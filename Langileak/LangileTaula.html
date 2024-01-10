@@ -36,7 +36,7 @@
                         <td class="table-primary">Kodea</td>
                     </tr>
                     <tr class="table-secondary" v-for="(langile) in listaLangile">
-                      <td class="table-secondary"><input type="checkbox" @change="handleCheckboxChange(langile.id)"></td>
+                      <td class="table-secondary"><input type="checkbox" :value="langile.id"v-model="arrayId"></td>
                       <td>{{langile.izena}}</td>
                       <td>{{langile.abizenak}}</td>
                       <td>{{langile.kodea}}</td>
@@ -112,128 +112,125 @@
                 existe: null
               },
               methods: {
-                handleCheckboxChange(checkboxId) {
-                  this.existe=false;
-                  console.log('Checkbox seleccionado:', checkboxId);
-                  this.selectedCheckbox = checkboxId; 
-                  if(this.arrayId.length==0){
-                    this.arrayId[0]=checkboxId;
-                  }else{
-                  //  for(var i=0; i < this.arrayId.length; i++){
-                      if(this.arrayId.includes(checkboxId)){
-                        console.log('Checkbox seleccionado', checkboxId, "es igual a ",this.arrayId[0]);
-                        this.arrayId.splice(this.arrayId.indexOf(checkboxId), 1);
-                      }else{
-                        this.arrayId.push(checkboxId);
-                      }
+                async cargaLangile() {
+                  try {
+                    const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileaklortu', {
+                      headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                      },
+                    });
+
+                    if (!response.ok) {
+                      console.log('Errorea eskera egiterakoan');
+                      throw new Error('Errorea eskaera egiterakoan');
+                    }
+
+                    const datuak = await response.json();
+
+                    this.listaLangile = datuak
+                      .filter(langile => langile.ezabatze_data === null || langile.ezabatze_data === "0000-00-00 00:00:00");
+                  } catch (error) {
+                    console.error('Errorea:', error);
                   }
-                  
-
                 },
-                cargaLangile() {
-                  fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileaklortu', {
-                    headers: {
-                      'Content-Type': 'application/json', // Indicar el tipo de contenido como JSON
-                      'Access-Control-Allow-Origin': '*'
-                    },
-                  })
-                  .then(dato => {
-                    return dato.json();
-                  })
-                  .then(datos => {
-                    for(var i=0; i < datos.length; i++){
-                      
-                      if(datos[i].ezabatze_data === null || datos[i].ezabatze_data==="0000-00-00 00:00:00"){
-                      this.listaLangile.push(datos[i]);
+                async cargarDatosModal(){
+                  try{
+                    const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileaklortubyid/'+this.arrayId[0], {
+                      headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                      },
+                    });
 
+                    if(!response.ok) {
+                      console.log('Errorea eskera egiterakoan');
+                      throw new Error('Errorea eskaera egiterakoan');
                     }
-                    }
-                  })
-                  .catch(error => {
-                    console.error('Se ha producido un error:', error);
-                  });
-                },
-                cargarDatosModal(){
-                  fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileaklortubyid/'+this.arrayId[0])
-                  .then(dato => {
-                    return dato.json();
-                  })
-                  .then(datos => {
-                    this.listaLangileById= datos;
+
+                    const datuak = await response.json();
+
+                    this.listaLangileById = datuak;
                     console.log(this.listaLangileById);
-                    this.izenaActu=this.listaLangileById[0].izena;
-                    this.abizenaActu=this.listaLangileById[0].abizenak;
-                    this.kodeaActu=this.listaLangileById[0].kodea;
-                  })
-                  .catch(error => {
-                    console.error('Se ha producido un error:', error);
-                  });
+
+                    this.izenaActu = this.listaLangileById[0].izena;
+                    this.abizenaActu = this.listaLangileById[0].abizenak;
+                    this.kodeaActu = this.listaLangileById[0].kodea;
+                  } catch (error){
+                    console.error('Errorea: ', error);
+                  }
                 },
-                actuDatosModal(){
-                  const id=this.arrayId[0];
-                  const izena=this.izenaActu;
-                  const abizenak=this.abizenaActu;
-                  const kodea=this.kodeaActu;
-                  const eguneratze_data_primaria = new Date();
-                  const year = eguneratze_data_primaria.getFullYear();
-                  const month = ('0' + (eguneratze_data_primaria.getMonth() + 1)).slice(-2);
-                  const day = ('0' + eguneratze_data_primaria.getDate()).slice(-2);
-                  const hours = ('0' + eguneratze_data_primaria.getHours()).slice(-2);
-                  const minutes = ('0' + eguneratze_data_primaria.getMinutes()).slice(-2);
-                  const seconds = ('0' + eguneratze_data_primaria.getSeconds()).slice(-2);
-                  const eguneratze_data = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-                  const arrayActu = [id,izena,abizenak,kodea,eguneratze_data];
-                  
+                async actuDatosModal(){
+                  try{
+                    const id=this.arrayId[0];
+                    const izena=this.izenaActu;
+                    const abizenak=this.abizenaActu;
+                    const kodea=this.kodeaActu;
+                    const eguneratze_data_primaria = new Date();
+                    const year = eguneratze_data_primaria.getFullYear();
+                    const month = ('0' + (eguneratze_data_primaria.getMonth() + 1)).slice(-2);
+                    const day = ('0' + eguneratze_data_primaria.getDate()).slice(-2);
+                    const hours = ('0' + eguneratze_data_primaria.getHours()).slice(-2);
+                    const minutes = ('0' + eguneratze_data_primaria.getMinutes()).slice(-2);
+                    const seconds = ('0' + eguneratze_data_primaria.getSeconds()).slice(-2);
+                    const eguneratze_data = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+                    const arrayActu = [id,izena,abizenak,kodea,eguneratze_data];
 
-                  fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileakeguneratu', {
-                    method: 'PUT',
-                    headers: {
-                      'Content-Type': 'application/json', // Indicar el tipo de contenido como JSON
-                      'Access-Control-Allow-Origin': '*'
-                    },
-                    body: JSON.stringify(arrayActu), // Convertir el objeto JSON a una cadena JSON
-                  })
-                  .then(response => {
-                    alert("Se ha actualizado");
-                    this.cargaLangile();
-                  })
-                  .catch(error => {
-                    console.error('Se ha producido un error:', error);
-                  });
+                    const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileakeguneratu', {
+                      method: 'PUT',
+                      headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                      },
+                      body: JSON.stringify(arrayActu),
+                    });
 
-                }
-                ,
-                createDatosModal(){
-                  const izena=this.izenaCrear;
-                  const abizenak=this.abizenaCrear;
-                  const kodea=this.kodeaCrear;
-                  const sortze_data_primaria = new Date();
-                  const year = sortze_data_primaria.getFullYear();
-                  const month = ('0' + (sortze_data_primaria.getMonth() + 1)).slice(-2);
-                  const day = ('0' + sortze_data_primaria.getDate()).slice(-2);
-                  const hours = ('0' + sortze_data_primaria.getHours()).slice(-2);
-                  const minutes = ('0' + sortze_data_primaria.getMinutes()).slice(-2);
-                  const seconds = ('0' + sortze_data_primaria.getSeconds()).slice(-2);
-                  const sortze_data = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-                  const arrayCrear = [izena,abizenak,kodea,sortze_data];
-                  console.log(JSON.stringify(arrayCrear));
+                    if(!response.ok){
+                      console.log('Errorea eguneratzerakoan');
+                      throw new Error('Errorea eguneratzerakoan');
+                    }
+                    
+                    alert('Ondo eguneratuta');
+                    await this.cargaLangile();
+                  } catch(error){
+                    console.log('Errorea: ', error);
+                  }
+                },
+                async createDatosModal(){
+                  try{
+                    const izena=this.izenaCrear;
+                    const abizenak=this.abizenaCrear;
+                    const kodea=this.kodeaCrear;
+                    const sortze_data_primaria = new Date();
+                    const year = sortze_data_primaria.getFullYear();
+                    const month = ('0' + (sortze_data_primaria.getMonth() + 1)).slice(-2);
+                    const day = ('0' + sortze_data_primaria.getDate()).slice(-2);
+                    const hours = ('0' + sortze_data_primaria.getHours()).slice(-2);
+                    const minutes = ('0' + sortze_data_primaria.getMinutes()).slice(-2);
+                    const seconds = ('0' + sortze_data_primaria.getSeconds()).slice(-2);
+                    const sortze_data = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+                    const arrayCrear = [izena,abizenak,kodea,sortze_data];
+                    console.log(JSON.stringify(arrayCrear));
 
-                  fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileaksortu', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json', // Indicar el tipo de contenido como JSON
-                      'Access-Control-Allow-Origin': '*'
-                    },
-                    body: JSON.stringify(arrayCrear), // Convertir el objeto JSON a una cadena JSON
-                  })
-                  .then(response => {
-                    alert("Se ha creado");
-                    this.cargaLangile();
-                  })
-                  .catch(error => {
-                    console.error('Se ha producido un error:', error);
-                  });
+                    const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileaksortu', {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json', // Indicar el tipo de contenido como JSON
+                        'Access-Control-Allow-Origin': '*'
+                      },
+                      body: JSON.stringify(arrayCrear), // Convertir el objeto JSON a una cadena JSON
+                    });
 
+                    if(!response.ok){
+                      console.log('Errorea sortzerakoan');
+                      throw new Error('Errorea sortzerakoan');
+                    }
+
+                    alert('Sortu da');
+                    await cargaLangile();
+                  } catch(error){
+                    console.log('Errorea: ', error);
+                  }
                 },
                 borrar() {
                   for(var i=0; i < this.arrayId.length; i++){
