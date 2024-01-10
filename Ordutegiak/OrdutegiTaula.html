@@ -22,7 +22,7 @@
           </ul>
         <div id="app">
           <div style="margin-left: 30vw; margin-top: 10vh;">
-            <h1 style="margin-left: 15vw;">Trabajadores</h1>
+            <h1 style="margin-left: 15vw;">Horarios</h1>
             <div style="margin-top: 10vh;">
 
                 <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal" :disabled="arrayId.length>1" @click="cargarDatosModal()">Editar</button>
@@ -50,7 +50,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Trabajador</h1>
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Horarios</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" v-for="(langile) in listaLangileById">
@@ -74,7 +74,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabelCrear">Crear Trabajador</h1>
+                  <h1 class="modal-title fs-5" id="exampleModalLabelCrear">Crear Horarios</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -140,7 +140,6 @@
                       
                       if(datos[i].ezabatze_data === null || datos[i].ezabatze_data==="0000-00-00 00:00:00"){
                       this.listaLangile.push(datos[i]);
-
                     }
                     }
                   })
