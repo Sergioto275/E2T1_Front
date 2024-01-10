@@ -39,7 +39,7 @@
                         <td class="table-primary">Amaiera Ordua</td>
                     </tr>
                     <tr class="table-secondary" v-for="(ordutegi) in listaOrdutegi">
-                      <td class="table-secondary"><input type="checkbox" @change="handleCheckboxChange(ordutegi.id)"></td>
+                      <td class="table-secondary"><input type="checkbox" :value="ordutegi.id"v-model="arrayId"></td>
                       <td>{{ordutegi.kodea}}</td>
                       <td>{{ordutegi.eguna}}</td>
                       <td>{{ordutegi.hasiera_data}}</td>
@@ -62,17 +62,17 @@
                 </div>
                 <div class="modal-body" v-for="(ordutegi) in listaOrdutegiById">
                   <label>Kodea:</label><br>
-                  <input type="text" class="w-100" v-model="izenaActu"><br>
+                  <input type="text" class="w-100" v-model="kodeaActu"><br>
                   <label>Eguna:</label><br>
-                  <input type="number" class="w-100" v-model="abizenaActu"><br>
+                  <input type="number" class="w-100" v-model="egunaActu"><br>
                   <label>Hasiera Data:</label><br>
-                  <input type="datetime" v-model="kodeaActu"><br>
+                  <input type="date" v-model="hasieradataActu"><br>
                   <label>Hasiera Ordua:</label><br>
-                  <input type="time" v-model="kodeaActu"><br>
+                  <input type="time" v-model="hasieraorduaActu"><br>
                   <label>Amaiera Data:</label><br>
-                  <input type="datetime" v-model="kodeaActu"><br>
+                  <input type="date" v-model="amaieradataActu"><br>
                   <label>Amaiera Ordua:</label><br>
-                  <input type="time" v-model="kodeaActu"><br>
+                  <input type="time" v-model="amaieraorduaActu"><br>
 
                 </div>
                 <div class="modal-footer">
@@ -91,12 +91,18 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <label>Izena:</label><br>
-                  <input type="text" class="w-100" v-model="izenaCrear"><br>
-                  <label>Abizenak:</label><br>
-                  <input type="text" class="w-100" v-model="abizenaCrear"><br>
-                  <label>Taldea:</label><br>
-                  <input type="text" v-model="kodeaCrear"><br>
+                  <label>Kodea:</label><br>
+                  <input type="text" class="w-100" v-model="kodeaCrear"><br>
+                  <label>Eguna:</label><br>
+                  <input type="number" class="w-100" v-model="egunaCrear"><br>
+                  <label>Hasiera Data:</label><br>
+                  <input type="date" v-model="hasieradataCrear"><br>
+                  <label>Hasiera Ordua:</label><br>
+                  <input type="time"  step="2"v-model="hasieraorduaCrear"><br>
+                  <label>Amaiera Data:</label><br>
+                  <input type="date" v-model="amaieradataCrear"><br>
+                  <label>Amaiera Ordua:</label><br>
+                  <input type="time"  step="2" v-model="amaieraorduaCrear"><br>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
@@ -120,32 +126,17 @@
                 hasieraorduaActu:"",
                 amaieradataActu:"",
                 amaieraorduaActu:"",
-                izenaCrear:"",
-                abizenaCrear:"",
                 kodeaCrear:"",
+                egunaCrear:"",
+                hasieradataCrear:"",
+                hasieraorduaCrear:"",
+                amaieradataCrear:"",
+                amaieraorduaCrear:"",
                 listaOrdutegi:[],
                 listaOrdutegiById:[],
                 existe: null
               },
               methods: {
-                handleCheckboxChange(checkboxId) {
-                  this.existe=false;
-                  console.log('Checkbox seleccionado:', checkboxId);
-                  this.selectedCheckbox = checkboxId; 
-                  if(this.arrayId.length==0){
-                    this.arrayId[0]=checkboxId;
-                  }else{
-                  //  for(var i=0; i < this.arrayId.length; i++){
-                      if(this.arrayId.includes(checkboxId)){
-                        console.log('Checkbox seleccionado', checkboxId, "es igual a ",this.arrayId[0]);
-                        this.arrayId.splice(this.arrayId.indexOf(checkboxId), 1);
-                      }else{
-                        this.arrayId.push(checkboxId);
-                      }
-                  }
-                  
-
-                },
                 cargaLangile() {
                   fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/ordutegiaklortu')
                   .then(dato => {
@@ -164,16 +155,19 @@
                   });
                 },
                 cargarDatosModal(){
-                  fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileaklortubyid/'+this.arrayId[0])
+                  fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/ordutegiakortubyid/'+this.arrayId[0])
                   .then(dato => {
                     return dato.json();
                   })
                   .then(datos => {
                     this.listaOrdutegiById= datos;
                     console.log(this.listaOrdutegiById);
-                    this.izenaActu=this.listaOrdutegiById[0].izena;
-                    this.abizenaActu=this.listaOrdutegiById[0].abizenak;
                     this.kodeaActu=this.listaOrdutegiById[0].kodea;
+                    this.egunaActu=this.listaOrdutegiById[0].eguna;
+                    this.hasieradataActu=this.listaOrdutegiById[0].hasiera_data;
+                    this.hasieraorduaActu=this.listaOrdutegiById[0].hasiera_ordua;
+                    this.amaieradataActu=this.listaOrdutegiById[0].amaiera_data;
+                    this.amaieraorduaActu=this.listaOrdutegiById[0].amaiera_ordua;
                   })
                   .catch(error => {
                     console.error('Se ha producido un error:', error);
@@ -181,9 +175,12 @@
                 },
                 actuDatosModal(){
                   const id=this.arrayId[0];
-                  const izena=this.izenaActu;
-                  const abizenak=this.abizenaActu;
                   const kodea=this.kodeaActu;
+                  const eguna=this.egunaActu;
+                  const hasiera_data=this.hasieradataActu;
+                  const hasiera_ordua=this.hasieraorduaActu;
+                  const amaiera_data=this.amaieradataActu;
+                  const amaiera_ordua=this.amaieraorduaActu;
                   const eguneratze_data_primaria = new Date();
                   const year = eguneratze_data_primaria.getFullYear();
                   const month = ('0' + (eguneratze_data_primaria.getMonth() + 1)).slice(-2);
@@ -192,10 +189,10 @@
                   const minutes = ('0' + eguneratze_data_primaria.getMinutes()).slice(-2);
                   const seconds = ('0' + eguneratze_data_primaria.getSeconds()).slice(-2);
                   const eguneratze_data = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-                  const arrayActu = [id,izena,abizenak,kodea,eguneratze_data];
+                  const arrayActu = [id,kodea,eguna,hasiera_data,amaiera_data,hasiera_ordua,amaiera_ordua,eguneratze_data];
                   
-
-                  fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileakeguneratu', {
+                  console.log(JSON.stringify(arrayActu));
+                  fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/ordutegiakeguneratu', {
                     method: 'PUT',
                     headers: {
                       'Content-Type': 'application/json', // Indicar el tipo de contenido como JSON
