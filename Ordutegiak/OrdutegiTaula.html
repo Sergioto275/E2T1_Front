@@ -18,7 +18,7 @@
                   <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
                   </li>
-            </div>
+            </div>  
           </ul>
         <div id="app">
           <div style="margin-left: 30vw; margin-top: 10vh;">
@@ -31,15 +31,22 @@
                 <table class="table table-striped table-hover w-50">
                     <tr class="table-primary">
                         <td class="table-primary"></td>
-                        <td class="table-primary">Izena</td>
-                        <td class="table-primary">Abizenak</td>
                         <td class="table-primary">Kodea</td>
+                        <td class="table-primary">Eguna</td>
+                        <td class="table-primary">Hasiera Data</td>
+                        <td class="table-primary">Amaiera Data</td>
+                        <td class="table-primary">Hasiera Ordua</td>
+                        <td class="table-primary">Amaiera Ordua</td>
                     </tr>
-                    <tr class="table-secondary" v-for="(langile) in listaLangile">
-                      <td class="table-secondary"><input type="checkbox" @change="handleCheckboxChange(langile.id)"></td>
-                      <td>{{langile.izena}}</td>
-                      <td>{{langile.abizenak}}</td>
-                      <td>{{langile.kodea}}</td>
+                    <tr class="table-secondary" v-for="(ordutegi) in listaOrdutegi">
+                      <td class="table-secondary"><input type="checkbox" @change="handleCheckboxChange(ordutegi.id)"></td>
+                      <td>{{ordutegi.kodea}}</td>
+                      <td>{{ordutegi.eguna}}</td>
+                      <td>{{ordutegi.hasiera_data}}</td>
+                      <td>{{ordutegi.amaiera_data}}</td>
+                      <td>{{ordutegi.hasiera_ordua}}</td>
+                      <td>{{ordutegi.amaiera_ordua}}</td>
+
                     </tr>
                 </table>
             </div>
@@ -53,13 +60,19 @@
                   <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Horarios</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" v-for="(langile) in listaLangileById">
-                  <label>Izena:</label><br>
+                <div class="modal-body" v-for="(ordutegi) in listaOrdutegiById">
+                  <label>Kodea:</label><br>
                   <input type="text" class="w-100" v-model="izenaActu"><br>
-                  <label>Abizenak:</label><br>
-                  <input type="text" class="w-100" v-model="abizenaActu"><br>
-                  <label>Taldea:</label><br>
-                  <input type="text" v-model="kodeaActu"><br>
+                  <label>Eguna:</label><br>
+                  <input type="number" class="w-100" v-model="abizenaActu"><br>
+                  <label>Hasiera Data:</label><br>
+                  <input type="datetime" v-model="kodeaActu"><br>
+                  <label>Hasiera Ordua:</label><br>
+                  <input type="time" v-model="kodeaActu"><br>
+                  <label>Amaiera Data:</label><br>
+                  <input type="datetime" v-model="kodeaActu"><br>
+                  <label>Amaiera Ordua:</label><br>
+                  <input type="time" v-model="kodeaActu"><br>
 
                 </div>
                 <div class="modal-footer">
@@ -101,14 +114,17 @@
               data: {
                 selectedCheckbox: null, // Esta variable almacenará la ID del checkbox seleccionado
                 arrayId :[],
-                izenaActu:"",
-                abizenaActu:"",
                 kodeaActu:"",
+                egunaActu:"",
+                hasieradataActu:"",
+                hasieraorduaActu:"",
+                amaieradataActu:"",
+                amaieraorduaActu:"",
                 izenaCrear:"",
                 abizenaCrear:"",
                 kodeaCrear:"",
-                listaLangile:[],
-                listaLangileById:[],
+                listaOrdutegi:[],
+                listaOrdutegiById:[],
                 existe: null
               },
               methods: {
@@ -131,7 +147,7 @@
 
                 },
                 cargaLangile() {
-                  fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileaklortu')
+                  fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/ordutegiaklortu')
                   .then(dato => {
                     return dato.json();
                   })
@@ -139,7 +155,7 @@
                     for(var i=0; i < datos.length; i++){
                       
                       if(datos[i].ezabatze_data === null || datos[i].ezabatze_data==="0000-00-00 00:00:00"){
-                      this.listaLangile.push(datos[i]);
+                      this.listaOrdutegi.push(datos[i]);
                     }
                     }
                   })
@@ -153,11 +169,11 @@
                     return dato.json();
                   })
                   .then(datos => {
-                    this.listaLangileById= datos;
-                    console.log(this.listaLangileById);
-                    this.izenaActu=this.listaLangileById[0].izena;
-                    this.abizenaActu=this.listaLangileById[0].abizenak;
-                    this.kodeaActu=this.listaLangileById[0].kodea;
+                    this.listaOrdutegiById= datos;
+                    console.log(this.listaOrdutegiById);
+                    this.izenaActu=this.listaOrdutegiById[0].izena;
+                    this.abizenaActu=this.listaOrdutegiById[0].abizenak;
+                    this.kodeaActu=this.listaOrdutegiById[0].kodea;
                   })
                   .catch(error => {
                     console.error('Se ha producido un error:', error);

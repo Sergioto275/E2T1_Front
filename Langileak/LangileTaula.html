@@ -131,7 +131,12 @@
 
                 },
                 cargaLangile() {
-                  fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileaklortu')
+                  fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileaklortu', {
+                    headers: {
+                      'Content-Type': 'application/json', // Indicar el tipo de contenido como JSON
+                      'Access-Control-Allow-Origin': '*'
+                    },
+                  })
                   .then(dato => {
                     return dato.json();
                   })
@@ -184,6 +189,7 @@
                     method: 'PUT',
                     headers: {
                       'Content-Type': 'application/json', // Indicar el tipo de contenido como JSON
+                      'Access-Control-Allow-Origin': '*'
                     },
                     body: JSON.stringify(arrayActu), // Convertir el objeto JSON a una cadena JSON
                   })
@@ -216,6 +222,7 @@
                     method: 'POST',
                     headers: {
                       'Content-Type': 'application/json', // Indicar el tipo de contenido como JSON
+                      'Access-Control-Allow-Origin': '*'
                     },
                     body: JSON.stringify(arrayCrear), // Convertir el objeto JSON a una cadena JSON
                   })
