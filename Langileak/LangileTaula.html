@@ -115,7 +115,7 @@
                 // Langilea guztiak taulan kargatu
                 async cargaLangile() {
                   try {
-                    const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileaklortu', {
+                    const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileak', {
                       headers: {  
                         'Content-Type': 'application/json',
                         'Access-Control-Allow-Origin': '*'
@@ -185,7 +185,7 @@
                       "eguneratze_data": eguneratze_data
                     };
 
-                    const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileakeguneratu', {
+                    const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileak', {
                       method: 'PUT',
                       headers: {
                         'Content-Type': 'application/json',
@@ -233,7 +233,7 @@
 
                     console.log(JSON.stringify(jsonSortu));
 
-                    const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileaksortu', {
+                    const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileak', {
                       method: 'POST',
                       headers: {
                         'Content-Type': 'application/json', // Indicar el tipo de contenido como JSON
@@ -278,8 +278,8 @@
                       };
                       console.log(JSON.stringify(jsonEzabatu));
 
-                      const deleteResponse = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileakdelete', {
-                        method: 'PUT',
+                      const deleteResponse = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileak', {
+                        method: 'DELETE',
                         headers: {
                           'Content-Type': 'application/json',
                         },
