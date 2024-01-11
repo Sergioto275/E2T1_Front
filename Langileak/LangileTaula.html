@@ -115,7 +115,7 @@
                 async cargaLangile() {
                   try {
                     const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileaklortu', {
-                      headers: {
+                      headers: {  
                         'Content-Type': 'application/json',
                         'Access-Control-Allow-Origin': '*'
                       },
@@ -269,6 +269,7 @@
                             })
                             .then(response => {
                               alert("Se ha actualizado");
+                              this.arrayId=[];
                               this.cargaLangile();
                             })
                             .catch(error => {
@@ -279,6 +280,8 @@
                       console.error('Se ha producido un error:', error);
                     });
                   }
+                  this.arrayId=[];
+
                 }
               },
               mounted() {
