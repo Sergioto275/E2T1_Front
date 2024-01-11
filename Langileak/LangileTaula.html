@@ -227,57 +227,60 @@
                     }
 
                     alert('Sortu da');
-                    await cargaLangile();
+                    await this.cargaLangile();
                   } catch(error){
                     console.log('Errorea: ', error);
                   }
                 },
-                borrar() {
-                  for(var i=0; i < this.arrayId.length; i++){
-                    fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileaklortubyid/'+this.arrayId[i])
-                    .then(dato => {
-                      return dato.json();
-                    })
-                    .then(datos => {
-                            this.listaLangileById= datos;
-                            console.log(this.listaLangileById[0].izena);
-                            this.izenaActu=this.listaLangileById[0].izena;
-                            this.abizenaActu=this.listaLangileById[0].abizenak;
-                            this.kodeaActu=this.listaLangileById[0].kodea;
+                async borrar() {
+                  try {
+                    for(var i=0; i < this.arrayId.length; i++){
+                      const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileaklortubyid/'+this.arrayId[i]);
+                      
+                      if (!response.ok) {
+                        console.log('Errorea kargatzerakoan');
+                        throw new Error('Errorea kargatzerakoan');
+                      }
+                      const datos = await response.json();
 
-                            const id=this.arrayId[0];
-                            const izena=this.izenaActu;
-                            const abizenak=this.abizenaActu;
-                            const kodea=this.kodeaActu;
-                            const eguneratze_data_primaria = new Date();
-                            const year = eguneratze_data_primaria.getFullYear();
-                            const month = ('0' + (eguneratze_data_primaria.getMonth() + 1)).slice(-2);
-                            const day = ('0' + eguneratze_data_primaria.getDate()).slice(-2);
-                            const hours = ('0' + eguneratze_data_primaria.getHours()).slice(-2);
-                            const minutes = ('0' + eguneratze_data_primaria.getMinutes()).slice(-2);
-                            const seconds = ('0' + eguneratze_data_primaria.getSeconds()).slice(-2);
-                            const eguneratze_data = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-                            const arrayActu = [id,izena,abizenak,kodea,eguneratze_data];
-                            console.log(JSON.stringify(arrayActu))
+                      this.listaLangileById= datos;
+                      console.log(this.listaLangileById[0].izena);
+                      this.izenaActu=this.listaLangileById[0].izena;
+                      this.abizenaActu=this.listaLangileById[0].abizenak;
+                      this.kodeaActu=this.listaLangileById[0].kodea;
 
-                            fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileakdelete', {
-                              method: 'PUT',
-                              headers: {
-                                'Content-Type': 'application/json', // Indicar el tipo de contenido como JSON
-                              },
-                              body: JSON.stringify(arrayActu), // Convertir el objeto JSON a una cadena JSON
-                            })
-                            .then(response => {
-                              alert("Se ha actualizado");
-                              this.cargaLangile();
-                            })
-                            .catch(error => {
-                              console.error('Se ha producido un error:', error);
-                            });
-                    })
-                    .catch(error => {
-                      console.error('Se ha producido un error:', error);
-                    });
+                      const id=this.arrayId[0];
+                      const izena=this.izenaActu;
+                      const abizenak=this.abizenaActu;
+                      const kodea=this.kodeaActu;
+                      const eguneratze_data_primaria = new Date();
+                      const year = eguneratze_data_primaria.getFullYear();
+                      const month = ('0' + (eguneratze_data_primaria.getMonth() + 1)).slice(-2);
+                      const day = ('0' + eguneratze_data_primaria.getDate()).slice(-2);
+                      const hours = ('0' + eguneratze_data_primaria.getHours()).slice(-2);
+                      const minutes = ('0' + eguneratze_data_primaria.getMinutes()).slice(-2);
+                      const seconds = ('0' + eguneratze_data_primaria.getSeconds()).slice(-2);
+                      const eguneratze_data = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+                      const arrayActu = [id,izena,abizenak,kodea,eguneratze_data];
+                      console.log(JSON.stringify(arrayActu));
+
+                      const deleteResponse = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileakdelete', {
+                        method: 'PUT',
+                        headers: {
+                          'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(arrayActu),
+                      });
+
+                      if (!deleteResponse.ok) {
+                        console.log('Errorea ezabatzerakoan');
+                        throw new Error('Errorea ezabatzerakoan');
+                      }
+                      alert("Eguneratu egin da");
+                      this.cargaLangile();
+                    }
+                  } catch (error) {
+                    console.error('Errorea:', error);
                   }
                 }
               },
