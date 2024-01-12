@@ -35,7 +35,7 @@
                         <td class="table-primary">Izena</td>
                     </tr>
                     <tr class="table-secondary" v-for="(talde) in listaTalde">
-                      <td class="table-secondary"><input type="checkbox" :value="talde.id"v-model="arrayId"></td>
+                      <td class="table-secondary"><input type="checkbox" :value="talde.kodea"v-model="arrayId"></td>
                       <td>{{talde.kodea}}</td>
                       <td>{{talde.izena}}</td>
                       
@@ -73,9 +73,9 @@
                 </div>
                 <div class="modal-body">
                   <label>Kodea:</label><br>
-                  <input type="text" class="w-100" v-model="kodeaActu"><br>
+                  <input type="text" class="w-100" v-model="kodeaCrear"><br>
                   <label>Izena:</label><br>
-                  <input type="text" class="w-100" v-model="izenaActu"><br>
+                  <input type="text" class="w-100" v-model="izenaCrear"><br>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
@@ -127,7 +127,7 @@
                 //Editatzeko modalean aukeratutako langilearen datuak kargatzeko
                 async cargarDatosModal(){
                   try{
-                    const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/taldeaklortubyid/'+this.arrayId[0], {
+                    const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/taldeaklortubycode/'+this.arrayId[0], {
                       headers: {
                         'Content-Type': 'application/json',
                         'Access-Control-Allow-Origin': '*'
@@ -214,7 +214,7 @@
 
                     console.log(JSON.stringify(jsonSortu));
 
-                    const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileak', {
+                    const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/taldeak', {
                       method: 'POST',
                       headers: {
                         'Content-Type': 'application/json', // Indicar el tipo de contenido como JSON
@@ -259,7 +259,7 @@
                       };
                       console.log(JSON.stringify(jsonEzabatu));
 
-                      const deleteResponse = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileak', {
+                      const deleteResponse = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/taldeak', {
                         method: 'DELETE',
                         headers: {
                           'Content-Type': 'application/json',
