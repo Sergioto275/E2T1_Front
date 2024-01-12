@@ -10,6 +10,7 @@ new Vue({
       abizenaCrear:"",
       kodeaCrear:"",
       listaLangile:[],
+      listaTalde:[],
       listaLangileById:[],
       existe: null
     },
@@ -60,6 +61,8 @@ new Vue({
           this.izenaActu = this.listaLangileById.izena;
           this.abizenaActu = this.listaLangileById.abizenak;
           this.kodeaActu = this.listaLangileById.kodea;
+          await this.cargarComboBox();
+
         } catch (error){
           console.error('Errorea: ', error);
         }
@@ -211,6 +214,31 @@ new Vue({
         this.izenaCrear = "";
         this.abizenaCrear = "";
         this.kodeaCrear = "";
+
+        this.cargarComboBox();
+
+      },
+      async cargarComboBox() {
+        try{
+          const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/taldeak',{
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+            },
+          });
+
+          if(!response.ok) {
+            console.log('Errorea eskera egiterakoan');
+            throw new Error('Errorea eskaera egiterakoan');
+          }
+          const datuak = await response.json();
+          this.listaTalde = datuak
+          .filter(talde => talde.ezabatze_data === null || talde.ezabatze_data === "0000-00-00 00:00:00");
+
+          console.log(this.listaTalde);
+        } catch (error){
+          console.error('Errorea: ', error);
+        }
       }
     },
     mounted() {
