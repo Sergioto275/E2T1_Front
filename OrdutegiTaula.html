@@ -30,13 +30,13 @@
                 <button type="button" class="btn btn-light border-black mb-3" @click="borrar()">Borrar</button>
                 <table class="table table-striped table-hover w-50">
                     <tr class="table-primary">
-                        <td class="table-primary"></td>
-                        <td class="table-primary">Kodea</td>
-                        <td class="table-primary">Eguna</td>
-                        <td class="table-primary">Hasiera Data</td>
-                        <td class="table-primary">Amaiera Data</td>
-                        <td class="table-primary">Hasiera Ordua</td>
-                        <td class="table-primary">Amaiera Ordua</td>
+                        <th class="table-primary" style="background-color: #BA9471"></th>
+                        <th class="table-primary" style="background-color: #BA9471">Kodea</th>
+                        <th class="table-primary" style="background-color: #BA9471">Eguna</th>
+                        <th class="table-primary" style="background-color: #BA9471">Hasiera Data</th>
+                        <th class="table-primary" style="background-color: #BA9471">Amaiera Data</th>
+                        <th class="table-primary" style="background-color: #BA9471">Hasiera Ordua</th>
+                        <th class="table-primary" style="background-color: #BA9471">Amaiera Ordua</th>
                     </tr>
                     <tr class="table-secondary" v-for="(ordutegi) in listaOrdutegi">
                       <td class="table-secondary"><input type="checkbox" :value="ordutegi.id"v-model="arrayId"></td>

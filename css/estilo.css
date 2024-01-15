@@ -1,3 +1,15 @@
 body{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+
+th{
+    background-color: #BA9471;
+}
+
+.nav nav-pills{
+    background-color: #403A36;
+}
+
+.nav rounded-end border-white border-4{
+    background-color: #332A21
+}
