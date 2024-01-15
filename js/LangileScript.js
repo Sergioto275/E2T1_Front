@@ -12,7 +12,9 @@ new Vue({
       listaLangile:[],
       listaTalde:[],
       listaLangileById:[],
-      existe: null
+      existe: null,
+      currentLocale: 'es',
+      translations: translations,
     },
     methods: {
       // Langilea guztiak taulan kargatu
@@ -239,6 +241,13 @@ new Vue({
         } catch (error){
           console.error('Errorea: ', error);
         }
+      },
+      changeLanguage(locale) {
+        console.log('Cambiando a:', locale);
+        this.currentLocale = locale;
+      },
+      prueba(){
+        console.log("hola");
       }
     },
     mounted() {

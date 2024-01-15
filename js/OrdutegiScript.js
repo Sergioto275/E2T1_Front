@@ -17,7 +17,7 @@ new Vue({
       amaieraorduaCrear:"",
       listaOrdutegi:[],
       listaOrdutegiById:[],
-      existe: null
+      existe: null,
     },
     methods: {
       cargaLangile() {
