@@ -24,10 +24,20 @@
           <div style="margin-left: 30vw; margin-top: 10vh;">
             <h1 style="margin-left: 15vw;">Horarios</h1>
             <div style="margin-top: 10vh;">
-
+              <div class="input-group mb-1 w-50">
                 <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal" :disabled="arrayId.length>1" @click="cargarDatosModal()">Editar</button>
                 <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalCrear">Añadir</button>
                 <button type="button" class="btn btn-light border-black mb-3" @click="borrar()">Borrar</button>
+                <select class="form-select border-black w-25 h-25" aria-label="Default select example" v-model="grupoFil" @change="filtroGrupo()">
+                  <option selected>Selecciona un grupo</option>
+                  <option v-for="(taldea) in listaTalde" :value="taldea.kodea">{{taldea.kodea}}</option>
+                </select>
+              </div>
+                
+                <div class="input-group mb-3 w-50">
+                  <input type="text" class="form-control" placeholder="" aria-label="Recipient's username" aria-describedby="basic-addon2" v-model="nombreFil" @change="filtroNombre()">
+                  <button class="btn btn-light border-black"><i class="bi bi-search"></i></button>
+                </div> 
                 <table class="table table-striped table-hover w-50">
                     <tr class="table-primary">
                         <th class="table-primary" style="background-color: #BA9471"></th>

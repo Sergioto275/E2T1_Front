@@ -13,12 +13,15 @@ new Vue({
       listaTalde:[],
       listaLangileById:[],
       existe: null,
+      nombreFil:"",
+      grupoFil:"",
       currentLocale: 'es',
       translations: translations,
     },
     methods: {
       // Langilea guztiak taulan kargatu
       async cargaLangile() {
+        console.log("Hello")
         try {
           const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileak', {
             headers: {  
@@ -36,6 +39,9 @@ new Vue({
 
           this.listaLangile = datuak
             .filter(langile => langile.ezabatze_data === null || langile.ezabatze_data === "0000-00-00 00:00:00");
+
+            this.cargarComboBox();
+            console.log(this.listaLangile)
         } catch (error) {
           console.error('Errorea:', error);
         }
@@ -238,6 +244,67 @@ new Vue({
           .filter(talde => talde.ezabatze_data === null || talde.ezabatze_data === "0000-00-00 00:00:00");
 
           console.log(this.listaTalde);
+        } catch (error){
+          console.error('Errorea: ', error);
+        }
+      },
+      async filtroNombre(){
+        console.log("hola")
+        try{
+          const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileak', {
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+            },
+          });
+
+          if(!response.ok) {
+            console.log('Errorea eskera egiterakoan');
+            throw new Error('Errorea eskaera egiterakoan');
+          }
+
+          this.listaLangile=[];
+          const datuak = await response.json();
+
+          this.listaLangile = datuak
+          .filter(langile => langile.izena.includes(this.nombreFil) && langile.ezabatze_data === null || langile.izena.includes(this.nombreFil) && langile.ezabatze_data === "0000-00-00 00:00:00");
+
+          if(this.listaLangile.length == 0){
+            this.listaLangileById = datuak
+            .filter(langile => langile.ezabatze_data === null || langile.ezabatze_data === "0000-00-00 00:00:00");
+          }
+
+        } catch (error){
+          console.error('Errorea: ', error);
+        }
+      },
+      async filtroGrupo(){
+        console.log("hola")
+        try{
+          const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileak', {
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+            },
+          });
+
+          if(!response.ok) {
+            console.log('Errorea eskera egiterakoan');
+            throw new Error('Errorea eskaera egiterakoan');
+          }
+
+          this.listaLangile=[];
+          const datuak = await response.json();
+
+          this.listaLangile = datuak
+          .filter(langile => langile.kodea === this.grupoFil && langile.ezabatze_data === null || langile.kodea === this.grupoFil  && langile.ezabatze_data === "0000-00-00 00:00:00");
+
+          if(this.listaLangile.length == 0){
+            this.listaLangile = datuak
+            .filter(langile => langile.ezabatze_data === null || langile.ezabatze_data === "0000-00-00 00:00:00");
+
+          }
+
         } catch (error){
           console.error('Errorea: ', error);
         }
