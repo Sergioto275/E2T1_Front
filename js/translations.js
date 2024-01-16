@@ -53,20 +53,22 @@ const translations = {
           },
           profesor:{
             titulo:'Profesor',
-            elemento1:'',
-            elemento2:'',
+            elemento1:{
+              titulo: 'Almacen',
+              elemento1: 'Productos',
+              elemento2: 'Material'
+            },
+            elemento2:'Tratamientos',
+            elemento3: {
+              titulo: 'Alumnado',
+              elemento1: 'Alumnos',
+              elemento2: 'Grupos'
+            },
+            elemento4:'Calendario'
           },
-          tareas:{
-            titulo:'Tareas',
-            elemento1:'',
-            elemento2:'',
-          },
-          citas:{
-            titulo:'Citas',
-            elemento1:'',
-            elemento2:'',
-          }
-        }
+          tareas: 'Tareas',
+          citas:'Citas'
+      }
     },
     eu: {
       default:{
@@ -106,24 +108,36 @@ const translations = {
       menu: {
         almacen:{
           titulo:'Biltegia',
-          elemento1:'',
-          elemento2:'',
+          elemento1:{
+            titulo:'Produktuak',
+            elemento1: 'Atera',
+            elemento2: 'Gorde',
+            elemento3: 'Historikoa'
+          },
+          elemento2:{
+            titulo:'Materiala',
+            elemento1: 'Atera',
+            elemento2: 'Gorde',
+            elemento3: 'Historikoa'
+          },
         },
         profesor:{
           titulo:'Irakaslea',
-          elemento1:'',
-          elemento2:'',
+          elemento1:{
+            titulo: 'Biltegia',
+            elemento1: 'Produktuak',
+            elemento2: 'Materiala'
+          },
+          elemento2:'Tratamenduak',
+          elemento3: {
+            titulo: 'Ikasleak',
+            elemento1: 'Ikasle',
+            elemento2: 'Taldeak'
+          },
+          elemento4:'Ordutegia'
         },
-        tareas:{
-          titulo:'Zereginak',
-          elemento1:'',
-          elemento2:'',
-        },
-        citas:{
-          titulo:'Hitzorduak',
-          elemento1:'',
-          elemento2:'',
-        }
-      }
+        tareas: 'Zereginak',
+        citas:'Hitzorduak'
+    }
     }
   };
