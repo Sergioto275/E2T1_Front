@@ -27,7 +27,7 @@ const translations = {
         añadir: 'Sortu',
         borrar: 'Ezabatu',
         salir: 'Irten',
-        guardar: 'Ezabatu',
+        guardar: 'Gorde',
       },
       trabajador: {
         titulo: 'Langile',
