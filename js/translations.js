@@ -19,6 +19,38 @@ const translations = {
             editar: 'Editar trabajador',
             añadir: 'Añadir trabajador',
           }
+        },
+        menu: {
+          almacen:{
+            titulo:'Almacen',
+            elemento1:{
+              titulo:'Producto',
+              elemento1: 'Sacar',
+              elemento2: 'Entregar',
+              elemento3: 'Historico'
+            },
+            elemento2:{
+              titulo:'Material',
+              elemento1: 'Sacar',
+              elemento2: 'Entregar',
+              elemento3: 'Historico'
+            },
+          },
+          profesor:{
+            titulo:'Profesor',
+            elemento1:'',
+            elemento2:'',
+          },
+          tareas:{
+            titulo:'Tareas',
+            elemento1:'',
+            elemento2:'',
+          },
+          citas:{
+            titulo:'Citas',
+            elemento1:'',
+            elemento2:'',
+          }
         }
     },
     eu: {
@@ -39,6 +71,28 @@ const translations = {
         modal:{
           editar: 'Langilea editatu',
           añadir: 'Langilea sortu',
+        }
+      },
+      menu: {
+        almacen:{
+          titulo:'Biltegia',
+          elemento1:'',
+          elemento2:'',
+        },
+        profesor:{
+          titulo:'Irakaslea',
+          elemento1:'',
+          elemento2:'',
+        },
+        tareas:{
+          titulo:'Zereginak',
+          elemento1:'',
+          elemento2:'',
+        },
+        citas:{
+          titulo:'Hitzorduak',
+          elemento1:'',
+          elemento2:'',
         }
       }
     }

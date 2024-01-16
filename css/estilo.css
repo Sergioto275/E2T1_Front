@@ -13,3 +13,7 @@ th{
 .nav rounded-end border-white border-4{
     background-color: #332A21
 }
+.dropend:hover>.dropdown-menu {
+    display: block;
+  }
+  
