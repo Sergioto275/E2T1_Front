@@ -71,8 +71,9 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" v-for="(ordutegi) in listaOrdutegiById">
-                  <label>Kodea:</label><br>
-                  <input type="text" class="w-100" v-model="kodeaActu"><br>
+                  <select v-model="kodeaActu" >
+                    <option v-for="(taldea) in listaTalde" :value="taldea.kodea">{{taldea.kodea}}</option>
+                  </select>
                   <label>Eguna:</label><br>
                   <input type="number" class="w-100" v-model="egunaActu"><br>
                   <label>Hasiera Data:</label><br>
@@ -83,6 +84,7 @@
                   <input type="date" v-model="amaieradataActu"><br>
                   <label>Amaiera Ordua:</label><br>
                   <input type="time" v-model="amaieraorduaActu"><br>
+                  
 
                 </div>
                 <div class="modal-footer">
