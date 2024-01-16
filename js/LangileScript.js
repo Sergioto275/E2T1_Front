@@ -15,12 +15,16 @@ new Vue({
       existe: null,
       currentLocale: 'es',
       translations: translations,
+      environment: 'http://localhost/Erronka2/Back/talde1erronka2',
     },
     methods: {
+      changeEnvironment(env){
+        this.environment = env;
+      },
       // Langilea guztiak taulan kargatu
       async cargaLangile() {
         try {
-          const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileak', {
+          const response = await fetch(this.environment + '/public/api/langileak', {
             headers: {  
               'Content-Type': 'application/json',
               'Access-Control-Allow-Origin': '*'
@@ -43,7 +47,7 @@ new Vue({
       //Editatzeko modalean aukeratutako langilearen datuak kargatzeko
       async cargarDatosModal(){
         try{
-          const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileak/'+this.arrayId[0], {
+          const response = await fetch(this.environment + '/public/api/langileak/'+this.arrayId[0], {
             headers: {
               'Content-Type': 'application/json',
               'Access-Control-Allow-Origin': '*'
@@ -92,7 +96,7 @@ new Vue({
             "eguneratze_data": eguneratze_data
           };
 
-          const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileak', {
+          const response = await fetch(this.environment + '/public/api/langileak', {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -140,7 +144,7 @@ new Vue({
 
           console.log(JSON.stringify(jsonSortu));
 
-          const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileak', {
+          const response = await fetch(this.environment + '/public/api/langileak', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json', // Indicar el tipo de contenido como JSON
@@ -185,7 +189,7 @@ new Vue({
             };
             console.log(JSON.stringify(jsonEzabatu));
 
-            const deleteResponse = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileak', {
+            const deleteResponse = await fetch(this.environment + '/public/api/langileak', {
               method: 'DELETE',
               headers: {
                 'Content-Type': 'application/json',
@@ -222,7 +226,7 @@ new Vue({
       },
       async cargarComboBox() {
         try{
-          const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/taldeak',{
+          const response = await fetch(this.environment + '/public/api/taldeak',{
             headers: {
               'Content-Type': 'application/json',
               'Access-Control-Allow-Origin': '*'
