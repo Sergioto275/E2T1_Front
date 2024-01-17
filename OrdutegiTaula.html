@@ -37,10 +37,10 @@
                     <!-- <img src="imagenes/es.png" class="img-fluid mt-1" style="width: 45px; height: 30px; cursor: pointer;" @click="changeLanguage('es')"> -->
                   </li>
                   <li class="navi-item me-3 mt-2">
-                    <a class="text-white" href="#" @click="changeEnvironment('http://localhost/Erronka2/Back/talde1erronka2')">LOCAL</a>
+                    <a class="text-white" :class="{ 'fw-bold': environment === 'https://localhost/Erronka2/Back/talde1erronka2' }" href="#" @click="changeEnvironment('https://localhost/Erronka2/Back/talde1erronka2')">LOCAL</a>
                   </li>
                   <li class="navi-item me-3 mt-2">
-                    <a class="text-white" href="#" @click="changeEnvironment('https://www.talde1-back.edu:8443')">SERVER</a>
+                    <a class="text-white" :class="{ 'fw-bold': environment === 'https://www.talde1-back.edu:8443' }" href="#" @click="changeEnvironment('https://www.talde1-back.edu:8443')">SERVER</a>
                   </li>
             </div>
           </ul>  
