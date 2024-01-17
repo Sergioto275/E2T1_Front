@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="eu">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Hitzorduak</title>
+        <link href="css/bootstrap/bootstrap.css" rel="stylesheet">
+        <link href="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.css" rel="stylesheet" />
+        <link href="css/bootstrap/icons/font/bootstrap-icons.css" rel="stylesheet">
+      </head>
+      <body style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
+      <script src="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.js"></script>
+      <div id="app" >
+        <!--HEADER-->
+        <header>
+          <ul class="nav nav-pills" style="background-color: #403A36;">
+            <div class=" nav rounded-end border-white border-4" style="background-color: #332A21;">
+                <li class="nav-item">
+                    <a class="nav-link text-white" aria-current="page" href="#">
+                      <i class="bi bi-box-arrow-left" alt="Logout"></i>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="#">
+                        <i class="bi bi-house" alt="Home"></i>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="#">
+                      <i class="bi bi-arrow-left" alt="Back"></i>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <img src="imagenes/eu.png" class="img-fluid me-2 mt-1" style="width: 45px; height: 30px; cursor: pointer;" @click="changeLanguage('eu')">
+                  </li>
+                  <li class="nav-item me-3">
+                    <img src="imagenes/es.png" class="img-fluid mt-1" style="width: 45px; height: 30px; cursor: pointer;" @click="changeLanguage('es')">
+                  </li>
+                  <li class="navi-item me-3 mt-2">
+                    <a class="text-white" href="#" @click="changeEnvironment('http://localhost/Erronka2/Back/talde1erronka2')">LOCAL</a>
+                  </li>
+                  <li class="navi-item me-3 mt-2">
+                    <a class="text-white" href="#" @click="changeEnvironment('http://www.talde1.edu:8081')">SERVER</a>
+                  </li>
+            </div>
+          </ul>  
+        </header>
+        <div class="text-xxl-center">
+          <div id="calendarContainer"></div>
+          <div id="organizerContainer"></div>
+        </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+      <script src="js/translations.js"></script>
+      <script src="js/HitzorduScript.js"></script>
+      <script src="js/bootstrap/bootstrap.bundle.js"></script>
+    </body>
+</html>
