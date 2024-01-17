@@ -8,9 +8,21 @@ new Vue({
       kodeaCrear:"",
       listaTalde:[],
       listaTaldeById:[],
-      existe: null
+      existe: null,
+      nombreFil:"",
+      grupoFil: "",
+      currentLocale: 'es',
+      translations: translations,
+      environment: 'http://localhost/Erronka2/Back/talde1erronka2',
     },
     methods: {
+      changeEnvironment(env){
+        this.environment = env;
+      },
+      changeLanguage(locale) {
+        console.log('Cambiando a:', locale);
+        this.currentLocale = locale;
+      },
       // Langilea guztiak taulan kargatu
       async cargaLangile() {
         try {

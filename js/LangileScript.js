@@ -316,9 +316,6 @@ new Vue({
       changeLanguage(locale) {
         console.log('Cambiando a:', locale);
         this.currentLocale = locale;
-      },
-      prueba(){
-        console.log("hola");
       }
     },
     mounted() {

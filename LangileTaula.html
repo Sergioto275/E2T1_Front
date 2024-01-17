@@ -28,11 +28,13 @@
                       <i class="bi bi-arrow-left" alt="Back"></i>
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <img src="imagenes/eu.png" class="img-fluid me-2 mt-1" style="width: 45px; height: 30px; cursor: pointer;" @click="changeLanguage('eu')">
+                  <li class="nav-item me-3 mt-2">
+                    <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }" @click="changeLanguage('eu')">EU</a>
+                    <!-- <img src="imagenes/eu.png" class="img-fluid me-2 mt-1" style="width: 45px; height: 30px; cursor: pointer;" @click="changeLanguage('eu')"> -->
                   </li>
-                  <li class="nav-item me-3">
-                    <img src="imagenes/es.png" class="img-fluid mt-1" style="width: 45px; height: 30px; cursor: pointer;" @click="changeLanguage('es')">
+                  <li class="nav-item me-3 mt-2">
+                    <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }" @click="changeLanguage('es')">ES</a>
+                    <!-- <img src="imagenes/es.png" class="img-fluid mt-1" style="width: 45px; height: 30px; cursor: pointer;" @click="changeLanguage('es')"> -->
                   </li>
                   <li class="navi-item me-3 mt-2">
                     <a class="text-white" href="#" @click="changeEnvironment('http://localhost/Erronka2/Back/talde1erronka2')">LOCAL</a>

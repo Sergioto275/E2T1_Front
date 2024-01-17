@@ -35,6 +35,15 @@ const translations = {
             añadir: 'Añadir horario',
           }
         },
+        grupos: {
+          titulo: 'Grupos',
+          codigo: 'Código',
+          nombre: 'Nombre',
+          modal: {
+            editar: 'Editar grupo',
+            añadir: 'Añadir grupo'
+          }
+        },
         menu: {
           almacen:{
             titulo:'Almacen',
@@ -103,6 +112,15 @@ const translations = {
         modal: {
           editar: 'Ordutegia editatu',
           añadir: 'Ordutegia sortu',
+        }
+      },
+      grupos: {
+        titulo: 'Taldeak',
+        codigo: 'Kodea',
+        nombre: 'Izena',
+        modal: {
+          editar: 'Taldea editatu',
+          añadir: 'Taldea sortu'
         }
       },
       menu: {
