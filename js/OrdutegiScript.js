@@ -18,11 +18,76 @@ new Vue({
       listaOrdutegi:[],
       listaOrdutegiById:[],
       existe: null,
+      currentLocale: 'es',
+      translations: translations,
+      environment: 'http://localhost/Erronka2/Back/talde1erronka2',
+      listaTalde:[],
+      grupoFil: "",
     },
     methods: {
+      changeEnvironment(env){
+        this.environment = env;
+      },
+      changeLanguage(locale) {
+        console.log('Cambiando a:', locale);
+        this.currentLocale = locale;
+      },
+      async cargarComboBox() {
+        try{
+          const response = await fetch(this.environment + '/public/api/taldeak',{
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+            },
+          });
+
+          if(!response.ok) {
+            console.log('Errorea eskera egiterakoan');
+            throw new Error('Errorea eskaera egiterakoan');
+          }
+          const datuak = await response.json();
+          this.listaTalde = datuak
+          .filter(talde => talde.ezabatze_data === null || talde.ezabatze_data === "0000-00-00 00:00:00");
+
+          console.log(this.listaTalde);
+        } catch (error){
+          console.error('Errorea: ', error);
+        }
+      },
+      async filtroGrupo(){
+        console.log("hola")
+        try{
+          const response = await fetch(this.environment + '/public/api/ordutegiak', {
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+            },
+          });
+
+          if(!response.ok) {
+            console.log('Errorea eskera egiterakoan');
+            throw new Error('Errorea eskaera egiterakoan');
+          }
+
+          this.listaLangile=[];
+          const datuak = await response.json();
+
+          this.listaLangile = datuak
+          .filter(langile => langile.kodea === this.grupoFil && langile.ezabatze_data === null || langile.kodea === this.grupoFil  && langile.ezabatze_data === "0000-00-00 00:00:00");
+
+          if(this.listaLangile.length == 0){
+            this.listaLangile = datuak
+            .filter(langile => langile.ezabatze_data === null || langile.ezabatze_data === "0000-00-00 00:00:00");
+
+          }
+
+        } catch (error){
+          console.error('Errorea: ', error);
+        }
+      },
       cargaLangile() {
         this.listaOrdutegi=[];
-        fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/ordutegiak')
+        fetch(this.environment + '/public/api/ordutegiak')
         .then(dato => {
           return dato.json();
         })
@@ -39,7 +104,7 @@ new Vue({
         });
       },
       cargarDatosModal(){
-        fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/ordutegiakortubyid/'+this.arrayId[0])
+        fetch(this.environment + '/public/api/ordutegiakortubyid/'+this.arrayId[0])
         .then(dato => {
           return dato.json();
         })
@@ -85,7 +150,7 @@ new Vue({
           };
 
         console.log(JSON.stringify(jsonEditatu));
-        fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/ordutegiak', {
+        fetch(this.environment + '/public/api/ordutegiak', {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json', // Indicar el tipo de contenido como JSON
@@ -126,7 +191,7 @@ new Vue({
             "amaiera_ordua": amaiera_ordua,
             "sortze_data": sortze_data
           };
-        fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/ordutegiak', {
+        fetch(this.environment + '/public/api/ordutegiak', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json', // Indicar el tipo de contenido como JSON
@@ -161,7 +226,7 @@ new Vue({
             };
             console.log(JSON.stringify(jsonEzabatu));
 
-            const deleteResponse = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/ordutegiak', {
+            const deleteResponse = await fetch(this.environment + '/public/api/ordutegiak', {
               method: 'DELETE',
               headers: {
                 'Content-Type': 'application/json',

@@ -255,7 +255,7 @@ new Vue({
       async filtroNombre(){
         console.log("hola")
         try{
-          const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileak', {
+          const response = await fetch(this.environment + '/public/api/langileak', {
             headers: {
               'Content-Type': 'application/json',
               'Access-Control-Allow-Origin': '*'
@@ -285,7 +285,7 @@ new Vue({
       async filtroGrupo(){
         console.log("hola")
         try{
-          const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/langileak', {
+          const response = await fetch(this.environment + '/public/api/langileak', {
             headers: {
               'Content-Type': 'application/json',
               'Access-Control-Allow-Origin': '*'
