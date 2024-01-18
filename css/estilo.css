@@ -17,3 +17,42 @@ th{
     display: block;
   }
   
+  .background-radial-gradient {
+    background-color: #332A21;
+    background-image: radial-gradient(650px circle at 0% 0%,
+        #D9914E 15%,
+        #4d3e2f 35%,
+        #403A36 75%,
+        #332A21 80%,
+        transparent 100%),
+      radial-gradient(1250px circle at 100% 100%,
+        #D9914E 15%,
+        #4d3e2f 35%,
+        #403A36 75%,
+        #332A21 80%,
+        transparent 100%);
+  }
+
+  #radius-shape-1 {
+    height: 220px;
+    width: 220px;
+    top: -60px;
+    left: -130px;
+    background: radial-gradient(#D9914E, #E6B181);
+    overflow: hidden;
+  }
+
+  #radius-shape-2 {
+    border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+    bottom: -60px;
+    right: -110px;
+    width: 300px;
+    height: 300px;
+    background:  radial-gradient(#D9914E, #E6B181);
+    overflow: hidden;
+  }
+
+  .bg-glass {
+    background-color: hsla(0, 0%, 100%, 0.9) !important;
+    backdrop-filter: saturate(200%) blur(25px);
+  } 

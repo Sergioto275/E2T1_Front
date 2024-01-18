@@ -1,12 +1,6 @@
 <script setup>
 Vue.component('tablaLangile', {
-    template: `
-    <tr class="table-secondary" v-for="langile in listaLangile" data-tor="hover:bg-darken(x1)">
-                    <td class="table-secondary"><input type="checkbox" :value="langile.id" v-model="arrayId"></td>
-                    <td>{{langile.izena}}</td>
-                    <td>{{langile.abizenak}}</td>
-                    <td>{{langile.kodea}}</td>
-    </tr>`,
+    
     data: function () {
         return {
           listaLangile:[],
@@ -38,12 +32,18 @@ Vue.component('tablaLangile', {
     },
     mounted() {
         this.cargaLangile();
-      }
+      },
+      template: `
+    <tr class="table-secondary" v-for="langile in listaLangile" data-tor="hover:bg-darken(x1)">
+                    <td class="table-secondary"><input type="checkbox" :value="langile.id" v-model="arrayId"></td>
+                    <td>{{langile.izena}}</td>
+                    <td>{{langile.abizenak}}</td>
+                    <td>{{langile.kodea}}</td>
+    </tr>`
 });
 new Vue({
     el: '#app',
     data: {
-      tablaLangile: `<tr class='table-secondary' v-for='langile in listaLangile' data-tor='hover:bg-darken(x1)'><td class='table-secondary'><input type='checkbox' :value='langile.id' v-model='arrayId'></td><td>{{langile.izena}}</td><td>{{langile.abizenak}}</td><td>{{langile.kodea}}</td></tr>`,
       selectedCheckbox: null, // Esta variable almacenará la ID del checkbox seleccionado
       arrayId :[],
       izenaActu:"",
