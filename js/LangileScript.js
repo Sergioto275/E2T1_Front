@@ -1,38 +1,38 @@
 new Vue({
-  el: '#app',
-  data: {
-    selectedCheckbox: null, // Esta variable almacenará la ID del checkbox seleccionado
-    arrayId: [],
-    izenaActu: "",
-    abizenaActu: "",
-    kodeaActu: "",
-    izenaCrear: "",
-    abizenaCrear: "",
-    kodeaCrear: "",
-    listaLangile: [],
-    listaTalde: [],
-    listaLangileById: [],
-    existe: null,
-    nombreFil: "",
-    grupoFil: "",
-    currentLocale: 'es',
-    translations: translations,
-    environment: 'http://localhost/Erronka2/Back/talde1erronka2',
-  },
-  methods: {
-    changeEnvironment(env) {
-      this.environment = env;
+    el: '#app',
+    data: {
+      selectedCheckbox: null, // Esta variable almacenará la ID del checkbox seleccionado
+      arrayId :[],
+      izenaActu:"",
+      abizenaActu:"",
+      kodeaActu:"",
+      izenaCrear:"",
+      abizenaCrear:"",
+      kodeaCrear:"",
+      listaLangile:[],
+      listaTalde:[],
+      listaLangileById:[],
+      existe: null,
+      nombreFil:"",
+      grupoFil:"",
+      currentLocale: 'es',
+      translations: translations,
+      environment: 'https://localhost/Erronka2/Back/talde1erronka2',
     },
-    // Langilea guztiak taulan kargatu
-    async cargaLangile() {
-      console.log("Hello")
-      try {
-        const response = await fetch(this.environment + '/public/api/langileak', {
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
-          },
-        });
+    methods: {
+      changeEnvironment(env){
+        this.environment = env;
+      },
+      // Langilea guztiak taulan kargatu
+      async cargaLangile() {
+        console.log("Hello")
+        try {
+          const response = await fetch(this.environment + '/public/api/langileak', {
+            headers: {  
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+            },
+          });
 
         if (!response.ok) {
           console.log('Errorea eskera egiterakoan');
@@ -309,20 +309,17 @@ new Vue({
 
         }
 
-      } catch (error) {
-        console.error('Errorea: ', error);
+        } catch (error){
+          console.error('Errorea: ', error);
+        }
+      },
+      changeLanguage(locale) {
+        console.log('Cambiando a:', locale);
+        this.currentLocale = locale;
       }
     },
-    changeLanguage(locale) {
-      console.log('Cambiando a:', locale);
-      this.currentLocale = locale;
-    },
-    prueba() {
-      console.log("hola");
-    }
-  },
-  mounted() {
-    // Konponentea sortzen denean taula kargatzeko
-    this.cargaLangile();
-  }
-});
+    mounted() {
+        // Konponentea sortzen denean taula kargatzeko
+        this.cargaLangile();
+      }
+  });

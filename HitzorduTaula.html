@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="eu">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hitzorduak</title>
+    <link href="css/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.css" rel="stylesheet" />
+    <link href="css/bootstrap/icons/font/bootstrap-icons.css" rel="stylesheet" />
+  </head>
+  <body style=" font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; " >
+    <script src="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.js"></script>
+
+    <div id="app">
+      <!--HEADER-->
+      <header>
+        <ul class="nav nav-pills" style="background-color: #403a36">
+          <div class="nav rounded-end border-white border-4" style="background-color: #332a21" >
+            <li class="nav-item">
+              <a class="nav-link text-white" aria-current="page" href="#">
+                <i class="bi bi-box-arrow-left" alt="Logout"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="Home.html">
+                <i class="bi bi-house" alt="Home"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="Home.html">
+                <i class="bi bi-arrow-left" alt="Back"></i>
+              </a>
+            </li>
+            <li class="nav-item me-3 mt-2">
+              <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }" @click="changeLanguage('eu')" >EU</a >
+              <!-- <img src="imagenes/eu.png" class="img-fluid me-2 mt-1" style="width: 45px; height: 30px; cursor: pointer;" @click="changeLanguage('eu')"> -->
+            </li>
+            <li class="nav-item me-3 mt-2">
+              <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }" @click="changeLanguage('es')" >ES</a >
+              <!-- <img src="imagenes/es.png" class="img-fluid mt-1" style="width: 45px; height: 30px; cursor: pointer;" @click="changeLanguage('es')"> -->
+            </li>
+            <li class="navi-item me-3 mt-2">
+              <a class="text-white" :class="{ 'fw-bold': environment === 'https://localhost/Erronka2/Back/talde1erronka2' }" href="#" @click="changeEnvironment('https://localhost/Erronka2/Back/talde1erronka2')" >LOCAL</a >
+            </li>
+            <li class="navi-item me-3 mt-2">
+              <a class="text-white" :class="{ 'fw-bold': environment === 'https://www.talde1-back.edu:8443' }" href="#" @click="changeEnvironment('https://www.talde1-back.edu:8443')" >SERVER</a >
+            </li>
+          </div>
+        </ul>
+      </header>
+      <div class="row justify-content-center">
+        <div class="col-md-10 offset-md-5 mt-5">
+          <h1 class="mb-5 offset-md-2"> {{ translations[currentLocale].citas.titulo }} </h1>
+          <div>
+            <div class="input-group mb-1 w-50">
+              <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalCrear" @click="" > {{ translations[currentLocale].default.añadir }} </button>
+              <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalEditar" @click="" > {{ translations[currentLocale].default.editar }} </button>
+              <button type="button" class="btn btn-light border-black mb-3" @click="" > {{ translations[currentLocale].default.borrar }} </button>
+              <button type="button" class="btn btn-light border-black mb-3" @click="" > {{ translations[currentLocale].citas.ticket }} </button>
+            </div>
+            <div id="calendarContainer"></div>
+            <div id="organizerContainer"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 20vh" >
+        <div class="modal-dialog">
+          <div class="modal-content" style="background-color: #ba9471">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel"> {{ translations[currentLocale].trabajador.modal.editar }} </h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+            </div>
+            <!-- <div class="modal-body">
+                <label>{{ translations[currentLocale].trabajador.nombre }}:</label><br>
+                <input type="text" class="w-100" v-model="izenaActu"><br>
+                <label>{{ translations[currentLocale].trabajador.apellidos }}:</label><br>
+                <input type="text" class="w-100" v-model="abizenaActu"><br>
+                <label>{{ translations[currentLocale].trabajador.grupo }}:</label><br>
+                <select v-model="kodeaActu" >
+                  <option v-for="(taldea) in listaTalde" :value="taldea.kodea">{{taldea.kodea}}</option>
+                </select>
+              </div>  -->
+            <div class="modal-footer">
+              <button type="button" class="btn bg-black text-white" data-bs-dismiss="modal" > {{ translations[currentLocale].default.salir }} </button>
+              <button type="button" class="btn bg-black text-white" @click="actuDatosModal()" > {{ translations[currentLocale].default.guardar }} </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="exampleModalCrear" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 20vh" >
+        <div class="modal-dialog">
+          <div class="modal-content" style="background-color: #ba9471">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabelCrear"> {{ translations[currentLocale].trabajador.modal.añadir }} </h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+            </div>
+            <div class="modal-body">
+              <label>{{ translations[currentLocale].citas.crear.fecha }}:</label>
+              <input type="date" class="w-100" v-model="dataCrear" />
+              <label>{{ translations[currentLocale].citas.crear.horaIni }}:</label>
+              <input type="time" class="w-100" v-model="hasOrduaCrear" />
+              <label>{{ translations[currentLocale].citas.crear.horaFin }}:</label>
+              <input type="time" class="w-100" v-model="amaOrduaCrear" />
+              <label>{{ translations[currentLocale].citas.crear.nombre }}:</label>
+              <input type="text" class="w-100" v-model="izenaCrear" />
+              <label>{{ translations[currentLocale].citas.crear.telefono}}:</label>
+              <input type="text" class="w-100" v-model="telfCrear" />
+              <label>{{ translations[currentLocale].citas.crear.descripcion }}:</label>
+              <input type="text" class="w-100" v-model="deskCrear" />
+              <div class="d-flex">
+                <label>{{ translations[currentLocale].citas.crear.centro }}:</label>
+                <input type="checkbox" class="w-25" v-model="etxekoCrear" />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ translations[currentLocale].default.salir }}</button>
+              <button type="button" class="btn btn-primary" @click="createCita()">{{ translations[currentLocale].default.guardar }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/HitzorduScript.js"></script>
+    <script src="js/bootstrap/bootstrap.bundle.js"></script>
+  </body>
+</html>

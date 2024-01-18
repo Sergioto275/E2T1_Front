@@ -35,6 +35,29 @@ const translations = {
             añadir: 'Añadir horario',
           }
         },
+        grupos: {
+          titulo: 'Grupos',
+          codigo: 'Código',
+          nombre: 'Nombre',
+          modal: {
+            editar: 'Editar grupo',
+            añadir: 'Añadir grupo'
+          }
+        },
+        productos:{
+          titulo: 'Productos',
+          id: 'ID',
+          nombre: 'Nombre',
+          descripcion: 'Descripción',
+          marca: 'Marca',
+          categoria: 'Categoría',
+          stock: 'Stock',
+          stockAlerta: 'Alerta stock',
+          modal: {
+            editar: 'Editar producto',
+            añadir: 'Añadir producto',
+          }
+        },
         menu: {
           almacen:{
             titulo:'Almacen',
@@ -67,7 +90,20 @@ const translations = {
             elemento4:'Calendario'
           },
           tareas: 'Tareas',
-          citas:'Citas'
+          citas:'Citas',
+      },
+      citas:{
+        titulo: "Citas",
+        ticket: "Generar Ticket",
+        crear: {
+          fecha:"Fecha",
+          horaIni:"Hora Inicio",
+          horaFin:"Hora Fin",
+          nombre:"Nombre",
+          telefono:"Telefono",
+          descripcion:"Descripcion",
+          centro:"Centro"      
+        }
       }
     },
     eu: {
@@ -105,6 +141,29 @@ const translations = {
           añadir: 'Ordutegia sortu',
         }
       },
+      grupos: {
+        titulo: 'Taldeak',
+        codigo: 'Kodea',
+        nombre: 'Izena',
+        modal: {
+          editar: 'Taldea editatu',
+          añadir: 'Taldea sortu'
+        }
+      },
+      productos:{
+        titulo: 'Produktuak',
+        id: 'ID',
+        nombre: 'Izena',
+        descripcion: 'Deskribapena',
+        marca: 'Marka',
+        categoria: 'Kategoria',
+        stock: 'Stock',
+        stockAlerta: 'Stock alerta',
+        modal: {
+          editar: 'Produktua editatu',
+          añadir: 'Produktua sortu',
+        }
+      },
       menu: {
         almacen:{
           titulo:'Biltegia',
@@ -138,6 +197,19 @@ const translations = {
         },
         tareas: 'Zereginak',
         citas:'Hitzorduak'
+    },
+    citas:{
+      titulo: "Hitzorduak",
+      ticket: "Ticket-a sortu",
+      crear: {
+        fecha:"Data",
+        horaIni:"Hasiera ordua",
+        horaFin:"Amaiera ordua",
+        nombre:"Izena",
+        descripcion:"Deskribapena",
+        telefono:"Telefonoa",
+        centro:"Centrokoa"      
+      }
     }
-    }
-  };
+  }
+};

@@ -4,29 +4,35 @@ new Vue({
       selectedCheckbox: null, // Esta variable almacenará la ID del checkbox seleccionado
       arrayId :[],
       izenaActu:"",
+      deskribapenaActu:"",
+      markaActu:"",
+      kategoriaActu: "",
+      stockActu: "",
+      stockAlertaActu: "",
       izenaCrear:"",
-      kodeaCrear:"",
-      listaTalde:[],
-      listaTaldeById:[],
+      deskribapenaCrear:"",
+      markaCrear:"",
+      kategoriaCrear: "",
+      stockCrear: "",
+      stockAlertaCrear: "",
+      listaProduktu:[],
+      listaProduktuById:[],
+      listaKategoria: [],
       existe: null,
       nombreFil:"",
-      grupoFil: "",
+      grupoFil:"",
       currentLocale: 'es',
       translations: translations,
-      environment: 'http://localhost/Erronka2/Back/talde1erronka2',
+      environment: 'https://localhost/Erronka2/Back/talde1erronka2',
     },
     methods: {
       changeEnvironment(env){
         this.environment = env;
       },
-      changeLanguage(locale) {
-        console.log('Cambiando a:', locale);
-        this.currentLocale = locale;
-      },
       // Langilea guztiak taulan kargatu
-      async cargaLangile() {
+      async cargaProduktu() {
         try {
-          const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/taldeak', {
+          const response = await fetch(this.environment + '/public/api/produktuak', {
             headers: {  
               'Content-Type': 'application/json',
               'Access-Control-Allow-Origin': '*'
@@ -34,14 +40,17 @@ new Vue({
           });
 
           if (!response.ok) {
-            console.log('Errorea eskera egiterakoan');
+            console.log('Errorea eskaera egiterakoan');
             throw new Error('Errorea eskaera egiterakoan');
           }
 
           const datuak = await response.json();
 
-          this.listaTalde = datuak
-            .filter(langile => langile.ezabatze_data === null || langile.ezabatze_data === "0000-00-00 00:00:00");
+          this.listaProduktu = datuak
+            .filter(produktu => produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00");
+
+            this.cargarKategoria();
+            console.log(this.listaProduktu)
         } catch (error) {
           console.error('Errorea:', error);
         }
@@ -49,7 +58,7 @@ new Vue({
       //Editatzeko modalean aukeratutako langilearen datuak kargatzeko
       async cargarDatosModal(){
         try{
-          const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/taldeaklortubycode/'+this.arrayId[0], {
+          const response = await fetch(this.environment + '/public/api/produktuak/'+this.arrayId[0], {
             headers: {
               'Content-Type': 'application/json',
               'Access-Control-Allow-Origin': '*'
@@ -57,16 +66,23 @@ new Vue({
           });
 
           if(!response.ok) {
-            console.log('Errorea eskera egiterakoan');
+            console.log('Errorea eskaera egiterakoan');
             throw new Error('Errorea eskaera egiterakoan');
           }
 
           const datuak = await response.json();
 
-          this.listaTaldeById = datuak;
-          console.log(this.listaTaldeById);
+          this.listaProduktuById = datuak;
+          console.log(this.listaProduktuById);
 
-          this.izenaActu = this.listaTaldeById[0].izena;
+          this.izenaActu = this.listaProduktuById.izena;
+          this.deskribapenaActu = this.listaProduktuById.deskribapena;
+          this.markaActu = this.listaProduktuById.marka;
+          this.kategoriaActu = this.listaProduktuById.id_kategoria;
+          this.stockActu = this.listaProduktuById.stock;
+          this.stockAlertaActu = this.listaProduktuById.stock_alerta;
+          await this.cargarKategoria();
+
         } catch (error){
           console.error('Errorea: ', error);
         }
@@ -76,6 +92,8 @@ new Vue({
         try{
           const id=this.arrayId[0];
           const izena=this.izenaActu;
+          const abizenak=this.abizenaActu;
+          const kodea=this.kodeaActu;
           const eguneratze_data_primaria = new Date();
           const year = eguneratze_data_primaria.getFullYear();
           const month = ('0' + (eguneratze_data_primaria.getMonth() + 1)).slice(-2);
@@ -85,12 +103,14 @@ new Vue({
           const seconds = ('0' + eguneratze_data_primaria.getSeconds()).slice(-2);
           const eguneratze_data = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
           const jsonEditatu = {
-            "kodea": id,
+            "id": id,
             "izena": izena,
+            "abizenak": abizenak,
+            "kodea": kodea,
             "eguneratze_data": eguneratze_data
           };
 
-          const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/taldeak', {
+          const response = await fetch(this.environment + '/public/api/produktuak', {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -105,7 +125,7 @@ new Vue({
           }
           
           alert('Ondo eguneratuta');
-          await this.cargaLangile();
+          await this.cargaProduktu();
 
           //Modal-a ixteko ondo egiten duenean
           const modalEditarElement = document.getElementById('exampleModalEditar');
@@ -119,6 +139,7 @@ new Vue({
       async createDatosModal(){
         try{
           const izena=this.izenaCrear;
+          const abizenak=this.abizenaCrear;
           const kodea=this.kodeaCrear;
           const sortze_data_primaria = new Date();
           const year = sortze_data_primaria.getFullYear();
@@ -129,14 +150,15 @@ new Vue({
           const seconds = ('0' + sortze_data_primaria.getSeconds()).slice(-2);
           const sortze_data = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
           const jsonSortu = {
-            "kodea": kodea,
             "izena": izena,
+            "abizenak": abizenak,
+            "kodea": kodea,
             "sortze_data": sortze_data
           };
 
           console.log(JSON.stringify(jsonSortu));
 
-          const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/taldeak', {
+          const response = await fetch(this.environment + '/public/api/produktuak', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json', // Indicar el tipo de contenido como JSON
@@ -151,7 +173,7 @@ new Vue({
           }
 
           alert('Sortu da');
-          await this.cargaLangile();
+          await this.cargaProduktu();
 
           //Modal-a ixteko ondo sortzen duenean
           const modalCrearElement = document.getElementById('exampleModalCrear');
@@ -176,12 +198,12 @@ new Vue({
             const seconds = ('0' + ezabatze_data_primaria.getSeconds()).slice(-2);
             const ezabatze_data = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
             const jsonEzabatu = {
-              "kodea": id,
+              "id": id,
               "ezabatze_data": ezabatze_data
             };
             console.log(JSON.stringify(jsonEzabatu));
 
-            const deleteResponse = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/taldeak', {
+            const deleteResponse = await fetch(this.environment + '/public/api/produktuak', {
               method: 'DELETE',
               headers: {
                 'Content-Type': 'application/json',
@@ -195,7 +217,7 @@ new Vue({
             }
 
             ondo = true;
-            this.cargaLangile();
+            this.cargaProduktu();
           }
         } catch (error) {
           ondo = false;
@@ -212,10 +234,100 @@ new Vue({
         this.izenaCrear = "";
         this.abizenaCrear = "";
         this.kodeaCrear = "";
+
+        this.cargarKategoria();
+
+      },
+      async cargarKategoria() {
+        try{
+          const response = await fetch(this.environment + '/public/api/kategoriak',{
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+            },
+          });
+
+          if(!response.ok) {
+            console.log('Errorea eskera egiterakoan');
+            throw new Error('Errorea eskaera egiterakoan');
+          }
+          const datuak = await response.json();
+          this.listaKategoria = datuak
+          .filter(kategoria => kategoria.ezabatze_data === null || kategoria.ezabatze_data === "0000-00-00 00:00:00");
+
+          console.log(this.listaKategoria);
+        } catch (error){
+          console.error('Errorea: ', error);
+        }
+      },
+      async filtroNombre(){
+        console.log("hola")
+        try{
+          const response = await fetch(this.environment + '/public/api/produktuak', {
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+            },
+          });
+
+          if(!response.ok) {
+            console.log('Errorea eskera egiterakoan');
+            throw new Error('Errorea eskaera egiterakoan');
+          }
+
+          this.listaProduktu=[];
+          const datuak = await response.json();
+
+          this.listaProduktu = datuak
+          .filter(produktu => produktu.izena.includes(this.nombreFil) && produktu.ezabatze_data === null || produktu.izena.includes(this.nombreFil) && produktu.ezabatze_data === "0000-00-00 00:00:00");
+
+          if(this.listaProduktu.length == 0){
+            this.listaProduktuById = datuak
+            .filter(produktu => produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00");
+          }
+
+        } catch (error){
+          console.error('Errorea: ', error);
+        }
+      },
+      async filtroGrupo(){
+        console.log("hola")
+        try{
+          const response = await fetch(this.environment + '/public/api/produktuak', {
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+            },
+          });
+
+          if(!response.ok) {
+            console.log('Errorea eskera egiterakoan');
+            throw new Error('Errorea eskaera egiterakoan');
+          }
+
+          this.listaProduktu=[];
+          const datuak = await response.json();
+
+          this.listaProduktu = datuak
+          .filter(produktu => produktu.kodea === this.grupoFil && produktu.ezabatze_data === null || produktu.kodea === this.grupoFil  && produktu.ezabatze_data === "0000-00-00 00:00:00");
+
+          if(this.listaProduktu.length == 0){
+            this.listaProduktu = datuak
+            .filter(produktu => produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00");
+
+          }
+
+        } catch (error){
+          console.error('Errorea: ', error);
+        }
+      },
+      changeLanguage(locale) {
+        console.log('Cambiando a:', locale);
+        this.currentLocale = locale;
       }
     },
     mounted() {
         // Konponentea sortzen denean taula kargatzeko
-        this.cargaLangile();
+        this.cargaProduktu();
       }
   });

@@ -6,9 +6,11 @@
         <title>Home</title>
         <link href="css/bootstrap/bootstrap.css" rel="stylesheet">
         <link href="css/estilo.css" rel="stylesheet">
+        <link href="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.css" rel="stylesheet" />
         <link href="css/bootstrap/icons/font/bootstrap-icons.css" rel="stylesheet">
     </head>
     <body style="background-color: #E6B181;">
+        <script src="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.js"></script>
         <div id="app">
             <header>
                 <ul class="nav nav-pills justify-content-between" style="background-color: #403A36;">
@@ -104,13 +106,29 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn" href="#" style="color: #E6B181;" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="btn" href="HitzorduTaula.html" style="color: #E6B181;" role="button" >
                             <strong>{{ translations[currentLocale].menu.citas }}</strong>
                         </a>
                     </li>
                 </ul>
             </header>
+            
         </div>
+        <div id="calendarContainer"></div>
+        <div id="organizerContainer"></div>
+        <script>
+            var calendar = new Calendar("calendarContainer", "small",
+                                [ "Monday", 3 ],
+                                [ "#ffc107", "#ffa000", "#ffffff", "#ffecb3" ],
+                                {
+                                    days: [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",  "Saturday" ],
+                                    months: [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ],
+                                    indicator: false,
+                                    placeholder: "<span>Custom Placeholder</span>"
+                                });
+            var data = {};
+            var organizer = new Organizer("organizerContainer", calendar, data);
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="js/translations.js"></script>
         <script src="js/LangileScript.js"></script>
