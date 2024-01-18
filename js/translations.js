@@ -76,7 +76,20 @@ const translations = {
             elemento4:'Calendario'
           },
           tareas: 'Tareas',
-          citas:'Citas'
+          citas:'Citas',
+      },
+      citas:{
+        titulo: "Citas",
+        ticket: "Generar Ticket",
+        crear: {
+          fecha:"Fecha",
+          horaIni:"Hora Inicio",
+          horaFin:"Hora Fin",
+          nombre:"Nombre",
+          telefono:"Telefono",
+          descripcion:"Descripcion",
+          centro:"Centro"      
+        }
       }
     },
     eu: {
@@ -156,6 +169,19 @@ const translations = {
         },
         tareas: 'Zereginak',
         citas:'Hitzorduak'
+    },
+    citas:{
+      titulo: "Hitzorduak",
+      ticket: "Ticket-a sortu",
+      crear: {
+        fecha:"Data",
+        horaIni:"Hasiera ordua",
+        horaFin:"Amaiera ordua",
+        nombre:"Izena",
+        descripcion:"Deskribapena",
+        telefono:"Telefonoa",
+        centro:"Centrokoa"      
+      }
     }
-    }
-  };
+  }
+};
