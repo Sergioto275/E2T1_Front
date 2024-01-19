@@ -48,8 +48,8 @@
           </div>
         </ul>
       </header>
-      <div class="row justify-content-center">
-        <div class="col-md-10 offset-md-5 mt-5">
+      <div class="justify-content-evenly">
+        <div class="">
           <h1 class="mb-5 offset-md-2"> {{ translations[currentLocale].citas.titulo }} </h1>
           <div>
             <div class="input-group mb-1 w-50">
@@ -58,8 +58,20 @@
               <button type="button" class="btn btn-light border-black mb-3" @click="" > {{ translations[currentLocale].default.borrar }} </button>
               <button type="button" class="btn btn-light border-black mb-3" @click="" > {{ translations[currentLocale].citas.ticket }} </button>
             </div>
-            <div id="calendarContainer"></div>
-            <div id="organizerContainer"></div>
+            <div class="row">
+              <div class="col">
+                <div id="calendarContainer"></div>
+                <div id="organizerContainer"></div>
+              </div>
+              <div class="col" @change="citasDisponibles()">
+                <label>{{ translations[currentLocale].citas.crear.fecha }}:</label>
+                <input type="date" class="w-25" v-model="dataTest" />
+                <label>{{ translations[currentLocale].citas.crear.horaIni }}:</label>
+                <input type="time" class="w-25" v-model="hasOrduaTest" />
+                <label>{{ translations[currentLocale].citas.crear.horaFin }}:</label>
+                <input type="time" class="w-25" v-model="amaOrduaTest" />
+              </div>
+            </div>
           </div>
         </div>
       </div>

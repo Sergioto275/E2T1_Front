@@ -6,12 +6,16 @@ const vue = new Vue({
         citas: [],
         organizer: null,
         dataCrear:null,
+        dataTest:null,
         hasOrduaCrear:null,
+        hasOrduaTest:null,
         amaOrduaCrear:null,
+        amaOrduaTest:null,
         izenaCrear:null,
         telfCrear:null,
         deskCrear:null,
         etxekoCrear:null,
+        citasDisponible:null,
         currentLocale: 'es',
         translations: translations,
         environment: 'http://localhost/Erronka2/Back/talde1erronka2'
@@ -24,7 +28,12 @@ const vue = new Vue({
             console.log('Cambiando a:', locale);
             this.currentLocale = locale;
           },
-
+          async citasDisponibles(){
+            if(!this.dataTest || !this.amaOrduaTest || !this.hasOrduaTest){
+                return 0;
+            }
+            console.log("aaa");
+          },
         async cargarHitzordu() {
             console.log("aaa");
             try{
