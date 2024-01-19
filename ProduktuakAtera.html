@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="eu">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Langileak</title>
+        <link href="css/bootstrap/bootstrap.css" rel="stylesheet">
+        <link href="css/bootstrap/icons/font/bootstrap-icons.css" rel="stylesheet">
+      </head>
+      <body style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
+      <div id="app" >
+        <!--HEADER-->
+        <header>
+          <ul class="nav nav-pills" style="background-color: #403A36;">
+            <div class=" nav rounded-end border-white border-4" style="background-color: #332A21;">
+                <li class="nav-item">
+                    <a class="nav-link text-white" aria-current="page" href="#">
+                      <i class="bi bi-box-arrow-left" alt="Logout"></i>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="#">
+                        <i class="bi bi-house" alt="Home"></i>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="#">
+                      <i class="bi bi-arrow-left" alt="Back"></i>
+                    </a>
+                  </li>
+                  <li class="nav-item me-3 mt-2">
+                    <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }" @click="changeLanguage('eu')">EU</a>
+                    <!-- <img src="imagenes/eu.png" class="img-fluid me-2 mt-1" style="width: 45px; height: 30px; cursor: pointer;" @click="changeLanguage('eu')"> -->
+                  </li>
+                  <li class="nav-item me-3 mt-2">
+                    <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }" @click="changeLanguage('es')">ES</a>
+                    <!-- <img src="imagenes/es.png" class="img-fluid mt-1" style="width: 45px; height: 30px; cursor: pointer;" @click="changeLanguage('es')"> -->
+                  </li>
+                  <li class="navi-item me-3 mt-2">
+                    <a class="text-white" :class="{ 'fw-bold': environment === 'https://localhost/Erronka2/Back/talde1erronka2' }" href="#" @click="changeEnvironment('https://localhost/Erronka2/Back/talde1erronka2')">LOCAL</a>
+                  </li>
+                  <li class="navi-item me-3 mt-2">
+                    <a class="text-white" :class="{ 'fw-bold': environment === 'https://www.talde1-back.edu:8443' }" href="#" @click="changeEnvironment('https://www.talde1-back.edu:8443')">SERVER</a>
+                  </li>
+            </div>
+          </ul>  
+        </header>
+        
+        <div class="row justify-content-center">
+            <div class="col-md-10 offset-md-5 mt-5">
+              <h1 class="mb-5 offset-md-2">{{ translations[currentLocale].productos.titulo }}</h1>
+              <div>
+                <div class="input-group mb-3 w-50">
+                  <input type="text" class="form-control" placeholder="" aria-label="Recipient's username" aria-describedby="basic-addon2" v-model="nombreFil" @change="filtroNombre()">
+                  <button type="button" class="btn btn-light border-black" @click="cargaProduktu()">
+                    <i class="bi bi-arrow-clockwise"></i>
+                  </button>
+                </div>      
+                <div class="input-group mb-1 w-50">
+                  <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalCrear" @click="limpiarCampos()">{{ translations[currentLocale].default.añadir }}</button>
+                  <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalEditar" :disabled="arrayId.length>1 || arrayId.length<=0" @click="cargarDatosModal()">{{ translations[currentLocale].default.editar }}</button>
+                  <button type="button" class="btn btn-light border-black mb-3" :disabled="arrayId.length<=0" @click="borrar()">{{ translations[currentLocale].default.borrar }}</button>
+                  <select class="form-select border-black w-25 h-25" aria-label="Selecciona una categoria" v-model="kategoriaFil" @change="filtroKategoria()" aria-placeholder="Categoria">
+                    <option selected value="first">{{ translations[currentLocale].productos.kategoriaFil }}</option>
+                    <option v-for="(kategoria) in listaKategoria" :value="kategoria.id">{{kategoria.izena}}</option>
+                  </select>
+                </div>
+                
+                  <table class="table table-striped table-hover w-50 text-center">
+                      <tr>
+                          <th class="border border-black" style="background-color: #BA9471"></th>
+                          <th class="border border-black" style="background-color: #BA9471">{{ translations[currentLocale].productos.nombre }}</th>
+                          <th class="border border-black" style="background-color: #BA9471">{{ translations[currentLocale].productos.descripcion }}</th>
+                          <th class="border border-black" style="background-color: #BA9471">{{ translations[currentLocale].productos.marca }}</th>
+                          <th class="border border-black" style="background-color: #BA9471">{{ translations[currentLocale].productos.categoria }}</th>
+                          <th class="border border-black" style="background-color: #BA9471">{{ translations[currentLocale].productos.stock }}</th>
+                      </tr>
+                      <tr class="table-secondary" v-for="(produktu) in listaProduktu" data-tor="hover:bg-darken(x1)">
+                        <td class="table-secondary"><button type="button" class="btn btn-dark"><i class="bi bi-cart-plus"></i>
+                        </button></td>
+                        <td>{{produktu.izena}}</td>
+                        <td>{{produktu.deskribapena}}</td>
+                        <td>{{produktu.marka}}</td>
+                        <td>{{produktu.kategoria_izena}}</td>
+                        <td>{{produktu.stock}}</td>
+                      </tr>
+                  </table>
+              </div>
+            </div>
+          </div>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 20vh;">
+            <div class="modal-dialog">
+              <div class="modal-content" style=" background-color: #BA9471">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">{{ translations[currentLocale].productos.modal.editar }}</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <label>{{ translations[currentLocale].productos.nombre }}:</label><br>
+                  <input type="text" class="w-100" v-model="izenaActu"><br>
+                  <label>{{ translations[currentLocale].productos.descripcion }}:</label><br>
+                  <input type="text" class="w-100" v-model="deskribapenaActu"><br>
+                  <label>{{ translations[currentLocale].productos.marca }}:</label><br>
+                  <input type="text" class="w-100" v-model="markaActu"><br>
+                  <label>{{ translations[currentLocale].productos.categoria }}:</label><br>
+                  <select v-model="kategoriaActu" >
+                    <option v-for="(kategoria) in listaKategoria" :value="kategoria.id">{{kategoria.izena}}</option>
+                  </select><br>
+                  <label>{{ translations[currentLocale].productos.stock }}:</label><br>
+                  <input type="text" class="w-100" v-model="stockActu"><br>
+                  <label>{{ translations[currentLocale].productos.stockAlerta }}:</label><br>
+                  <input type="text" class="w-100" v-model="stockAlertaActu"><br>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn bg-black text-white" data-bs-dismiss="modal">{{ translations[currentLocale].default.salir }}</button>
+                  <button type="button" class="btn bg-black text-white" @click="actuDatosModal()">{{ translations[currentLocale].default.guardar }}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="exampleModalCrear" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 20vh;">
+            <div class="modal-dialog">
+              <div class="modal-content"  style=" background-color: #BA9471">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabelCrear">{{ translations[currentLocale].trabajador.modal.añadir }}</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <label>{{ translations[currentLocale].productos.nombre }}:</label><br>
+                  <input type="text" class="w-100" v-model="izenaCrear"><br>
+                  <label>{{ translations[currentLocale].productos.descripcion }}:</label><br>
+                  <input type="text" class="w-100" v-model="deskribapenaCrear"><br>
+                  <label>{{ translations[currentLocale].productos.marca }}:</label><br>
+                  <input type="text" class="w-100" v-model="markaCrear"><br>
+                  <label>{{ translations[currentLocale].productos.categoria }}:</label><br>
+                  <select v-model="kategoriaCrear" >
+                    <option v-for="(kategoria) in listaKategoria" :value="kategoria.id">{{kategoria.izena}}</option>
+                  </select><br>
+                  <label>{{ translations[currentLocale].productos.stock }}:</label><br>
+                  <input type="number" min="0" class="w-100" v-model="stockCrear"><br>
+                  <label>{{ translations[currentLocale].productos.stockAlerta }}:</label><br>
+                  <input type="number" min="0" class="w-100" v-model="stockAlertaCrear"><br>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ translations[currentLocale].default.salir }}</button>
+                  <button type="button" class="btn btn-primary" @click="createDatosModal()">{{ translations[currentLocale].default.guardar }}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="js/translations.js"></script>
+        <script src="js/ProduktuakAteraScript.js"></script>
+        <script src="js/bootstrap/bootstrap.bundle.js"></script>
+    </body>
+</html>

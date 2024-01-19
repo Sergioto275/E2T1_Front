@@ -53,6 +53,7 @@ const translations = {
           categoria: 'Categoría',
           stock: 'Stock',
           stockAlerta: 'Alerta stock',
+          kategoriaFil: 'Selecciona una categoría',
           modal: {
             editar: 'Editar producto',
             añadir: 'Añadir producto',
@@ -159,6 +160,7 @@ const translations = {
         categoria: 'Kategoria',
         stock: 'Stock',
         stockAlerta: 'Stock alerta',
+        kategoriaFil: 'Kategoria bat aukeratu',
         modal: {
           editar: 'Produktua editatu',
           añadir: 'Produktua sortu',
