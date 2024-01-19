@@ -5,16 +5,21 @@ const vue = new Vue({
         calendar: null,
         citas: [],
         organizer: null,
-        dataCrear:null,
         dataTest:null,
-        hasOrduaCrear:null,
         hasOrduaTest:null,
-        amaOrduaCrear:null,
         amaOrduaTest:null,
         izenaCrear:null,
         telfCrear:null,
         deskCrear:null,
         etxekoCrear:null,
+        dataSelec:null,
+        dataEditar:null,
+        hasOrduaEditar:null,
+        amaOrduaEditar:null,
+        izenaEditar:null,
+        telfEditar:null,
+        deskEditar:null,
+        etxekoEditar:null,
         citasDisponible:null,
         currentLocale: 'es',
         translations: translations,
@@ -32,7 +37,50 @@ const vue = new Vue({
             if(!this.dataTest || !this.amaOrduaTest || !this.hasOrduaTest){
                 return 0;
             }
-            console.log("aaa");
+            try{
+                const json_data = {
+                    "data":this.dataTest,
+                    "hasiera_ordua":this.hasOrduaTest,
+                    "amaiera_ordua":this.amaOrduaTest
+                }
+                const response = await fetch(this.environment + '/public/api/hitzordu_eskuragarri',{
+                    headers: {  
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    method: "POST",
+                    body: JSON.stringify(json_data)
+                });
+                if(!response.ok){
+                    throw new Error('Errorea eskaera egiterakoan');
+                }
+                const datuak = await response.json();
+                if(datuak < 0){
+                    this.citasDisponible = ("No hay ordutegi asignado")
+                }else{
+                    this.citasDisponible = datuak;
+                }
+            }catch(error){
+                throw new Error("Error en carga de citas disponibles:"+error);
+            }
+          },
+          async cargar_citas(){
+            try{
+                const response = await fetch(this.environment + '/public/api/hitzorduakbydate/'+this.dataSelec,{
+                    headers: {  
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    method: "GET"
+                });
+                if(!response.ok){
+                    throw new Error('Errorea eskaera egiterakoan');
+                }
+                const datuak = await response.json();
+                // this.hitzorduArray = datuak;
+            }catch(error){
+                throw new Error("Error al cargar las citas:"+error);
+            }
           },
         async cargarHitzordu() {
             console.log("aaa");
@@ -65,9 +113,9 @@ const vue = new Vue({
         },
         async createCita(){
             try{
-                const data = this.dataCrear;
-                const hasOrdua = this.hasOrduaCrear;
-                const amaOrdua = this.amaOrduaCrear;
+                const data = this.dataTest;
+                const hasOrdua = this.hasOrduaTest;
+                const amaOrdua = this.amaOrduaTest;
                 const izena = this.izenaCrear;
                 const telefonoa = this.telfCrear;
                 const deskribapena = this.deskCrear;

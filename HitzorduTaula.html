@@ -48,29 +48,38 @@
           </div>
         </ul>
       </header>
-      <div class="justify-content-evenly">
-        <div class="">
+      <div class="justify-content-evenly" style="margin:0%15%">
+        <div>
           <h1 class="mb-5 offset-md-2"> {{ translations[currentLocale].citas.titulo }} </h1>
           <div>
             <div class="input-group mb-1 w-50">
               <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalCrear" @click="" > {{ translations[currentLocale].default.añadir }} </button>
-              <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalEditar" @click="" > {{ translations[currentLocale].default.editar }} </button>
-              <button type="button" class="btn btn-light border-black mb-3" @click="" > {{ translations[currentLocale].default.borrar }} </button>
+              <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalEditar" @click="" > {{ translations[currentLocale].citas.seleccionarCita.titulo }} </button>
               <button type="button" class="btn btn-light border-black mb-3" @click="" > {{ translations[currentLocale].citas.ticket }} </button>
             </div>
             <div class="row">
-              <div class="col">
-                <div id="calendarContainer"></div>
-                <div id="organizerContainer"></div>
+              <div class="col-5">
+                <div class="w-100" id="calendarContainer"></div>
+                <div class="w-100"id="organizerContainer"></div>
               </div>
-              <div class="col" @change="citasDisponibles()">
-                <label>{{ translations[currentLocale].citas.crear.fecha }}:</label>
-                <input type="date" class="w-25" v-model="dataTest" />
-                <label>{{ translations[currentLocale].citas.crear.horaIni }}:</label>
-                <input type="time" class="w-25" v-model="hasOrduaTest" />
-                <label>{{ translations[currentLocale].citas.crear.horaFin }}:</label>
-                <input type="time" class="w-25" v-model="amaOrduaTest" />
+              <div class="col-5 mb-3 mb-sm-0">
+                <div class="card">
+                  <div class="card-body row" @change="citasDisponibles()">
+                    <div class="col d-flex flex-column">
+                      <label>{{ translations[currentLocale].citas.crear.fecha }}:</label>
+                      <input type="date" class="w-100" v-model="dataTest" />
+                      <label>{{ translations[currentLocale].citas.crear.horaIni }}:</label>
+                      <input type="time" class="w-100" v-model="hasOrduaTest" />
+                      <label>{{ translations[currentLocale].citas.crear.horaFin }}:</label>
+                      <input type="time" class="w-100" v-model="amaOrduaTest" />
+                    </div>
+                    <p class="col display-6"> {{ citasDisponible }} citas</p>
+                  </div>
+                </div>
               </div>
+              <!-- <div class="col" >
+                
+              </div> -->
             </div>
           </div>
         </div>
@@ -80,19 +89,36 @@
         <div class="modal-dialog">
           <div class="modal-content" style="background-color: #ba9471">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel"> {{ translations[currentLocale].trabajador.modal.editar }} </h1>
+              <h1 class="modal-title fs-5" id="exampleModalLabel"> {{ translations[currentLocale].citas.editar.titulo }} </h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
             </div>
-            <!-- <div class="modal-body">
-                <label>{{ translations[currentLocale].trabajador.nombre }}:</label><br>
-                <input type="text" class="w-100" v-model="izenaActu"><br>
-                <label>{{ translations[currentLocale].trabajador.apellidos }}:</label><br>
-                <input type="text" class="w-100" v-model="abizenaActu"><br>
-                <label>{{ translations[currentLocale].trabajador.grupo }}:</label><br>
-                <select v-model="kodeaActu" >
-                  <option v-for="(taldea) in listaTalde" :value="taldea.kodea">{{taldea.kodea}}</option>
-                </select>
-              </div>  -->
+            <div class="modal-body row">
+                <div class="col">
+                  <input type="date" v-model="dataSelec"/>
+                  <div class="card">
+                    <div class="card-body">
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <label>{{ translations[currentLocale].citas.crear.fecha }}:</label>
+                  <input type="date" class="w-100" v-model="dataEditar" />
+                  <label>{{ translations[currentLocale].citas.crear.horaIni }}:</label>
+                  <input type="time" class="w-100" v-model="hasOrduaEditar" />
+                  <label>{{ translations[currentLocale].citas.crear.horaFin }}:</label>
+                  <input type="time" class="w-100" v-model="amaOrduaEditar" />
+                  <label>{{ translations[currentLocale].citas.crear.nombre }}:</label>
+                  <input type="text" class="w-100" v-model="izenaEditar" />
+                  <label>{{ translations[currentLocale].citas.crear.telefono}}:</label>
+                  <input type="text" class="w-100" v-model="telfEditar" />
+                  <label>{{ translations[currentLocale].citas.crear.descripcion }}:</label>
+                  <input type="text" class="w-100" v-model="deskEditar" />
+                  <div class="d-flex">
+                    <label>{{ translations[currentLocale].citas.crear.centro }}:</label>
+                    <input type="checkbox" class="w-25" v-model="etxekoEditar" />
+                  </div>
+                </div>
+              </div> 
             <div class="modal-footer">
               <button type="button" class="btn bg-black text-white" data-bs-dismiss="modal" > {{ translations[currentLocale].default.salir }} </button>
               <button type="button" class="btn bg-black text-white" @click="actuDatosModal()" > {{ translations[currentLocale].default.guardar }} </button>
@@ -105,16 +131,16 @@
         <div class="modal-dialog">
           <div class="modal-content" style="background-color: #ba9471">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabelCrear"> {{ translations[currentLocale].trabajador.modal.añadir }} </h1>
+              <h1 class="modal-title fs-5" id="exampleModalLabelCrear"> {{ translations[currentLocale].citas.crear.titulo }} </h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
             </div>
             <div class="modal-body">
               <label>{{ translations[currentLocale].citas.crear.fecha }}:</label>
-              <input type="date" class="w-100" v-model="dataCrear" />
+              <input type="date" class="w-100" v-model="dataTest" />
               <label>{{ translations[currentLocale].citas.crear.horaIni }}:</label>
-              <input type="time" class="w-100" v-model="hasOrduaCrear" />
+              <input type="time" class="w-100" v-model="hasOrduaTest" />
               <label>{{ translations[currentLocale].citas.crear.horaFin }}:</label>
-              <input type="time" class="w-100" v-model="amaOrduaCrear" />
+              <input type="time" class="w-100" v-model="amaOrduaTest" />
               <label>{{ translations[currentLocale].citas.crear.nombre }}:</label>
               <input type="text" class="w-100" v-model="izenaCrear" />
               <label>{{ translations[currentLocale].citas.crear.telefono}}:</label>
