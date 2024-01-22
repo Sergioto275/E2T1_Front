@@ -44,6 +44,15 @@ const translations = {
             añadir: 'Añadir grupo'
           }
         },
+        tareas: {
+          titulo:'Turnos',
+          tipo: 'Tipo',
+          fecha: 'Fecha',
+          trabajador: 'Trabajador',
+          modal: {
+            editar: 'Editar turno',
+        }
+        },
         productos:{
           titulo: 'Productos',
           id: 'ID',
@@ -148,6 +157,15 @@ const translations = {
         modal: {
           editar: 'Taldea editatu',
           añadir: 'Taldea sortu'
+        }
+      },
+      tareas: {
+        titulo:'Txanda',
+        tipo: 'Mota',
+        fecha: 'Data',
+        trabajador: 'Langilea',
+        modal: {
+          editar: 'Taldea editatu',
         }
       },
       productos:{

@@ -15,15 +15,16 @@
                         <div class="mb-5">
                             <label class="">Grupo</label>
                             <select class="form-select" aria-label="Default select example" v-model="grupoSeleccionado" @change="cargaLangile()">
-                                <option v-for="(taldea) in listaTalde" :value="taldea.kodea">{{taldea.kodea}}</option>
+                                <option v-for="(taldea) in listaTalde" :value="taldea.kodea" selected>{{taldea.kodea}}</option>
                             </select class="form-select" aria-label="Default select example">
                             <label class="">Alumno</label>
                             <select class="form-select" aria-label="Default select example" v-model="langileSeleccionado">
+                                <option selected>Seleccione un trabajador</option>
                                 <option v-for="(langile) in listaLangile" :value="langile.id">{{langile.izena}} {{langile.abizenak}}</option>
                             </select>
                             <label class="">Tarea</label>
                             <select class="form-select" aria-label="Default select example" v-model="tareaSeleccionado">
-                                <option value="M">Mostrador</option>
+                                <option value="M" selected>Mostrador</option>
                                 <option value="G">Limpieza</option>
                             </select>
                         </div>
