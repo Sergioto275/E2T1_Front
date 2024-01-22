@@ -3,6 +3,7 @@ new Vue({
   data: {
     listaLangile: [],
     listaTalde: [],
+    listaOrdutegi: [],
     listaTxandaCont: [],
     listaTxandaLast: [],
     listaFiltroTalde: [],
@@ -16,7 +17,6 @@ new Vue({
       this.environment = env;
     },
     async cargaLangile() {
-      console.log("Hello")
       try {
         const response = await fetch(this.environment + '/public/api/langileak', {
           headers: {
@@ -31,12 +31,11 @@ new Vue({
         }
 
         const datuak = await response.json();
-
+        console.log(this.grupoSeleccionado)
         this.listaLangile = datuak
           .filter(langile => langile.ezabatze_data === null && langile.kodea == this.grupoSeleccionado || langile.ezabatze_data === "0000-00-00 00:00:00" && langile.kodea == this.grupoSeleccionado);
 
         this.cargarTxanda();
-        console.log(this.listaLangile)
       } catch (error) {
         console.error('Errorea:', error);
       }
@@ -57,13 +56,40 @@ new Vue({
         const datuak = await response.json();
         this.listaTalde = datuak
           .filter(talde => talde.ezabatze_data === null || talde.ezabatze_data === "0000-00-00 00:00:00");
-
-
-
-        console.log(this.listaTalde);
       } catch (error) {
         console.error('Errorea: ', error);
       }
+
+      this.listaOrdutegi = [];
+      fetch(this.environment + '/public/api/ordutegiak')
+        .then(dato => {
+          return dato.json();
+        })
+        .then(datos => {
+          for (var i = 0; i < datos.length; i++) {
+
+            if (datos[i].ezabatze_data === null || datos[i].ezabatze_data === "0000-00-00 00:00:00") {
+              this.listaOrdutegi.push(datos[i]);
+
+              const cadenaFecha = datos[i]["hasiera_data"];
+              const fechaEjemplo = new Date(cadenaFecha);
+              const fechaActual = new Date();
+              const fecha1SoloFecha = new Date(fechaActual.getFullYear(), fechaActual.getMonth(), fechaActual.getDate());
+              const fecha2SoloFecha = new Date(fechaEjemplo.getFullYear(), fechaEjemplo.getMonth(), fechaEjemplo.getDate());
+              console.log(fecha1SoloFecha+" "+fecha2SoloFecha)
+              if (fecha1SoloFecha.getTime() === fecha2SoloFecha.getTime()) {
+                console.log("HOla")
+                this.grupoSeleccionado=datos[i]["kodea"];
+              }
+            }
+          }
+           this.cargaLangile();
+
+        })
+        .catch(error => {
+          console.error('Se ha producido un error:', error);
+        });
+
     },
     async cargarTxanda() {
       this.listaTxandaCont = []
@@ -160,8 +186,14 @@ new Vue({
           fechaSemanaPasada.setDate(fechaSemanaPasada.getDate() - 7);
           if (fechaEjemplo > fechaSemanaPasada && fechaEjemplo <= fechaActual) {
             var persona = { id_langilea: datuak[index]["id_langilea"], mota: datuak[index]["mota"] };
-            this.listaTxandaLast.push(persona);
-            console.log(this.listaTxandaLast)
+            var listaTxandaLastStrings = this.listaTxandaLast.map(item => JSON.stringify(item));
+            var personaString = JSON.stringify(persona);
+            if (listaTxandaLastStrings.includes(personaString)) {
+              console.log("persona")
+            } else {
+              this.listaTxandaLast.push(persona);
+            }
+
           }
         }
 
@@ -234,7 +266,8 @@ new Vue({
         });
 
         if (!response.ok) {
-          console.log('Errorea sortzerakoan');
+          alert("ya existe un registro igual")
+          console.log(response+'Errorea sortzerakoan');
           throw new Error('Errorea sortzerakoan');
         }
 
