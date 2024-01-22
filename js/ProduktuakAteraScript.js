@@ -24,6 +24,7 @@ new Vue({
       currentLocale: 'es',
       translations: translations,
       environment: 'https://localhost/Erronka2/Back/talde1erronka2',
+      kantitate: ""
     },
     methods: {
       changeEnvironment(env){

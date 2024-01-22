@@ -60,6 +60,10 @@
                   <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalCrear" @click="limpiarCampos()">{{ translations[currentLocale].default.añadir }}</button>
                   <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalEditar" :disabled="arrayId.length>1 || arrayId.length<=0" @click="cargarDatosModal()">{{ translations[currentLocale].default.editar }}</button>
                   <button type="button" class="btn btn-light border-black mb-3" :disabled="arrayId.length<=0" @click="borrar()">{{ translations[currentLocale].default.borrar }}</button>
+                  <select class="form-select border-black w-25 h-25" aria-label="Selecciona una categoria" v-model="kategoriaFil" @change="filtroKategoria()" aria-placeholder="Categoria">
+                    <option selected value="first">{{ translations[currentLocale].productos.kategoriaFil }}</option>
+                    <option v-for="(kategoria) in listaKategoria" :value="kategoria.id">{{kategoria.izena}}</option>
+                  </select>
                   <!-- <select class="form-select border-black w-25 h-25" aria-label="Default select example" v-model="grupoFil" @change="filtroGrupo()" aria-placeholder="Grupo">
                     <option selected>Todos</option>
                     <option v-for="(taldea) in listaTalde" :value="taldea.kodea">{{taldea.kodea}}</option>

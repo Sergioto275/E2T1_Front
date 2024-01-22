@@ -62,6 +62,7 @@ const translations = {
           categoria: 'Categoría',
           stock: 'Stock',
           stockAlerta: 'Alerta stock',
+          kategoriaFil: 'Selecciona una categoría',
           modal: {
             editar: 'Editar producto',
             añadir: 'Añadir producto',
@@ -104,7 +105,11 @@ const translations = {
       citas:{
         titulo: "Citas",
         ticket: "Generar Ticket",
+        seleccionarCita:{
+          titulo: "Seleccionar Cita"
+        },
         crear: {
+          titulo:"Insertar cita",
           fecha:"Fecha",
           horaIni:"Hora Inicio",
           horaFin:"Hora Fin",
@@ -112,6 +117,9 @@ const translations = {
           telefono:"Telefono",
           descripcion:"Descripcion",
           centro:"Centro"      
+        },
+        editar:{
+          titulo: "Editar cita"
         }
       }
     },
@@ -177,6 +185,7 @@ const translations = {
         categoria: 'Kategoria',
         stock: 'Stock',
         stockAlerta: 'Stock alerta',
+        kategoriaFil: 'Kategoria bat aukeratu',
         modal: {
           editar: 'Produktua editatu',
           añadir: 'Produktua sortu',
@@ -219,7 +228,11 @@ const translations = {
     citas:{
       titulo: "Hitzorduak",
       ticket: "Ticket-a sortu",
+      seleccionarCita:{
+        titulo: "Hitzordua Aukeratu"
+      },
       crear: {
+        titulo: "Hitzordua gehitu",
         fecha:"Data",
         horaIni:"Hasiera ordua",
         horaFin:"Amaiera ordua",
@@ -227,6 +240,9 @@ const translations = {
         descripcion:"Deskribapena",
         telefono:"Telefonoa",
         centro:"Centrokoa"      
+      },
+      editar:{
+        titulo: "Hitzordua editatu"
       }
     }
   }
