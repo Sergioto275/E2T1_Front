@@ -2,10 +2,14 @@ const vue = new Vue({
     el: "#app",
     data: {
         hitzorduArray: [],
+        citasEditarArray: [],
         calendar: null,
         citas: [],
         organizer: null,
         dataTest:null,
+        dataSelec:null,
+        citaSelec:null,
+        idSelec:null,
         hasOrduaTest:null,
         amaOrduaTest:null,
         izenaCrear:null,
@@ -64,6 +68,88 @@ const vue = new Vue({
                 throw new Error("Error en carga de citas disponibles:"+error);
             }
           },
+          cargar_cita_selec(id){
+            cita = this.citasEditarArray.filter(citas => citas.id === id);
+            this.idSelec = id;
+            this.dataEditar = cita[0].data;
+            this.hasOrduaEditar = cita[0].hasiera_ordua;
+            this.amaOrduaEditar = cita[0].amaiera_ordua;
+            this.izenaEditar = cita[0].izena;
+            this.telfEditar = cita[0].telefonoa;
+            this.deskEditar = cita[0].deskribapena;
+            if(cita[0].etxekoa == "E"){
+                this.etxekoEditar = true;
+            }else{
+                this.etxekoEditar = false;
+            };  
+          },
+          async editar_cita(){
+            try{
+                var etxeko;
+                if(this.etxekoEditar){
+                    etxeko = "E";
+                }else{
+                    etxeko = "K";
+                };  
+                const json_data = {
+                    "id":this.idSelec,
+                    "data":this.dataEditar,
+                    "hasiera_ordua":this.hasOrduaEditar,
+                    "amaiera_ordua":this.amaOrduaEditar,
+                    "izena":this.izenaEditar,
+                    "telefonoa":this.telfEditar,
+                    "deskribapena":this.deskEditar,
+                    "etxekoa":etxeko
+                }
+                const response = await fetch(this.environment + '/public/api/hitzorduak',{
+                    headers: {  
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    method: "PUT",
+                    body: JSON.stringify(json_data)
+                });
+                if(!response.ok){
+                    throw new Error('Errorea eskaera egiterakoan');
+                }
+                alert('Ondo eguneratuta');
+                await this.cargarHitzordu();
+
+                //Modal-a ixteko ondo egiten duenean
+                const modalEditarElement = document.getElementById('exampleModalEditar');
+                const modalInst = bootstrap.Modal.getInstance(modalEditarElement);
+                modalInst.hide();
+            }catch(error){
+                throw new Error("Error en carga de citas disponibles:"+error);
+            }
+          },
+          async eliminar_cita(){
+            try{ 
+                const json_data = {
+                    "id":this.idSelec
+                }
+                const response = await fetch(this.environment + '/public/api/hitzorduak',{
+                    headers: {  
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    method: "DELETE",
+                    body: JSON.stringify(json_data)
+                });
+                if(!response.ok){
+                    throw new Error('Errorea eskaera egiterakoan');
+                }
+                alert('Ondo eguneratuta');
+                await this.cargarHitzordu();
+
+                //Modal-a ixteko ondo egiten duenean
+                const modalEditarElement = document.getElementById('exampleModalEditar');
+                const modalInst = bootstrap.Modal.getInstance(modalEditarElement);
+                modalInst.hide();
+            }catch(error){
+                throw new Error("Error en carga de citas disponibles:"+error);
+            }
+          },
           async cargar_citas(){
             try{
                 const response = await fetch(this.environment + '/public/api/hitzorduakbydate/'+this.dataSelec,{
@@ -77,13 +163,14 @@ const vue = new Vue({
                     throw new Error('Errorea eskaera egiterakoan');
                 }
                 const datuak = await response.json();
-                // this.hitzorduArray = datuak;
+
+                this.citasEditarArray = datuak.filter(citas => citas.ezabatze_data === null || citas.ezabatze_data === "0000-00-00 00:00:00");
             }catch(error){
                 throw new Error("Error al cargar las citas:"+error);
             }
           },
         async cargarHitzordu() {
-            console.log("aaa");
+            document.getElementById('organizerContainer').innerHTML = "";
             try{
                 const response = await fetch(this.environment + '/public/api/hitzorduak',{
                     headers: {  
@@ -146,7 +233,6 @@ const vue = new Vue({
                     throw new Error('Errorea eskaera egiterakoan');
                 }
                 alert('Sortu da');
-                document.getElementById('organizerContainer').innerHTML = "";
                 await this.cargarHitzordu();
       
                 //Modal-a ixteko ondo sortzen duenean

@@ -86,20 +86,11 @@ new Vue({
         const izena = this.izenaActu;
         const abizenak = this.abizenaActu;
         const kodea = this.kodeaActu;
-        const eguneratze_data_primaria = new Date();
-        const year = eguneratze_data_primaria.getFullYear();
-        const month = ('0' + (eguneratze_data_primaria.getMonth() + 1)).slice(-2);
-        const day = ('0' + eguneratze_data_primaria.getDate()).slice(-2);
-        const hours = ('0' + eguneratze_data_primaria.getHours()).slice(-2);
-        const minutes = ('0' + eguneratze_data_primaria.getMinutes()).slice(-2);
-        const seconds = ('0' + eguneratze_data_primaria.getSeconds()).slice(-2);
-        const eguneratze_data = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         const jsonEditatu = {
           "id": id,
           "izena": izena,
           "abizenak": abizenak,
-          "kodea": kodea,
-          "eguneratze_data": eguneratze_data
+          "kodea": kodea
         };
 
         const response = await fetch(this.environment + '/public/api/langileak', {
@@ -133,19 +124,10 @@ new Vue({
         const izena = this.izenaCrear;
         const abizenak = this.abizenaCrear;
         const kodea = this.kodeaCrear;
-        const sortze_data_primaria = new Date();
-        const year = sortze_data_primaria.getFullYear();
-        const month = ('0' + (sortze_data_primaria.getMonth() + 1)).slice(-2);
-        const day = ('0' + sortze_data_primaria.getDate()).slice(-2);
-        const hours = ('0' + sortze_data_primaria.getHours()).slice(-2);
-        const minutes = ('0' + sortze_data_primaria.getMinutes()).slice(-2);
-        const seconds = ('0' + sortze_data_primaria.getSeconds()).slice(-2);
-        const sortze_data = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         const jsonSortu = {
           "izena": izena,
           "abizenak": abizenak,
-          "kodea": kodea,
-          "sortze_data": sortze_data
+          "kodea": kodea
         };
 
         console.log(JSON.stringify(jsonSortu));
@@ -181,17 +163,8 @@ new Vue({
       try {
         for (var i = 0; i < this.arrayId.length; i++) {
           const id = this.arrayId[i];
-          const ezabatze_data_primaria = new Date();
-          const year = ezabatze_data_primaria.getFullYear();
-          const month = ('0' + (ezabatze_data_primaria.getMonth() + 1)).slice(-2);
-          const day = ('0' + ezabatze_data_primaria.getDate()).slice(-2);
-          const hours = ('0' + ezabatze_data_primaria.getHours()).slice(-2);
-          const minutes = ('0' + ezabatze_data_primaria.getMinutes()).slice(-2);
-          const seconds = ('0' + ezabatze_data_primaria.getSeconds()).slice(-2);
-          const ezabatze_data = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
           const jsonEzabatu = {
-            "id": id,
-            "ezabatze_data": ezabatze_data
+            "id": id
           };
           console.log(JSON.stringify(jsonEzabatu));
 

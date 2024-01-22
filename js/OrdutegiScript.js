@@ -110,7 +110,6 @@ new Vue({
         })
         .then(datos => {
           this.listaOrdutegiById= datos;
-          console.log(this.listaOrdutegiById);
           this.kodeaActu=this.listaOrdutegiById[0].kodea;
           this.egunaActu=this.listaOrdutegiById[0].eguna;
           this.hasieradataActu=this.listaOrdutegiById[0].hasiera_data;
@@ -130,14 +129,6 @@ new Vue({
         const hasiera_ordua=this.hasieraorduaActu;
         const amaiera_data=this.amaieradataActu;
         const amaiera_ordua=this.amaieraorduaActu;
-        const eguneratze_data_primaria = new Date();
-        const year = eguneratze_data_primaria.getFullYear();
-        const month = ('0' + (eguneratze_data_primaria.getMonth() + 1)).slice(-2);
-        const day = ('0' + eguneratze_data_primaria.getDate()).slice(-2);
-        const hours = ('0' + eguneratze_data_primaria.getHours()).slice(-2);
-        const minutes = ('0' + eguneratze_data_primaria.getMinutes()).slice(-2);
-        const seconds = ('0' + eguneratze_data_primaria.getSeconds()).slice(-2);
-        const eguneratze_data = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         const jsonEditatu = {
             "id": id,
             "kodea": kodea,
@@ -145,8 +136,7 @@ new Vue({
             "hasiera_data": hasiera_data,
             "hasiera_ordua": hasiera_ordua,
             "amaiera_data": amaiera_data,
-            "amaiera_ordua": amaiera_ordua,
-            "eguneratze_data": eguneratze_data
+            "amaiera_ordua": amaiera_ordua
           };
 
         console.log(JSON.stringify(jsonEditatu));
@@ -174,22 +164,13 @@ new Vue({
         const hasiera_ordua=this.hasieraorduaCrear;
         const amaiera_data=this.amaieradataCrear;
         const amaiera_ordua=this.amaieraorduaCrear;
-        const sortze_data_primaria = new Date();
-        const year = sortze_data_primaria.getFullYear();
-        const month = ('0' + (sortze_data_primaria.getMonth() + 1)).slice(-2);
-        const day = ('0' + sortze_data_primaria.getDate()).slice(-2);
-        const hours = ('0' + sortze_data_primaria.getHours()).slice(-2);
-        const minutes = ('0' + sortze_data_primaria.getMinutes()).slice(-2);
-        const seconds = ('0' + sortze_data_primaria.getSeconds()).slice(-2);
-        const sortze_data = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         const jsonEditatu = {
             "kodea": kodea,
             "eguna": eguna,
             "hasiera_data": hasiera_data,
             "hasiera_ordua": hasiera_ordua,
             "amaiera_data": amaiera_data,
-            "amaiera_ordua": amaiera_ordua,
-            "sortze_data": sortze_data
+            "amaiera_ordua": amaiera_ordua
           };
         fetch(this.environment + '/public/api/ordutegiak', {
           method: 'POST',
@@ -212,17 +193,8 @@ new Vue({
         try {
           for(var i=0; i < this.arrayId.length; i++){
             const id = this.arrayId[i];
-            const ezabatze_data_primaria = new Date();
-            const year = ezabatze_data_primaria.getFullYear();
-            const month = ('0' + (ezabatze_data_primaria.getMonth() + 1)).slice(-2);
-            const day = ('0' + ezabatze_data_primaria.getDate()).slice(-2);
-            const hours = ('0' + ezabatze_data_primaria.getHours()).slice(-2);
-            const minutes = ('0' + ezabatze_data_primaria.getMinutes()).slice(-2);
-            const seconds = ('0' + ezabatze_data_primaria.getSeconds()).slice(-2);
-            const ezabatze_data = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
             const jsonEzabatu = {
-              "id": id,
-              "ezabatze_data": ezabatze_data
+              "id": id
             };
             console.log(JSON.stringify(jsonEzabatu));
 

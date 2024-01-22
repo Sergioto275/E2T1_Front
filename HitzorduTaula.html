@@ -94,9 +94,12 @@
             </div>
             <div class="modal-body row">
                 <div class="col">
-                  <input type="date" v-model="dataSelec"/>
+                  <input type="date" v-model="dataSelec" @change="cargar_citas()"/>
                   <div class="card">
                     <div class="card-body">
+                      <div class="list-group">
+                        <a v-for="citas in citasEditarArray" :key="citas.id" @click="cargar_cita_selec(citas.id)" class="list-group-item list-group-item-action">{{ citas.hasiera_ordua }} - {{ citas.izena }} - {{ citas.deskribapena }}</a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -121,7 +124,8 @@
               </div> 
             <div class="modal-footer">
               <button type="button" class="btn bg-black text-white" data-bs-dismiss="modal" > {{ translations[currentLocale].default.salir }} </button>
-              <button type="button" class="btn bg-black text-white" @click="actuDatosModal()" > {{ translations[currentLocale].default.guardar }} </button>
+              <button type="button" class="btn bg-black text-white" @click="eliminar_cita()"> {{ translations[currentLocale].default.borrar }} </button>
+              <button type="button" class="btn bg-black text-white" @click="editar_cita()" > {{ translations[currentLocale].default.guardar }} </button>
             </div>
           </div>
         </div>
