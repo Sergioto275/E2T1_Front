@@ -74,7 +74,7 @@
                           <th class="border border-black" style="background-color: #BA9471">{{ translations[currentLocale].trabajador.codigo }}</th>
                       </tr>
                       <tr class="table-secondary" v-for="(langile) in listaLangile" data-tor="hover:bg-darken(x1)">
-                        <td class="table-secondary"><input type="checkbox" :value="langile.id"v-model="arrayId"></td>
+                        <td class="table-secondary"><input type="checkbox" :value="langile.id" v-model="arrayId"></td>
                         <td>{{langile.izena}}</td>
                         <td>{{langile.abizenak}}</td>
                         <td>{{langile.kodea}}</td>
