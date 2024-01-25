@@ -55,7 +55,7 @@
             <div class="input-group mb-1 w-50">
               <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalCrear" @click="" > {{ translations[currentLocale].default.añadir }} </button>
               <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalEditar" @click="" > {{ translations[currentLocale].citas.seleccionarCita.titulo }} </button>
-              <button type="button" class="btn btn-light border-black mb-3" @click="" > {{ translations[currentLocale].citas.ticket }} </button>
+              <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalAsignar" @click="" > {{ translations[currentLocale].citas.ticket }} </button>
             </div>
             <div class="row">
               <div class="col-5">
@@ -98,7 +98,8 @@
                   <div class="card">
                     <div class="card-body">
                       <div class="list-group">
-                        <a v-for="citas in citasEditarArray" :key="citas.id" @click="cargar_cita_selec(citas.id)" class="list-group-item list-group-item-action">{{ citas.hasiera_ordua }} - {{ citas.izena }} - {{ citas.deskribapena }}</a>
+                        <h3 v-if="citasEditarArray.length <= 0">No hay citas</h3>
+                        <a v-else v-for="citas in citasEditarArray" :key="citas.id" @click="cargar_cita_selec(citas.id)" class="list-group-item list-group-item-action">{{ citas.hasiera_ordua }} - {{ citas.izena }} - {{ citas.deskribapena }}</a>
                       </div>
                     </div>
                   </div>
@@ -163,7 +164,59 @@
           </div>
         </div>
       </div>
+      <div class="modal fade" id="exampleModalAsignar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 20vh" >
+        <div class="modal-dialog">
+          <div class="modal-content" style="background-color: #ba9471">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel"> {{ translations[currentLocale].citas.editar.titulo }} </h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+            </div>
+            <div class="modal-body row">
+                <div class="col">
+                  <input type="date" v-model="dataSelec" @load="today()" @change="cargar_citas()"/>
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="list-group">
+                        <h3 v-if="citasEditarArray.length <= 0">No hay citas</h3>
+                        <a v-else v-for="citas in citasEditarArray" :key="citas.id" @click="cargar_cita_selec(citas.id)" class="list-group-item list-group-item-action">{{ citas.hasiera_ordua }} - {{ citas.izena }} - {{ citas.deskribapena }}</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Asignar</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Generar</button>
+                    </li>
+                  </ul>
+                  <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                        <select class="form-select" aria-label="Default select example" v-model="idTalde" @change="cargarComboBox()">
+                          <option v-for="(taldea) in taldeArray" :value="taldea.kodea" >{{taldea.kodea}}</option>
+                      </select class="form-select" aria-label="Default select example">
+                      <select class="form-select" aria-label="Default select example" v-model="idLangile">
+                          <option v-for="(langile) in langileArray" :value="langile.id" >{{langile.kodea}} - {{ langile.izena }}</option>
+                      </select class="form-select" aria-label="Default select example">
+                    </div>
+                    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                      <button type="button" class="btn bg-black text-white" @click="" > {{ translations[currentLocale].default.guardar }} </button>
+                    </div>
+                  </div>
+                </div>
+              </div> 
+            <div class="modal-footer">
+              <button type="button" class="btn bg-black text-white" data-bs-dismiss="modal" > {{ translations[currentLocale].default.salir }} </button>
+              <button type="button" class="btn bg-black text-white" @click="asignar_cita()" > {{ translations[currentLocale].default.guardar }} </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="js/translations.js"></script>
     <script src="js/HitzorduScript.js"></script>

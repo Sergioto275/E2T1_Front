@@ -3,6 +3,10 @@ const vue = new Vue({
     data: {
         hitzorduArray: [],
         citasEditarArray: [],
+        taldeArray: [],
+        langileArray: [],
+        idLangile: null,
+        idTalde: null,
         calendar: null,
         citas: [],
         organizer: null,
@@ -36,6 +40,13 @@ const vue = new Vue({
           changeLanguage(locale) {
             console.log('Cambiando a:', locale);
             this.currentLocale = locale;
+          },
+          today(){
+            const eguneratze_data_primaria = new Date();
+            const year = eguneratze_data_primaria.getFullYear();
+            const month = ('0' + (eguneratze_data_primaria.getMonth() + 1)).slice(-2);
+            const day = ('0' + eguneratze_data_primaria.getDate()).slice(-2);
+            return (`${year}-${month}-${day}`);
           },
           async citasDisponibles(){
             if(!this.dataTest || !this.amaOrduaTest || !this.hasOrduaTest){
@@ -150,7 +161,37 @@ const vue = new Vue({
                 throw new Error("Error en carga de citas disponibles:"+error);
             }
           },
+          async asignar_cita(){
+            try{ 
+                const json_data = {
+                    "id":this.idSelec,
+                    "id_langilea":this.idLangile
+                }
+                console.log(JSON.stringify(json_data));
+                const response = await fetch(this.environment + '/public/api/hitzorduesleitu',{
+                    headers: {  
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    method: "POST",
+                    body: JSON.stringify(json_data)
+                });
+                if(!response.ok){
+                    throw new Error('Errorea eskaera egiterakoan');
+                }
+                alert('Ondo eguneratuta');
+                await this.cargarHitzordu();
+
+                //Modal-a ixteko ondo egiten duenean
+                const modalAsignarElement = document.getElementById('exampleModalAsignar');
+                const modalInst = bootstrap.Modal.getInstance(modalAsignarElement);
+                modalInst.hide();
+            }catch(error){
+                throw new Error("Error en carga de citas disponibles:"+error);
+            }
+          },
           async cargar_citas(){
+            this.citasEditarArray = [];
             try{
                 const response = await fetch(this.environment + '/public/api/hitzorduakbydate/'+this.dataSelec,{
                     headers: {  
@@ -169,6 +210,49 @@ const vue = new Vue({
                 throw new Error("Error al cargar las citas:"+error);
             }
           },
+          async cargarComboBox() {
+            try {
+              const response = await fetch(this.environment + '/public/api/taldeak', {
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Access-Control-Allow-Origin': '*'
+                },
+              });
+      
+              if (!response.ok) {
+                console.log('Errorea eskera egiterakoan');
+                throw new Error('Errorea eskaera egiterakoan');
+              }
+              const datuak = await response.json();
+              this.taldeArray = datuak
+                .filter(talde => talde.ezabatze_data === null || talde.ezabatze_data === "0000-00-00 00:00:00");
+      
+              console.log(this.taldeArray);
+            } catch (error) {
+              console.error('Errorea: ', error);
+            }
+
+            try {
+                const response = await fetch(this.environment + '/public/api/langileak', {
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                  },
+                });
+        
+                if (!response.ok) {
+                  console.log('Errorea eskera egiterakoan');
+                  throw new Error('Errorea eskaera egiterakoan');
+                }
+                const datuak = await response.json();
+                this.langileArray = datuak
+                  .filter(langile => langile.ezabatze_data === null && langile.kodea == this.idTalde || langile.ezabatze_data === "0000-00-00 00:00:00" && langile.kodea == this.idTalde);
+        
+                console.log(this.langileArray);
+              } catch (error) {
+                console.error('Errorea: ', error);
+              }
+          },
         async cargarHitzordu() {
             document.getElementById('organizerContainer').innerHTML = "";
             try{
@@ -185,12 +269,12 @@ const vue = new Vue({
                 const datuak = await response.json();
                 this.hitzorduArray = datuak
                 this.calendar = new Calendar("calendarContainer", "small",
-                            [ "Monday", 3 ],
-                            ["#ffc107", "#ffa000", "#ffffff", "#ffecb3"],
+                            [ "Lunes", 3 ],
+                            ["#c7c1c1", "#b6adad", "#ffffff", "#ffffff"],
                             {
-                                days: [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",  "Saturday" ],
-                                months: [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ],
-                                indicator: false,
+                                days: [ "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes",  "Sabado" ],
+                                months: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
+                                indicator: true,
                                 placeholder: "<span>No hay ninguna cita</span>"
                             });
                 this.organizer = new Organizer("organizerContainer", this.calendar, this.hitzorduArray);
@@ -246,6 +330,7 @@ const vue = new Vue({
     },
     mounted() {
         this.cargarHitzordu();
+        this.cargarComboBox();
       }
 });
 
