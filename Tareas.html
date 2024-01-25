@@ -73,7 +73,7 @@
           <div class="modal-dialog">
             <div class="modal-content" style=" background-color: #BA9471">
               <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">{{ translations[currentLocale].tareas.modal.editar }}</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">{{ translations[currentLocale].grupos.modal.editar }}</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
@@ -86,7 +86,7 @@
                     <select class="form-select" aria-label="Default select example" v-model="grupoActu" @change="cargarComboBox()">
                         <option v-for="(taldea) in listaTalde" :value="taldea.kodea" selected>{{taldea.kodea}}</option>
                     </select class="form-select" aria-label="Default select example">
-                <label class="">{{ translations[currentLocale].tareas.trabajador }}</label>
+                <label class="">Alumno</label>
                     <select class="form-select" aria-label="Default select example" v-model="langileActu">
                         <option v-for="(langile) in listaLangile" :value="langile.id">{{langile.izena}} {{langile.abizenak}}</option>
                     </select>

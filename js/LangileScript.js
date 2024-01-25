@@ -17,7 +17,7 @@ new Vue({
       grupoFil:"",
       currentLocale: 'es',
       translations: translations,
-      environment: 'https://localhost/Erronka2/Back/talde1erronka2',
+      environment: 'http://localhost/Erronka2/Back/talde1erronka2',
     },
     methods: {
       changeEnvironment(env){
@@ -28,9 +28,10 @@ new Vue({
         console.log("Hello")
         try {
           const response = await fetch(this.environment + '/public/api/langileak', {
+            mode: 'cors',
             headers: {  
               'Content-Type': 'application/json',
-              'Access-Control-Allow-Origin': '*'
+              'Access-Control-Allow-Origin': '*',
             },
           });
 
@@ -54,9 +55,10 @@ new Vue({
     async cargarDatosModal() {
       try {
         const response = await fetch(this.environment + '/public/api/langileak/' + this.arrayId[0], {
+          mode: 'no-cors',
           headers: {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+            // 'Access-Control-Allow-Origin': '*'
           },
         });
 
