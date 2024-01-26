@@ -22,6 +22,7 @@ const vue = new Vue({
         hasOrduaTest:null,
         amaOrduaTest:null,
         eserlekuaCrear:null,
+        eserlekuaEditar:null,
         izenaCrear:null,
         telfCrear:null,
         deskCrear:null,
@@ -136,6 +137,7 @@ const vue = new Vue({
                     "data":this.dataEditar,
                     "hasiera_ordua":this.hasOrduaEditar,
                     "amaiera_ordua":this.amaOrduaEditar,
+                    "eserlekua":this.eserlekuaEditar,
                     "izena":this.izenaEditar,
                     "telefonoa":this.telfEditar,
                     "deskribapena":this.deskEditar,
@@ -491,6 +493,25 @@ const vue = new Vue({
             }catch(error){
                 console.log("Errorea: "+error);
             }
+        },
+        lortuData(){
+            var gaur = new Date();
+            var urtea = gaur.getFullYear();
+            var hilabetea = gaur.getMonth() + 1;
+            var eguna = gaur.getDate();
+            if (eguna < 10) {
+                eguna = '0'+eguna
+            }
+            if (hilabetea < 10) {
+                hilabetea = '0'+hilabetea
+            }
+            // if (ordua < this.intervaloHoras[1]) {
+            //     this.orduak = this.orduakG;
+            // } else {
+            //     this.orduak = this.orduakA;
+            // }
+            // Dar formato :D
+            return urtea+'-'+hilabetea+'-'+eguna;
         }
     },
     mounted() {
@@ -498,6 +519,7 @@ const vue = new Vue({
         this.cargarComboBox();
         this.getHoursInRange();
         this.cargarTratamenduak();
+        this.dataSelec = this.lortuData();
       }
 });
 
