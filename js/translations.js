@@ -7,8 +7,11 @@ const translations = {
       borrar: 'Borrar',
       salir: 'Salir',
       guardar: 'Guardar',
-      filtroGrupo: 'Selecciona un grupo'
+      filtroGrupo: 'Selecciona un grupo',
+      correcto: 'Operación realizada correctamente',
+      error: 'Error al realizar la operación'
     },
+
     trabajador: {
       titulo: 'Trabajador',
       id: 'ID',
@@ -21,6 +24,7 @@ const translations = {
         añadir: 'Añadir trabajador',
       }
     },
+
     horarios: {
       titulo: 'Horarios',
       id: 'ID',
@@ -35,6 +39,7 @@ const translations = {
         añadir: 'Añadir horario',
       }
     },
+
     grupos: {
       titulo: 'Grupos',
       codigo: 'Código',
@@ -44,6 +49,7 @@ const translations = {
         añadir: 'Añadir grupo'
       }
     },
+
     tareas: {
       titulo: 'Turnos',
       tipo: 'Tipo',
@@ -53,6 +59,7 @@ const translations = {
         editar: 'Editar turno',
       }
     },
+
     productos: {
       titulo: 'Productos',
       id: 'ID',
@@ -66,8 +73,15 @@ const translations = {
       modal: {
         editar: 'Editar producto',
         añadir: 'Añadir producto',
+      },
+      grupo: 'Grupo',
+      trabajador: 'Trabajador',
+      aviso: {
+        stockMaximo: 'Stock máximo alcanzado',
+        stockSeguridad: 'Stock de seguridad alcanzado'
       }
     },
+
     menu: {
       almacen: {
         titulo: 'Almacen',
@@ -102,6 +116,7 @@ const translations = {
       tareas: 'Tareas',
       citas: 'Citas',
     },
+
     citas: {
       titulo: 'Citas',
       ticket: 'Generar Ticket',
@@ -129,6 +144,7 @@ const translations = {
         titulo: 'Editar cita'
       }
     },
+
     fichas: {
       titulo: "Fichas",
       nombre: "Nombre",
@@ -184,8 +200,8 @@ const translations = {
         crear: 'Crear Tratamiento',
         nombre: 'Nombre'
       }
-
     },
+
     eu: {
       default: {
         editar: 'Editatu',
@@ -193,8 +209,11 @@ const translations = {
         borrar: 'Ezabatu',
         salir: 'Irten',
         guardar: 'Gorde',
-        filtroGrupo: 'Taldea aukeratu'
+        filtroGrupo: 'Taldea aukeratu',
+        correcto: 'Eragiketa egokia izan da',
+        error: 'Errorea eragiketa egitean'
       },
+
       trabajador: {
         titulo: 'Langile',
         id: 'ID',
@@ -207,6 +226,7 @@ const translations = {
           añadir: 'Langilea sortu',
         }
       },
+
       horarios: {
         titulo: 'Ordutegiak',
         id: 'ID',
@@ -221,6 +241,7 @@ const translations = {
           añadir: 'Ordutegia sortu',
         }
       },
+
       grupos: {
         titulo: 'Taldeak',
         codigo: 'Kodea',
@@ -230,6 +251,7 @@ const translations = {
           añadir: 'Taldea sortu'
         }
       },
+
       tareas: {
         titulo: 'Txanda',
         tipo: 'Mota',
@@ -239,6 +261,7 @@ const translations = {
           editar: 'Taldea editatu',
         }
       },
+
       productos: {
         titulo: 'Produktuak',
         id: 'ID',
@@ -252,8 +275,15 @@ const translations = {
         modal: {
           editar: 'Produktua editatu',
           añadir: 'Produktua sortu',
+        },
+        grupo: 'Talde',
+        trabajador: 'Langile',
+        aviso: {
+          stockMaximo: 'Gehienezko stockera iritsi da',
+          stockSeguridad: 'Segurtasun stockera iritsi da'
         }
       },
+
       menu: {
         almacen: {
           titulo: 'Biltegia',
@@ -288,6 +318,7 @@ const translations = {
         tareas: 'Zereginak',
         citas: 'Hitzorduak'
       },
+
       citas: {
         titulo: 'Hitzorduak',
         ticket: 'Ticket-a sortu',
@@ -315,6 +346,7 @@ const translations = {
           titulo: 'Hitzordua editatu'
         }
       },
+
       fichas: {
         titulo: "Fitxak",
         nombre: "Izena",
