@@ -121,6 +121,54 @@ const translations = {
         editar:{
           titulo: "Editar cita"
         }
+      },
+      fichas:{
+        titulo: "Fichas",
+        nombre:"Nombre",
+        apellido:"Apellidos",
+        seleccionCasa:"Seleccione una casa",
+        seleccionTinte:"Seleccione un tinte",
+        nombreape:"Nombre y apellidos",
+        telefono:"Telefono",
+        sensible:"Sensible",
+        fecha:"Fecha",
+        tinte:"Tinte",
+        casa:"Casa",
+        cantidad:"Cantidad",
+        volumenes:"Volumenes",
+        observaciones:"Observaciones",
+        añadirCliente:{
+          titulo: "Modificar Cliente",
+          nombre:"Nombre",
+          apellido:"Apellidos",
+          telefono:"Telefono",
+          sensible:"Piel Sensible",
+        },
+        modificarCliente: {
+          titulo:"Insertar cita",
+          nombre:"Nombre",
+          apellido:"Apellidos",
+          telefono:"Telefono",
+          sensible:"Piel Sensible",     
+        },
+        añadirRegistro:{
+          titulo: "Añadir Tratamiento",
+          fecha:"Fecha",
+          casa:"Casa",
+          tinte:"Tinte",
+          cantidad:"Cantidad",
+          volumenes:"Volumenes",
+          observaciones:"Observaciones",
+        },
+        editarRegistro:{
+          titulo: "Editar Tratamiento",
+          fecha:"Fecha",
+          casa:"Casa",
+          tinte:"Tinte",
+          cantidad:"Cantidad",
+          volumenes:"Volumenes",
+          observaciones:"Observaciones",
+        }
       }
     },
     eu: {
@@ -243,6 +291,54 @@ const translations = {
       },
       editar:{
         titulo: "Hitzordua editatu"
+      }
+    },
+    fichas:{
+      titulo: "Fitxak",
+      nombre:"Izena",
+      apellido:"Abizenak",
+      seleccionCasa:"Aukeratu etxe bat",
+      seleccionTinte:"Aukeratu tindagai bat",
+      nombreape:"Izena y Abizenak",
+      telefono:"Telefonoa",
+      sensible:"Sentikorra",
+      fecha:"Data",
+      tinte:"Tindagai",
+      casa:"Etxea",
+      cantidad:"Kantitatea",
+      volumenes:"Bolumena",
+      observaciones:"Behaketak",
+      añadirCliente:{
+        titulo: "Sortu Bezero",
+        nombre:"Izena",
+        apellido:"Abizenak",
+        telefono:"Telefonoa",
+        sensible:"Azal Sentikorra",
+      },
+      modificarCliente: {
+        titulo:"Eguneratu Bezero",
+        nombre:"Izena",
+        apellido:"Abizenak",
+        telefono:"Telefonoa",
+        sensible:"Azal Sentikorra",     
+      },
+      añadirRegistro:{
+        titulo: "Tratamendua Sortu",
+        fecha:"Data",
+        casa:"Etxea",
+        tinte:"Tindagai",
+        cantidad:"Kantitatea",
+        volumenes:"Bolumena",
+        observaciones:"Behaketak",
+      },
+      editarRegistro:{
+        titulo: "Tratamendua Editatu",
+        fecha:"data",
+        casa:"Etxea",
+        tinte:"Tindagai",
+        cantidad:"Kantitatea",
+        volumenes:"Bolumena",
+        observaciones:"Behaketak",
       }
     }
   }

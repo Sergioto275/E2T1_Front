@@ -63,10 +63,22 @@
               <div>
                 <div class="input-group mb-3 w-50">
                   <input type="text" class="form-control" placeholder="" aria-label="Recipient's username"
-                    aria-describedby="basic-addon2" @change="filtroNombre()">
-                  <button type="button" class="btn btn-light border-black" @click="cargaBezero()">
+                    aria-describedby="basic-addon2" @change="filtroNombre()" v-model="filtrNom">
+                  <button type="button" class="btn btn-light border-black" @click="cargaBezeroa()">
                     <i class="bi bi-arrow-clockwise"></i>
                   </button>
+                </div>
+                <div class="input-group mb-1 ms-1 w-50">
+                  <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal"
+                    data-bs-target="#modalCrearCliente" @click="limpiarCampos()">{{
+                    translations[currentLocale].default.añadir
+                    }}</button>
+                  <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal"
+                    data-bs-target="#modalModificarCliente" :disabled="arrayId.length>1 || arrayId.length<=0"
+                    @click="cargarDatosModal()">{{ translations[currentLocale].default.editar }}</button>
+                  <button type="button" class="btn btn-light border-black mb-3" :disabled="arrayId.length<=0"
+                    @click="borrar()">{{ translations[currentLocale].default.borrar }}</button>
+                  </select>
                 </div>
                 <table class="table table-striped table-hover w-50 text-center">
                   <tr>
@@ -76,9 +88,10 @@
                     <th class="border border-black" style="background-color: #BA9471">{{
                       translations[currentLocale].trabajador.apellidos }}</th>
                   </tr>
-                  <tr class="table-secondary" v-for="(bezero) in listaBezero"
-                    data-tor="hover:bg-darken(x1)" @click="cargaFitxa(bezero.id)">
-                    <td class="table-secondary"><input type="checkbox" :value="bezero.id" v-model="arrayId" :disabled="bezero.id=='no'"></td>
+                  <tr class="table-secondary" v-for="(bezero) in listaBezero" data-tor="hover:bg-darken(x1)"
+                    @click="cargaFitxa(bezero.id)">
+                    <td class="table-secondary"><input type="checkbox" :value="bezero.id" v-model="arrayId"
+                        :disabled="bezero.id=='no'"></td>
                     <td>{{bezero.izena}}</td>
                     <td>{{bezero.abizena}}</td>
                   </tr>
@@ -91,7 +104,8 @@
         <div class="col-lg-9">
           <div class="row g-0 position-relative justify-content-start">
             <div class="col-md-12 offset-md-1 mt-5">
-              <h1 class="mb-5 offset-md-2">Fichas</h1>
+              <h1 class="mb-5 offset-md-2">{{
+                translations[currentLocale].fichas.titulo }}</h1>
               <div>
                 <div class="input-group mb-3 w-50">
                   <table class="table table-bordered">
@@ -100,50 +114,65 @@
                   </table>
                 </div>
                 <div class="input-group mb-1 w-50">
+                  <select class="form-select" aria-label="Default select example" v-model="casaFiltr"
+                    @change="filtrarComboTintesFiltr()">
+                    <option value="" selected>{{translations[currentLocale].fichas.seleccionCasa }}</option>
+                    <option v-for="(kolore) in arrayComboBoxMarka" :value="kolore">{{kolore}}</option>
+
+                  </select>
+                  <select class="form-select" aria-label="Default select example" v-model="tinteFiltr"
+                    @change="filtrarPorTintes()">
+                    <option value="" selected>{{translations[currentLocale].fichas.seleccionTinte }}</option>
+                    <option v-for="(kolore) in arrayComboBoxTinte" :value="kolore.id">{{kolore.izena}}</option>
+
+                  </select>
+                </div>
+                <div class="input-group mb-1 w-50">
                   <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal"
-                    data-bs-target="#exampleModalCrear" @click="limpiarCampos()">{{
+                    data-bs-target="#modalCrearResgistro" @click="limpiarCampos()">{{
                     translations[currentLocale].default.añadir
                     }}</button>
                   <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal"
-                    data-bs-target="#exampleModalEditar" :disabled="arrayId.length>1 || arrayId.length<=0"
-                    @click="cargarDatosModal()">{{ translations[currentLocale].default.editar }}</button>
-                  <button type="button" class="btn btn-light border-black mb-3" :disabled="arrayId.length<=0"
-                    @click="borrar()">{{ translations[currentLocale].default.borrar }}</button>
-                  <select class="form-select border-black w-25 h-25" aria-label="Default select example"
-                    @change="filtroGrupo()" aria-placeholder="Grupo">
-                    <option selected>Todos</option>
-                    <option v-for="(taldea) in listaBezero" :value="taldea.id">{{taldea.izena}}</option>
-                  </select>
+                    data-bs-target="#modalEditarResgistro" :disabled="arrayId2.length>1 || arrayId2.length<=0"
+                    @click="cargarDatosModal2()">{{ translations[currentLocale].default.editar }}</button>
+                  <button type="button" class="btn btn-light border-black mb-3" :disabled="arrayId2.length<=0"
+                    @click="borrar2()">{{ translations[currentLocale].default.borrar }}</button>
+                  <input type="date" class="form-select border-black w-25 h-25" aria-label="Default select example" v
+                    @change="filtroFecha()" aria-placeholder="Grupo" v-model="fechaFil" /><button type="button"
+                    class="btn btn-light border-black h-25" @click="cargaFitxa(bezeroSeleccionado[0].id)">
+                    <i class="bi bi-arrow-clockwise"></i>
+                  </button>
                 </div>
 
                 <table class="table table-striped table-hover w-50 text-center">
                   <tr v-for="(bezeroa) in bezeroSeleccionado">
-                    <th class="border border-black" style="background-color: #BA9471">Nombre y apellidos</th>
-                    <th class="border border-black" style="background-color: #BA9471">Telefono</th>
+                    <th class="border border-black" style="background-color: #BA9471">{{translations[currentLocale].fichas.nombreape }}</th>
+                    <th class="border border-black" style="background-color: #BA9471">{{translations[currentLocale].fichas.telefono }}</th>
                     <td colspan="5" class="border border-black">{{bezeroa.telefonoa}}</td>
 
                   </tr>
                   <tr v-for="(bezeroa) in bezeroSeleccionado">
-                    <td class="border border-black text-start ps-3" colspan="7" >{{bezeroa.izena}} {{bezeroa.abizena}}</td>
+                    <td class="border border-black text-start ps-3" colspan="7">{{bezeroa.izena}} {{bezeroa.abizena}}
+                    </td>
                   </tr>
                   <tr v-for="(bezeroa) in bezeroSeleccionado">
-                    <th class="border border-black" style="background-color: #BA9471">Cuero cabelludo sensibled</th>
+                    <th class="border border-black" style="background-color: #BA9471">{{translations[currentLocale].fichas.sensible }}</th>
                     <td class="border border-black" colspan="6">{{bezeroa.azal_sentikorra}}</td>
                   </tr>
                   <tr>
                     <th class="border border-black" style="background-color: #BA9471"></th>
-                    <th class="border border-black" style="background-color: #BA9471">Fecha </th>
-                    <th class="border border-black" style="background-color: #BA9471">Tinte</th>
-                    <th class="border border-black" style="background-color: #BA9471">Casa</th>
-                    <th class="border border-black" style="background-color: #BA9471">Cantidad</th>
-                    <th class="border border-black" style="background-color: #BA9471">Volumenes</th>
-                    <th class="border border-black" style="background-color: #BA9471">Observaciones</th>
+                    <th class="border border-black" style="background-color: #BA9471">{{translations[currentLocale].fichas.fecha }} </th>
+                    <th class="border border-black" style="background-color: #BA9471">{{translations[currentLocale].fichas.tinte }}</th>
+                    <th class="border border-black" style="background-color: #BA9471">{{translations[currentLocale].fichas.casa }}</th>
+                    <th class="border border-black" style="background-color: #BA9471">{{translations[currentLocale].fichas.cantidad }}</th>
+                    <th class="border border-black" style="background-color: #BA9471">{{translations[currentLocale].fichas.volumenes }}</th>
+                    <th class="border border-black" style="background-color: #BA9471">{{translations[currentLocale].fichas.observaciones }}</th>
                   </tr>
                   <tr class="table-secondary" v-for="(fitxa) in listaKolore" data-tor="hover:bg-darken(x1)">
-                    <td class="table-secondary"><input type="checkbox" :value="fitxa.id" v-model="arrayId"></td>
+                    <td class="table-secondary"><input type="checkbox" :value="fitxa.id" v-model="arrayId2"></td>
                     <td>{{fitxa.data}}</td>
-                    <td>{{fitxa.id_produktua}}</td>
-                    <td>{{fitxa.kantitatea}}</td>
+                    <td>{{fitxa.produktua_izena}}</td>
+                    <td>{{fitxa.produktua_marka}}</td>
                     <td>{{fitxa.kantitatea}}</td>
                     <td>{{fitxa.bolumena}}</td>
                     <td>{{fitxa.oharrak}}</td>
@@ -157,23 +186,52 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="modalCrearCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-      style="margin-top: 20vh;">
+    <div class="modal fade" id="modalCrearCliente" tabindex="-1" aria-labelledby="modalCrearClienteLabel"
+      aria-hidden="true" style="margin-top: 20vh;">
       <div class="modal-dialog">
         <div class="modal-content" style=" background-color: #BA9471">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Añadir Cliente</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">{{translations[currentLocale].fichas.añadirCliente.titulo }}</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <label>Nombre:</label><br>
+            <label>{{translations[currentLocale].fichas.añadirCliente.nombre }}:</label><br>
             <input type="text" class="w-100" v-model="izenaCrear"><br>
-            <label>Apellidos:</label><br>
+            <label>{{translations[currentLocale].fichas.añadirCliente.apellido }}:</label><br>
             <input type="text" class="w-100" v-model="abizenaCrear"><br>
-            <label>Telefono:</label><br>
+            <label>{{translations[currentLocale].fichas.añadirCliente.telefono }}:</label><br>
             <input type="text" class="w-100" v-model="telefonoCrear"><br>
-            <label>Piel sensible:</label><br>
+            <label>{{translations[currentLocale].fichas.añadirCliente.sensible }}:</label><br>
             <input type="checkbox" v-model="pielCrear"><br>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn bg-black text-white" data-bs-dismiss="modal">{{
+              translations[currentLocale].default.salir }}</button>
+            <button type="button" class="btn bg-black text-white" @click="crearDatosModal()">{{
+              translations[currentLocale].default.guardar }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalModificarCliente" tabindex="-1" aria-labelledby="modalModificarClienteLabel"
+      aria-hidden="true" style="margin-top: 20vh;">
+      <div class="modal-dialog">
+        <div class="modal-content" style=" background-color: #BA9471">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">{{translations[currentLocale].fichas.modificarCliente.titulo }}</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <label>{{translations[currentLocale].fichas.modificarCliente.nombre }}:</label><br>
+            <input type="text" class="w-100" v-model="izenaEditar"><br>
+            <label>{{translations[currentLocale].fichas.modificarCliente.apellido }}:</label><br>
+            <input type="text" class="w-100" v-model="abizenaEditar"><br>
+            <label>{{translations[currentLocale].fichas.modificarCliente.telefono }}:</label><br>
+            <input type="text" class="w-100" v-model="telefonoEditar "><br>
+            <label>{{translations[currentLocale].fichas.modificarCliente.sensible }}:</label><br>
+            <input type="checkbox" v-model="pielEditar"><br>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn bg-black text-white" data-bs-dismiss="modal">{{
@@ -186,28 +244,74 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="modalModificarCliente" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="modalCrearResgistro" tabindex="-1" aria-labelledby="modalCrearClienteLabel"
       aria-hidden="true" style="margin-top: 20vh;">
       <div class="modal-dialog">
         <div class="modal-content" style=" background-color: #BA9471">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Cliente</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">{{translations[currentLocale].fichas.añadirRegistro.titulo }}</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <label>Nombre:</label><br>
-            <input type="text" class="w-100" v-model="izenaCrear"><br>
-            <label>Apellidos:</label><br>
-            <input type="text" class="w-100" v-model="abizenaCrear"><br>
-            <label>Telefono:</label><br>
-            <input type="text" class="w-100" v-model="telefonoCrear"><br>
-            <label>Piel sensible:</label><br>
-            <input type="checkbox" v-model="pielCrear"><br>
+            <label>{{translations[currentLocale].fichas.añadirRegistro.fecha }}:</label><br>
+            <input type="date" class="w-100" v-model="fechaCrear"><br>
+            <label>{{translations[currentLocale].fichas.añadirRegistro.casa }}:</label><br>
+            <select class="form-select" aria-label="Default select example" v-model="casaCrear"
+              @change="filtrarComboTintes()">
+              <option v-for="(kolore) in arrayComboBoxMarka" :value="kolore">{{kolore}}</option>
+            </select>
+            <label>{{translations[currentLocale].fichas.añadirRegistro.tinte }}:</label><br>
+            <select class="form-select" aria-label="Default select example" v-model="tinteCrear">
+              <option v-for="(kolore) in arrayComboBoxTinte" :value="kolore.id">{{kolore.izena}}</option>
+            </select>
+            <label>{{translations[currentLocale].fichas.añadirRegistro.cantidad }}:</label><br>
+            <input type="text" class="w-100" v-model="cantidadCrear"><br>
+            <label>{{translations[currentLocale].fichas.añadirRegistro.volumenes }}:</label><br>
+            <input type="text" class="w-100" v-model="volumenesCrear"><br>
+            <label>{{translations[currentLocale].fichas.añadirRegistro.observaciones }}:</label><br>
+            <textarea class="w-100" v-model="observacionesCrear"></textarea><br>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn bg-black text-white" data-bs-dismiss="modal">{{
               translations[currentLocale].default.salir }}</button>
-            <button type="button" class="btn bg-black text-white" @click="actuDatosModal()">{{
+            <button type="button" class="btn bg-black text-white" @click="createDatosModal2()">{{
+              translations[currentLocale].default.guardar }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="modalEditarResgistro" tabindex="-1" aria-labelledby="modalCrearClienteLabel"
+      aria-hidden="true" style="margin-top: 20vh;">
+      <div class="modal-dialog">
+        <div class="modal-content" style=" background-color: #BA9471">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">{{translations[currentLocale].fichas.editarRegistro.titulo }}</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <label>{{translations[currentLocale].fichas.editarRegistro.fecha }}:</label><br>
+            <input type="date" class="w-100" v-model="fechaEditar"><br>
+            <label>{{translations[currentLocale].fichas.editarRegistro.casa }}:</label><br>
+            <select class="form-select" aria-label="Default select example" v-model="casaEditar"
+              @change="filtrarComboTintesActu()">
+              <option v-for="(kolore) in arrayComboBoxMarka" :value="kolore">{{kolore}}</option>
+            </select>
+            <label>{{translations[currentLocale].fichas.editarRegistro.tinte }}:</label><br>
+            <select class="form-select" aria-label="Default select example" v-model="tinteEditar">
+              <option v-for="(kolore) in arrayComboBoxTinte" :value="kolore.id">{{kolore.izena}}</option>
+            </select>
+            <label>{{translations[currentLocale].fichas.editarRegistro.cantidad }}:</label><br>
+            <input type="text" class="w-100" v-model="cantidadEditar"><br>
+            <label>{{translations[currentLocale].fichas.editarRegistro.volumenes }}:</label><br>
+            <input type="text" class="w-100" v-model="volumenesEditar"><br>
+            <label>{{translations[currentLocale].fichas.editarRegistro.observaciones }}:</label><br>
+            <textarea class="w-100" v-model="observacionesEditar"></textarea><br>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn bg-black text-white" data-bs-dismiss="modal">{{
+              translations[currentLocale].default.salir }}</button>
+            <button type="button" class="btn bg-black text-white" @click="actuDatosModal2()">{{
               translations[currentLocale].default.guardar }}</button>
           </div>
         </div>

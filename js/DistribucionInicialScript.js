@@ -238,6 +238,7 @@ new Vue({
     async createDatos() {
       try {
         const id_langilea = this.langileSeleccionado;
+        const kodea = this.grupoSeleccionado
         const mota = this.tareaSeleccionado;
         const sortze_data_primaria = new Date();
         const year = sortze_data_primaria.getFullYear();
@@ -249,6 +250,7 @@ new Vue({
         const sortze_data = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         const jsonSortu = {
           "id_langilea": id_langilea,
+          "kodea":kodea,
           "mota": mota,
           "data": sortze_data,
           "sortze_data": sortze_data
