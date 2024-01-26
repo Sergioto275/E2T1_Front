@@ -71,18 +71,21 @@
                     <tr v-for="time in hoursArray">
                       <td>{{ time }}</td>
                       <td v-for="eserlekua in eserlekuKop" :key="eserlekua.id">
-                        <div v-if="getCitasAtTimeAndSeat(time, eserlekua.id,'izena').length > 0" class="card">
-                          <div class="card-body" @click="cargar_cita_selec(getCitasAtTimeAndSeat(time, eserlekua.id,'id'))">
-                            <h5 class="card-title">{{ getCitasAtTimeAndSeat(time, eserlekua.id,'izena') }}</h5>
-                            <p class="card-text">{{ getCitasAtTimeAndSeat(time, eserlekua.id,'deskribapena') }}</p>
-                            <!-- <a href="#"  class="btn btn-primary">Editar</a> -->
-                          </div>
-                        </div> 
-                        <div v-else>
-                          <button @click="seleccionar_citaCrear(eserlekua.id,time)"><i class="bi bi-calendar2-plus"></i></button>
-                        </div>
+                          <template v-if="getCitasAtTimeAndSeat(time, eserlekua.id, 'izena').length > 0">
+                              <div v-for="cita in getCitasAtTimeAndSeat(time, eserlekua.id, 'izena')" class="card">
+                                  <div class="card-body" @click="cargar_cita_selec(cita.id)">
+                                      <h5 class="card-title">{{ cita.izena }}</h5>
+                                      <p class="card-text">{{ cita.deskribapena }}</p>
+                                  </div>
+                              </div>
+                          </template>
+                          <template v-else>
+                              <button @click="seleccionar_citaCrear(eserlekua.id, time)">
+                                  <i class="bi bi-calendar2-plus"></i>
+                              </button>
+                          </template>
                       </td>
-                    </tr>
+                  </tr>
                   </tbody>
                 </table>
               </div>
@@ -161,11 +164,18 @@
                     <span>{{ idSelec }} - {{ izenaSelec }}</span>
                     <ul class="list-group">
                       <li class="list-group-item" v-for="tratamendua in tratamenduArray">
-                        <input v-if="etxekoEditar" :disabled="idSelec == null" class="form-check-input me-1" type="checkbox" :value="{'tratamendu_id':tratamendua.id,'prezioa':tratamendua.etxeko_prezioa}" v-model="tratamenduSelec" id="Checkbox">
-                        <input v-else :disabled="idSelec == null" class="form-check-input me-1" type="checkbox" :value="{'tratamendu_id':tratamendua.id,'prezioa':tratamendua.kanpoko_prezioa}" v-model="tratamenduSelec" id="Checkbox">
-                        <label class="form-check-label" for="Checkbox">{{ tratamendua.izena }}</label>
-                        <label v-if="etxekoEditar" class="form-check-label" for="Checkbox"> - {{ translations[currentLocale].citas.precioDentro}}: {{ tratamendua.etxeko_prezioa }}</label>
-                        <label v-else class="form-check-label" for="Checkbox"> - {{ translations[currentLocale].citas.precioFuera}}: {{ tratamendua.kanpoko_prezioa }}</label>
+                        <template v-if="!comprobar_extras(tratamendua.id_katTratamendu)">
+                          <input v-if="etxekoEditar" :disabled="idSelec == null" class="form-check-input me-1" type="checkbox" :value="{'tratamendu_id':tratamendua.id,'prezioa':tratamendua.etxeko_prezioa}" v-model="tratamenduSelec" id="Checkbox">
+                          <input v-else :disabled="idSelec == null" class="form-check-input me-1" type="checkbox" :value="{'tratamendu_id':tratamendua.id,'prezioa':tratamendua.kanpoko_prezioa}" v-model="tratamenduSelec" id="Checkbox">
+                          <label class="form-check-label" for="Checkbox">{{ tratamendua.izena }}</label>
+                          <label v-if="etxekoEditar" class="form-check-label" for="Checkbox"> - {{ translations[currentLocale].citas.precioDentro}}: {{ tratamendua.etxeko_prezioa }}</label>
+                          <label v-else class="form-check-label" for="Checkbox"> - {{ translations[currentLocale].citas.precioFuera}}: {{ tratamendua.kanpoko_prezioa }}</label>
+                        </template>
+                        <template v-else>
+                          <input :disabled="idSelec == null" class="form-check-input me-1" type="checkbox" :value="{'tratamendu_id':tratamendua.id, 'prezioa':precioextra}" v-model="tratamenduSelec" id="Checkbox">
+                          <label class="form-check-label" for="Checkbox">{{ tratamendua.izena }}</label>
+                          <input :disabled="idSelec == null" class="me-1" type="number" v-model="precioextra" >
+                        </template>
                       </li>
                     </ul>
                     <button type="button" class="btn bg-black text-white" :disabled="tratamenduSelec.length <= 0" @click="generar_ticket()" > {{ translations[currentLocale].default.guardar }} </button>

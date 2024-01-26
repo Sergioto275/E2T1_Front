@@ -4,12 +4,16 @@ const vue = new Vue({
         startHour : '10:00:00',
         endHour : '16:00:00',
         hitzorduArray: [],
+        rowspanValues: {},
+        tratamenduKategoria: [],
+        precioextra:null,
         citasEditarArray: [],
         tratamenduArray:[],
         tratamenduSelec:[],
         taldeArray: [],
         langileArray: [],
         eserlekuKop:[],
+        citasMostradas:[],
         hoursArray:[],
         idLangile: null,
         idTalde: null,
@@ -107,9 +111,7 @@ const vue = new Vue({
             }
           },
           cargar_cita_selec(id){
-            console.log(id)
             cita = this.hitzorduArray.filter(citas => citas.id == id);
-            console.log(cita)
             this.idSelec = id;
             this.dataEditar = cita[0].data;
             this.hasOrduaEditar = cita[0].hasiera_ordua;
@@ -221,9 +223,14 @@ const vue = new Vue({
             }
           },
           async generar_ticket(){
+            var prezio_totala = 0;
+            this.tratamenduSelec.forEach(tratamendu => {
+                prezio_totala = Number(prezio_totala) + Number(tratamendu.prezioa);
+            });
             try{
                 const json_data = {
-                    "id":this.idSelec
+                    "id":this.idSelec,
+                    "prezio_totala":prezio_totala
                 }
                 const response = await fetch(this.environment + '/public/api/hitzorduaamaitu',{
                     headers: {  
@@ -259,6 +266,16 @@ const vue = new Vue({
                 }
                 alert('Ondo eguneratuta');
                 await this.cargarHitzordu();
+                this.tratamenduSelec.forEach(tratamendu => {
+                    var tratamiento = this.tratamenduArray.filter(element => element.id == tratamendu.id);
+                    var kategoria = this.tratamenduKategoria.filter(el => el.id == tratamiento.id_katTratamendu)
+                    if(kategoria[0].kolorea == 's'){
+                        alert("Tiene que registrar la ficha de este cliente");
+                        if(confirm("Desea ser redireccionado a clientes?")){
+                            
+                        }
+                    }
+                });
             }catch(error){
                 throw new Error("Error en generacion de citas disponibles:"+error)
             }
@@ -296,14 +313,12 @@ const vue = new Vue({
               });
       
               if (!response.ok) {
-                console.log('Errorea eskera egiterakoan');
                 throw new Error('Errorea eskaera egiterakoan');
               }
               const datuak = await response.json();
               this.taldeArray = datuak
                 .filter(talde => talde.ezabatze_data === null || talde.ezabatze_data === "0000-00-00 00:00:00");
       
-              console.log(this.taldeArray);
             } catch (error) {
               console.error('Errorea: ', error);
             }
@@ -317,14 +332,12 @@ const vue = new Vue({
                 });
         
                 if (!response.ok) {
-                  console.log('Errorea eskera egiterakoan');
                   throw new Error('Errorea eskaera egiterakoan');
                 }
                 const datuak = await response.json();
                 this.langileArray = datuak
                   .filter(langile => langile.ezabatze_data === null && langile.kodea == this.idTalde || langile.ezabatze_data === "0000-00-00 00:00:00" && langile.kodea == this.idTalde);
         
-                console.log(this.langileArray);
               } catch (error) {
                 console.error('Errorea: ', error);
               }
@@ -360,25 +373,15 @@ const vue = new Vue({
                 this.eserlekuaCrear = eserlekua;
             }
           },
-          getCitasAtTimeAndSeat(time, seatId, dato) {
-            console.log(time);
-            // Filtrar citas para obtener las citas en la hora y asiento específicos
-            const filteredCitas = this.hitzorduArray.filter(cita => (cita.hasiera_ordua <= time && cita.amaiera_ordua > time && cita.eserlekua === seatId));
-            // Puedes personalizar cómo mostrar la información de las citas aquí
-            switch(dato){
-                case 'id':
-                    return filteredCitas.map(cita => cita.id).join(', '); // Muestra los nombres de las personas
-                case 'izena':
-                    return filteredCitas.map(cita => cita.izena).join(', '); // Muestra los nombres de las personas
-                case 'deskribapena':
-                    return filteredCitas.map(cita => cita.deskribapena).join(', '); // Muestra los nombres de las personas
-            }
-          },
+            getCitasAtTimeAndSeat(time, seatId, dato) {
+                // Filtrar citas para obtener las citas en la hora y asiento específicos
+                const filteredCitas = this.hitzorduArray.filter(cita => (cita.hasiera_ordua <= time && cita.amaiera_ordua > time && cita.eserlekua === seatId));
+                return filteredCitas;
+            },
         async cargarHitzordu() {
-            // this.limpiar_campos();
             this.hitzorduArray = [];
+            this.citasMostradas = [];
             try{
-                // console.log(this.dataSelec)
                 const response = await fetch(this.environment + '/public/api/hitzorduak/'+this.dataSelec,{
                     headers: {  
                         'Content-Type': 'application/json',
@@ -390,7 +393,6 @@ const vue = new Vue({
                     throw new Error('Errorea eskaera egiterakoan');
                 }
                 const datuak = await response.json();
-                console.log(datuak)
                 this.hitzorduArray = datuak.filter(hitzordu => hitzordu.ezabatze_data === null || hitzordu.ezabatze_data === "0000-00-00 00:00:00");
             }catch(error){
                 console.log("Errorea: "+error);
@@ -411,7 +413,6 @@ const vue = new Vue({
                 for (let i = 1; i <= datuak2; i++) {
                     this.eserlekuKop.push({id:i});
                 }
-                // this.getHoursInRange();
 
             }catch(error){
                 console.log("Errorea: "+error);
@@ -493,6 +494,33 @@ const vue = new Vue({
             }catch(error){
                 console.log("Errorea: "+error);
             }
+            try{
+                const response = await fetch(this.environment + '/public/api/kategoriaTratamendu',{
+                    headers: {  
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    method: "GET"
+                });
+                if(!response.ok){
+                    throw new Error('Errorea eskaera egiterakoan');
+                }
+                const datuak = await response.json();
+                this.tratamenduKategoria = datuak.filter(katTratamendu => katTratamendu.ezabatze_data === null || katTratamendu.ezabatze_data === '0000-00-00 00:00:00');
+            }catch(error){
+                console.log("Errorea: "+error);
+            }
+        },
+        comprobar_extras(id_kategoria){
+            const kategoria = this.tratamenduKategoria.filter(katTratamendu => katTratamendu.id == id_kategoria);
+            console.log(kategoria)
+            if(kategoria.length>0){
+                if(kategoria[0].extra === 's'){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
         },
         lortuData(){
             var gaur = new Date();
@@ -505,21 +533,15 @@ const vue = new Vue({
             if (hilabetea < 10) {
                 hilabetea = '0'+hilabetea
             }
-            // if (ordua < this.intervaloHoras[1]) {
-            //     this.orduak = this.orduakG;
-            // } else {
-            //     this.orduak = this.orduakA;
-            // }
-            // Dar formato :D
             return urtea+'-'+hilabetea+'-'+eguna;
         }
     },
     mounted() {
+        this.dataSelec = this.lortuData();
+        this.getHoursInRange();
         this.cargarHitzordu();
         this.cargarComboBox();
-        this.getHoursInRange();
         this.cargarTratamenduak();
-        this.dataSelec = this.lortuData();
       }
 });
 
