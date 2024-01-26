@@ -103,22 +103,30 @@ const translations = {
           citas:'Citas',
       },
       citas:{
-        titulo: "Citas",
-        ticket: "Generar Ticket",
+        titulo: 'Citas',
+        ticket: 'Generar Ticket',
+        hora:'Hora',
+        asiento:'Asiento',
+        alumno:'Alumno',
+        asignar:'Asignar Alumno',
+        ticket:'Generar Ticket',
+        precioFuera:'Precio Fuera',
+        precioDentro:'Precio Dentro',
         seleccionarCita:{
-          titulo: "Seleccionar Cita"
+          titulo: 'Seleccionar Cita'
         },
         crear: {
-          titulo:"Insertar cita",
-          fecha:"Fecha",
-          horaIni:"Hora Inicio",
-          horaFin:"Hora Fin",
-          nombre:"Nombre",
-          telefono:"Telefono",
-          descripcion:"Descripcion",
-          centro:"Centro"      
+          titulo:'Insertar cita',
+          fecha:'Fecha',
+          horaIni:'Hora Inicio',
+          horaFin:'Hora Fin',
+          nombre:'Nombre',
+          telefono:'Telefono',
+          descripcion:'Descripcion',
+          centro:'Centro'      
         },
         editar:{
+          titulo: 'Editar cita'
           titulo: "Editar cita"
         }
       },
@@ -168,7 +176,14 @@ const translations = {
           cantidad:"Cantidad",
           volumenes:"Volumenes",
           observaciones:"Observaciones",
-        }
+        },
+      tratamientos:{
+        titulo:'Tratamientos',
+        precioFuera:'Precio Fuera',
+        precioDentro:'Precio Dentro',
+        editar:'Editar Tratamiento',
+        crear:'Crear Tratamiento',
+        nombre:'Nombre'
       }
     },
     eu: {
@@ -274,22 +289,30 @@ const translations = {
         citas:'Hitzorduak'
     },
     citas:{
-      titulo: "Hitzorduak",
-      ticket: "Ticket-a sortu",
+      titulo: 'Hitzorduak',
+      ticket: 'Ticket-a sortu',
+      hora:'Ordua',
+      asiento:'Eserleku',
+      alumno:'Ikaslea',
+      asignar:'Ikaslea Esleitu',
+      ticket:'Ticket-a sortu',
+      precioFuera:'Kanpoko prezioa',
+      precioDentro:'Barruko Prezioa',
       seleccionarCita:{
-        titulo: "Hitzordua Aukeratu"
+        titulo: 'Hitzordua Aukeratu'
       },
       crear: {
-        titulo: "Hitzordua gehitu",
-        fecha:"Data",
-        horaIni:"Hasiera ordua",
-        horaFin:"Amaiera ordua",
-        nombre:"Izena",
-        descripcion:"Deskribapena",
-        telefono:"Telefonoa",
-        centro:"Centrokoa"      
+        titulo: 'Hitzordua gehitu',
+        fecha:'Data',
+        horaIni:'Hasiera ordua',
+        horaFin:'Amaiera ordua',
+        nombre:'Izena',
+        descripcion:'Deskribapena',
+        telefono:'Telefonoa',
+        centro:'Centrokoa'      
       },
       editar:{
+        titulo: 'Hitzordua editatu'
         titulo: "Hitzordua editatu"
       }
     },
@@ -339,7 +362,14 @@ const translations = {
         cantidad:"Kantitatea",
         volumenes:"Bolumena",
         observaciones:"Behaketak",
-      }
+      },
+    tratamientos:{
+      titulo:'Tratamenduak',
+      precioFuera:'Kanpoko Prezioa',
+      precioDentro:'Barruko Prezioa',
+      editar:'Tratamendua Editatu',
+      crear:'Tratamendua Sortu',
+      nombre:'Izena'
     }
   }
 };
