@@ -17,6 +17,7 @@ new Vue({
         existe: null,
         nombreFil: "",
         grupoFil: "",
+        fechaFil:"",
         currentLocale: 'es',
         translations: translations,
         environment: 'http://localhost/Erronka2/Back/talde1erronka2',
@@ -49,7 +50,7 @@ new Vue({
 
                 for (let index = 0; index < datuak.length; index++) {
 
-                    const cadenaFecha = datuak[index]["sortze_data"];
+                    const cadenaFecha = datuak[index]["data"];
                     const fechaEjemplo = new Date(cadenaFecha);
                     const fechaActual = new Date();
 
@@ -65,7 +66,6 @@ new Vue({
                     if (mismoDia(fechaEjemplo, fechaActual)) {
                         var persona = { id: datuak[index]["id"], id_langilea: datuak[index]["id_langilea"], data: datuak[index]["data"], mota: datuak[index]["mota"] };
                         this.listaTxanda.push(persona);
-                        console.log(this.listaTxanda)
                     }
 
                 }
@@ -92,7 +92,6 @@ new Vue({
                             if (this.listaTxanda[a].id_langilea == this.listaFiltroTalde[c]["id"]) {
 
                                 this.listaTxanda[a].id_langilea = this.listaFiltroTalde[c]["izena"] + " " + this.listaFiltroTalde[c]["abizenak"];
-                                console.log(this.listaTxanda[a].id_langilea)
                             }
                         }
 
@@ -102,7 +101,7 @@ new Vue({
                 }
 
                 if (this.listaTxanda.length == 0) {
-                    var nohay = { id: "no", mota: "no", data: "hay", id_langilea: "nada" }
+                    var nohay = { id: "no", mota: ">:(", data: "No hay datos en esta fecha", id_langilea: "🤫🧏‍♀️" }
                     this.listaTxanda.push(nohay);
                 }
             } catch (error) {
@@ -127,7 +126,6 @@ new Vue({
                 const datuak = await response.json();
 
                 this.listaTxandaById = datuak;
-                console.log(this.listaTxandaById.id_langilea);                
                 this.tareaActu = this.listaTxandaById.mota;
                 this.langileActu = this.listaTxandaById.id_langilea;
 
@@ -205,7 +203,6 @@ new Vue({
                     "sortze_data": sortze_data
                 };
 
-                console.log(JSON.stringify(jsonSortu));
 
                 const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/taldeak', {
                     method: 'POST',
@@ -232,52 +229,7 @@ new Vue({
                 console.log('Errorea: ', error);
             }
         },
-        // Langileak ezabatzeko
-        async borrar() {
-            let ondo = false;
-            try {
-                for (var i = 0; i < this.arrayId.length; i++) {
-                    const id = this.arrayId[i];
-                    const ezabatze_data_primaria = new Date();
-                    const year = ezabatze_data_primaria.getFullYear();
-                    const month = ('0' + (ezabatze_data_primaria.getMonth() + 1)).slice(-2);
-                    const day = ('0' + ezabatze_data_primaria.getDate()).slice(-2);
-                    const hours = ('0' + ezabatze_data_primaria.getHours()).slice(-2);
-                    const minutes = ('0' + ezabatze_data_primaria.getMinutes()).slice(-2);
-                    const seconds = ('0' + ezabatze_data_primaria.getSeconds()).slice(-2);
-                    const ezabatze_data = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-                    const jsonEzabatu = {
-                        "kodea": id,
-                        "ezabatze_data": ezabatze_data
-                    };
-                    console.log(JSON.stringify(jsonEzabatu));
-
-                    const deleteResponse = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/taldeak', {
-                        method: 'DELETE',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(jsonEzabatu),
-                    });
-
-                    if (!deleteResponse.ok) {
-                        console.log('Errorea ezabatzerakoan');
-                        throw new Error('Errorea ezabatzerakoan');
-                    }
-
-                    ondo = true;
-                    this.cargaLangile();
-                }
-            } catch (error) {
-                ondo = false;
-                console.error('Errorea:', error);
-            }
-            if (ondo) {
-                alert("Eguneratu egin da");
-            }
-
-            this.arrayId = [];
-        },
+        // Langileak ezabatzek,
         // Sortzeko modalean aurreko langilearen datuak ez agertzeko
         limpiarCampos() {
             this.izenaCrear = "";
@@ -301,7 +253,6 @@ new Vue({
               this.listaTalde = datuak
                 .filter(talde => talde.ezabatze_data === null || talde.ezabatze_data === "0000-00-00 00:00:00");
       
-              console.log(this.listaTalde);
             } catch (error) {
               console.error('Errorea: ', error);
             }
@@ -322,7 +273,6 @@ new Vue({
                 this.listaLangile = datuak
                   .filter(langile => langile.ezabatze_data === null && langile.kodea == this.grupoActu || langile.ezabatze_data === "0000-00-00 00:00:00" && langile.kodea == this.grupoActu);
         
-                console.log(this.listaLangile);
               } catch (error) {
                 console.error('Errorea: ', error);
               }
@@ -346,7 +296,91 @@ new Vue({
             } catch (error) {
               console.error('Errorea: ', error);
             }
-          }
+          },
+          async filtroFecha() {
+            console.log("MATAME")
+            this.listaTxanda = [];
+            try {
+                const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/txanda', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                });
+
+                if (!response.ok) {
+                    console.log('Errorea eskera egiterakoan');
+                    throw new Error('Errorea eskaera egiterakoan');
+                }
+                var datuak="";
+                datuak = await response.json();
+
+
+                for (let index = 0; index < datuak.length; index++) {
+
+                    const cadenaFecha = datuak[index]["data"];
+                    const fechaEjemplo = new Date(cadenaFecha);
+                    const fechaActual = new Date(this.fechaFil);
+
+                    function mismoDia(fechaEjemplo, fechaActual) {
+                        return (
+                            fechaEjemplo.getFullYear() === fechaActual.getFullYear() &&
+                            fechaEjemplo.getMonth() === fechaActual.getMonth() &&
+                            fechaEjemplo.getDate() === fechaActual.getDate()
+                        );
+                    }
+
+                    // Ejemplo de uso
+                    if (mismoDia(fechaEjemplo, fechaActual)) {
+                        var persona = { id: datuak[index]["id"], id_langilea: datuak[index]["id_langilea"], data: datuak[index]["data"], mota: datuak[index]["mota"] };
+                        console.log(persona);
+                        if(this.listaTxanda.includes(persona)){
+                            
+                        }else{
+                        this.listaTxanda.push(persona);
+                    }
+                    }
+
+                }
+
+                for (let a = 0; a < this.listaTxanda.length; a++) {
+                    try {
+                        const response = await fetch(this.environment + '/public/api/langileak', {
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Access-Control-Allow-Origin': '*'
+                            },
+                        });
+
+                        if (!response.ok) {
+                            console.log('Errorea eskera egiterakoan');
+                            throw new Error('Errorea eskaera egiterakoan');
+                        }
+                        const datuak = await response.json()
+                        this.listaFiltroTalde = datuak
+                            .filter(langile => langile.ezabatze_data === null || langile.ezabatze_data === "0000-00-00 00:00:00");
+
+
+                        for (let c = 0; c < this.listaFiltroTalde.length; c++) {
+                            if (this.listaTxanda[a].id_langilea == this.listaFiltroTalde[c]["id"]) {
+
+                                this.listaTxanda[a].id_langilea = this.listaFiltroTalde[c]["izena"] + " " + this.listaFiltroTalde[c]["abizenak"];
+                            }
+                        }
+
+                    } catch (error) {
+
+                    }
+                }
+                
+                if (this.listaTxanda.length == 0) {
+                    var nohay = { id: "no", mota: ">:(", data: "No hay datos en esta fecha", id_langilea: "🤫🧏‍♀️" }
+                    this.listaTxanda.push(nohay);
+                }
+            } catch (error) {
+                console.error('Errorea:', error);
+            }
+            }
     },
     mounted() {
         // Konponentea sortzen denean taula kargatzeko

@@ -55,9 +55,15 @@ const translations = {
 
     tareas: {
       titulo: 'Turnos',
+      grupos:'Grupos',
       tipo: 'Tipo',
       fecha: 'Fecha',
       trabajador: 'Trabajador',
+      saltar: 'Saltar',
+      completar: 'Completar',
+      historico: 'Historico Semana Pasada',
+      mostrador: 'Mostrador',
+      limpieza: 'Limpieza',
       modal: {
         editar: 'Editar turno',
       }
