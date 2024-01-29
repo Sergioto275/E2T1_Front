@@ -10,6 +10,8 @@ new Vue({
     grupoSeleccionado: "",
     tareaSeleccionado: "",
     langileSeleccionado: "",
+    currentLocale: 'es',
+    translations: translations,
     environment: 'http://localhost/Erronka2/Back/talde1erronka2',
   },
   methods: {
@@ -282,6 +284,10 @@ new Vue({
       } catch (error) {
         console.log('Errorea: ', error);
       }
+    },
+    changeLanguage(locale) {
+      console.log('Cambiando a:', locale);
+      this.currentLocale = locale;
     }
   },
 

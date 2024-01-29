@@ -48,8 +48,15 @@
         <div class="row justify-content-center">
           <div class="col-md-10 offset-md-5 mt-5">
             <h1 class="mb-5 offset-md-2">{{ translations[currentLocale].tareas.titulo }}</h1>
+            
             <div class="input-group mb-1 w-50">
-                <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalEditar" :disabled="arrayId.length>1 || arrayId.length<=0" @click="cargarDatosModal()">{{ translations[currentLocale].default.editar }}</button>                
+                <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalEditar" :disabled="arrayId.length>1 || arrayId.length<=0" @click="cargarDatosModal()">{{ translations[currentLocale].default.editar }}</button>         
+                <input type="date" class="form-select border-black w-25 h-25" aria-label="Default select example"
+                 aria-placeholder="Grupo" v-model="fechaFil" />
+                <button type="button"class="btn btn-light border-black h-25" @click="filtroFecha()"><i class="bi bi-search"></i></button>     
+                <button type="button"class="btn btn-light border-black h-25" @click="cargaTxanda()">
+                <i class="bi bi-arrow-clockwise"></i>
+                
             </div>
             <table class="table table-striped table-hover w-50 text-center">
               <tr>

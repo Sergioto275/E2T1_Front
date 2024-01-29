@@ -31,6 +31,8 @@ new Vue({
     taldeFil: '',
     listaLangile: [],
     langileFil: '',
+    listaMarka: [],
+    markaFil: ''
   },
   methods: {
     modalAtera() {
@@ -206,6 +208,9 @@ new Vue({
         this.listaProduktu = datuak
           .filter(produktu => produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00")
           .map(produktu => ({ ...produktu, showFullDescription: false }));
+
+        // Markak lortu
+        this.listaMarka = [...new Set(this.listaProduktu.map(produktu => produktu.marka.toLowerCase()))];
 
         this.cargarKategoria();
         console.log(this.listaProduktu)
@@ -512,7 +517,7 @@ new Vue({
         console.error('Errorea: ', error);
       }
     },
-    async filtroKategoria() {
+    async aplicarFiltros() {
       try {
         const response = await fetch(this.environment + '/public/api/produktuak', {
           headers: {
@@ -520,24 +525,37 @@ new Vue({
             'Access-Control-Allow-Origin': '*'
           },
         });
-
+    
         if (!response.ok) {
           console.log('Errorea eskera egiterakoan');
           throw new Error('Errorea eskaera egiterakoan');
         }
-
+    
         this.listaProduktu = [];
         const datuak = await response.json();
-
-        this.listaProduktu = datuak
-          .filter(produktu => produktu.id_kategoria === this.kategoriaFil && produktu.ezabatze_data === null || produktu.id_kategoria === this.kategoriaFil && produktu.ezabatze_data === "0000-00-00 00:00:00");
-
-        if (this.listaProduktu.length == 0) {
-          this.listaProduktu = datuak
-            .filter(produktu => produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00");
-
+    
+        let filteredData = datuak;
+    
+        if (this.markaFil) {
+          filteredData = filteredData.filter(produktu =>
+            produktu.marka.toLowerCase() === this.markaFil
+          );
         }
-
+    
+        if (this.kategoriaFil) {
+          filteredData = filteredData.filter(produktu =>
+            produktu.id_kategoria === this.kategoriaFil &&
+            (produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00")
+          );
+        }
+    
+        this.listaProduktu = filteredData;
+    
+        if (this.listaProduktu.length === 0) {
+          this.listaProduktu = datuak.filter(produktu =>
+            produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00"
+          );
+        }
       } catch (error) {
         console.error('Errorea: ', error);
       }
