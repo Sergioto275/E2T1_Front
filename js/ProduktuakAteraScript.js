@@ -23,7 +23,7 @@ new Vue({
     kategoriaFil: "first",
     currentLocale: 'es',
     translations: translations,
-    environment: 'https://localhost/Erronka2/Back/talde1erronka2',
+    environment: 'http://localhost/Erronka2/Back/talde1erronka2',
     carrito: [],
     mensaje: '',
     accionActual: null,
@@ -536,14 +536,22 @@ new Vue({
     
         let filteredData = datuak;
     
-        if (this.markaFil) {
+        if (this.markaFil && !this.kategoriaFil) {
           filteredData = filteredData.filter(produktu =>
             produktu.marka.toLowerCase() === this.markaFil
           );
         }
     
-        if (this.kategoriaFil) {
+        if (this.kategoriaFil && !this.markaFil) {
           filteredData = filteredData.filter(produktu =>
+            produktu.id_kategoria === this.kategoriaFil &&
+            (produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00")
+          );
+        }
+
+        if(this.kategoriaFil && this.markaFil ){
+          filteredData = filteredData.filter(produktu =>
+            produktu.marka.toLowerCase() === this.markaFil &&
             produktu.id_kategoria === this.kategoriaFil &&
             (produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00")
           );
