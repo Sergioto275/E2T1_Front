@@ -46,9 +46,15 @@ const translations = {
     },
     tareas: {
       titulo: 'Turnos',
+      grupos:'Grupos',
       tipo: 'Tipo',
       fecha: 'Fecha',
       trabajador: 'Trabajador',
+      saltar: 'Saltar',
+      completar: 'Completar',
+      historico: 'Historico Semana Pasada',
+      mostrador: 'Mostrador',
+      limpieza: 'Limpieza',
       modal: {
         editar: 'Editar turno',
       }
@@ -184,7 +190,6 @@ const translations = {
         crear: 'Crear Tratamiento',
         nombre: 'Nombre'
       }
-
     },
     eu: {
       default: {
@@ -234,7 +239,13 @@ const translations = {
         titulo: 'Txanda',
         tipo: 'Mota',
         fecha: 'Data',
+        grupos:'Taldeak',
         trabajador: 'Langilea',
+        saltar: 'Pasa',
+        completar: 'Amaitu',
+        historico: 'Pasa den Asteko Historikoa',
+        mostrador: 'Mostradore',
+        limpieza: 'Garbiketa',
         modal: {
           editar: 'Taldea editatu',
         }
