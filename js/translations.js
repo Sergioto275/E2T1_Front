@@ -81,7 +81,6 @@ const translations = {
         stockSeguridad: 'Stock de seguridad alcanzado'
       }
     },
-
     menu: {
       almacen: {
         titulo: 'Almacen',

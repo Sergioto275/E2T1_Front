@@ -5,6 +5,7 @@ const vue = new Vue({
         endHour : '16:00:00',
         hitzorduArray: [],
         rowspanValues: {},
+        langileTratamenduak: [],
         tratamenduKategoria: [],
         precioextra:null,
         citasEditarArray: [],
@@ -69,7 +70,6 @@ const vue = new Vue({
             this.environment = env;
           },
           changeLanguage(locale) {
-            console.log('Cambiando a:', locale);
             this.currentLocale = locale;
           },
           today(){
@@ -243,7 +243,6 @@ const vue = new Vue({
                 if(!response.ok){
                     throw new Error('Errorea eskaera egiterakoan');
                 }
-                alert('Ondo eguneratuta');
                 await this.cargarHitzordu();
             }catch(error){
                 throw new Error("Error en generacion de citas disponibles:"+error)
@@ -253,6 +252,7 @@ const vue = new Vue({
                     "id_hitzordu":this.idSelec,
                     "tratamendua":this.tratamenduSelec
                 }
+                console.log(JSON.stringify(json_data))
                 const response = await fetch(this.environment + '/public/api/ticket_lerro',{
                     headers: {  
                         'Content-Type': 'application/json',
@@ -265,14 +265,15 @@ const vue = new Vue({
                     throw new Error('Errorea eskaera egiterakoan');
                 }
                 alert('Ondo eguneratuta');
-                await this.cargarHitzordu();
                 this.tratamenduSelec.forEach(tratamendu => {
-                    var tratamiento = this.tratamenduArray.filter(element => element.id == tratamendu.id);
-                    var kategoria = this.tratamenduKategoria.filter(el => el.id == tratamiento.id_katTratamendu)
+                    var tratamiento = this.tratamenduArray.filter(element => element.id == tratamendu.tratamendu_id);
+                    var kategoria = this.tratamenduKategoria.filter(el => el.id == tratamiento[0].id_katTratamendu)
                     if(kategoria[0].kolorea == 's'){
                         alert("Tiene que registrar la ficha de este cliente");
                         if(confirm("Desea ser redireccionado a clientes?")){
-                            
+                            window.location.href ='BezeroFitxak.html';
+                        }else{
+                            this.cargarHitzordu();
                         }
                     }
                 });
@@ -341,6 +342,7 @@ const vue = new Vue({
               } catch (error) {
                 console.error('Errorea: ', error);
               }
+              this.tratamenduByLangile();
           },
           seleccionar_citaCrear(eserlekua,time){
             if(this.dataTest){
@@ -513,7 +515,6 @@ const vue = new Vue({
         },
         comprobar_extras(id_kategoria){
             const kategoria = this.tratamenduKategoria.filter(katTratamendu => katTratamendu.id == id_kategoria);
-            console.log(kategoria)
             if(kategoria.length>0){
                 if(kategoria[0].extra === 's'){
                     return true;
@@ -534,6 +535,25 @@ const vue = new Vue({
                 hilabetea = '0'+hilabetea
             }
             return urtea+'-'+hilabetea+'-'+eguna;
+        },
+        async tratamenduByLangile(){
+            try{
+                const response = await fetch(this.environment + '/public/api/tratamenduByLangile/' + this.idTalde,{
+                    headers: {  
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    method: "GET"
+                });
+                if(!response.ok){
+                    throw new Error('Errorea eskaera egiterakoan');
+                }
+                const datuak = await response.json();
+                console.log(datuak)
+                this.langileTratamenduak = datuak;
+            }catch(error){
+                console.log("Errorea: "+error);
+            }
         }
     },
     mounted() {
