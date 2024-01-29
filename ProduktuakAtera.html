@@ -147,9 +147,9 @@
           </tr>
         </table>
         <button type="button" class="btn btn-primary" @click="modalAtera()"
-          :disabled="carrito.length === 0">{{translations[currentLocale].productos.aceptar}}</button>
+          :disabled="carrito.length === 0">{{translations[currentLocale].default.aceptar}}</button>
         <button type="button" class="btn btn-secondary" @click="limpiarCarrito()"
-          :disabled="carrito.length === 0">{{translations[currentLocale].productos.limpiar}}</button>
+          :disabled="carrito.length === 0">{{translations[currentLocale].default.limpiar}}</button>
       </div>
     </div>
 
