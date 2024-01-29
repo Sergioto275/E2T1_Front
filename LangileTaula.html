@@ -51,7 +51,7 @@
               <h1 class="mb-5 offset-md-2">{{ translations[currentLocale].trabajador.titulo }}</h1>
               <div>
                 <div class="input-group mb-3 w-50">
-                  <input type="text" class="form-control" placeholder="" aria-label="Recipient's username" aria-describedby="basic-addon2" v-model="nombreFil" @change="filtroNombre()">
+                  <input type="text" class="form-control" placeholder="" aria-label="Recipient's username" aria-describedby="basic-addon2" v-model="nombreFil" @input="filtroNombre()">
                   <button type="button" class="btn btn-light border-black" @click="cargaLangile()">
                     <i class="bi bi-arrow-clockwise"></i>
                   </button>
@@ -73,7 +73,7 @@
                           <th class="border border-black" style="background-color: #BA9471">{{ translations[currentLocale].trabajador.apellidos }}</th>
                           <th class="border border-black" style="background-color: #BA9471">{{ translations[currentLocale].trabajador.codigo }}</th>
                       </tr>
-                      <tr class="table-secondary" v-for="(langile) in listaLangile" data-tor="hover:bg-darken(x1)">
+                      <tr class="table-secondary" v-for="(langile) in listaFiltradaPorNombre" data-tor="hover:bg-darken(x1)">
                         <td class="table-secondary"><input type="checkbox" :value="langile.id" v-model="arrayId"></td>
                         <td>{{langile.izena}}</td>
                         <td>{{langile.abizenak}}</td>

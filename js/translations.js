@@ -268,8 +268,14 @@ const translations = {
 
     tareas: {
       titulo: 'Txanda',
+      grupos:'Taldeak',
       tipo: 'Mota',
       fecha: 'Data',
+      saltar:'Salto',
+      completar: 'Amaitu',
+      historico: 'Pasa den Asteko Historiala',
+      mostrador: 'Mostradore',
+      limpieza: 'Garbiketa',
       trabajador: 'Langilea',
       modal: {
         editar: 'Taldea editatu',
