@@ -6,15 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fitxas</title>
   <link href="css/bootstrap/bootstrap.css" rel="stylesheet">
+  <link href="css/estilo.css" rel="stylesheet">
   <link href="css/bootstrap/icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 
-<body style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
+<body>
   <div id="app">
     <!--HEADER-->
     <header>
-      <ul class="nav nav-pills" style="background-color: #403A36;">
-        <div class=" nav rounded-end border-white border-4" style="background-color: #332A21;">
+      <ul class="nav nav-pills">
+        <div class=" nav rounded-end border-white border-4 sip">
           <li class="nav-item">
             <a class="nav-link text-white" aria-current="page" href="#">
               <i class="bi bi-box-arrow-left" alt="Logout"></i>
@@ -189,7 +190,7 @@
     <div class="modal fade" id="modalCrearCliente" tabindex="-1" aria-labelledby="modalCrearClienteLabel"
       aria-hidden="true" style="margin-top: 20vh;">
       <div class="modal-dialog">
-        <div class="modal-content" style=" background-color: #BA9471">
+        <div class="modal-content lamodal">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">{{translations[currentLocale].fichas.añadirCliente.titulo }}</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -216,9 +217,9 @@
 
     <!-- Modal -->
     <div class="modal fade" id="modalModificarCliente" tabindex="-1" aria-labelledby="modalModificarClienteLabel"
-      aria-hidden="true" style="margin-top: 20vh;">
+      aria-hidden="true">
       <div class="modal-dialog">
-        <div class="modal-content" style=" background-color: #BA9471">
+        <div class="modal-content lamodal">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">{{translations[currentLocale].fichas.modificarCliente.titulo }}</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -245,9 +246,9 @@
 
     <!-- Modal -->
     <div class="modal fade" id="modalCrearResgistro" tabindex="-1" aria-labelledby="modalCrearClienteLabel"
-      aria-hidden="true" style="margin-top: 20vh;">
+      aria-hidden="true">
       <div class="modal-dialog">
-        <div class="modal-content" style=" background-color: #BA9471">
+        <div class="modal-content lamodal">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">{{translations[currentLocale].fichas.añadirRegistro.titulo }}</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -282,7 +283,7 @@
     </div>
 
     <div class="modal fade" id="modalEditarResgistro" tabindex="-1" aria-labelledby="modalCrearClienteLabel"
-      aria-hidden="true" style="margin-top: 20vh;">
+      aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content" style=" background-color: #BA9471">
           <div class="modal-header">
