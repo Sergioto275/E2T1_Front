@@ -5,8 +5,13 @@ const vue = new Vue({
         endHour : '16:00:00',
         hitzorduArray: [],
         rowspanValues: {},
+        rowspanAux: [],
+        data:null,
+        eserlekua:null,
+        ordua:null,
         langileTratamenduak: [],
         tratamenduKategoria: [],
+        tratamenduKategoriaTaula: [],
         precioextra:null,
         citasEditarArray: [],
         tratamenduArray:[],
@@ -32,7 +37,7 @@ const vue = new Vue({
         telfCrear:null,
         deskCrear:null,
         etxekoCrear:null,
-        dataSelec:"",
+        dataSelec:null,
         dataEditar:null,
         hasOrduaEditar:null,
         amaOrduaEditar:null,
@@ -252,7 +257,6 @@ const vue = new Vue({
                     "id_hitzordu":this.idSelec,
                     "tratamendua":this.tratamenduSelec
                 }
-                console.log(JSON.stringify(json_data))
                 const response = await fetch(this.environment + '/public/api/ticket_lerro',{
                     headers: {  
                         'Content-Type': 'application/json',
@@ -375,7 +379,7 @@ const vue = new Vue({
                 this.eserlekuaCrear = eserlekua;
             }
           },
-            getCitasAtTimeAndSeat(time, seatId, dato) {
+            getCitasAtTimeAndSeat(time, seatId) {
                 // Filtrar citas para obtener las citas en la hora y asiento específicos
                 const filteredCitas = this.hitzorduArray.filter(cita => (cita.hasiera_ordua <= time && cita.amaiera_ordua > time && cita.eserlekua === seatId));
                 return filteredCitas;
@@ -549,19 +553,93 @@ const vue = new Vue({
                     throw new Error('Errorea eskaera egiterakoan');
                 }
                 const datuak = await response.json();
-                console.log(datuak)
                 this.langileTratamenduak = datuak;
+                this.tratamenduKategoriaTaula = this.tratamenduKategoria.filter(kategoria => kategoria.extra == 'n');
             }catch(error){
                 console.log("Errorea: "+error);
             }
+        },
+        getCantKategoria(katId,lanId){
+            const cant = this.langileTratamenduak.filter(tratamendu=> tratamendu.langile_id === lanId && tratamendu.kategoria_id === katId);
+            if(cant.length > 0){
+                return cant[0].cant;
+            }else{
+                return "0";
+            }
+        },
+        cita_sartuta(time,seatId){
+            if(time == this.hoursArray[0] && seatId == this.eserlekuKop[0].id){
+                this.rowspanAux = [];
+                this.rowspanValues = {};
+            }
+            const filteredCitas = this.hitzorduArray.filter(cita => (cita.hasiera_ordua <= time && cita.amaiera_ordua > time && cita.eserlekua === seatId));
+            if(filteredCitas.length <= 0){
+                return true;
+            }
+            var citaID = filteredCitas[0].id;
+            if(this.rowspanAux.includes(citaID)){
+                return false;
+            }else{
+                return true;
+            }
+        },
+        rowspanManagement(time,seatId){
+            if(time == this.hoursArray[0] && seatId == this.eserlekuKop[0].id){
+                this.rowspanAux = [];
+                this.rowspanValues = {};
+            }
+            const filteredCitas = this.hitzorduArray.filter(cita => (cita.hasiera_ordua <= time && cita.amaiera_ordua > time && cita.eserlekua === seatId));
+            if(filteredCitas.length <= 0){
+                return 1;
+            }
+            var citaID = filteredCitas[0].id;
+            
+            var cant = 0;
+            this.rowspanAux.push(citaID);
+            this.hoursArray.forEach(element=>{
+                if(filteredCitas[0].hasiera_ordua <= element && filteredCitas[0].amaiera_ordua > element){
+                    cant++;
+                }
+            })
+            return cant;
         }
+        // rowspanManagement(time,seatId){
+        //     // this.data = dataSelec;
+        //     // this.ordua = time;
+        //     // this.eserlekua = seatId;
+        //     if(time == this.hoursArray[0] && seatId == this.eserlekuKop[0].id){
+        //         this.rowspanAux = {};
+        //         this.rowspanValues = {};
+        //     }
+        //     const filteredCitas = this.hitzorduArray.filter(cita => (cita.hasiera_ordua <= time && cita.amaiera_ordua > time && cita.eserlekua === seatId));
+        //     if (!this.rowspanValues[String(time)]) {
+        //         this.rowspanValues[String(time)] = {};
+        //     }
+        //     // 
+        //     // if (this.rowspanValues[String(time)][String(seatId)]) {
+        //     //     return true;
+        //     // }
+        //     if(filteredCitas.length <= 0){
+        //         this.rowspanValues[String(time)][String(seatId)] = 1;
+        //         return true;
+        //     }
+        //     var idHitzordu = filteredCitas[0].id;
+        //     if(this.rowspanAux[String(idHitzordu)]){
+        //         this.rowspanValues[String(this.rowspanAux[String(idHitzordu)])][String(seatId)] = Number(this.rowspanValues[String(this.rowspanAux[String(idHitzordu)])][String(seatId)]) + 1;
+        //         return false;
+        //     }else{
+        //         this.rowspanAux[String(idHitzordu)] = time;
+        //         this.rowspanValues[String(time)][String(seatId)] = 1;
+        //         return true;
+        //     }
+        // }
     },
     mounted() {
         this.dataSelec = this.lortuData();
         this.getHoursInRange();
-        this.cargarHitzordu();
         this.cargarComboBox();
         this.cargarTratamenduak();
+        this.cargarHitzordu();
       }
 });
 

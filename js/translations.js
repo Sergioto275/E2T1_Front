@@ -149,7 +149,7 @@ const translations = {
         nombre: 'Nombre',
         telefono: 'Telefono',
         descripcion: 'Descripcion',
-        centro: 'Centro'
+        centro: 'Cliente del Centro'
       },
       editar: {
         titulo: 'Editar cita'
@@ -203,14 +203,14 @@ const translations = {
         volumenes: "Volumenes",
         observaciones: "Observaciones",
       },
-      tratamientos: {
-        titulo: 'Tratamientos',
-        precioFuera: 'Precio Fuera',
-        precioDentro: 'Precio Dentro',
-        editar: 'Editar Tratamiento',
-        crear: 'Crear Tratamiento',
-        nombre: 'Nombre'
-      }
+    },
+    tratamientos: {
+      titulo: 'Tratamientos',
+      precioFuera: 'Precio Fuera',
+      precioDentro: 'Precio Dentro',
+      editar: 'Editar Tratamiento',
+      crear: 'Crear Tratamiento',
+      nombre: 'Nombre'
     },
   },
   eu: {
@@ -361,7 +361,7 @@ const translations = {
         nombre: 'Izena',
         descripcion: 'Deskribapena',
         telefono: 'Telefonoa',
-        centro: 'Centrokoa'
+        centro: 'Centroko Bezeroa'
       },
       editar: {
         titulo: 'Hitzordua editatu'
@@ -415,14 +415,14 @@ const translations = {
         volumenes: "Bolumena",
         observaciones: "Behaketak",
       },
-      tratamientos: {
-        titulo: 'Tratamenduak',
-        precioFuera: 'Kanpoko Prezioa',
-        precioDentro: 'Barruko Prezioa',
-        editar: 'Tratamendua Editatu',
-        crear: 'Tratamendua Sortu',
-        nombre: 'Izena'
-      }
+    },
+    tratamientos: {
+      titulo: 'Tratamenduak',
+      precioFuera: 'Kanpoko Prezioa',
+      precioDentro: 'Barruko Prezioa',
+      editar: 'Tratamendua Editatu',
+      crear: 'Tratamendua Sortu',
+      nombre: 'Izena'
     }
   }
 };

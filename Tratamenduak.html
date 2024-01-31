@@ -49,6 +49,8 @@
       <div>
       <div class="input-group mb-1 w-50">
         <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalCrear">{{ translations[currentLocale].default.añadir }}</button>        
+        <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalAñadirKategoria">Añadir Kategoria</button>        
+        <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalEditarKategoria">Editar kategoria</button>        
       </div>
       <div class="row">
         <div v-for="(tratamendua) in tratamenduArray" class="card col-4" style="width: 18rem;">
@@ -75,6 +77,9 @@
               <input type="number" class="w-100" v-model="etxeko_prezioaCrear" />
               <label>{{ translations[currentLocale].tratamientos.precioFuera }}:</label>
               <input type="number" class="w-100" v-model="kanpoko_prezioaCrear" />
+              <select class="form-select" aria-label="Default select example" v-model="tratKategoriaIdCrear">
+                <option v-for="(kategoria) in tratamenduKategoria" :value="kategoria.id" >{{kategoria.izena}}</option>
+              </select class="form-select" aria-label="Default select example">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ translations[currentLocale].default.salir }}</button>
@@ -97,6 +102,9 @@
               <input type="number" class="w-100" v-model="etxeko_prezioaEditar" />
               <label>{{ translations[currentLocale].tratamientos.precioFuera }}:</label>
               <input type="number" class="w-100" v-model="kanpoko_prezioaEditar" />
+              <select class="form-select" aria-label="Default select example" v-model="tratKategoriaIdEditar">
+                <option v-for="(kategoria) in tratamenduKategoria" :value="kategoria.id" >{{kategoria.izena}}</option>
+              </select class="form-select" aria-label="Default select example">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ translations[currentLocale].default.salir }}</button>
@@ -106,6 +114,55 @@
           </div>
         </div>
       </div>
+      <div class="modal fade" id="exampleModalAñadirKategoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 20vh" >
+        <div class="modal-dialog">
+          <div class="modal-content" style="background-color: #ba9471">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabelAñadirKategoria"> {{ translations[currentLocale].citas.crear.titulo }} </h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+            </div>
+            <div class="modal-body">
+              <label>{{ translations[currentLocale].tratamientos.nombre }}:</label>
+              <input type="text" class="w-100" v-model="kategoriaIzenaCrear" />
+              <label>{{ translations[currentLocale].tratamientos.precioDentro }}:</label>
+              <input type="checkbox" class="w-100" v-model="kategoriaColorCrear" />
+              <label>{{ translations[currentLocale].tratamientos.precioFuera }}:</label>
+              <input type="checkbox" class="w-100" v-model="kategoriaExtraCrear" />
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ translations[currentLocale].default.salir }}</button>
+              <button type="button" class="btn btn-primary" @click="createKategoria()">{{ translations[currentLocale].default.guardar }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="exampleModalEditarKategoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 20vh" >
+        <div class="modal-dialog">
+          <div class="modal-content" style="background-color: #ba9471">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabelEditarKategoria"> {{ translations[currentLocale].citas.crear.titulo }} </h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+            </div>
+            <div class="modal-body">
+              <select class="form-select" aria-label="Default select example" v-model="tratKategoriaIdEditar" @change="cargar_datos_kategoria()">
+                <option v-for="(kategoria) in tratamenduKategoria" :value="kategoria.id" >{{kategoria.izena}}</option>
+              </select class="form-select" aria-label="Default select example">
+              <label>Izena:</label>
+              <input type="text" class="w-100" v-model="kategoriaIzenaEditar" />
+              <label>Color:</label>
+              <input type="checkbox" class="w-100" v-model="kategoriaColorEditar" />
+              <label>Extra:</label>
+              <input type="checkbox" class="w-100" v-model="kategoriaExtraEditar" />
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ translations[currentLocale].default.salir }}</button>
+              <button type="button" class="btn btn-primary" @click="deleteKategoria()">{{ translations[currentLocale].default.borrar }}</button>
+              <button type="button" class="btn btn-primary" @click="editarKategoria()">{{ translations[currentLocale].default.guardar }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

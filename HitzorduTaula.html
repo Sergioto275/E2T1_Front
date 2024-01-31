@@ -9,9 +9,8 @@
     <link href="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.css" rel="stylesheet" />
     <link href="css/bootstrap/icons/font/bootstrap-icons.css" rel="stylesheet" />
   </head>
-  <body>
-    <script src="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.js"></script>
-
+  <body style=" font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; " >
+    <!-- <script src="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.js"></script> -->
     <div id="app">
       <!--HEADER-->
       <header>
@@ -34,11 +33,9 @@
             </li>
             <li class="nav-item me-3 mt-2">
               <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }" @click="changeLanguage('eu')" >EU</a >
-              <!-- <img src="imagenes/eu.png" class="img-fluid me-2 mt-1" style="width: 45px; height: 30px; cursor: pointer;" @click="changeLanguage('eu')"> -->
             </li>
             <li class="nav-item me-3 mt-2">
               <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }" @click="changeLanguage('es')" >ES</a >
-              <!-- <img src="imagenes/es.png" class="img-fluid mt-1" style="width: 45px; height: 30px; cursor: pointer;" @click="changeLanguage('es')"> -->
             </li>
             <li class="navi-item me-3 mt-2">
               <a class="text-white" :class="{ 'fw-bold': environment === 'https://localhost/Erronka2/Back/talde1erronka2' }" href="#" @click="changeEnvironment('https://localhost/Erronka2/Back/talde1erronka2')" >LOCAL</a >
@@ -58,9 +55,9 @@
             </div>
             <div class="row">
               <div class="col">
-                <input type="date" v-model="dataSelec" @change="cargarHitzordu()"/>
+                <input type="date" v-model="dataSelec" @change="cargarHitzordu()" />
                 <input type="time" v-model="startHour" @change="getHoursInRange()"/>
-                <input type="time" v-model="endHour" @change="getHoursInRange()"/>
+                <input type="time" v-model="endHour" @change="getHoursInRange()" /><!-- -->
                 <table>
                   <thead>
                     <tr>
@@ -69,24 +66,44 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="time in hoursArray">
+                    <tr v-for="(time, index) in hoursArray">
                       <td>{{ time }}</td>
-                      <td v-for="eserlekua in eserlekuKop" :key="eserlekua.id">
-                          <template v-if="getCitasAtTimeAndSeat(time, eserlekua.id, 'izena').length > 0">
-                              <div v-for="cita in getCitasAtTimeAndSeat(time, eserlekua.id, 'izena')" class="card">
-                                  <div class="card-body" @click="cargar_cita_selec(cita.id)">
-                                      <h5 class="card-title">{{ cita.izena }}</h5>
-                                      <p class="card-text">{{ cita.deskribapena }}</p>
+                        <template v-for="(eserlekua, esIndex) in eserlekuKop">
+                          <td :key="eserlekua.id" v-if="cita_sartuta(time,eserlekua.id)" :rowspan="rowspanManagement(time,eserlekua.id)">
+                              <template v-if="getCitasAtTimeAndSeat(time, eserlekua.id).length > 0">
+                                  <div v-for="cita in getCitasAtTimeAndSeat(time, eserlekua.id)" class="card">
+                                      <div class="card-body" @click="cargar_cita_selec(cita.id)">
+                                          <h5 class="card-title">{{ cita.izena }}</h5>
+                                          <p class="card-text">{{ cita.deskribapena }}</p>
+                                      </div>
                                   </div>
-                              </div>
-                          </template>
-                          <template v-else>
-                              <button @click="seleccionar_citaCrear(eserlekua.id, time)">
-                                  <i class="bi bi-calendar2-plus"></i>
-                              </button>
-                          </template>
-                      </td>
+                              </template>
+                              <template v-else>
+                                  <button @click="seleccionar_citaCrear(eserlekua.id, time)">
+                                      <i class="bi bi-calendar2-plus"></i>
+                                  </button>
+                              </template>
+                          </td>
+                      </template>
                   </tr>
+                  <!-- <tr v-for="time in hoursArray">
+                    <td>{{ time }}</td>
+                        <td :key="eserlekua.id" v-for="eserlekua in eserlekuKop">
+                            <template v-if="getCitasAtTimeAndSeat(time, eserlekua.id).length > 0">
+                                <div v-for="cita in getCitasAtTimeAndSeat(time, eserlekua.id)" class="card">
+                                    <div class="card-body" @click="cargar_cita_selec(cita.id)">
+                                        <h5 class="card-title">{{ cita.izena }}</h5>
+                                        <p class="card-text">{{ cita.deskribapena }}</p>
+                                    </div>
+                                </div>
+                            </template>
+                            <template v-else>
+                                <button @click="seleccionar_citaCrear(eserlekua.id, time)">
+                                    <i class="bi bi-calendar2-plus"></i>
+                                </button>
+                            </template>
+                        </td>
+                </tr> -->
                   </tbody>
                 </table>
               </div>
@@ -149,8 +166,8 @@
                     <button type="button" class="btn bg-black text-white" @click="eliminar_cita()"> {{ translations[currentLocale].default.borrar }} </button>
                     <button type="button" class="btn bg-black text-white" @click="editar_cita()" > {{ translations[currentLocale].default.guardar }} </button>
                   </div>
-                  <div class="tab-pane fade show" id="asignar-tab-pane" role="tabpanel" aria-labelledby="asignar-tab" tabindex="0">
-                    <span>{{ idSelec }} - {{ izenaSelec }}</span><br>
+                  <div class="tab-pane fade show" id="asignar-tab-pane" role="tabpanel" aria-labelledby="asignar-tab" tabindex="0">-->
+                     <span>{{ idSelec }} - {{ izenaSelec }}</span>
                     <label>{{ translations[currentLocale].trabajador.grupo }}:</label>
                     <select class="form-select" aria-label="Default select example" v-model="idTalde" @change="cargarComboBox()">
                         <option v-for="(taldea) in taldeArray" :value="taldea.kodea" >{{taldea.kodea}}</option>
@@ -159,15 +176,19 @@
                     <select class="form-select" aria-label="Default select example" v-model="idLangile">
                         <option v-for="(langile) in langileArray" :value="langile.id" >{{langile.kodea}} - {{ langile.izena }}</option>
                     </select class="form-select" aria-label="Default select example">
-                    <button type="button" class="btn bg-black text-white" @click="asignar_cita()" > {{ translations[currentLocale].default.guardar }} </button>
+                    <button type="button" class="btn bg-black text-white" @click="asignar_cita()" > {{ translations[currentLocale].default.guardar }} </button> 
                     <table>
                       <tr>
-                        <th>AAAAAA</th>
+                        <th>Langilea</th>
+                        <th v-for="kategoria in tratamenduKategoriaTaula">{{ kategoria.izena }}</th>
                       </tr>
-                      <tr>
-                        <td>AAAAA</td>
+                      <tr v-for="langile in langileArray">
+                        <td>{{ langile.izena }}</td>
+                        <td v-for="kategoria in tratamenduKategoriaTaula">{{ getCantKategoria(kategoria.id,langile.id) }}</td>
                       </tr>
                     </table>
+
+
                   </div>
                   <div class="tab-pane fade" id="generar-tab-pane" role="tabpanel" aria-labelledby="generar-tab" tabindex="0">
                     <span>{{ idSelec }} - {{ izenaSelec }}</span>
