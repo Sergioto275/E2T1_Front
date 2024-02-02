@@ -12,7 +12,9 @@ const translations = {
       correcto: 'Operación realizada correctamente',
       error: 'Error al realizar la operación',
       aceptar: 'Aceptar',
-      limpiar: 'Limpiar'
+      limpiar: 'Limpiar',
+      datosCargados: 'Datos cargados correctamente',
+      avisoCarrito: 'Ya se encuentra en el carrito'
     },
 
     trabajador: {
@@ -84,6 +86,7 @@ const translations = {
       modal: {
         editar: 'Editar producto',
         añadir: 'Añadir producto',
+        sacar: 'Sacar productos'
       },
       grupo: 'Grupo',
       trabajador: 'Trabajador',
@@ -135,7 +138,6 @@ const translations = {
       asiento: 'Asiento',
       alumno: 'Alumno',
       asignar: 'Asignar Alumno',
-      ticket: 'Generar Ticket',
       precioFuera: 'Precio Fuera',
       precioDentro: 'Precio Dentro',
       seleccionarCita: {
@@ -212,11 +214,28 @@ const translations = {
       crear: 'Crear Tratamiento',
       nombre: 'Nombre'
     },
+
+    material: {
+      titulo: 'Material',
+      id: 'ID',
+      etiqueta: 'Etiqueta',
+      nombre: 'Nombre',
+      carrito: 'Carrito',
+      modal: {
+        editar: 'Editar material',
+        añadir: 'Añadir material',
+        sacar: 'Sacar material'
+      },
+      grupo: 'Grupo',
+      trabajador: 'Trabajador',
+      materialLibre: 'Material libre'
+    },
+
   },
   eu: {
     default: {
       editar: 'Editatu',
-      añadir: 'Sortu',
+      añadir: 'Gehitu',
       borrar: 'Ezabatu',
       salir: 'Irten',
       guardar: 'Gorde',
@@ -224,7 +243,9 @@ const translations = {
       correcto: 'Eragiketa egokia izan da',
       error: 'Errorea eragiketa egitean',
       aceptar: 'Onartu',
-      limpiar: 'Garbitu'
+      limpiar: 'Garbitu',
+      datosCargados: 'Datuak kargatu egin dira',
+      avisoCarrito: 'Orgatxoan dago jada'
     },
 
     trabajador: {
@@ -236,7 +257,7 @@ const translations = {
       grupo: 'Taldea',
       modal: {
         editar: 'Langilea editatu',
-        añadir: 'Langilea sortu',
+        añadir: 'Langilea gehitu',
       }
     },
 
@@ -251,7 +272,7 @@ const translations = {
       horaFinal: 'Amaiera ordua',
       modal: {
         editar: 'Ordutegia editatu',
-        añadir: 'Ordutegia sortu',
+        añadir: 'Ordutegia gehitu',
       }
     },
 
@@ -261,7 +282,7 @@ const translations = {
       nombre: 'Izena',
       modal: {
         editar: 'Taldea editatu',
-        añadir: 'Taldea sortu'
+        añadir: 'Taldea gehitu'
       }
     },
 
@@ -294,7 +315,8 @@ const translations = {
       kategoriaFil: 'Kategoria bat aukeratu',
       modal: {
         editar: 'Produktua editatu',
-        añadir: 'Produktua sortu',
+        añadir: 'Produktua gehitu',
+        sacar: 'Produktuak atera'
       },
       grupo: 'Talde',
       trabajador: 'Langile',
@@ -347,7 +369,6 @@ const translations = {
       asiento: 'Eserleku',
       alumno: 'Ikaslea',
       asignar: 'Ikaslea Esleitu',
-      ticket: 'Ticket-a sortu',
       precioFuera: 'Kanpoko prezioa',
       precioDentro: 'Barruko Prezioa',
       seleccionarCita: {
@@ -384,7 +405,7 @@ const translations = {
       volumenes: "Bolumena",
       observaciones: "Behaketak",
       añadirCliente: {
-        titulo: "Sortu Bezero",
+        titulo: "Gehitu Bezero",
         nombre: "Izena",
         apellido: "Abizenak",
         telefono: "Telefonoa",
@@ -398,7 +419,7 @@ const translations = {
         sensible: "Azal Sentikorra",
       },
       añadirRegistro: {
-        titulo: "Tratamendua Sortu",
+        titulo: "Tratamendua Gehitu",
         fecha: "Data",
         casa: "Etxea",
         tinte: "Tindagai",
@@ -415,14 +436,30 @@ const translations = {
         volumenes: "Bolumena",
         observaciones: "Behaketak",
       },
+      tratamientos: {
+        titulo: 'Tratamenduak',
+        precioFuera: 'Kanpoko Prezioa',
+        precioDentro: 'Barruko Prezioa',
+        editar: 'Tratamendua Editatu',
+        crear: 'Tratamendua Gehitu',
+        nombre: 'Izena'
+      }
     },
-    tratamientos: {
-      titulo: 'Tratamenduak',
-      precioFuera: 'Kanpoko Prezioa',
-      precioDentro: 'Barruko Prezioa',
-      editar: 'Tratamendua Editatu',
-      crear: 'Tratamendua Sortu',
-      nombre: 'Izena'
-    }
+
+    material: {
+      titulo: 'Materiala',
+      id: 'ID',
+      etiqueta: 'Etiketa',
+      nombre: 'Izena',
+      carrito: 'Orgatxoa',
+      modal: {
+        editar: 'Materiala editatu',
+        añadir: 'Materiala gehitu',
+        sacar: 'Materiala atera'
+      },
+      grupo: 'Talde',
+      trabajador: 'Langile',
+      materialLibre: 'Material librea'
+    },
   }
 };

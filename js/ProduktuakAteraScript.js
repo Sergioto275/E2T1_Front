@@ -213,7 +213,7 @@ new Vue({
         this.listaMarka = [...new Set(this.listaProduktu.map(produktu => produktu.marka.toLowerCase()))];
 
         this.cargarKategoria();
-        console.log(this.listaProduktu)
+        toastr.success(this.translations[this.currentLocale].default.datosCargados);
       } catch (error) {
         console.error('Errorea:', error);
       }
