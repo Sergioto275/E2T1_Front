@@ -49,7 +49,7 @@
         
         <div class="row justify-content-center">
             <div class="col-md-10 offset-md-5 mt-5">
-              <h1 class="mb-5 offset-md-2">{{ translations[currentLocale].trabajador.titulo }}</h1>
+              <h1 class="mb-5 offset-md-2">Devolver Material</h1>
               <div>
                 <div class="input-group mb-3 w-50">
                   <input type="date" class="form-select border-black w-25 h-25" aria-label="Default select example" v
@@ -61,9 +61,9 @@
                 <div class="input-group mb-1 w-50">
                   <button type="button" class="btn btn-light border-black mb-3" :disabled="arrayId.length<=0" @click="devolver()">Devolver</button>
                   <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalEditar" :disabled="arrayId.length>1 || arrayId.length<=0" @click="cargarDatosModal()">{{ translations[currentLocale].default.editar }}</button>
-                  <select class="form-select border-black w-25 h-25" aria-label="Default select example" v-model="grupoFil" @change="filtroGrupo()" aria-placeholder="Grupo">
+                  <select class="form-select border-black w-25 h-25" aria-label="Default select example" v-model="materialFil" @change="fitroMaterial()" aria-placeholder="Grupo">
                     <option selected>Todos</option>
-                    <option v-for="(devolver) in listaDevolver" :value="devolver.id_materiala">{{devolver.materiala_izena}}</option>
+                    <option v-for="(devolver) in listaMaterial" :value="devolver.id">{{devolver.izena}}</option>
                   </select>
                   <button type="button"
                     class="btn btn-light border-black h-25" @click="cargaLangile()">
@@ -100,12 +100,12 @@
                 </div>
                 <div class="modal-body">
                   <label>{{ translations[currentLocale].trabajador.nombre }}:</label><br>
-                  <select class="form-select border-black w-25 h-25" aria-label="Default select example" v-model="langileActu" aria-placeholder="Grupo">
+                  <select class="form-select border-black w-100 h-25" aria-label="Default select example" v-model="langileActu" aria-placeholder="Grupo">
                     <option selected>Todos</option>
                     <option v-for="(langile) in listaLangile" :value="langile.id">{{langile.izena}}</option>
                   </select><br>
                   <label>{{ translations[currentLocale].trabajador.apellidos }}:</label><br>
-                  <select class="form-select border-black w-25 h-25" aria-label="Default select example" v-model="materialActu" aria-placeholder="Grupo">
+                  <select class="form-select border-black w-100 h-25" aria-label="Default select example" v-model="materialActu" aria-placeholder="Grupo">
                     <option selected>Todos</option>
                     <option v-for="(material) in listaMaterial" :value="material.id">{{material.izena}}</option>
                   </select><br>

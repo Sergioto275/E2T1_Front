@@ -7,6 +7,7 @@ new Vue({
       abizenaActu:"",
       kodeaActu:"",
       izenaCrear:"",
+      materialFil:"",
       abizenaCrear:"",
       kodeaCrear:"",
       materialActu:"",
@@ -262,17 +263,71 @@ new Vue({
         this.listaDevolver = [];
         const datuak = await response.json();
     
-        this.listaDevolver = datuak
+        if(this.materialFil!=""){
+          this.listaDevolver = datuak
+          .filter(kolore => {
+            // Comparar si la fecha en formato "2024-01-31 08:36:23" incluye la fecha en formato "31/01/2024"
+            return kolore.hasiera_data.includes(this.fechaFil) && kolore.id_materiala == this.materialFil && (kolore.ezabatze_data === null || kolore.ezabatze_data === "0000-00-00 00:00:00");
+          });
+        }else{
+          this.listaDevolver = datuak
           .filter(kolore => {
             // Comparar si la fecha en formato "2024-01-31 08:36:23" incluye la fecha en formato "31/01/2024"
             return kolore.hasiera_data.includes(this.fechaFil) && (kolore.ezabatze_data === null || kolore.ezabatze_data === "0000-00-00 00:00:00");
           });
+        }
+        
     
         if (this.listaDevolver.length == 0) {
           this.listaDevolver = datuak
             .filter(kolore => {
               // Comparar si la fecha en formato "2024-01-31 08:36:23" incluye la fecha en formato "31/01/2024"
               return kolore.hasiera_data.includes(this.fechaFil) && (kolore.ezabatze_data === null || kolore.ezabatze_data === "0000-00-00 00:00:00");
+            });
+        }
+    
+      } catch (error) {
+        console.error('Errorea: ', error);
+      }
+    },
+    async fitroMaterial() {
+      console.log(this.fechaFil)
+      try {
+        const response = await fetch(this.environment + '/public/api/devolver', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          },
+        });
+    
+        if (!response.ok) {
+          console.log('Errorea eskera egiterakoan');
+          throw new Error('Errorea eskaera egiterakoan');
+        }
+    
+        this.listaDevolver = [];
+        const datuak = await response.json();
+    
+        if(this.fechaFil!=""){
+          this.listaDevolver = datuak
+          .filter(kolore => {
+            // Comparar si la fecha en formato "2024-01-31 08:36:23" incluye la fecha en formato "31/01/2024"
+            return kolore.id_materiala == this.materialFil && (kolore.ezabatze_data === null || kolore.ezabatze_data === "0000-00-00 00:00:00");
+          });
+        }else{
+          this.listaDevolver = datuak
+          .filter(kolore => {
+            // Comparar si la fecha en formato "2024-01-31 08:36:23" incluye la fecha en formato "31/01/2024"
+            return kolore.hasiera_data.includes(this.fechaFil) && kolore.id_materiala == this.materialFil && (kolore.ezabatze_data === null || kolore.ezabatze_data === "0000-00-00 00:00:00");
+          });
+        }
+        
+    
+        if (this.listaDevolver.length == 0) {
+          this.listaDevolver = datuak
+            .filter(kolore => {
+              // Comparar si la fecha en formato "2024-01-31 08:36:23" incluye la fecha en formato "31/01/2024"
+              return (kolore.ezabatze_data === null || kolore.ezabatze_data === "0000-00-00 00:00:00");
             });
         }
     
