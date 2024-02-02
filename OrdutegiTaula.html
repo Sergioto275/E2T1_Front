@@ -212,7 +212,7 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{
               translations[currentLocale].default.salir }}</button>
-            <button type="button" class="btn btn-primary" @click="createDatosModal()">{{
+            <button type="button" class="btn btn-primary" :disabled="arrayDias.length==0 || kodeaCrear=='' || hasieradataCrear=='' || amaiera_data=='' || amaieraorduaCrear=='' || hasieraorduaCrear =='' " @click="createDatosModal()">{{
               translations[currentLocale].default.guardar }}</button>
           </div>
         </div>

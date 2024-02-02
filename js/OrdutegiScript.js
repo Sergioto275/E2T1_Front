@@ -132,8 +132,11 @@ new Vue({
 
               }
               this.listaOrdutegi.push(ordutegi);
+              this.listaOrdutegi.sort((a, b) => a.hasiera_data - b.hasiera_data);
+
             }
           }
+          
         })
         .catch(error => {
           console.error('Se ha producido un error:', error);

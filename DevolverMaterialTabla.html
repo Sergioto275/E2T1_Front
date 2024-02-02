@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="eu">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Devolver</title>
+        <link href="css/bootstrap/bootstrap.css" rel="stylesheet">
+        <link href="css/estilo.css" rel="stylesheet">
+        <link href="css/bootstrap/icons/font/bootstrap-icons.css" rel="stylesheet">
+      </head>
+      <body>
+      <div id="app" >
+        <!--HEADER-->
+        <header>
+          <ul class="nav nav-pills">
+            <div class=" nav rounded-end border-white border-4 sip">
+                <li class="nav-item">
+                    <a class="nav-link text-white" aria-current="page" href="#">
+                      <i class="bi bi-box-arrow-left" alt="Logout"></i>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="Home.html">
+                        <i class="bi bi-house" alt="Home"></i>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="Home.html">
+                      <i class="bi bi-arrow-left" alt="Back"></i>
+                    </a>
+                  </li>
+                  <li class="nav-item me-3 mt-2">
+                    <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }" @click="changeLanguage('eu')">EU</a>
+                    <!-- <img src="imagenes/eu.png" class="img-fluid me-2 mt-1" style="width: 45px; height: 30px; cursor: pointer;" @click="changeLanguage('eu')"> -->
+                  </li>
+                  <li class="nav-item me-3 mt-2">
+                    <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }" @click="changeLanguage('es')">ES</a>
+                    <!-- <img src="imagenes/es.png" class="img-fluid mt-1" style="width: 45px; height: 30px; cursor: pointer;" @click="changeLanguage('es')"> -->
+                  </li>
+                  <li class="navi-item me-3 mt-2">
+                    <a class="text-white" :class="{ 'fw-bold': environment === 'https://localhost/Erronka2/Back/talde1erronka2' }" href="#" @click="changeEnvironment('https://localhost/Erronka2/Back/talde1erronka2')">LOCAL</a>
+                  </li>
+                  <li class="navi-item me-3 mt-2">
+                    <a class="text-white" :class="{ 'fw-bold': environment === 'https://www.talde1-back.edu:8443' }" href="#" @click="changeEnvironment('https://www.talde1-back.edu:8443')">SERVER</a>
+                  </li>
+            </div>
+          </ul>  
+        </header>
+        
+        <div class="row justify-content-center">
+            <div class="col-md-10 offset-md-5 mt-5">
+              <h1 class="mb-5 offset-md-2">{{ translations[currentLocale].trabajador.titulo }}</h1>
+              <div>
+                <div class="input-group mb-3 w-50">
+                  <input type="date" class="form-select border-black w-25 h-25" aria-label="Default select example" v
+                    @change="filtroFecha()" aria-placeholder="Grupo" v-model="fechaFil" /><button type="button"
+                    class="btn btn-light border-black h-25" @click="cargarDatosSinEntregar()">
+                    <i class="bi bi-calendar-range-fill"></i>
+                  </button>
+                </div>      
+                <div class="input-group mb-1 w-50">
+                  <button type="button" class="btn btn-light border-black mb-3" :disabled="arrayId.length<=0" @click="devolver()">Devolver</button>
+                  <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalEditar" :disabled="arrayId.length>1 || arrayId.length<=0" @click="cargarDatosModal()">{{ translations[currentLocale].default.editar }}</button>
+                  <select class="form-select border-black w-25 h-25" aria-label="Default select example" v-model="grupoFil" @change="filtroGrupo()" aria-placeholder="Grupo">
+                    <option selected>Todos</option>
+                    <option v-for="(devolver) in listaDevolver" :value="devolver.id_materiala">{{devolver.materiala_izena}}</option>
+                  </select>
+                  <button type="button"
+                    class="btn btn-light border-black h-25" @click="cargaLangile()">
+                    <i class="bi bi-arrow-clockwise"></i>
+                  </button>
+                </div>
+                
+                  <table class="table table-striped table-hover w-50 text-center">
+                      <tr>
+                          <th class="border border-black" style="background-color: #BA9471"></th>
+                          <th class="border border-black" style="background-color: #BA9471">Trabajador</th>
+                          <th class="border border-black" style="background-color: #BA9471">Codigo del material</th>
+                          <th class="border border-black" style="background-color: #BA9471">Fecha Inicio</th>
+                          <th class="border border-black" style="background-color: #BA9471">Fecha Fin</th>
+                      </tr>
+                      <tr class="table-secondary" v-for="(devolver) in listaDevolver" data-tor="hover:bg-darken(x1)">
+                        <td class="table-secondary"><input type="checkbox" :value="devolver.id" v-model="arrayId" :disabled="devolver.amaiera_data!=null"></td>
+                        <td>{{devolver.langilea_izena}}</td>
+                        <td>{{devolver.materiala_izena}}</td>
+                        <td>{{devolver.hasiera_data}}</td>
+                        <td>{{devolver.amaiera_data}}</td>
+                      </tr>
+                  </table>
+              </div>
+            </div>
+          </div>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content lamodal">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">{{ translations[currentLocale].trabajador.modal.editar }}</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <label>{{ translations[currentLocale].trabajador.nombre }}:</label><br>
+                  <select class="form-select border-black w-25 h-25" aria-label="Default select example" v-model="langileActu" aria-placeholder="Grupo">
+                    <option selected>Todos</option>
+                    <option v-for="(langile) in listaLangile" :value="langile.id">{{langile.izena}}</option>
+                  </select><br>
+                  <label>{{ translations[currentLocale].trabajador.apellidos }}:</label><br>
+                  <select class="form-select border-black w-25 h-25" aria-label="Default select example" v-model="materialActu" aria-placeholder="Grupo">
+                    <option selected>Todos</option>
+                    <option v-for="(material) in listaMaterial" :value="material.id">{{material.izena}}</option>
+                  </select><br>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn bg-black text-white" data-bs-dismiss="modal">{{ translations[currentLocale].default.salir }}</button>
+                  <button type="button" class="btn bg-black text-white" @click="actuDatosModal()">{{ translations[currentLocale].default.guardar }}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="js/translations.js"></script>
+        <script src="js/DevolverMaterialScript.js"></script>
+        <script src="js/bootstrap/bootstrap.bundle.js"></script>
+    </body>
+</html>
