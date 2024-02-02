@@ -99,33 +99,32 @@ const translations = {
 
       almacen: {
         titulo: 'Almacen',
-        elemento1: {
+        producto: {
           titulo: 'Producto',
-          elemento1: 'Sacar',
-          elemento2: 'Entregar',
-          elemento3: 'Historico'
+          sacar: 'Sacar',
+          historico: 'Histórico'
         },
-        elemento2: {
+        material: {
           titulo: 'Material',
-          elemento1: 'Sacar',
-          elemento2: 'Entregar',
-          elemento3: 'Historico'
+          sacar: 'Sacar',
+          entregar: 'Entregar',
+          historico: 'Historico'
         },
       },
       profesor: {
         titulo: 'Profesor',
-        elemento1: {
+        almacen: {
           titulo: 'Almacen',
-          elemento1: 'Productos',
-          elemento2: 'Material'
+          productos: 'Productos',
+          material: 'Material'
         },
-        elemento2: 'Tratamientos',
-        elemento3: {
+        tratamientos: 'Tratamientos',
+        alumnado: {
           titulo: 'Alumnado',
-          elemento1: 'Alumnos',
-          elemento2: 'Grupos'
+          alumnos: 'Alumnos',
+          grupos: 'Grupos'
         },
-        elemento4: 'Calendario'
+        calendario: 'Calendario'
       },
       tareas: 'Tareas',
       citas: 'Citas',
@@ -330,33 +329,32 @@ const translations = {
     menu: {
       almacen: {
         titulo: 'Biltegia',
-        elemento1: {
+        producto: {
           titulo: 'Produktuak',
-          elemento1: 'Atera',
-          elemento2: 'Gorde',
-          elemento3: 'Historikoa'
+          sacar: 'Atera',
+          historico: 'Historikoa'
         },
-        elemento2: {
+        material: {
           titulo: 'Materiala',
-          elemento1: 'Atera',
-          elemento2: 'Gorde',
-          elemento3: 'Historikoa'
+          sacar: 'Atera',
+          entregar: 'Gorde',
+          historico: 'Historikoa'
         },
       },
       profesor: {
         titulo: 'Irakaslea',
-        elemento1: {
+        almacen: {
           titulo: 'Biltegia',
-          elemento1: 'Produktuak',
-          elemento2: 'Materiala'
+          productos: 'Produktuak',
+          material: 'Materiala'
         },
-        elemento2: 'Tratamenduak',
-        elemento3: {
+        tratamientos: 'Tratamenduak',
+        alumnado: {
           titulo: 'Ikasleak',
-          elemento1: 'Ikasle',
-          elemento2: 'Taldeak'
+          alumnos: 'Ikasle',
+          grupos: 'Taldeak'
         },
-        elemento4: 'Ordutegia'
+        calendario: 'Ordutegia'
       },
       tareas: 'Zereginak',
       citas: 'Hitzorduak'
