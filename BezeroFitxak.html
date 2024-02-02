@@ -54,7 +54,7 @@
       </ul>
     </header>
 
-    <div class="container-fluid p-3">
+    <div class="container-fluid p-5">
       <div class="row">
 
         <div class="col-lg-3">
@@ -64,7 +64,7 @@
               <div>
                 <div class="input-group mb-3 w-50">
                   <input type="text" class="form-control" placeholder="" aria-label="Recipient's username"
-                    aria-describedby="basic-addon2" @change="filtroNombre()" v-model="filtrNom">
+                    aria-describedby="basic-addon2" @input="callFiltro()" v-model="filtrNom">
                   <button type="button" class="btn btn-light border-black" @click="cargaBezeroa()">
                     <i class="bi bi-arrow-clockwise"></i>
                   </button>
@@ -102,13 +102,13 @@
           </div>
         </div>
 
-        <div class="col-lg-9">
-          <div class="row g-0 position-relative justify-content-start">
-            <div class="col-md-12 offset-md-1 mt-5">
-              <h1 class="mb-5 offset-md-2">{{
+        <div class="col-lg-9 md-5">
+          <div class="row g-0 md-5 position-relative justify-content-start">
+            <div class="col-md-12 md-5 mt-5">
+              <h1 class="mb-5 offset-md-2 justify-content-center">{{
                 translations[currentLocale].fichas.titulo }}</h1>
-              <div>
-                <div class="input-group mb-3 w-50">
+              <div class="ms-5">
+                <div class="input-group md-5 mb-3 w-50">
                   <table class="table table-bordered">
 
 

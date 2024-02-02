@@ -1,6 +1,7 @@
 new Vue({
   el: '#app',
   data: {
+    searchTimeout:null,
     listaBezero: [],
     listaBezeroById: [],
     listaKolore: [],
@@ -341,7 +342,17 @@ new Vue({
         console.error('Errorea: ', error);
       }
     },
+    callFiltro() {
+      // Borra el timeout anterior (si existe)
+      if (this.searchTimeout) {
+        clearTimeout(this.searchTimeout);
+      }
 
+      // Inicia un nuevo timeout para ejecutar la búsqueda después de 500 ms
+      this.searchTimeout = setTimeout(() => {
+        this.filtroNombre();
+      }, 500);
+    },
     async createDatosModal2() {
       try {
         const data = this.fechaCrear;
@@ -690,6 +701,17 @@ new Vue({
         } catch (error){
           console.error('Errorea: ', error);
         }
+      },
+      callFiltro2() {
+        // Borra el timeout anterior (si existe)
+        if (this.searchTimeout) {
+          clearTimeout(this.searchTimeout);
+        }
+  
+        // Inicia un nuevo timeout para ejecutar la búsqueda después de 500 ms
+        this.searchTimeout = setTimeout(() => {
+          this.filtroFecha();
+        }, 500);
       },
       async filtrarPorTintes() {
         try {

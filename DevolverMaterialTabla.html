@@ -47,13 +47,13 @@
           </ul>  
         </header>
         
-        <div class="row justify-content-center">
-            <div class="col-md-10 offset-md-5 mt-5">
+        <div class="justify-content-center">
+            <div class="col-md-10 mt-5" style="margin-left: 30%;">
               <h1 class="mb-5 offset-md-2">Devolver Material</h1>
               <div>
                 <div class="input-group mb-3 w-50">
                   <input type="date" class="form-select border-black w-25 h-25" aria-label="Default select example" v
-                    @change="filtroFecha()" aria-placeholder="Grupo" v-model="fechaFil" /><button type="button"
+                    @change="callFiltro()" aria-placeholder="Grupo" v-model="fechaFil" /><button type="button"
                     class="btn btn-light border-black h-25" @click="cargarDatosSinEntregar()">
                     <i class="bi bi-calendar-range-fill"></i>
                   </button>

@@ -180,6 +180,47 @@ new Vue({
 
         this.arrayId = [];
       },
+      async filtroNombre() {
+        console.log(this.nombreFil)
+        try {
+          const response = await fetch(this.environment + '/public/api/taldeak', {
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+            },
+          });
+  
+          if (!response.ok) {
+            console.log('Errorea eskera egiterakoan');
+            throw new Error('Errorea eskaera egiterakoan');
+          }
+  
+          this.listaTalde = [];
+          const datuak = await response.json();
+  
+          this.listaTalde = datuak
+            .filter(bezero => bezero.kodea.includes(this.nombreFil) && bezero.ezabatze_data === null || bezero.kodea.includes(this.nombreFil) && bezero.ezabatze_data === "0000-00-00 00:00:00");
+  
+          if (this.listaTalde.length == 0) {
+            this.listaTalde = datuak
+              .filter(langile => langile.ezabatze_data === null || langile.ezabatze_data === "0000-00-00 00:00:00");
+          }
+  
+        } catch (error) {
+          console.error('Errorea: ', error);
+        }
+      },
+      callFiltro() {
+        // Borra el timeout anterior (si existe)
+        if (this.searchTimeout) {
+          clearTimeout(this.searchTimeout);
+        }
+  
+        // Inicia un nuevo timeout para ejecutar la búsqueda después de 500 ms
+        this.searchTimeout = setTimeout(() => {
+          this.filtroNombre();
+        }, 500);
+      },
       // Sortzeko modalean aurreko langilearen datuak ez agertzeko
       limpiarCampos(){
         this.izenaCrear = "";
