@@ -4,10 +4,13 @@ const vue = new Vue({
         startHour : '10:00:00',
         endHour : '16:00:00',
         hitzorduArray: [],
+        hitzorduak: [],
         rowspanValues: {},
         rowspanAux: [],
+        langile_asignado:'nadie Asignado',
         data:null,
         eserlekua:null,
+        generado: false,
         ordua:null,
         langileTratamenduak: [],
         tratamenduKategoria: [],
@@ -48,6 +51,7 @@ const vue = new Vue({
         citasDisponible:null,
         currentLocale: 'es',
         translations: translations,
+        error:false,
         environment: 'http://localhost/Erronka2/Back/talde1erronka2'
     },
     methods: {
@@ -125,11 +129,22 @@ const vue = new Vue({
             this.izenaEditar = cita[0].izena;
             this.telfEditar = cita[0].telefonoa;
             this.deskEditar = cita[0].deskribapena;
+            this.eserlekuaEditar = cita[0].eserlekua;
             if(cita[0].etxekoa == "E"){
                 this.etxekoEditar = true;
             }else{
                 this.etxekoEditar = false;
-            };  
+            };
+            if(cita[0].id_langilea){
+                this.langile_asignado = cita[0].kodea+' - '+ cita[0].l_izena;
+            }else{
+                this.langile_asignado = 'nadie Asignado';
+            }
+            if(cita[0].prezio_totala){
+                this.generado = true;
+            }else{
+                this.generado = false;
+            }
           },
           async editar_cita(){
             try{
@@ -386,9 +401,10 @@ const vue = new Vue({
             },
         async cargarHitzordu() {
             this.hitzorduArray = [];
+            this.hitzorduak = [];
             this.citasMostradas = [];
             try{
-                const response = await fetch(this.environment + '/public/api/hitzorduak/'+this.dataSelec,{
+                const response = await fetch(this.environment + '/public/api/hitzorduak/',{
                     headers: {  
                         'Content-Type': 'application/json',
                         'Access-Control-Allow-Origin': '*'
@@ -399,7 +415,9 @@ const vue = new Vue({
                     throw new Error('Errorea eskaera egiterakoan');
                 }
                 const datuak = await response.json();
-                this.hitzorduArray = datuak.filter(hitzordu => hitzordu.ezabatze_data === null || hitzordu.ezabatze_data === "0000-00-00 00:00:00");
+                this.hitzorduak = datuak.filter(hitzordu => hitzordu.ezabatze_data === null || hitzordu.ezabatze_data === "0000-00-00 00:00:00");
+                var eguna = new Date(this.dataSelec).toISOString().substring(0, 10);
+                this.hitzorduArray = datuak.filter(hitzordu => (hitzordu.ezabatze_data === null || hitzordu.ezabatze_data === "0000-00-00 00:00:00") && hitzordu.data.includes(eguna));
             }catch(error){
                 console.log("Errorea: "+error);
             }
@@ -423,6 +441,10 @@ const vue = new Vue({
             }catch(error){
                 console.log("Errorea: "+error);
             }
+        },
+        cargar_dia_seleccionado(){
+            var eguna = new Date(this.dataSelec).toISOString().substring(0, 10);
+            this.hitzorduArray = this.hitzorduak.filter(hitzordu => (hitzordu.ezabatze_data === null || hitzordu.ezabatze_data === "0000-00-00 00:00:00") && hitzordu.data.includes(eguna));
         },
         getHoursInRange() {
             const startTime = new Date(`2022-01-01 ${this.startHour}`);
@@ -527,6 +549,54 @@ const vue = new Vue({
                 }
             }
         },
+        roundDownHour_hasieraData_crear() {
+            const parts = this.hasOrduaTest.split(":");
+            const hour = parseInt(parts[0], 10);
+            const minute = parseInt(parts[1], 10);
+    
+            // Redondear hacia abajo
+            const roundedMinute = minute >= 45 ? "00" : minute >= 15 ? "30" : "00";
+            const roundedHour = minute >= 45 ? hour + 1 : hour;      
+            // Formatear la hora redondeada como cadena (agregar ceros si es necesario)
+            this.hasOrduaTest = `${roundedHour.toString().padStart(2, "0")}:${roundedMinute}`;
+
+          },
+          roundDownHour_amaieraData_crear() {
+            const parts = this.amaOrduaTest.split(":");
+            const hour = parseInt(parts[0], 10);
+            const minute = parseInt(parts[1], 10);
+    
+            // Redondear hacia abajo
+            const roundedMinute = minute >= 45 ? "00" : minute >= 15 ? "30" : "00";
+            const roundedHour = minute >= 45 ? hour + 1 : hour;      
+            // Formatear la hora redondeada como cadena (agregar ceros si es necesario)
+            this.amaOrduaTest = `${roundedHour.toString().padStart(2, "0")}:${roundedMinute}`;
+
+          },
+          roundDownHour_hasieraData_editar() {
+            const parts = this.hasOrduaEditar.split(":");
+            const hour = parseInt(parts[0], 10);
+            const minute = parseInt(parts[1], 10);
+    
+            // Redondear hacia abajo
+            const roundedMinute = minute >= 45 ? "00" : minute >= 15 ? "30" : "00";
+            const roundedHour = minute >= 45 ? hour + 1 : hour;      
+            // Formatear la hora redondeada como cadena (agregar ceros si es necesario)
+            this.hasOrduaEditar = `${roundedHour.toString().padStart(2, "0")}:${roundedMinute}`;
+
+          },
+          roundDownHour_amaieraData_editar() {
+            const parts = this.amaOrduaEditar.split(":");
+            const hour = parseInt(parts[0], 10);
+            const minute = parseInt(parts[1], 10);
+    
+            // Redondear hacia abajo
+            const roundedMinute = minute >= 45 ? "00" : minute >= 15 ? "30" : "00";
+            const roundedHour = minute >= 45 ? hour + 1 : hour;      
+            // Formatear la hora redondeada como cadena (agregar ceros si es necesario)
+            this.amaOrduaEditar = `${roundedHour.toString().padStart(2, "0")}:${roundedMinute}`;
+
+          },
         lortuData(){
             var gaur = new Date();
             var urtea = gaur.getFullYear();
@@ -602,37 +672,27 @@ const vue = new Vue({
                 }
             })
             return cant;
+        },
+        comprobar_cita_editar(){
+            var eguna = new Date(this.dataEditar).toISOString().substring(0, 10);
+            const filtrarCitas = this.hitzorduak.filter(cita => ((cita.hasiera_ordua >= this.hasOrduaEditar && cita.hasiera_ordua < this.amaOrduaEditar) || (cita.amaiera_ordua >= this.hasOrduaEditar && cita.amaiera_ordua < this.amaOrduaEditar)) && cita.eserlekua == this.eserlekuaEditar && cita.data.includes(eguna));
+            if(filtrarCitas.length > 0){
+                this.error = true;
+                toastr.error('La cita ya esta reservada');
+            }else{
+                this.error = false;
+            }
+        },
+        comprobar_cita_crear(){
+            var eguna = new Date(this.dataTest).toISOString().substring(0, 10);
+            const filtrarCitas = this.hitzorduak.filter(cita => ((cita.hasiera_ordua >= this.hasOrduaTest && cita.hasiera_ordua < this.amaOrduaTest) || (cita.amaiera_ordua >= this.hasOrduaTest && cita.amaiera_ordua < this.amaOrduaTest)) && cita.eserlekua == this.eserlekuaCrear && cita.data.includes(eguna));
+            if(filtrarCitas.length > 0){
+                this.error = true;
+                toastr.error('La cita ya esta reservada');
+            }else{
+                this.error = false;
+            }
         }
-        // rowspanManagement(time,seatId){
-        //     // this.data = dataSelec;
-        //     // this.ordua = time;
-        //     // this.eserlekua = seatId;
-        //     if(time == this.hoursArray[0] && seatId == this.eserlekuKop[0].id){
-        //         this.rowspanAux = {};
-        //         this.rowspanValues = {};
-        //     }
-        //     const filteredCitas = this.hitzorduArray.filter(cita => (cita.hasiera_ordua <= time && cita.amaiera_ordua > time && cita.eserlekua === seatId));
-        //     if (!this.rowspanValues[String(time)]) {
-        //         this.rowspanValues[String(time)] = {};
-        //     }
-        //     // 
-        //     // if (this.rowspanValues[String(time)][String(seatId)]) {
-        //     //     return true;
-        //     // }
-        //     if(filteredCitas.length <= 0){
-        //         this.rowspanValues[String(time)][String(seatId)] = 1;
-        //         return true;
-        //     }
-        //     var idHitzordu = filteredCitas[0].id;
-        //     if(this.rowspanAux[String(idHitzordu)]){
-        //         this.rowspanValues[String(this.rowspanAux[String(idHitzordu)])][String(seatId)] = Number(this.rowspanValues[String(this.rowspanAux[String(idHitzordu)])][String(seatId)]) + 1;
-        //         return false;
-        //     }else{
-        //         this.rowspanAux[String(idHitzordu)] = time;
-        //         this.rowspanValues[String(time)][String(seatId)] = 1;
-        //         return true;
-        //     }
-        // }
     },
     mounted() {
         this.dataSelec = this.lortuData();
