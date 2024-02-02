@@ -23,9 +23,9 @@ body {
   background-color: #BA9471;
 }
 
-.dropend:hover>.dropdown-menu {
+/* .dropend:hover>.dropdown-menu {
   display: block;
-}
+} */
 
 .background-radial-gradient {
   background-color: #332A21;
