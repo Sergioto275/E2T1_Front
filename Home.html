@@ -10,6 +10,14 @@
     <link href="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.css"
         rel="stylesheet" />
     <link href="css/bootstrap/icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        /* Este hace el color del hover */
+        .dropdown-menu>li>a:hover {
+            /*background-color:red !important;*/
+            background-color: #E6B181 !important;
+            color: #000000 !important;
+        }
+    </style>
 </head>
 
 <body style="background-color: #EFEFEF;">
@@ -42,16 +50,16 @@
             <ul class="nav nav-pills justify-content-center" style="background-color: #403A36; color: #E6B181;">
                 <li class="nav-item">
                     <div class="dropdown">
-                        <button class="btn dropdown-toggle" href="#" style="color: #E6B181;" role="button" data-bs-toggle="dropdown"
-                            id="dropdownMenuButton6" aria-expanded="false">
+                        <button class="btn dropdown-toggle" href="#" style="color: #E6B181;" role="button"
+                            data-bs-toggle="dropdown" id="dropdownMenuButton6" aria-expanded="false">
                             <strong>{{ translations[currentLocale].menu.almacen.titulo }}</strong>
                         </button>
                         <ul class="dropdown-menu" style="background-color: #403A36;"
                             aria-labelledby="dropdownMenuButton6">
                             <li>
                                 <div div class="dropdown dropend" onclick="event.stopPropagation();">
-                                    <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton6"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button class="btn text-white dropdown-toggle" type="button"
+                                        id="dropdownMenuButton6" data-bs-toggle="dropdown" aria-expanded="false">
                                         {{ translations[currentLocale].menu.almacen.producto.titulo }}
                                     </button>
                                     <ul class="dropdown-menu" style="background-color: #665951;"
@@ -112,8 +120,8 @@
                                     translations[currentLocale].menu.profesor.tratamientos }}</a></li>
                             <li>
                                 <div class="dropend">
-                                    <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton5"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button class="btn text-white dropdown-toggle" type="button"
+                                        id="dropdownMenuButton5" data-bs-toggle="dropdown" aria-expanded="false">
                                         {{ translations[currentLocale].menu.profesor.alumnado.titulo }}
                                     </button>
                                     <ul class="dropdown-menu" style="background-color: #665951;"
@@ -160,6 +168,79 @@
                 event.stopPropagation();
             });
         });
+
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     // Inicializar todos los dropdowns con Bootstrap
+        //     var dropdowns = document.querySelectorAll('.dropdown-toggle');
+        //     dropdowns.forEach(function (dropdown) {
+        //         new bootstrap.Dropdown(dropdown);
+        //     });
+
+        //     // Evento al mostrar un nuevo dropdown principal
+        //     document.querySelectorAll('.dropdown').forEach(function (dropdown) {
+        //         dropdown.addEventListener('show.bs.dropdown', function () {
+        //             if (dropdown.id === 'dropdownMenuButton6') {
+        //                 cerrarOtrosDropdownsAlmacen(dropdown);
+        //             } else if (dropdown.id === 'dropdownMenuButton4') {
+        //                 cerrarOtrosDropdownsProfesor(dropdown);
+        //             } else {
+        //                 cerrarOtrosDropdowns(dropdown);
+        //             }
+        //         });
+        //     });
+
+        //     // Evento al mostrar un nuevo dropdown secundario
+        //     document.querySelectorAll('.dropdown-menu').forEach(function (menu) {
+        //         menu.addEventListener('show.bs.dropdown', function () {
+        //             cerrarOtrosDropdowns(menu.closest('.dropdown'));
+        //         });
+        //     });
+
+        //     function cerrarOtrosDropdowns(dropdownActual) {
+        //         document.querySelectorAll('.dropdown').forEach(function (dropdown) {
+        //             if (dropdown !== dropdownActual) {
+        //                 var instanciaBootstrap = new bootstrap.Dropdown(dropdown);
+        //                 instanciaBootstrap.hide();
+        //             }
+        //         });
+        //     }
+
+        //     function cerrarOtrosDropdownsAlmacen(dropdownActual) {
+        //         // Cierra solo los dropdowns principales diferentes al actual
+        //         document.querySelectorAll('.dropdown.dropdown-principal').forEach(function (dropdown) {
+        //             if (dropdown !== dropdownActual) {
+        //                 var instanciaBootstrap = new bootstrap.Dropdown(dropdown);
+        //                 instanciaBootstrap.hide();
+        //             }
+        //         });
+
+        //         // Cierra todos los submenús de "almacén" diferentes al actual
+        //         document.querySelectorAll('.dropdown.dropdown-principal #dropdownMenuButton6 + .dropdown-menu').forEach(function (menu) {
+        //             if (menu.closest('.dropdown') !== dropdownActual) {
+        //                 var instanciaBootstrap = new bootstrap.Dropdown(menu);
+        //                 instanciaBootstrap.hide();
+        //             }
+        //         });
+        //     }
+
+        //     function cerrarOtrosDropdownsProfesor(dropdownActual) {
+        //         // Cierra solo los dropdowns principales diferentes al actual
+        //         document.querySelectorAll('.dropdown.dropdown-principal').forEach(function (dropdown) {
+        //             if (dropdown !== dropdownActual) {
+        //                 var instanciaBootstrap = new bootstrap.Dropdown(dropdown);
+        //                 instanciaBootstrap.hide();
+        //             }
+        //         });
+
+        //         // Cierra todos los submenús de "profesor" diferentes al actual
+        //         document.querySelectorAll('.dropdown.dropdown-principal #dropdownMenuButton4 + .dropdown-menu').forEach(function (menu) {
+        //             if (menu.closest('.dropdown') !== dropdownActual) {
+        //                 var instanciaBootstrap = new bootstrap.Dropdown(menu);
+        //                 instanciaBootstrap.hide();
+        //             }
+        //         });
+        //     }
+        // });
     </script>
 </body>
 
