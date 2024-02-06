@@ -5,7 +5,6 @@ const vue = new Vue({
         endHour : '16:00:00',
         hitzorduArray: [],
         hitzorduak: [],
-        rowspanValues: {},
         rowspanAux: [],
         langile_asignado:'nadie Asignado',
         data:null,
@@ -176,7 +175,7 @@ const vue = new Vue({
                 if(!response.ok){
                     throw new Error('Errorea eskaera egiterakoan');
                 }
-                alert('Ondo eguneratuta');
+                toastr.success('Ondo eguneratuta');
                 await this.cargarHitzordu();
 
                 //Modal-a ixteko ondo egiten duenean
@@ -203,7 +202,7 @@ const vue = new Vue({
                 if(!response.ok){
                     throw new Error('Errorea eskaera egiterakoan');
                 }
-                alert('Ondo eguneratuta');
+                toastr.success('Ondo eguneratuta');
                 await this.cargarHitzordu();
 
                 //Modal-a ixteko ondo egiten duenean
@@ -231,7 +230,7 @@ const vue = new Vue({
                 if(!response.ok){
                     throw new Error('Errorea eskaera egiterakoan');
                 }
-                alert('Ondo eguneratuta');
+                toastr.success('Ondo eguneratuta');
                 await this.cargarHitzordu();
 
                 //Modal-a ixteko ondo egiten duenean
@@ -283,12 +282,12 @@ const vue = new Vue({
                 if(!response.ok){
                     throw new Error('Errorea eskaera egiterakoan');
                 }
-                alert('Ondo eguneratuta');
+                toastr.success('Ondo eguneratuta');
                 this.tratamenduSelec.forEach(tratamendu => {
                     var tratamiento = this.tratamenduArray.filter(element => element.id == tratamendu.tratamendu_id);
                     var kategoria = this.tratamenduKategoria.filter(el => el.id == tratamiento[0].id_katTratamendu)
                     if(kategoria[0].kolorea == 's'){
-                        alert("Tiene que registrar la ficha de este cliente");
+                        toastr.warning('Tiene que registrar la ficha de este cliente');
                         if(confirm("Desea ser redireccionado a clientes?")){
                             window.location.href ='BezeroFitxak.html';
                         }else{
@@ -494,7 +493,7 @@ const vue = new Vue({
                 if(!response.ok){
                     throw new Error('Errorea eskaera egiterakoan');
                 }
-                alert('Sortu da');
+                toastr.success('Sortu da');
                 await this.cargarHitzordu();
       
                 //Modal-a ixteko ondo sortzen duenean
@@ -640,7 +639,6 @@ const vue = new Vue({
         cita_sartuta(time,seatId){
             if(time == this.hoursArray[0] && seatId == this.eserlekuKop[0].id){
                 this.rowspanAux = [];
-                this.rowspanValues = {};
             }
             const filteredCitas = this.hitzorduArray.filter(cita => (cita.hasiera_ordua <= time && cita.amaiera_ordua > time && cita.eserlekua === seatId));
             if(filteredCitas.length <= 0){
@@ -656,7 +654,6 @@ const vue = new Vue({
         rowspanManagement(time,seatId){
             if(time == this.hoursArray[0] && seatId == this.eserlekuKop[0].id){
                 this.rowspanAux = [];
-                this.rowspanValues = {};
             }
             const filteredCitas = this.hitzorduArray.filter(cita => (cita.hasiera_ordua <= time && cita.amaiera_ordua > time && cita.eserlekua === seatId));
             if(filteredCitas.length <= 0){

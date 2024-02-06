@@ -17,7 +17,7 @@
   </style>
 </head>
   </head>
-  <body style=" font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; " >
+  <body style="background-color: #EFEFEF; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; " >
     <!-- <script src="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.js"></script> -->
     <div id="app">
       <!--HEADER-->
@@ -54,48 +54,52 @@
           </div>
         </ul>
       </header>
-      <div class="justify-content-evenly" style="margin:0%15%">
+      <div class="text-center" style="margin:0%15%">
         <div>
-          <h1 class="mb-5 offset-md-2"> {{ translations[currentLocale].citas.titulo }} </h1>
+          <h1> {{ translations[currentLocale].citas.titulo }} </h1>
           <div>
             <div class="input-group mb-1 w-50">
               <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalCrear" @click="" > {{ translations[currentLocale].default.añadir }} </button>
+              <input class="btn border-black mb-3" type="date" v-model="dataSelec" @change="cargar_dia_seleccionado()" />
+              <input class="btn border-black mb-3" type="time" v-model="startHour" @change="getHoursInRange()"/>
+              <input class="btn border-black mb-3" type="time" v-model="endHour" @change="getHoursInRange()" />
             </div>
             <div class="row">
               <div class="col">
-                <input type="date" v-model="dataSelec" @change="cargar_dia_seleccionado()" />
-                <input type="time" v-model="startHour" @change="getHoursInRange()"/>
-                <input type="time" v-model="endHour" @change="getHoursInRange()" />
-                <table>
-                  <thead>
-                    <tr>
-                      <th>{{ translations[currentLocale].citas.hora }}</th>
-                      <th v-for="eserlekua in eserlekuKop" :key="eserlekua.id">{{ translations[currentLocale].citas.asiento }} {{ eserlekua.id }}</th>
+                <div style="overflow:scroll;
+                height:500px;
+                width:500px;">
+                  <table style="height: 100%; width: 100%;">
+                    <thead>
+                      <tr>
+                        <th>{{ translations[currentLocale].citas.hora }}</th>
+                        <th v-for="eserlekua in eserlekuKop" :key="eserlekua.id">{{ translations[currentLocale].citas.asiento }} {{ eserlekua.id }}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="(time, index) in hoursArray">
+                        <td>{{ time }}</td>
+                          <template v-for="(eserlekua, esIndex) in eserlekuKop">
+                            <td :key="eserlekua.id" v-if="cita_sartuta(time,eserlekua.id)" :rowspan="rowspanManagement(time,eserlekua.id)" style="margin:1%">
+                                <template v-if="getCitasAtTimeAndSeat(time, eserlekua.id).length > 0">
+                                    <div v-for="cita in getCitasAtTimeAndSeat(time, eserlekua.id)" class="card" style="height: 100%; border:0">
+                                        <div class="card-body" @click="cargar_cita_selec(cita.id)" >
+                                            <h5 class="card-title">{{ cita.izena }}</h5>
+                                            <p class="card-text">{{ cita.deskribapena }}</p>
+                                        </div>
+                                    </div>
+                                </template>
+                                <template v-else>
+                                    <button class="w-100" @click="seleccionar_citaCrear(eserlekua.id, time)" style="border:0;background-color:#5a5754">
+                                        <i class="bi bi-calendar2-plus"></i>
+                                    </button>
+                                </template>
+                            </td>
+                        </template>
                     </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="(time, index) in hoursArray">
-                      <td>{{ time }}</td>
-                        <template v-for="(eserlekua, esIndex) in eserlekuKop">
-                          <td :key="eserlekua.id" v-if="cita_sartuta(time,eserlekua.id)" :rowspan="rowspanManagement(time,eserlekua.id)">
-                              <template v-if="getCitasAtTimeAndSeat(time, eserlekua.id).length > 0">
-                                  <div v-for="cita in getCitasAtTimeAndSeat(time, eserlekua.id)" class="card">
-                                      <div class="card-body" @click="cargar_cita_selec(cita.id)">
-                                          <h5 class="card-title">{{ cita.izena }}</h5>
-                                          <p class="card-text">{{ cita.deskribapena }}</p>
-                                      </div>
-                                  </div>
-                              </template>
-                              <template v-else>
-                                  <button @click="seleccionar_citaCrear(eserlekua.id, time)">
-                                      <i class="bi bi-calendar2-plus"></i>
-                                  </button>
-                              </template>
-                          </td>
-                      </template>
-                  </tr>
-                  </tbody>
-                </table>
+                    </tbody>
+                  </table>
+                </div>
               </div>
               <div class="col">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -112,7 +116,7 @@
                     <button class="nav-link" id="generar-tab" data-bs-toggle="tab" data-bs-target="#generar-tab-pane" type="button" role="tab" aria-controls="generar-tab-pane" aria-selected="false" :disabled="!idSelec || generado">{{ translations[currentLocale].citas.ticket }}</button>
                   </li>
                 </ul>
-                <div class="tab-content" id="myTabContent">
+                <div class="tab-content bg-white" id="myTabContent">
                   <div class="tab-pane fade show active" id="crear-tab-pane" role="tabpanel" aria-labelledby="crear-tab" tabindex="0">
                     <label>{{ translations[currentLocale].citas.crear.fecha }}:</label>
                     <input type="date" class="w-100" v-model="dataTest" />
