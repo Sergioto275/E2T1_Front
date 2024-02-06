@@ -38,7 +38,7 @@ new Vue({
     fechaFil:"",
     currentLocale: 'es',
     translations: translations,
-    environment: 'http://localhost/Erronka2/Back/talde1erronka2',
+    environment: environment,
   },
   methods: {
     changeEnvironment(env) {

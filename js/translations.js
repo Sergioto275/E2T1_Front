@@ -1,4 +1,4 @@
-// translate.js
+// Testuak euskaraz eta gaztelaniaz
 const translations = {
   es: {
 
@@ -461,3 +461,5 @@ const translations = {
     },
   }
 };
+
+const environment = 'https://localhost/Erronka2/Back/talde1erronka2';

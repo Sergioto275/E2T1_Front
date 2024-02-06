@@ -20,7 +20,7 @@ const vue = new Vue({
         kanpoko_prezioaEditar:null,
         etxeko_prezioaCrear:null,
         etxeko_prezioaEditar:null,
-        environment: 'http://localhost/Erronka2/Back/talde1erronka2'
+        environment: environment
     },
     methods: {
         changeEnvironment(env){

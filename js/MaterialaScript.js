@@ -13,7 +13,7 @@ new Vue({
     nombreFil: "",
     currentLocale: 'es',
     translations: translations,
-    environment: 'https://localhost/Erronka2/Back/talde1erronka2',
+    environment: environment,
   },
   methods: {
     changeEnvironment(env) {

@@ -51,7 +51,7 @@ const vue = new Vue({
         currentLocale: 'es',
         translations: translations,
         error:false,
-        environment: 'http://localhost/Erronka2/Back/talde1erronka2'
+        environment: environment
     },
     methods: {
         limpiar_campos(){

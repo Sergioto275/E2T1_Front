@@ -23,7 +23,7 @@ new Vue({
       kategoriaFil:"first",
       currentLocale: 'es',
       translations: translations,
-      environment: 'https://localhost/Erronka2/Back/talde1erronka2',
+      environment: environment,
     },
     methods: {
       changeEnvironment(env){
@@ -316,5 +316,6 @@ new Vue({
     mounted() {
         // Konponentea sortzen denean taula kargatzeko
         this.cargaProduktu();
+        console.log(this.environment);
       }
   });
