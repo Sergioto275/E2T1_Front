@@ -127,7 +127,33 @@ const translations = {
         calendario: 'Calendario'
       },
       tareas: 'Tareas',
-      citas: 'Citas',
+      citas: 'Citasssss',
+      calendar: {
+        meses: {
+          enero:'Enero',
+          febrero:'Febrero',
+          marzo:'Marzo',
+          abril:'Abril',
+          mayo:'Mayo',
+          junio:'Junio',
+          julio:'Julio',
+          agosto:'Agosto',
+          septiembre:'Septiembre',
+          octubre:'Octubre',
+          noviembre:'Noviembre',
+          diciembre:'Diciembre'
+        },
+        dias: {
+          lunes:'Lunes',
+          martes:'Martes',
+          miercoles:'Miercoles',
+          jueves:'Jueves',
+          viernes:'Viernes',
+          sabado:'Sabado',
+          domingo:'Domingo' 
+        },
+        placeholder: "No hay citas"
+      }
     },
 
     citas: {
@@ -357,7 +383,33 @@ const translations = {
         calendario: 'Ordutegia'
       },
       tareas: 'Zereginak',
-      citas: 'Hitzorduak'
+      citas: 'Hitzorduak',
+      calendar: {
+        meses: {
+          enero:'Urtarrila',
+          febrero:'Otsaila',
+          marzo:'Martxoa',
+          abril:'Apirila',
+          mayo:'Maiatza',
+          junio:'Ekaina',
+          julio:'Ustaila',
+          agosto:'Abuztua',
+          septiembre:'Iraila',
+          octubre:'Urria',
+          noviembre:'Azaroa',
+          diciembre:'Abendua'
+        },
+        dias: {
+          lunes:'Astelehena',
+          martes:'Asteartea',
+          miercoles:'Asteazkena',
+          jueves:'Osteguna',
+          viernes:'Ostirala',
+          sabado:'Larunbata',
+          domingo:'Igandea' 
+        },
+        placeholder: "Ez dago hitzordurik"
+      }
     },
 
     citas: {
@@ -458,7 +510,7 @@ const translations = {
       grupo: 'Talde',
       trabajador: 'Langile',
       materialLibre: 'Material librea'
-    },
+    }
   }
 };
 
