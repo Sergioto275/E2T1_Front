@@ -32,7 +32,6 @@ const vue = new Vue({
                 }
                 const datuak = await response.json();
                 this.hitzorduArray = datuak
-                console.log(translations[this.currentLocale].menu.calendar.meses.enero)
                 this.calendar = new Calendar("calendarContainer", "small",
                             [ "Lunes", 3 ],
                             ["#c7c1c1", "#b6adad", "#ffffff", "#ffffff"],
@@ -44,10 +43,9 @@ const vue = new Vue({
                             });
                 this.organizer = new Organizer("organizerContainer", this.calendar, this.hitzorduArray);
             }catch(error){
-                console.log(translations[this.currentLocale].menu.citas);
+                console.log("Errorea: "+error);
             }
         }
-        
     },
     mounted() {
         this.cargarHitzordu();

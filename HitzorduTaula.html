@@ -11,18 +11,15 @@
     <link href="js/toastr/build/toastr.css" rel="stylesheet">
   <style>
     /* Aplicar opacidad del 100% a los mensajes emergentes de Toastr */
-    .toast {
-      opacity: 1 !important;
-    }
+
   </style>
 </head>
   </head>
-  <body style="background-color: #EFEFEF; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; " >
-    <!-- <script src="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.js"></script> -->
+  <body>
     <div id="app">
       <!--HEADER-->
       <header>
-        <ul class="nav nav-pills">
+        <ul class="nav nav-pills bg-brown-strong">
           <div class="nav rounded-end border-white border-4 sip">
             <li class="nav-item">
               <a class="nav-link text-white" aria-current="page" href="#">
@@ -54,7 +51,7 @@
           </div>
         </ul>
       </header>
-      <div class="text-center" style="margin:0%15%">
+      <div class="text-center m-0-15" >
         <div>
           <h1> {{ translations[currentLocale].citas.titulo }} </h1>
           <div>
@@ -65,11 +62,9 @@
               <input class="btn border-black mb-3" type="time" v-model="endHour" @change="getHoursInRange()" />
             </div>
             <div class="row">
-              <div class="col">
-                <div style="overflow:scroll;
-                height:500px;
-                width:500px;">
-                  <table style="height: 100%; width: 100%;">
+              <div class="col taula">
+                <div >
+                  <table class="h-100 w-100" >
                     <thead>
                       <tr>
                         <th>{{ translations[currentLocale].citas.hora }}</th>
@@ -80,9 +75,9 @@
                       <tr v-for="(time, index) in hoursArray">
                         <td>{{ time }}</td>
                           <template v-for="(eserlekua, esIndex) in eserlekuKop">
-                            <td :key="eserlekua.id" v-if="cita_sartuta(time,eserlekua.id)" :rowspan="rowspanManagement(time,eserlekua.id)" style="margin:1%">
+                            <td class="m-1" :key="eserlekua.id" v-if="cita_sartuta(time,eserlekua.id)" :rowspan="rowspanManagement(time,eserlekua.id)" >
                                 <template v-if="getCitasAtTimeAndSeat(time, eserlekua.id).length > 0">
-                                    <div v-for="cita in getCitasAtTimeAndSeat(time, eserlekua.id)" class="card" style="height: 100%; border:0">
+                                    <div v-for="cita in getCitasAtTimeAndSeat(time, eserlekua.id)" class="card h-100 border-0" v-bind:class="{ 'bg-grey-blue-light': cita.prezio_totala, 'bg-blue-green-light': cita.id_langilea && !cita.prezio_totala, 'bg-pink-light': !cita.id_langilea && !cita.prezio_totala }">
                                         <div class="card-body" @click="cargar_cita_selec(cita.id)" >
                                             <h5 class="card-title">{{ cita.izena }}</h5>
                                             <p class="card-text">{{ cita.deskribapena }}</p>
@@ -90,7 +85,7 @@
                                     </div>
                                 </template>
                                 <template v-else>
-                                    <button class="w-100" @click="seleccionar_citaCrear(eserlekua.id, time)" style="border:0;background-color:#5a5754">
+                                    <button class="w-100 border-0 bg-blue-brilliant" @click="seleccionar_citaCrear(eserlekua.id, time)" >
                                         <i class="bi bi-calendar2-plus"></i>
                                     </button>
                                 </template>
@@ -172,7 +167,7 @@
                         <option v-for="(langile) in langileArray" :value="langile.id" >{{langile.kodea}} - {{ langile.izena }}</option>
                     </select class="form-select" aria-label="Default select example">
                     <button type="button" class="btn bg-black text-white" @click="asignar_cita()" :disabled="!idSelec || generado"> {{ translations[currentLocale].default.guardar }} </button> 
-                    <table>
+                    <table v-if="langileArray.length > 0">
                       <tr>
                         <th>Langilea</th>
                         <th v-for="kategoria in tratamenduKategoriaTaula">{{ kategoria.izena }}</th>
@@ -201,7 +196,7 @@
                         </template>
                       </li>
                     </ul>
-                    <button type="button" class="btn bg-black text-white" :disabled="tratamenduSelec.length <= 0 || generado" @click="generar_ticket()"> {{ translations[currentLocale].default.guardar }} </button>
+                    <button type="button" class="btn bg-black text-white" :disabled="tratamenduSelec.length <= 0 || generado" @click="generar_ticket() || langile_asignado.includes("nadie")"> {{ translations[currentLocale].default.guardar }} </button>
                   </div>
                 </div>
               </div>

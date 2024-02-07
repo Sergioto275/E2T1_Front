@@ -119,6 +119,7 @@ const vue = new Vue({
                     "kolorea":color,
                     "extra":extra
                 }
+                console.log(JSON.stringify(json_data))
                 const response = await fetch(this.environment + '/public/api/kategoriaTratamendu',{
                     headers: {  
                         'Content-Type': 'application/json',

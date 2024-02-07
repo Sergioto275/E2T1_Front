@@ -96,7 +96,6 @@ const translations = {
       }
     },
     menu: {
-
       almacen: {
         titulo: 'Almacen',
         producto: {
@@ -127,7 +126,7 @@ const translations = {
         calendario: 'Calendario'
       },
       tareas: 'Tareas',
-      citas: 'Citasssss',
+      citas: 'Citas',
       calendar: {
         meses: {
           enero:'Enero',
@@ -514,4 +513,4 @@ const translations = {
   }
 };
 
-const environment = 'https://localhost/Erronka2/Back/talde1erronka2';
+const environment = 'http://localhost/Erronka2/Back/talde1erronka2';

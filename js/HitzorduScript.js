@@ -87,37 +87,6 @@ const vue = new Vue({
             const day = ('0' + eguneratze_data_primaria.getDate()).slice(-2);
             return (`${year}-${month}-${day}`);
           },
-          async citasDisponibles(){
-            if(!this.dataTest || !this.amaOrduaTest || !this.hasOrduaTest){
-                return 0;
-            }
-            try{
-                const json_data = {
-                    "data":this.dataTest,
-                    "hasiera_ordua":this.hasOrduaTest,
-                    "amaiera_ordua":this.amaOrduaTest
-                }
-                const response = await fetch(this.environment + '/public/api/hitzordu_eskuragarri',{
-                    headers: {  
-                        'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': '*'
-                    },
-                    method: "POST",
-                    body: JSON.stringify(json_data)
-                });
-                if(!response.ok){
-                    throw new Error('Errorea eskaera egiterakoan');
-                }
-                const datuak = await response.json();
-                if(datuak < 0){
-                    this.citasDisponible = ("No hay ordutegi asignado")
-                }else{
-                    this.citasDisponible = datuak;
-                }
-            }catch(error){
-                throw new Error("Error en carga de citas disponibles:"+error);
-            }
-          },
           cargar_cita_selec(id){
             cita = this.hitzorduArray.filter(citas => citas.id == id);
             this.idSelec = id;
@@ -164,6 +133,7 @@ const vue = new Vue({
                     "deskribapena":this.deskEditar,
                     "etxekoa":etxeko
                 }
+                console.log(JSON.stringify(json_data))
                 const response = await fetch(this.environment + '/public/api/hitzorduak',{
                     headers: {  
                         'Content-Type': 'application/json',
@@ -283,6 +253,7 @@ const vue = new Vue({
                     throw new Error('Errorea eskaera egiterakoan');
                 }
                 toastr.success('Ondo eguneratuta');
+                toastr.success('Precio a pagar'+prezio_totala);
                 this.tratamenduSelec.forEach(tratamendu => {
                     var tratamiento = this.tratamenduArray.filter(element => element.id == tratamendu.tratamendu_id);
                     var kategoria = this.tratamenduKategoria.filter(el => el.id == tratamiento[0].id_katTratamendu)
@@ -293,6 +264,7 @@ const vue = new Vue({
                         }else{
                             this.cargarHitzordu();
                         }
+                        return 0;
                     }
                 });
             }catch(error){
@@ -396,6 +368,7 @@ const vue = new Vue({
             getCitasAtTimeAndSeat(time, seatId) {
                 // Filtrar citas para obtener las citas en la hora y asiento específicos
                 const filteredCitas = this.hitzorduArray.filter(cita => (cita.hasiera_ordua <= time && cita.amaiera_ordua > time && cita.eserlekua === seatId));
+                // console.log(filteredCitas)
                 return filteredCitas;
             },
         async cargarHitzordu() {
@@ -482,6 +455,7 @@ const vue = new Vue({
                     "deskribapena":deskribapena,
                     "etxekoa":etxeko
                 }
+                console.log(JSON.stringify(json_data))
                 const response = await fetch(this.environment + '/public/api/hitzorduak',{
                     headers: {  
                         'Content-Type': 'application/json',
