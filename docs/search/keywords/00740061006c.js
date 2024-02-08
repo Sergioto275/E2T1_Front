@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("tal",["Class"],[["TaldeScript",,[[,,,,0,"File:TaldeScript.js:TaldeScript","JavaScriptClass:TaldeScript"]]]]);

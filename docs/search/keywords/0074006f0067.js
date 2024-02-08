@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("tog",["Function"],[["toggleDescription",,[["ProduktuakAteraScript",,,,0,"File:ProduktuakAteraScript.js:ProduktuakAteraScript.toggleDescription","JavaScriptClass:ProduktuakAteraScript:toggleDescription"]]]]);

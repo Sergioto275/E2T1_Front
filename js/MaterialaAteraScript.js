@@ -1,3 +1,5 @@
+// Class: MaterialaAteraScript
+// Materiala ateratzeko behar diren metodo guztiak batzen dituen script-a.
 new Vue({
   el: '#app',
   data: {
@@ -20,16 +22,29 @@ new Vue({
     searchTimeout: null,
   },
   methods: {
+    /* Function: modalAtera
+    Modala kargatzeko.
+    */
     modalAtera() {
       this.cargaTalde();
       $('#modalAtera').modal('show');
     },
+    /* Function: enCarrito
+    Material bat orgatxoan dagoen edo ez bueltatzen du.
+    Parameters:
+      material - Aukeratutako materiala.
+    */
     enCarrito(material) {
       return this.carrito.some(item => item.id === material.id);
     },
     changeEnvironment(env) {
       this.environment = env;
     },
+    /* Function: addCarrito
+    Material bat orgatxoan sartzeko.
+    Parameters:
+      material - Aukeratutako materiala.
+    */
     addCarrito(material) {
       const existingMaterial = this.carrito.find(item => item.id === material.id);
 
@@ -48,6 +63,11 @@ new Vue({
         // Puedes agregar aquí la lógica para mostrar una alerta si es necesario
       }
     },
+    /* Function: removeCarrito
+    Material bat orgatxotik kentzeko.
+    Parameters:
+      produktu - Aukeratutako materiala.
+    */
     removeCarrito(produktu) {
       const index = this.carrito.findIndex(item => item.id === produktu.id);
 
@@ -58,7 +78,9 @@ new Vue({
     limpiarCarrito() {
       this.carrito = []
     },
-    // Produktuak ateratzeko funtzioa
+    /* Function: ateraMaterial
+    Aukeratutako materiala ateratzeko.
+    */
     async ateraMaterial() {
       try {
         const requestData = {
@@ -98,7 +120,9 @@ new Vue({
         toastr.error(this.translations[this.currentLocale].default.error);
       }
     },
-    // Produktu guztiak taulan kargatu
+    /* Function: cargaMaterial
+    Material guztia kargatzeko taulan.
+    */
     async cargaMaterial() {
       try {
         const response = await fetch(this.environment + '/public/api/materialalibre', {
@@ -123,7 +147,9 @@ new Vue({
         console.error('Errorea:', error);
       }
     },
-    // Talde guztiak taulan kargatu
+    /* Function: cargaTalde
+    Talde guztiak kargatzeko taulan.
+    */
     async cargaTalde() {
       try {
         const response = await fetch(this.environment + '/public/api/taldeak', {
@@ -146,7 +172,9 @@ new Vue({
         console.error('Errorea: ', error);
       }
     },
-    // Langile guztiak taulan kargatu
+    /* Function: cargaLangile
+    Langile guztiak kargatzeko taulan.
+    */
     async cargaLangile() {
       try {
         const response = await fetch(this.environment + '/public/api/langileak', {
@@ -172,6 +200,9 @@ new Vue({
         console.error('Errorea:', error);
       }
     },
+    /* Function: filtroNombre
+    Izenaren arabera filtratzeko.
+    */
     async filtroNombre() {
       try {
         const response = await fetch(this.environment + '/public/api/materialalibre', {
@@ -201,7 +232,9 @@ new Vue({
         console.error('Errorea: ', error);
       }
     },
-    // Atzerapen pixka bat aplikatu filtroari
+    /* Function: callFiltro
+    Too many request errorea saiesteko timeout txikia filtroa deitzean.
+    */
     callFiltro() {
       // Borra el timeout anterior (si existe)
       if (this.searchTimeout) {
@@ -213,6 +246,11 @@ new Vue({
         this.filtroNombre();
       }, 500);
     },
+    /* Function: changeLanguage
+    Hizkuntza aldatzeko.
+    Parameters:
+      locale - Hizkuntza.
+    */
     changeLanguage(locale) {
       console.log('Cambiando a:', locale);
       this.currentLocale = locale;

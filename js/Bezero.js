@@ -1,9 +1,5 @@
-/**
- * Clase principal de la aplicación Vue.
- *
- * @class
- * @name Bezero
- */
+// Class: Bezero
+// Bezeroa-ren metodo guztiak batzen dituen script-a.
 new Vue({
   el: '#app',
   data: {
@@ -47,22 +43,12 @@ new Vue({
     environment: environment,
   },
   methods: {
-    /**
-     * Cambia el entorno de la aplicación.
-     *
-     * @param {string} env - Nuevo entorno.
-     */
     changeEnvironment(env) {
       this.environment = env;
     },
-    // Langilea guztiak taulan kargatu
-    /**
-     * Carga la lista de clientes desde el servidor.
-     *
-     * @async
-     * @function
-     * @throws {Error} Se lanza un error si hay un problema en la solicitud al servidor.
-     */
+    /* Function: cargaBezeroa
+    Langilea guztiak taulan kargatzen ditu.
+    */
     async cargaBezeroa() {
       console.log("Hello")
       try {
@@ -89,6 +75,11 @@ new Vue({
         console.error('Errorea:', error);
       }
     },
+    /* Function: cargaFitxa
+    Bezeroaren fitxa kargatzen du.
+    Parameters:
+    bezero - Bezero objektu bat.
+    */
     async cargaFitxa(bezero) {
       try {
         this.bezeroSeleccionado = bezero;
@@ -129,10 +120,6 @@ new Vue({
       this.abizenaCrear = "";
       this.telefonoCrear = "";
       this.pielCrear = "";
-
-
-      // this.cargarComboBox();
-
     },
     async crearDatosModal() {
       try {
@@ -182,6 +169,9 @@ new Vue({
         console.log('Errorea: ', error);
       }
     },
+    /* Function: cargarDatosModal
+    Modalean datuak kargatzeko.
+    */
     async cargarDatosModal() {
       try {
         const response = await fetch(this.environment + '/public/api/bezero/' + this.arrayId[0], {
@@ -210,6 +200,9 @@ new Vue({
         console.error('Errorea: ', error);
       }
     },
+    /* Function: actuDatosModal
+    Eguneratzeko modalean datuak kargatzeko.
+    */
     async actuDatosModal() {
       try {
         const id = this.arrayId[0];
@@ -257,6 +250,9 @@ new Vue({
         console.log('Errorea: ', error);
       }
     },
+    /* Function: createDatosModal
+    Sortzeko modalean datuak kargatzeko.
+    */
     async createDatosModal() {
       try {
         const izena = this.izenaCrear;
@@ -294,7 +290,11 @@ new Vue({
       } catch (error) {
         console.log('Errorea: ', error);
       }
-    }, async borrar() {
+    }, 
+    /* Function: borrar
+    Ezabatzeko logika duen funtzioa.
+    */
+    async borrar() {
       let ondo = false;
       try {
         for (var i = 0; i < this.arrayId.length; i++) {
@@ -330,6 +330,9 @@ new Vue({
 
       this.arrayId = [];
     },
+    /* Function: filtroNombre
+    Izenaren arabera filtratzeko funtzioa.
+    */
     async filtroNombre() {
       console.log(this.filtrNom)
       try {
@@ -360,6 +363,9 @@ new Vue({
         console.error('Errorea: ', error);
       }
     },
+    /* Function: callFiltro
+    Filtroari timeout txiki bat sartzen dion metodo. Too many request errorea saiesteko eginda da.
+    */
     callFiltro() {
       // Borra el timeout anterior (si existe)
       if (this.searchTimeout) {
@@ -415,6 +421,9 @@ new Vue({
         console.log('Errorea: ', error);
       }
     },
+    /* Function: gestionarCombobox
+    Combobox-a kudeatzeko metodoa.
+    */
     async gestionarCombobox() {
       try {
 
@@ -463,6 +472,9 @@ new Vue({
         console.log('Errorea: ', error);
       }
     },
+    /* Function: filtrarComboTintes
+    Tinteen comboboxa filtratzeko.
+    */
     async filtrarComboTintes() {
       try {
 
@@ -488,6 +500,9 @@ new Vue({
         console.log('Errorea: ', error);
       }
     },
+    /* Function: filtrarComboTintesActu
+    Eguneratzeko tinteen comboboxa filtratzeko.
+    */
     async filtrarComboTintesActu() {
       try {
 
@@ -572,6 +587,11 @@ new Vue({
         console.log('Errorea: ', error);
       }
     },
+    /* Function: formatDateToYYYYMMDD
+    Datei formatua emateko.
+    Parameters:
+      date - Formateatu nahi den data.
+    */    
     formatDateToYYYYMMDD(date) {
       const year = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -624,8 +644,6 @@ new Vue({
           "bolumena": bolumena,
           "oharrak": oharrak,
         };
-
-
 
         console.log(JSON.stringify(jsonEditatu))
         const response = await fetch(this.environment + '/public/api/kolore', {
@@ -691,7 +709,6 @@ new Vue({
       this.arrayId2 = [];
     },
     async filtroFecha() {
-      console.log("holaaaaaaaaaaaaaaaa")
       try {
         const response = await fetch(this.environment + '/public/api/kolore', {
           headers: {
@@ -731,6 +748,9 @@ new Vue({
           this.filtroFecha();
         }, 500);
       },
+    /* Function: filtrarPorTintes
+    Tinteen arabera filtratzeko.
+    */ 
       async filtrarPorTintes() {
         try {
   
@@ -754,14 +774,15 @@ new Vue({
             this.listaKolore = datuak
             .filter(tinte => tinte.id_bezeroa == this.bezeroSeleccionado[0].id && tinte.ezabatze_data === null || tinte.id_bezeroa == this.bezeroSeleccionado[0].id && tinte.ezabatze_data === "0000-00-00 00:00:00");
           }
-         
-  
-  
-  
         } catch (error) {
           console.log('Errorea: ', error);
         }
       },
+    /* Function: changeLanguage
+    Hizkuntza aldatzeko.
+    Parameters:
+      locale - Hizkuntza.
+    */ 
       changeLanguage(locale) {
         console.log('Cambiando a:', locale);
         this.currentLocale = locale;

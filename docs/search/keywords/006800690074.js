@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("hit",["Class"],[["HitzorduScript",,[[,,,,0,"File:HitzorduScript.js:HitzorduScript","JavaScriptClass:HitzorduScript"]]]]);

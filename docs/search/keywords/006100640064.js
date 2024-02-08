@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("add",["Function"],[["addCarrito",,[["MaterialaAteraScript",,,,0,"File:MaterialaAteraScript.js:MaterialaAteraScript.addCarrito","JavaScriptClass:MaterialaAteraScript:addCarrito"],["ProduktuakAteraScript",,,,0,"File:ProduktuakAteraScript.js:ProduktuakAteraScript.addCarrito","JavaScriptClass:ProduktuakAteraScript:addCarrito"]]]]);

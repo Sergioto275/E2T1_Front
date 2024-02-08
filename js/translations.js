@@ -1,3 +1,5 @@
+// Class: translations
+// Web aplikazioan agertzen diren testu guztiak gaztelaniaz eta euskaraz, baita erabiltzen ari den host helbidea.
 // Testuak euskaraz eta gaztelaniaz
 const translations = {
   es: {
@@ -512,5 +514,5 @@ const translations = {
     }
   }
 };
-
+// Host helbidea
 const environment = 'http://localhost/Erronka2/Back/talde1erronka2';

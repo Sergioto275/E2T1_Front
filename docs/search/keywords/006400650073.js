@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("des",["Function"],[["deskribapenaZatitu",,[["ProduktuakAteraScript",,,,0,"File:ProduktuakAteraScript.js:ProduktuakAteraScript.deskribapenaZatitu","JavaScriptClass:ProduktuakAteraScript:deskribapenaZatitu"]]]]);

@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("sho",["Function"],[["showFullDescription",,[["ProduktuakAteraScript",,,,0,"File:ProduktuakAteraScript.js:ProduktuakAteraScript.showFullDescription","JavaScriptClass:ProduktuakAteraScript:showFullDescription"]]]]);

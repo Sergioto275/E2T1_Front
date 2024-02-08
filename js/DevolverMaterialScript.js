@@ -1,3 +1,5 @@
+// Class: DevolverMaterialScript
+// Materiala bueltatzearen metodo guztiak batzen dituen script-a.
 new Vue({
     el: '#app',
     data: {
@@ -36,7 +38,9 @@ new Vue({
       changeEnvironment(env){
         this.environment = env;
       },
-      // Langilea guztiak taulan kargatu
+    /* Function: cargaLangile
+    Langile guztiak kargatzeko.
+    */ 
       async cargaLangile() {
         console.log("Hello")
         try {
@@ -64,6 +68,9 @@ new Vue({
         console.error('Errorea:', error);
       }
     },
+    /* Function: cargarDatosSinEntregar
+    Entregatu ez diren materialak kargatzeko.
+    */ 
     async cargarDatosSinEntregar() {
       console.log("Hello")
       try {
@@ -91,7 +98,9 @@ new Vue({
       console.error('Errorea:', error);
     }
   },
-    //Editatzeko modalean aukeratutako langilearen datuak kargatzeko
+    /* Function: cargarDatosModal
+    Editatzeko modalean datuak kargatzeko.
+    */ 
     async cargarDatosModal() {
       try {
         const response = await fetch(this.environment + '/public/api/devolver/' + this.arrayId[0], {
@@ -120,7 +129,9 @@ new Vue({
         console.error('Errorea: ', error);
       }
     },
-    // Langilearen datuak eguneratzeko
+    /* Function: actuDatosModal
+    Materiala eguneratzeko metodoa.
+    */ 
     async actuDatosModal() {
       try {
         const id = this.arrayId[0];
@@ -157,6 +168,9 @@ new Vue({
         console.log('Errorea: ', error);
       }
     },
+    /* Function: devolver
+    Materiala bueltatzeko metodoa.
+    */ 
     async devolver() {
       for (let index = 0; index < this.arrayId.length; index++) {
         try {
@@ -203,6 +217,9 @@ new Vue({
       this.cargarComboBox();
 
     },
+    /* Function: cargarComboBox
+    Combobox-a kargatzeko metodoa.
+    */ 
     async cargarComboBox() {
       try {
         const response = await fetch(this.environment + '/public/api/langileak', {
@@ -246,6 +263,9 @@ new Vue({
         console.error('Errorea: ', error);
       }
     },
+    /* Function: filtroFecha
+    Dataren arabera filtratzeko.
+    */ 
     async filtroFecha() {
       try {
         const response = await fetch(this.environment + '/public/api/devolver', {
@@ -290,6 +310,9 @@ new Vue({
         console.error('Errorea: ', error);
       }
     },
+    /* Function: fitroMaterial
+    Materialaren arabera filtratzeko.
+    */ 
     async fitroMaterial() {
       console.log(this.fechaFil)
       try {
@@ -335,11 +358,21 @@ new Vue({
         console.error('Errorea: ', error);
       }
     },
+    /* Function: convertirFecha
+    Data formateatzeko metodoa.
+    Parameters:
+      fecha - Data.
+    */ 
       convertirFecha(fecha) {
         const partes = fecha.split('/');
         const fechaConvertida = partes[2] + '-' + partes[1] + '-' + partes[0] + ' 00:00:00';
         return fechaConvertida;
       },
+    /* Function: changeLanguage
+    Hizkuntza aldatzeko.
+    Parameters:
+      locale - Hizkuntza.
+    */ 
       changeLanguage(locale) {
         console.log('Cambiando a:', locale);
         this.currentLocale = locale;

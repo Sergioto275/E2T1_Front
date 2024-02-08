@@ -1,47 +1,51 @@
+// Class: LangileScript
+// Langileak kudeatzen dituen metodo guztiak batzen dituen script-a.
 new Vue({
-    el: '#app',
-    data: {
-      selectedCheckbox: null, // Esta variable almacenará la ID del checkbox seleccionado
-      arrayId :[],
-      izenaActu:"",
-      abizenaActu:"",
-      kodeaActu:"",
-      izenaCrear:"",
-      abizenaCrear:"",
-      kodeaCrear:"",
-      listaLangile:[],
-      listaTalde:[],
-      listaLangileById:[],
-      existe: null,
-      nombreFil:"",
-      grupoFil:"",
-      currentLocale: 'es',
-      translations: translations,
-      environment: environment,
+  el: '#app',
+  data: {
+    selectedCheckbox: null, // Esta variable almacenará la ID del checkbox seleccionado
+    arrayId: [],
+    izenaActu: "",
+    abizenaActu: "",
+    kodeaActu: "",
+    izenaCrear: "",
+    abizenaCrear: "",
+    kodeaCrear: "",
+    listaLangile: [],
+    listaTalde: [],
+    listaLangileById: [],
+    existe: null,
+    nombreFil: "",
+    grupoFil: "",
+    currentLocale: 'es',
+    translations: translations,
+    environment: environment,
+  },
+  computed: {
+    listaFiltradaPorNombre() {
+      return this.listaLangile.filter(langile => {
+        return langile.izena.toLowerCase().includes(this.nombreFil.toLowerCase()) &&
+          (langile.ezabatze_data === null || langile.ezabatze_data === "0000-00-00 00:00:00");
+      });
+    }
+  },
+  methods: {
+    changeEnvironment(env) {
+      this.environment = env;
     },
-    computed: {
-      listaFiltradaPorNombre() {
-        return this.listaLangile.filter(langile => {
-          return langile.izena.toLowerCase().includes(this.nombreFil.toLowerCase()) &&
-                 (langile.ezabatze_data === null || langile.ezabatze_data === "0000-00-00 00:00:00");
+    /* Function: cargaLangile
+    Langile guztiak kargatzeko.
+    */
+    async cargaLangile() {
+      console.log("Hello")
+      try {
+        const response = await fetch(this.environment + '/public/api/langileak', {
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
         });
-      }
-    },
-    methods: {
-      changeEnvironment(env){
-        this.environment = env;
-      },
-      // Langilea guztiak taulan kargatu
-      async cargaLangile() {
-        console.log("Hello")
-        try {
-          const response = await fetch(this.environment + '/public/api/langileak', {
-            mode: 'cors',
-            headers: {  
-              'Content-Type': 'application/json',
-              'Access-Control-Allow-Origin': '*',
-            },
-          });
 
         if (!response.ok) {
           console.log('Errorea eskera egiterakoan');
@@ -59,7 +63,9 @@ new Vue({
         console.error('Errorea:', error);
       }
     },
-    //Editatzeko modalean aukeratutako langilearen datuak kargatzeko
+    /* Function: cargarDatosModal
+    Editatzeko modalean datu guztiak kargatzeko.
+    */
     async cargarDatosModal() {
       try {
         const response = await fetch(this.environment + '/public/api/langileak/' + this.arrayId[0], {
@@ -89,7 +95,9 @@ new Vue({
         console.error('Errorea: ', error);
       }
     },
-    // Langilearen datuak eguneratzeko
+    /* Function: actuDatosModal
+    Langile zehatz baten datuak eguneratzeko.
+    */
     async actuDatosModal() {
       try {
         const id = this.arrayId[0];
@@ -128,7 +136,9 @@ new Vue({
         console.log('Errorea: ', error);
       }
     },
-    // Langile berri bat sortzeko
+    /* Function: createDatosModal
+    Langile berri bat sortzeko.
+    */
     async createDatosModal() {
       try {
         const izena = this.izenaCrear;
@@ -167,7 +177,9 @@ new Vue({
         console.log('Errorea: ', error);
       }
     },
-    // Langileak ezabatzeko
+    /* Function: borrar
+    Langileak ezabatzeko.
+    */
     async borrar() {
       let ondo = false;
       try {
@@ -213,6 +225,9 @@ new Vue({
       this.cargarComboBox();
 
     },
+    /* Function: cargarComboBox
+    Comboboxa kargatzeko.
+    */
     async cargarComboBox() {
       try {
         const response = await fetch(this.environment + '/public/api/taldeak', {
@@ -235,6 +250,9 @@ new Vue({
         console.error('Errorea: ', error);
       }
     },
+    /* Function: filtroNombre
+    Filtroa izenaren arabera.
+    */
     async filtroNombre() {
       console.log("hola")
       try {
@@ -265,6 +283,9 @@ new Vue({
         console.error('Errorea: ', error);
       }
     },
+    /* Function: filtroGrupo
+    Taldearen arabera filtratzeko.
+    */
     async filtroGrupo() {
       console.log("hola")
       try {
@@ -292,17 +313,22 @@ new Vue({
 
         }
 
-        } catch (error){
-          console.error('Errorea: ', error);
-        }
-      },
-      changeLanguage(locale) {
-        console.log('Cambiando a:', locale);
-        this.currentLocale = locale;
+      } catch (error) {
+        console.error('Errorea: ', error);
       }
     },
-    mounted() {
-        // Konponentea sortzen denean taula kargatzeko
-        this.cargaLangile();
-      }
-  });
+    /* Function: changeLanguage
+    Hizkuntza aldatzeko.
+    Parameters:
+      locale - Hizkuntza
+    */
+    changeLanguage(locale) {
+      console.log('Cambiando a:', locale);
+      this.currentLocale = locale;
+    }
+  },
+  mounted() {
+    // Konponentea sortzen denean taula kargatzeko
+    this.cargaLangile();
+  }
+});

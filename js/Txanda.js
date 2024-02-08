@@ -1,3 +1,5 @@
+// Class: Txanda
+// Txanda kudeatzen duen metodo guztiak batzen dituen script-a.
 new Vue({
     el: '#app',
     data: {
@@ -26,11 +28,18 @@ new Vue({
         changeEnvironment(env) {
             this.environment = env;
         },
+        /* Function: changeLanguage
+        Hizkuntza aldatzeko.
+        Parameters:
+            locale - Hizkuntza.
+        */
         changeLanguage(locale) {
             console.log('Cambiando a:', locale);
             this.currentLocale = locale;
         },
-        // Langilea guztiak taulan kargatu
+        /* Function: cargaTxanda
+        Txanda guztiak kargatzeko.
+        */
         async cargaTxanda() {
             this.listaTxanda = [];
             try {
@@ -108,7 +117,9 @@ new Vue({
                 console.error('Errorea:', error);
             }
         },
-        //Editatzeko modalean aukeratutako langilearen datuak kargatzeko
+        /* Function: cargarDatosModal
+        Editatu nahi den txanda kargatzeko modalean.
+        */
         async cargarDatosModal() {
             try {
                 const response = await fetch(this.environment + '/public/api/txanda/' + this.arrayId[0], {
@@ -137,7 +148,9 @@ new Vue({
                 console.error('Errorea: ', error);
             }
         },
-        // Langilearen datuak eguneratzeko
+        /* Function: actuDatosModal
+        Txanda eguneratzeko.
+        */
         async actuDatosModal() {
             try {
                 const id = this.arrayId[0];
@@ -184,7 +197,9 @@ new Vue({
                 console.log('Errorea: ', error);
             }
         },
-        // Langile berri bat sortzeko
+        /* Function: createDatosModal
+        Txanda berria sortzeko.
+        */
         async createDatosModal() {
             try {
                 const izena = this.izenaCrear;
@@ -236,6 +251,9 @@ new Vue({
             this.abizenaCrear = "";
             this.kodeaCrear = "";
         },
+        /* Function: cargarComboBox
+        Comboboxa kargatzeko.
+        */
         async cargarComboBox() {
             try {
               const response = await fetch(this.environment + '/public/api/taldeak', {
@@ -298,7 +316,6 @@ new Vue({
             }
           },
           async filtroFecha() {
-            console.log("MATAME")
             this.listaTxanda = [];
             try {
                 const response = await fetch(this.environment + '/public/api/txanda', {

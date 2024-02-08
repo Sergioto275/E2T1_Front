@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("eli",["Function"],[["eliminar_cita",,[["HitzorduScript",,,,0,"File:HitzorduScript.js:HitzorduScript.eliminar_cita","JavaScriptClass:HitzorduScript:eliminar_cita"]]]]);

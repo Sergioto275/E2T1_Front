@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("del",["Function"],[["deleteKategoria",,[["TratamenduakScript",,,,0,"File:TratamenduakScript.js:TratamenduakScript.deleteKategoria","JavaScriptClass:TratamenduakScript:deleteKategoria"]]]]);

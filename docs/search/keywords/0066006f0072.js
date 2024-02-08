@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("for",["Function"],[["formatDateToYYYYMMDD",,[["Bezero",,,,0,"File:Bezero.js:Bezero.formatDateToYYYYMMDD","JavaScriptClass:Bezero:formatDateToYYYYMMDD"]]]]);

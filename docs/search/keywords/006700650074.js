@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("get",["Function"],[["getCitasAtTimeAndSeat",,[["HitzorduScript",,,,0,"File:HitzorduScript.js:HitzorduScript.getCitasAtTimeAndSeat","JavaScriptClass:HitzorduScript:getCitasAtTimeAndSeat"]]]]);

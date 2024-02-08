@@ -1,0 +1,1 @@
+﻿NDSummary.OnToolTipsLoaded("JavaScriptClass:translations",{6:"<div class=\"NDToolTip TClass LJavaScript\"><div class=\"TTSummary\">Web aplikazioan agertzen diren testu guztiak gaztelaniaz eta euskaraz, baita erabiltzen ari den host helbidea.&nbsp; Testuak euskaraz eta gaztelaniaz</div></div>"});

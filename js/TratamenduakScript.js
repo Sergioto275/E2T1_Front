@@ -1,3 +1,5 @@
+// Class: TratamenduakScript
+// Tratamenduak kudeatzen duen metodo guztiak batzen dituen script-a.
 const vue = new Vue({
     el: "#app",
     data: {
@@ -5,50 +7,63 @@ const vue = new Vue({
         tratamenduKategoria: [],
         tratKategoriaIdCrear: null,
         tratKategoriaIdEditar: null,
-        kategoriaIzenaEditar:null,
-        kategoriaColorEditar:null,
-        kategoriaExtraEditar:null,
-        kategoriaIzenaCrear:null,
-        kategoriaColorCrear:null,
-        kategoriaExtraCrear:null,
+        kategoriaIzenaEditar: null,
+        kategoriaColorEditar: null,
+        kategoriaExtraEditar: null,
+        kategoriaIzenaCrear: null,
+        kategoriaColorCrear: null,
+        kategoriaExtraCrear: null,
         currentLocale: 'es',
         translations: translations,
-        idSelec:null,
-        izenaCrear:null,
-        izenaEditar:null,
-        kanpoko_prezioaCrear:null,
-        kanpoko_prezioaEditar:null,
-        etxeko_prezioaCrear:null,
-        etxeko_prezioaEditar:null,
+        idSelec: null,
+        izenaCrear: null,
+        izenaEditar: null,
+        kanpoko_prezioaCrear: null,
+        kanpoko_prezioaEditar: null,
+        etxeko_prezioaCrear: null,
+        etxeko_prezioaEditar: null,
         environment: environment
     },
     methods: {
-        changeEnvironment(env){
+        changeEnvironment(env) {
             this.environment = env;
-          },
-          changeLanguage(locale) {
+        },
+        /* Function: changeLanguage
+        Hizkuntza aldatzeko.
+        Parameters:
+            locale - Hizkuntza.
+        */
+        changeLanguage(locale) {
             console.log('Cambiando a:', locale);
             this.currentLocale = locale;
-          },
-          async cargarTratamenduak() {
-            try{
-                const response = await fetch(this.environment + '/public/api/tratamenduak',{
-                    headers: {  
+        },
+        /* Function: cargarTratamenduak
+        Tratamendu guztiak kargatzeko.
+        */
+        async cargarTratamenduak() {
+            try {
+                const response = await fetch(this.environment + '/public/api/tratamenduak', {
+                    headers: {
                         'Content-Type': 'application/json',
                         'Access-Control-Allow-Origin': '*'
                     },
                     method: "GET"
                 });
-                if(!response.ok){
+                if (!response.ok) {
                     throw new Error('Errorea eskaera egiterakoan');
                 }
                 const datuak = await response.json();
                 this.tratamenduArray = datuak.filter(tratamendua => tratamendua.ezabatze_data === null || tratamendua.ezabatze_data === '0000-00-00 00:00:00');
-            }catch(error){
-                console.log("Errorea: "+error);
+            } catch (error) {
+                console.log("Errorea: " + error);
             }
         },
-        cargar_datos(id){
+        /* Function: cargar_datos
+        IDaren arabera tratamenduak kargatzeko.
+        Parameters:
+            id - Tratamenduaren IDa
+        */
+        cargar_datos(id) {
             const tratamendu = this.tratamenduArray.filter(tratamendu => tratamendu.id == id)
             this.idSelec = id;
             this.izenaEditar = tratamendu[0].izena;
@@ -56,37 +71,43 @@ const vue = new Vue({
             this.kanpoko_prezioaEditar = tratamendu[0].kanpoko_prezioa;
             this.tratKategoriaIdEditar = tratamendu[0].id_katTratamendu;
         },
-        cargar_datos_kategoria(){
+        /* Function: cargar_datos_kategoria
+        Tratamenduen kategoriak kargatzeko.
+        */
+        cargar_datos_kategoria() {
             const kategoria = this.tratamenduKategoria.filter(kategoria => kategoria.id == this.tratKategoriaIdEditar)
             this.kategoriaIzenaEditar = kategoria[0].izena;
-            if(kategoria[0].kolorea == 's'){
+            if (kategoria[0].kolorea == 's') {
                 this.kategoriaColorEditar = true;
-            }else{
+            } else {
                 this.kategoriaColorEditar = false;
             }
-            if(kategoria[0].extra == 's'){
+            if (kategoria[0].extra == 's') {
                 this.kategoriaExtraEditar = true;
-            }else{
+            } else {
                 this.kategoriaExtraEditar = false;
             }
         },
-        async createTratamendu(){
-            try{ 
+        /* Function: createTratamendu
+        Tratamendu berria sortzeko.
+        */
+        async createTratamendu() {
+            try {
                 const json_data = {
-                    "izena":this.izenaCrear,
-                    "etxeko_prezioa":this.etxeko_prezioaCrear,
-                    "kanpoko_prezioa":this.kanpoko_prezioaCrear,
-                    "id_katTratamendu":this.tratKategoriaIdEditar
+                    "izena": this.izenaCrear,
+                    "etxeko_prezioa": this.etxeko_prezioaCrear,
+                    "kanpoko_prezioa": this.kanpoko_prezioaCrear,
+                    "id_katTratamendu": this.tratKategoriaIdEditar
                 }
-                const response = await fetch(this.environment + '/public/api/tratamenduak',{
-                    headers: {  
+                const response = await fetch(this.environment + '/public/api/tratamenduak', {
+                    headers: {
                         'Content-Type': 'application/json',
                         'Access-Control-Allow-Origin': '*'
                     },
                     method: "POST",
                     body: JSON.stringify(json_data)
                 });
-                if(!response.ok){
+                if (!response.ok) {
                     throw new Error('Errorea eskaera egiterakoan');
                 }
                 alert('Ondo eguneratuta');
@@ -96,39 +117,42 @@ const vue = new Vue({
                 const modalCrearElement = document.getElementById('exampleModalCrear');
                 const modalInst = bootstrap.Modal.getInstance(modalCrearElement);
                 modalInst.hide();
-            }catch(error){
-                throw new Error("Error en carga de citas disponibles:"+error);
+            } catch (error) {
+                throw new Error("Error en carga de citas disponibles:" + error);
             }
         },
-        async createKategoria(){
+        /* Function: createKategoria
+        Tratamendu kategoria berria sortzeko.
+        */
+        async createKategoria() {
             var color;
             var extra;
-            if(this.kategoriaColorCrear){
+            if (this.kategoriaColorCrear) {
                 color = "s";
-            }else{
+            } else {
                 color = "n";
             }
-            if(this.kategoriaExtraCrear){
+            if (this.kategoriaExtraCrear) {
                 extra = "s";
-            }else{
+            } else {
                 extra = "n";
             }
-            try{ 
+            try {
                 const json_data = {
-                    "izena":this.kategoriaIzenaCrear,
-                    "kolorea":color,
-                    "extra":extra
+                    "izena": this.kategoriaIzenaCrear,
+                    "kolorea": color,
+                    "extra": extra
                 }
                 console.log(JSON.stringify(json_data))
-                const response = await fetch(this.environment + '/public/api/kategoriaTratamendu',{
-                    headers: {  
+                const response = await fetch(this.environment + '/public/api/kategoriaTratamendu', {
+                    headers: {
                         'Content-Type': 'application/json',
                         'Access-Control-Allow-Origin': '*'
                     },
                     method: "POST",
                     body: JSON.stringify(json_data)
                 });
-                if(!response.ok){
+                if (!response.ok) {
                     throw new Error('Errorea eskaera egiterakoan');
                 }
                 alert('Ondo eguneratuta');
@@ -139,28 +163,31 @@ const vue = new Vue({
                 const modalCrearElement = document.getElementById('exampleModalAñadirKategoria');
                 const modalInst = bootstrap.Modal.getInstance(modalCrearElement);
                 modalInst.hide();
-            }catch(error){
-                throw new Error("Error en carga de citas disponibles:"+error);
+            } catch (error) {
+                throw new Error("Error en carga de citas disponibles:" + error);
             }
         },
-        async editarTratamendu(){
-            try{ 
+        /* Function: editarTratamendu
+        Nahi den tratamendua editatzeko.
+        */
+        async editarTratamendu() {
+            try {
                 const json_data = {
-                    "id":this.idSelec,
-                    "izena":this.izenaEditar,
-                    "etxeko_prezioa":this.etxeko_prezioaEditar,
-                    "kanpoko_prezioa":this.kanpoko_prezioaEditar,
-                    "id_katTratamendu":this.tratKategoriaIdEditar
+                    "id": this.idSelec,
+                    "izena": this.izenaEditar,
+                    "etxeko_prezioa": this.etxeko_prezioaEditar,
+                    "kanpoko_prezioa": this.kanpoko_prezioaEditar,
+                    "id_katTratamendu": this.tratKategoriaIdEditar
                 }
-                const response = await fetch(this.environment + '/public/api/tratamenduak',{
-                    headers: {  
+                const response = await fetch(this.environment + '/public/api/tratamenduak', {
+                    headers: {
                         'Content-Type': 'application/json',
                         'Access-Control-Allow-Origin': '*'
                     },
                     method: "PUT",
                     body: JSON.stringify(json_data)
                 });
-                if(!response.ok){
+                if (!response.ok) {
                     throw new Error('Errorea eskaera egiterakoan');
                 }
                 alert('Ondo eguneratuta');
@@ -170,40 +197,43 @@ const vue = new Vue({
                 const modalEditarElement = document.getElementById('exampleModalEditar');
                 const modalInst = bootstrap.Modal.getInstance(modalEditarElement);
                 modalInst.hide();
-            }catch(error){
-                throw new Error("Error en carga de citas disponibles:"+error);
+            } catch (error) {
+                throw new Error("Error en carga de citas disponibles:" + error);
             }
         },
-        async editarKategoria(){
+        /* Function: editarKategoria
+        Nahi den tratamendu kategoria editatzeko.
+        */
+        async editarKategoria() {
             var color;
             var extra;
-            if(this.kategoriaColorEditar){
+            if (this.kategoriaColorEditar) {
                 color = "s";
-            }else{
+            } else {
                 color = "n";
             }
-            if(this.kategoriaExtraEditar){
+            if (this.kategoriaExtraEditar) {
                 extra = "s";
-            }else{
+            } else {
                 extra = "n";
             }
-            try{ 
+            try {
                 const json_data = {
-                    "id":this.tratKategoriaIdEditar,
-                    "izena":this.kategoriaIzenaEditar,
-                    "kolorea":color,
-                    "extra":extra
+                    "id": this.tratKategoriaIdEditar,
+                    "izena": this.kategoriaIzenaEditar,
+                    "kolorea": color,
+                    "extra": extra
                 }
                 console.log(JSON.stringify(json_data))
-                const response = await fetch(this.environment + '/public/api/kategoriaTratamendu',{
-                    headers: {  
+                const response = await fetch(this.environment + '/public/api/kategoriaTratamendu', {
+                    headers: {
                         'Content-Type': 'application/json',
                         'Access-Control-Allow-Origin': '*'
                     },
                     method: "PUT",
                     body: JSON.stringify(json_data)
                 });
-                if(!response.ok){
+                if (!response.ok) {
                     throw new Error('Errorea eskaera egiterakoan');
                 }
                 alert('Ondo eguneratuta');
@@ -214,24 +244,27 @@ const vue = new Vue({
                 const modalCrearElement = document.getElementById('exampleModalEditarKategoria');
                 const modalInst = bootstrap.Modal.getInstance(modalCrearElement);
                 modalInst.hide();
-            }catch(error){
-                throw new Error("Error en carga de citas disponibles:"+error);
+            } catch (error) {
+                throw new Error("Error en carga de citas disponibles:" + error);
             }
         },
-        async deleteKategoria(){
-            try{ 
+        /* Function: deleteKategoria
+        Nahi den tratamendu kategoria ezabatzeko.
+        */
+        async deleteKategoria() {
+            try {
                 const json_data = {
-                    "id":this.tratKategoriaIdEditar
+                    "id": this.tratKategoriaIdEditar
                 }
-                const response = await fetch(this.environment + '/public/api/kategoriaTratamendu',{
-                    headers: {  
+                const response = await fetch(this.environment + '/public/api/kategoriaTratamendu', {
+                    headers: {
                         'Content-Type': 'application/json',
                         'Access-Control-Allow-Origin': '*'
                     },
                     method: "DELETE",
                     body: JSON.stringify(json_data)
                 });
-                if(!response.ok){
+                if (!response.ok) {
                     throw new Error('Errorea eskaera egiterakoan');
                 }
                 alert('Ondo eguneratuta');
@@ -242,43 +275,49 @@ const vue = new Vue({
                 const modalCrearElement = document.getElementById('exampleModalEditarKategoria');
                 const modalInst = bootstrap.Modal.getInstance(modalCrearElement);
                 modalInst.hide();
-            }catch(error){
-                throw new Error("Error en carga de citas disponibles:"+error);
+            } catch (error) {
+                throw new Error("Error en carga de citas disponibles:" + error);
             }
         },
-        async cargarCategorias(){
-            this.tratamenduKategoria=[];
-            try{
-                const response = await fetch(this.environment + '/public/api/kategoriaTratamendu',{
-                    headers: {  
+        /* Function: cargarCategorias
+        Tratamendu kategoriak kargatzeko.
+        */
+        async cargarCategorias() {
+            this.tratamenduKategoria = [];
+            try {
+                const response = await fetch(this.environment + '/public/api/kategoriaTratamendu', {
+                    headers: {
                         'Content-Type': 'application/json',
                         'Access-Control-Allow-Origin': '*'
                     },
                     method: "GET"
                 });
-                if(!response.ok){
+                if (!response.ok) {
                     throw new Error('Errorea eskaera egiterakoan');
                 }
                 const datuak = await response.json();
                 this.tratamenduKategoria = datuak.filter(katTratamendu => katTratamendu.ezabatze_data === null || katTratamendu.ezabatze_data === '0000-00-00 00:00:00');
-            }catch(error){
-                console.log("Errorea: "+error);
+            } catch (error) {
+                console.log("Errorea: " + error);
             }
         },
-        async borrarTratamendu(){
-            try{ 
+        /* Function: borrarTratamendu
+        Nahi den tratamendua ezabatzeko.
+        */
+        async borrarTratamendu() {
+            try {
                 const json_data = {
-                    "id":this.idSelec
+                    "id": this.idSelec
                 }
-                const response = await fetch(this.environment + '/public/api/tratamenduak',{
-                    headers: {  
+                const response = await fetch(this.environment + '/public/api/tratamenduak', {
+                    headers: {
                         'Content-Type': 'application/json',
                         'Access-Control-Allow-Origin': '*'
                     },
                     method: "DELETE",
                     body: JSON.stringify(json_data)
                 });
-                if(!response.ok){
+                if (!response.ok) {
                     throw new Error('Errorea eskaera egiterakoan');
                 }
                 alert('Ondo eguneratuta');
@@ -288,14 +327,14 @@ const vue = new Vue({
                 const modalEditarElement = document.getElementById('exampleModalEditar');
                 const modalInst = bootstrap.Modal.getInstance(modalEditarElement);
                 modalInst.hide();
-            }catch(error){
-                throw new Error("Error en carga de citas disponibles:"+error);
+            } catch (error) {
+                throw new Error("Error en carga de citas disponibles:" + error);
             }
         },
     },
     mounted() {
         this.cargarTratamenduak();
         this.cargarCategorias();
-      }
+    }
 });
 

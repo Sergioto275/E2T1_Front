@@ -1,3 +1,5 @@
+// Class: DistribucionInicialScript
+// Hasierako egoera kudeatzen duen metodo guztiak batzen dituen script-a.
 new Vue({
   el: '#app',
   data: {
@@ -18,6 +20,9 @@ new Vue({
     changeEnvironment(env) {
       this.environment = env;
     },
+    /* Function: cargaLangile
+    Langileak kargatzeko.
+    */ 
     async cargaLangile() {
       try {
         const response = await fetch(this.environment + '/public/api/langileak', {
@@ -42,6 +47,9 @@ new Vue({
         console.error('Errorea:', error);
       }
     },
+    /* Function: cargarTalde
+    Taldeak kargatzeko.
+    */ 
     async cargarTalde() {
       try {
         const response = await fetch(this.environment + '/public/api/taldeak', {
@@ -93,6 +101,9 @@ new Vue({
         });
 
     },
+    /* Function: cargarTxanda
+    Txanda guztiak kargatzeko.
+    */ 
     async cargarTxanda() {
       this.listaTxandaCont = []
       this.listaTxandaLast = []
@@ -237,6 +248,9 @@ new Vue({
         console.error('Errorea: ', error);
       }
     },
+    /* Function: createDatos
+    Datu berriak sortzeko.
+    */ 
     async createDatos() {
       try {
         const id_langilea = this.langileSeleccionado;
@@ -285,6 +299,11 @@ new Vue({
         console.log('Errorea: ', error);
       }
     },
+    /* Function: changeLanguage
+    Hizkuntza aldatzeko.
+    Parameters:
+      locale - Hizkuntza.
+    */ 
     changeLanguage(locale) {
       console.log('Cambiando a:', locale);
       this.currentLocale = locale;

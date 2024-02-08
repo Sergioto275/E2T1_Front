@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("ges",["Function"],[["gestionarCombobox",,[["Bezero",,,,0,"File:Bezero.js:Bezero.gestionarCombobox","JavaScriptClass:Bezero:gestionarCombobox"]]]]);

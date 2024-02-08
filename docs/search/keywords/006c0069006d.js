@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("lim",["Function"],[["limpiar_campos",,[["HitzorduScript",,,,0,"File:HitzorduScript.js:HitzorduScript.limpiar_campos","JavaScriptClass:HitzorduScript:limpiar_campos"]]],["limpiarCarrito",,[["ProduktuakAteraScript",,,,0,"File:ProduktuakAteraScript.js:ProduktuakAteraScript.limpiarCarrito","JavaScriptClass:ProduktuakAteraScript:limpiarCarrito"]]]]);

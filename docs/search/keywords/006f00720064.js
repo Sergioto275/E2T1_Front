@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("ord",["Class"],[["OrdutegiScript",,[[,,,,0,"File:OrdutegiScript.js:OrdutegiScript","JavaScriptClass:OrdutegiScript"]]]]);

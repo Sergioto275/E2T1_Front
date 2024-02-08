@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("fit",["Function"],[["fitroMaterial",,[["DevolverMaterialScript",,,,0,"File:DevolverMaterialScript.js:DevolverMaterialScript.fitroMaterial","JavaScriptClass:DevolverMaterialScript:fitroMaterial"]]]]);

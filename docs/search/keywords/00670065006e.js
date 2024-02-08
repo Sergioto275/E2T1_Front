@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("gen",["Function"],[["generar_ticket",,[["HitzorduScript",,,,0,"File:HitzorduScript.js:HitzorduScript.generar_ticket","JavaScriptClass:HitzorduScript:generar_ticket"]]]]);
