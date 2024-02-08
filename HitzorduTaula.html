@@ -196,7 +196,7 @@
                         </template>
                       </li>
                     </ul>
-                    <button type="button" class="btn bg-black text-white" :disabled="tratamenduSelec.length <= 0 || generado" @click="generar_ticket() || langile_asignado.includes("nadie")"> {{ translations[currentLocale].default.guardar }} </button>
+                    <button type="button" class="btn bg-black text-white" :disabled="tratamenduSelec.length <= 0 || generado" @click="generar_ticket()"> {{ translations[currentLocale].default.guardar }} </button>
                   </div>
                 </div>
               </div>

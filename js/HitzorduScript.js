@@ -147,11 +147,6 @@ const vue = new Vue({
                 }
                 toastr.success('Ondo eguneratuta');
                 await this.cargarHitzordu();
-
-                //Modal-a ixteko ondo egiten duenean
-                const modalEditarElement = document.getElementById('exampleModalEditar');
-                const modalInst = bootstrap.Modal.getInstance(modalEditarElement);
-                modalInst.hide();
             }catch(error){
                 throw new Error("Error en carga de citas disponibles:"+error);
             }
@@ -175,10 +170,6 @@ const vue = new Vue({
                 toastr.success('Ondo eguneratuta');
                 await this.cargarHitzordu();
 
-                //Modal-a ixteko ondo egiten duenean
-                const modalEditarElement = document.getElementById('exampleModalEditar');
-                const modalInst = bootstrap.Modal.getInstance(modalEditarElement);
-                modalInst.hide();
             }catch(error){
                 throw new Error("Error en carga de citas disponibles:"+error);
             }
@@ -202,11 +193,6 @@ const vue = new Vue({
                 }
                 toastr.success('Ondo eguneratuta');
                 await this.cargarHitzordu();
-
-                //Modal-a ixteko ondo egiten duenean
-                const modalAsignarElement = document.getElementById('exampleModalAsignar');
-                const modalInst = bootstrap.Modal.getInstance(modalAsignarElement);
-                modalInst.hide();
             }catch(error){
                 throw new Error("Error en carga de citas disponibles:"+error);
             }
@@ -264,7 +250,6 @@ const vue = new Vue({
                         }else{
                             this.cargarHitzordu();
                         }
-                        return 0;
                     }
                 });
             }catch(error){
