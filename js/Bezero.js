@@ -1,3 +1,9 @@
+/**
+ * Clase principal de la aplicación Vue.
+ *
+ * @class
+ * @name Bezero
+ */
 new Vue({
   el: '#app',
   data: {
@@ -41,10 +47,22 @@ new Vue({
     environment: environment,
   },
   methods: {
+    /**
+     * Cambia el entorno de la aplicación.
+     *
+     * @param {string} env - Nuevo entorno.
+     */
     changeEnvironment(env) {
       this.environment = env;
     },
     // Langilea guztiak taulan kargatu
+    /**
+     * Carga la lista de clientes desde el servidor.
+     *
+     * @async
+     * @function
+     * @throws {Error} Se lanza un error si hay un problema en la solicitud al servidor.
+     */
     async cargaBezeroa() {
       console.log("Hello")
       try {

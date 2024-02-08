@@ -1,3 +1,9 @@
+/**
+ * Clase principal de la aplicación Vue.
+ *
+ * @class
+ * @name Talde
+ */
 new Vue({
     el: '#app',
     data: {
@@ -16,6 +22,11 @@ new Vue({
       environment: environment,
     },
     methods: {
+      /**
+     * Cambia el entorno de la aplicación.
+     *
+     * @param {string} env - Nuevo entorno.
+     */
       changeEnvironment(env){
         this.environment = env;
       },
@@ -26,7 +37,7 @@ new Vue({
       // Langilea guztiak taulan kargatu
       async cargaLangile() {
         try {
-          const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/taldeak', {
+          const response = await fetch(this.environment + '/public/api/taldeak', {
             headers: {  
               'Content-Type': 'application/json',
               'Access-Control-Allow-Origin': '*'
@@ -49,7 +60,7 @@ new Vue({
       //Editatzeko modalean aukeratutako langilearen datuak kargatzeko
       async cargarDatosModal(){
         try{
-          const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/taldeaklortubycode/'+this.arrayId[0], {
+          const response = await fetch(this.environment + '/public/api/taldeak/'+this.arrayId[0], {
             headers: {
               'Content-Type': 'application/json',
               'Access-Control-Allow-Origin': '*'
@@ -81,7 +92,7 @@ new Vue({
             "izena": izena
           };
 
-          const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/taldeak', {
+          const response = await fetch(this.environment + '/public/api/taldeak', {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -118,7 +129,7 @@ new Vue({
 
           console.log(JSON.stringify(jsonSortu));
 
-          const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/taldeak', {
+          const response = await fetch(this.environment + '/public/api/taldeak', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json', // Indicar el tipo de contenido como JSON
@@ -154,7 +165,7 @@ new Vue({
             };
             console.log(JSON.stringify(jsonEzabatu));
 
-            const deleteResponse = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/taldeak', {
+            const deleteResponse = await fetch(this.environment + '/public/api/taldeak', {
               method: 'DELETE',
               headers: {
                 'Content-Type': 'application/json',
