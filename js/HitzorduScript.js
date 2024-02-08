@@ -514,13 +514,8 @@ const vue = new Vue({
                     throw new Error('Errorea eskaera egiterakoan');
                 }
                 toastr.success('Sortu da');
-                await this.cargarHitzordu();
-
-                //Modal-a ixteko ondo sortzen duenean
-                const modalCrearElement = document.getElementById('exampleModalCrear');
-                const modalInst = bootstrap.Modal.getInstance(modalCrearElement);
-                modalInst.hide();
-            } catch (error) {
+                await this.cargarHitzordu();                
+            }catch(error){
                 throw new Error("Ez da sortu".error);
             }
         },

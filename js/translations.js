@@ -159,6 +159,7 @@ const translations = {
 
     citas: {
       titulo: 'Citas',
+      fichaCliente: 'Ficha de Clientes',
       ticket: 'Generar Ticket',
       hora: 'Hora',
       asiento: 'Asiento',
@@ -238,7 +239,11 @@ const translations = {
       precioDentro: 'Precio Dentro',
       editar: 'Editar Tratamiento',
       crear: 'Crear Tratamiento',
-      nombre: 'Nombre'
+      nombre: 'Nombre',
+      añadirKategoria:"Añadir Categoria",
+      editarCentro:"Editar Categoria",
+      color:"Utiliza Colorantes",
+      extras:"Extras"
     },
 
     material: {
@@ -415,6 +420,7 @@ const translations = {
 
     citas: {
       titulo: 'Hitzorduak',
+      fichaCliente: 'Bezeroen fitxak',
       ticket: 'Ticket-a sortu',
       hora: 'Ordua',
       asiento: 'Eserleku',
@@ -486,15 +492,19 @@ const translations = {
         cantidad: "Kantitatea",
         volumenes: "Bolumena",
         observaciones: "Behaketak",
-      },
-      tratamientos: {
-        titulo: 'Tratamenduak',
-        precioFuera: 'Kanpoko Prezioa',
-        precioDentro: 'Barruko Prezioa',
-        editar: 'Tratamendua Editatu',
-        crear: 'Tratamendua Gehitu',
-        nombre: 'Izena'
       }
+    },
+    tratamientos: {
+      titulo: 'Tratamenduak',
+      precioFuera: 'Kanpoko Prezioa',
+      precioDentro: 'Barruko Prezioa',
+      editar: 'Tratamendua Editatu',
+      crear: 'Tratamendua Gehitu',
+      nombre: 'Izena',
+      añadirKategoria:"Kategoria Gehitu",
+      editarCentro:"Kategoria Editatu",
+      color:"Kolorea erabiltzen da",
+      extras:"Extrak"
     },
 
     material: {

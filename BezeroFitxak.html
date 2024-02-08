@@ -15,9 +15,9 @@
     <!--HEADER-->
     <header>
       <ul class="nav nav-pills bg-brown-strong">
-        <div class=" nav rounded-end border-white border-4 sip">
+        <div class="nav rounded-end border-white border-4 sip">
           <li class="nav-item">
-            <a class="nav-link text-white" aria-current="page" href="#">
+            <a class="nav-link text-white" aria-current="page" href="Login.html">
               <i class="bi bi-box-arrow-left" alt="Logout"></i>
             </a>
           </li>
@@ -32,21 +32,16 @@
             </a>
           </li>
           <li class="nav-item me-3 mt-2">
-            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }"
-              @click="changeLanguage('eu')">EU</a>
+            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }" @click="changeLanguage('eu')" >EU</a >
           </li>
           <li class="nav-item me-3 mt-2">
-            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }"
-              @click="changeLanguage('es')">ES</a>
+            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }" @click="changeLanguage('es')" >ES</a >
           </li>
           <li class="navi-item me-3 mt-2">
-            <a class="text-white"
-              :class="{ 'fw-bold': environment === 'https://localhost/Erronka2/Back/talde1erronka2' }" href="#"
-              @click="changeEnvironment('https://localhost/Erronka2/Back/talde1erronka2')">LOCAL</a>
+            <a class="text-white" :class="{ 'fw-bold': environment === 'https://localhost/Erronka2/Back/talde1erronka2' }" href="#" @click="changeEnvironment('https://localhost/Erronka2/Back/talde1erronka2')" >LOCAL</a >
           </li>
           <li class="navi-item me-3 mt-2">
-            <a class="text-white" :class="{ 'fw-bold': environment === 'https://www.talde1-back.edu:8443' }" href="#"
-              @click="changeEnvironment('https://www.talde1-back.edu:8443')">SERVER</a>
+            <a class="text-white" :class="{ 'fw-bold': environment === 'https://www.talde1-back.edu:8443' }" href="#" @click="changeEnvironment('https://www.talde1-back.edu:8443')" >SERVER</a >
           </li>
         </div>
       </ul>

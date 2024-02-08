@@ -4,6 +4,10 @@ body {
   background-color: #EFEFEF !important;
 }
 
+.center{
+  text-align: -webkit-center;
+}
+
 .bg-brown-strong {
   background-color: #403A36 !important;
 }

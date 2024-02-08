@@ -53,8 +53,8 @@
                                             aria-labelledby="dropdownMenuButton">
                                             <li><a class="dropdown-item text-white" href="ProduktuakAtera.html">{{
                                                     translations[currentLocale].menu.almacen.producto.sacar }}</a></li>
-                                            <li><a class="dropdown-item text-white" href="ProduktuTaula.html">{{
-                                                    translations[currentLocale].menu.almacen.producto.historico }}</a></li>
+                                            <!-- <li><a class="dropdown-item text-white" href="">{{
+                                                    translations[currentLocale].menu.almacen.producto.historico }}</a></li> -->
                                         </ul>
                                     </div>
                                 </li>
@@ -70,8 +70,8 @@
                                                     translations[currentLocale].menu.almacen.material.sacar }}</a></li>
                                             <li><a class="dropdown-item text-white" href="DevolverMaterialTabla.html">{{
                                                     translations[currentLocale].menu.almacen.material.entregar }}</a></li>
-                                            <li><a class="dropdown-item text-white" href="MaterialaTaula.html">{{
-                                                    translations[currentLocale].menu.almacen.material.historico }}</a></li>
+                                            <!-- <li><a class="dropdown-item text-white" href="">{{
+                                                    translations[currentLocale].menu.almacen.material.historico }}</a></li> -->
                                         </ul>
                                     </div>
                                 </li>
@@ -94,10 +94,10 @@
                                         </button>
                                         <ul class="dropdown-menu menu bg-drop-brown" 
                                             aria-labelledby="dropdownMenuButton4">
-                                            <li><a class="dropdown-item text-white" href="#">{{
+                                            <li><a class="dropdown-item text-white" href="ProduktuTaula.html">{{
                                                     translations[currentLocale].menu.profesor.almacen.productos }}</a>
                                             </li>
-                                            <li><a class="dropdown-item text-white" href="#">{{
+                                            <li><a class="dropdown-item text-white" href="MaterialaTaula.html">{{
                                                     translations[currentLocale].menu.profesor.almacen.material }}</a>
                                             </li>
                                         </ul>
@@ -140,9 +140,11 @@
                     </li>
                 </ul>
             </header>
+            <div class="center">
+                <div id="calendarContainer"></div>
+                <div id="organizerContainer"></div>
+            </div>
         </div>
-        <div id="calendarContainer"></div>
-        <div id="organizerContainer"></div>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="js/translations.js"></script>
         <script src="js/Home.js"></script>

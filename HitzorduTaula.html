@@ -22,7 +22,7 @@
         <ul class="nav nav-pills bg-brown-strong">
           <div class="nav rounded-end border-white border-4 sip">
             <li class="nav-item">
-              <a class="nav-link text-white" aria-current="page" href="#">
+              <a class="nav-link text-white" aria-current="page" href="Login.html">
                 <i class="bi bi-box-arrow-left" alt="Logout"></i>
               </a>
             </li>
@@ -56,7 +56,7 @@
           <h1> {{ translations[currentLocale].citas.titulo }} </h1>
           <div>
             <div class="input-group mb-1 w-50">
-              <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalCrear" @click="" > {{ translations[currentLocale].default.añadir }} </button>
+              <a class="btn border-black mb-3" href="BezeroFitxak.html"><button class="btn">{{ translations[currentLocale].citas.fichaCliente }}</button></a>
               <input class="btn border-black mb-3" type="date" v-model="dataSelec" @change="cargar_dia_seleccionado()" />
               <input class="btn border-black mb-3" type="time" v-model="startHour" @change="getHoursInRange()"/>
               <input class="btn border-black mb-3" type="time" v-model="endHour" @change="getHoursInRange()" />
