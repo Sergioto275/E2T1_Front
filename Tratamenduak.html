@@ -46,7 +46,7 @@
           </div>
         </ul>
       </header>
-    <div class="text-center">
+    <div class="text-center m-0-15">
       <h1>{{ translations[currentLocale].tratamientos.titulo }}</h1>
       <div class="input-group mb-1 w-50">
         <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalCrear">{{ translations[currentLocale].default.añadir }}</button>        
@@ -57,7 +57,7 @@
         <div v-for="(tratamendua) in tratamenduArray" class="card col-4 me-3 w-25 mb-3 p-0" >
               <img src="imagenes/default-tratamenduak.jpg" class="card-img-top h-50" alt="default">
               <div class="card-body">
-                  <h5 class="card-title display-6">{{ tratamendua.izena }}</h5>
+                  <h5 class="card-title">{{ tratamendua.izena }}</h5>
                   <p class="card-text">{{ translations[currentLocale].tratamientos.precioFuera }}: {{ tratamendua.kanpoko_prezioa }}</p>
                   <p class="card-text">{{ translations[currentLocale].tratamientos.precioDentro }}: {{ tratamendua.etxeko_prezioa }}</p>
                   <a href="#" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModalEditar" :key="tratamendua.id" @click="cargar_datos(tratamendua.id)">{{ translations[currentLocale].default.editar }}</a>
