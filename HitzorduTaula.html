@@ -111,7 +111,7 @@
                     <button class="nav-link" id="generar-tab" data-bs-toggle="tab" data-bs-target="#generar-tab-pane" type="button" role="tab" aria-controls="generar-tab-pane" aria-selected="false" :disabled="!idSelec || generado">{{ translations[currentLocale].citas.ticket }}</button>
                   </li>
                 </ul>
-                <div class="tab-content bg-white" id="myTabContent">
+                <div class="tab-content bg-white p-3 border-black mb-3" id="myTabContent">
                   <div class="tab-pane fade show active" id="crear-tab-pane" role="tabpanel" aria-labelledby="crear-tab" tabindex="0">
                     <label>{{ translations[currentLocale].citas.crear.fecha }}:</label>
                     <input type="date" class="w-100" v-model="dataTest" />

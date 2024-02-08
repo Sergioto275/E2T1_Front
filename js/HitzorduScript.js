@@ -557,6 +557,9 @@ const vue = new Vue({
             }
         },
         comprobar_extras(id_kategoria) {
+            console.log(this.tratamenduKategoria)
+            console.log(id_kategoria)
+
             const kategoria = this.tratamenduKategoria.filter(katTratamendu => katTratamendu.id == id_kategoria);
             if (kategoria.length > 0) {
                 if (kategoria[0].extra === 's') {
