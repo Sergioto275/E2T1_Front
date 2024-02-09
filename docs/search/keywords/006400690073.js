@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("dis",["Class"],[["DistribucionInicialScript",,[[,,,,0,"File:DistribucionInicialScript.js:DistribucionInicialScript","JavaScriptClass:DistribucionInicialScript"]]]]);

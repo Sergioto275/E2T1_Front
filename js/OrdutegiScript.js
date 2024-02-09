@@ -1,3 +1,5 @@
+// Class: OrdutegiScript
+// Ordutegiak kudeatzen dituen metodo guztiak batzen dituen script-a.
 new Vue({
   el: '#app',
   data: {
@@ -21,7 +23,7 @@ new Vue({
     existe: null,
     currentLocale: 'es',
     translations: translations,
-    environment: 'http://localhost/Erronka2/Back/talde1erronka2',
+    environment: environment,
     listaTalde: [],
     grupoFil: "",
   },
@@ -29,10 +31,18 @@ new Vue({
     changeEnvironment(env) {
       this.environment = env;
     },
+    /* Function: changeLanguage
+    Hizkuntza aldatzeko.
+    Parameters:
+      locale - Hizkuntza.
+    */
     changeLanguage(locale) {
       console.log('Cambiando a:', locale);
       this.currentLocale = locale;
     },
+    /* Function: cargarComboBox
+    Comboboxa kargatzeko.
+    */
     async cargarComboBox() {
       try {
         const response = await fetch(this.environment + '/public/api/taldeak', {
@@ -55,6 +65,9 @@ new Vue({
         console.error('Errorea: ', error);
       }
     },
+    /* Function: filtroGrupo
+    Taldearen arabera filtratzeko.
+    */
     async filtroGrupo() {
       console.log("hola")
       try {
@@ -103,9 +116,11 @@ new Vue({
         console.error('Errorea: ', error);
       }
     },
+    /* Function: cargaLangile
+    Langileak kargatzeko.
+    */
     cargaLangile() {
       this.listaOrdutegi = [];
-      console.log("SADASDASDASDIJJJML")
       fetch(this.environment + '/public/api/ordutegiak')
         .then(dato => {
           return dato.json();
@@ -145,6 +160,9 @@ new Vue({
     updateEgunaActu(value) {
       this.egunaActu = this.egunaActu === value ? null : value; // Toggle entre marcar y desmarcar
     },
+    /* Function: cargarDatosModal
+    Modalean datuak kargatzeko.
+    */
     cargarDatosModal() {
       fetch(this.environment + '/public/api/ordutegiak/' + this.arrayId[0])
         .then(dato => {
@@ -198,8 +216,10 @@ new Vue({
           console.error('Se ha producido un error:', error);
         });
 
-    }
-    ,
+    },
+    /* Function: createDatosModal
+    Ordutegi berria sortzeko.
+    */
     createDatosModal() {
       for (let index = 0; index < this.arrayDias.length; index++) {
         const kodea = this.kodeaCrear;
@@ -233,6 +253,9 @@ new Vue({
       // Llamar a cargaLangile una vez que todas las iteraciones del bucle hayan terminado
       this.cargaLangile();
     },
+    /* Function: borrar
+    Ordutegiak ezabatzeko.
+    */
     async borrar() {
       let ondo = false;
       try {

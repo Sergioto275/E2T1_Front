@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("txa",["Class"],[["Txanda",,[[,,,,0,"File:Txanda.js:Txanda","JavaScriptClass:Txanda"]]]]);

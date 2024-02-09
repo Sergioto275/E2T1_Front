@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("dev",["Function","Class"],[["devolver",,[["DevolverMaterialScript",,,,0,"File:DevolverMaterialScript.js:DevolverMaterialScript.devolver","JavaScriptClass:DevolverMaterialScript:devolver"]]],["DevolverMaterialScript",,[[,,,,1,"File:DevolverMaterialScript.js:DevolverMaterialScript","JavaScriptClass:DevolverMaterialScript"]]]]);

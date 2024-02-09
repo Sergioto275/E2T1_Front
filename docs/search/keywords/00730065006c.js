@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("sel",["Function"],[["seleccionar_citaCrear",,[["HitzorduScript",,,,0,"File:HitzorduScript.js:HitzorduScript.seleccionar_citaCrear","JavaScriptClass:HitzorduScript:seleccionar_citaCrear"]]]]);

@@ -1,4 +1,6 @@
-// translate.js
+// Class: translations
+// Web aplikazioan agertzen diren testu guztiak gaztelaniaz eta euskaraz, baita erabiltzen ari den host helbidea.
+// Testuak euskaraz eta gaztelaniaz
 const translations = {
   es: {
 
@@ -96,43 +98,68 @@ const translations = {
       }
     },
     menu: {
-
       almacen: {
         titulo: 'Almacen',
-        elemento1: {
+        producto: {
           titulo: 'Producto',
-          elemento1: 'Sacar',
-          elemento2: 'Entregar',
-          elemento3: 'Historico'
+          sacar: 'Sacar',
+          historico: 'Histórico'
         },
-        elemento2: {
+        material: {
           titulo: 'Material',
-          elemento1: 'Sacar',
-          elemento2: 'Entregar',
-          elemento3: 'Historico'
+          sacar: 'Sacar',
+          entregar: 'Entregar',
+          historico: 'Historico'
         },
       },
       profesor: {
         titulo: 'Profesor',
-        elemento1: {
+        almacen: {
           titulo: 'Almacen',
-          elemento1: 'Productos',
-          elemento2: 'Material'
+          productos: 'Productos',
+          material: 'Material'
         },
-        elemento2: 'Tratamientos',
-        elemento3: {
+        tratamientos: 'Tratamientos',
+        alumnado: {
           titulo: 'Alumnado',
-          elemento1: 'Alumnos',
-          elemento2: 'Grupos'
+          alumnos: 'Alumnos',
+          grupos: 'Grupos'
         },
-        elemento4: 'Calendario'
+        calendario: 'Calendario'
       },
       tareas: 'Tareas',
       citas: 'Citas',
+      calendar: {
+        meses: {
+          enero:'Enero',
+          febrero:'Febrero',
+          marzo:'Marzo',
+          abril:'Abril',
+          mayo:'Mayo',
+          junio:'Junio',
+          julio:'Julio',
+          agosto:'Agosto',
+          septiembre:'Septiembre',
+          octubre:'Octubre',
+          noviembre:'Noviembre',
+          diciembre:'Diciembre'
+        },
+        dias: {
+          lunes:'Lunes',
+          martes:'Martes',
+          miercoles:'Miercoles',
+          jueves:'Jueves',
+          viernes:'Viernes',
+          sabado:'Sabado',
+          domingo:'Domingo' 
+        },
+        placeholder: "No hay citas"
+      }
     },
 
     citas: {
       titulo: 'Citas',
+      fichaCliente: 'Ficha de Clientes',
       ticket: 'Generar Ticket',
       hora: 'Hora',
       asiento: 'Asiento',
@@ -212,7 +239,11 @@ const translations = {
       precioDentro: 'Precio Dentro',
       editar: 'Editar Tratamiento',
       crear: 'Crear Tratamiento',
-      nombre: 'Nombre'
+      nombre: 'Nombre',
+      añadirKategoria:"Añadir Categoria",
+      editarCentro:"Editar Categoria",
+      color:"Utiliza Colorantes",
+      extras:"Extras"
     },
 
     material: {
@@ -330,40 +361,66 @@ const translations = {
     menu: {
       almacen: {
         titulo: 'Biltegia',
-        elemento1: {
+        producto: {
           titulo: 'Produktuak',
-          elemento1: 'Atera',
-          elemento2: 'Gorde',
-          elemento3: 'Historikoa'
+          sacar: 'Atera',
+          historico: 'Historikoa'
         },
-        elemento2: {
+        material: {
           titulo: 'Materiala',
-          elemento1: 'Atera',
-          elemento2: 'Gorde',
-          elemento3: 'Historikoa'
+          sacar: 'Atera',
+          entregar: 'Gorde',
+          historico: 'Historikoa'
         },
       },
       profesor: {
         titulo: 'Irakaslea',
-        elemento1: {
+        almacen: {
           titulo: 'Biltegia',
-          elemento1: 'Produktuak',
-          elemento2: 'Materiala'
+          productos: 'Produktuak',
+          material: 'Materiala'
         },
-        elemento2: 'Tratamenduak',
-        elemento3: {
+        tratamientos: 'Tratamenduak',
+        alumnado: {
           titulo: 'Ikasleak',
-          elemento1: 'Ikasle',
-          elemento2: 'Taldeak'
+          alumnos: 'Ikasle',
+          grupos: 'Taldeak'
         },
-        elemento4: 'Ordutegia'
+        calendario: 'Ordutegia'
       },
       tareas: 'Zereginak',
-      citas: 'Hitzorduak'
+      citas: 'Hitzorduak',
+      calendar: {
+        meses: {
+          enero:'Urtarrila',
+          febrero:'Otsaila',
+          marzo:'Martxoa',
+          abril:'Apirila',
+          mayo:'Maiatza',
+          junio:'Ekaina',
+          julio:'Ustaila',
+          agosto:'Abuztua',
+          septiembre:'Iraila',
+          octubre:'Urria',
+          noviembre:'Azaroa',
+          diciembre:'Abendua'
+        },
+        dias: {
+          lunes:'Astelehena',
+          martes:'Asteartea',
+          miercoles:'Asteazkena',
+          jueves:'Osteguna',
+          viernes:'Ostirala',
+          sabado:'Larunbata',
+          domingo:'Igandea' 
+        },
+        placeholder: "Ez dago hitzordurik"
+      }
     },
 
     citas: {
       titulo: 'Hitzorduak',
+      fichaCliente: 'Bezeroen fitxak',
       ticket: 'Ticket-a sortu',
       hora: 'Ordua',
       asiento: 'Eserleku',
@@ -435,15 +492,19 @@ const translations = {
         cantidad: "Kantitatea",
         volumenes: "Bolumena",
         observaciones: "Behaketak",
-      },
-      tratamientos: {
-        titulo: 'Tratamenduak',
-        precioFuera: 'Kanpoko Prezioa',
-        precioDentro: 'Barruko Prezioa',
-        editar: 'Tratamendua Editatu',
-        crear: 'Tratamendua Gehitu',
-        nombre: 'Izena'
       }
+    },
+    tratamientos: {
+      titulo: 'Tratamenduak',
+      precioFuera: 'Kanpoko Prezioa',
+      precioDentro: 'Barruko Prezioa',
+      editar: 'Tratamendua Editatu',
+      crear: 'Tratamendua Gehitu',
+      nombre: 'Izena',
+      añadirKategoria:"Kategoria Gehitu",
+      editarCentro:"Kategoria Editatu",
+      color:"Kolorea erabiltzen da",
+      extras:"Extrak"
     },
 
     material: {
@@ -460,6 +521,8 @@ const translations = {
       grupo: 'Talde',
       trabajador: 'Langile',
       materialLibre: 'Material librea'
-    },
+    }
   }
 };
+// Host helbidea
+const environment = 'http://localhost/Erronka2/Back/talde1erronka2';

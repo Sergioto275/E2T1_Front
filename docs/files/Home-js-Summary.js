@@ -1,0 +1,1 @@
+﻿NDFramePage.OnPageTitleLoaded("File:Home.js","Home.js");NDSummary.OnSummaryLoaded("File:Home.js",[["JavaScript","JavaScript"]],[["Classes","Class"],["Functions","Function"],["Groups","Group"]],[[10,0,0,"Home","Home"],[68,0,2,"Functions","Home.Functions"],[69,0,1,"changeLanguage","Home.changeLanguage"],[70,0,1,"cargarHitzordu","Home.cargarHitzordu"]]);

@@ -1,3 +1,5 @@
+// Class: MaterialaScript
+// Materiala kudeatzen duen metodo guztiak batzen dituen script-a.
 new Vue({
   el: '#app',
   data: {
@@ -13,7 +15,7 @@ new Vue({
     nombreFil: "",
     currentLocale: 'es',
     translations: translations,
-    environment: 'http://localhost/Erronka2/Back/talde1erronka2',
+    environment: environment,
   },
   computed: {
     listaFiltradaPorNombre() {
@@ -27,7 +29,9 @@ new Vue({
     changeEnvironment(env) {
       this.environment = env;
     },
-    // Langilea guztiak taulan kargatu
+    /* Function: cargaMaterial
+    Materiala kargatzeko taulan.
+    */
     async cargaMaterial() {
       try {
         const response = await fetch(this.environment + '/public/api/materiala', {
@@ -52,7 +56,9 @@ new Vue({
         toastr.error(this.translations[this.currentLocale].default.error + " " + error);
       }
     },
-    //Editatzeko modalean aukeratutako langilearen datuak kargatzeko
+    /* Function: cargarDatosModal
+    Editatzeko erabiliko den modalean datuak kargatzeko.
+    */
     async cargarDatosModal() {
       try {
         const response = await fetch(this.environment + '/public/api/materiala/' + this.arrayId[0], {
@@ -78,7 +84,9 @@ new Vue({
         toastr.error(this.translations[this.currentLocale].default.error + " " + error);
       }
     },
-    // Langilearen datuak eguneratzeko
+    /* Function: actuDatosModal
+    Materiala eguneratzeko.
+    */
     async actuDatosModal() {
       try {
         const id = this.arrayId[0];
@@ -117,7 +125,9 @@ new Vue({
 
       }
     },
-    // Langile berri bat sortzeko
+    /* Function: createDatosModal
+    Material berria sortzeko.
+    */
     async createDatosModal() {
       try {
         const izena = this.izenaCrear;
@@ -155,7 +165,9 @@ new Vue({
         toastr.error(this.translations[this.currentLocale].default.error + " " + error);
       }
     },
-    // Langileak ezabatzeko
+    /* Function: borrar
+    Materiala ezabatzeko.
+    */
     async borrar() {
       let ondo = false;
       try {
@@ -198,6 +210,9 @@ new Vue({
       this.izenaCrear = "";
       this.etiketaCrear = "";
     },
+    /* Function: filtroNombre
+    Izenaren arabera filtratzeko.
+    */
     async filtroNombre() {
       try {
         const response = await fetch(this.environment + '/public/api/materiala', {
@@ -228,6 +243,11 @@ new Vue({
         toastr.error(this.translations[this.currentLocale].default.error + " " + error);
       }
     },
+    /* Function: changeLanguage
+    Hizkuntza aldatzeko.
+    Parameters:
+      locale - Hizkuntza.
+    */
     changeLanguage(locale) {
       console.log('Cambiando a:', locale);
       this.currentLocale = locale;

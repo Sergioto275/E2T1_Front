@@ -14,10 +14,10 @@
     <div id="app">
       <!--HEADER-->
       <header>
-        <ul class="nav nav-pills">
+        <ul class="nav nav-pills bg-brown-strong">
           <div class="nav rounded-end border-white border-4 sip">
             <li class="nav-item">
-              <a class="nav-link text-white" aria-current="page" href="#">
+              <a class="nav-link text-white" aria-current="page" href="Login.html">
                 <i class="bi bi-box-arrow-left" alt="Logout"></i>
               </a>
             </li>
@@ -46,15 +46,16 @@
           </div>
         </ul>
       </header>
-      <div>
+    <div class="text-center m-0-15">
+      <h1>{{ translations[currentLocale].tratamientos.titulo }}</h1>
       <div class="input-group mb-1 w-50">
         <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalCrear">{{ translations[currentLocale].default.añadir }}</button>        
-        <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalAñadirKategoria">Añadir Kategoria</button>        
-        <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalEditarKategoria">Editar kategoria</button>        
+        <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalAñadirKategoria">{{ translations[currentLocale].tratamientos.añadirKategoria }}</button>        
+        <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalEditarKategoria">{{ translations[currentLocale].tratamientos.editarCentro }}</button>        
       </div>
-      <div class="row">
-        <div v-for="(tratamendua) in tratamenduArray" class="card col-4" style="width: 18rem;">
-              <img src="" class="card-img-top" alt="...">
+      <div class="row justify-content-evenly">
+        <div v-for="(tratamendua) in tratamenduArray" class="card col-4 me-3 w-25 mb-3 p-0" >
+              <img src="imagenes/default-tratamenduak.jpg" class="card-img-top h-50" alt="default">
               <div class="card-body">
                   <h5 class="card-title">{{ tratamendua.izena }}</h5>
                   <p class="card-text">{{ translations[currentLocale].tratamientos.precioFuera }}: {{ tratamendua.kanpoko_prezioa }}</p>
@@ -63,7 +64,7 @@
               </div>
         </div>
       </div>
-      <div class="modal fade" id="exampleModalCrear" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 20vh" >
+      <div class="modal fade mt-20vh" id="exampleModalCrear" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  >
         <div class="modal-dialog">
           <div class="modal-content lamodal">
             <div class="modal-header">
@@ -114,9 +115,9 @@
           </div>
         </div>
       </div>
-      <div class="modal fade" id="exampleModalAñadirKategoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 20vh" >
+      <div class="modal fade mt-20vh" id="exampleModalAñadirKategoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  >
         <div class="modal-dialog">
-          <div class="modal-content" style="background-color: #ba9471">
+          <div class="modal-content bg-skin-strong" >
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalLabelAñadirKategoria"> {{ translations[currentLocale].citas.crear.titulo }} </h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
@@ -124,10 +125,14 @@
             <div class="modal-body">
               <label>{{ translations[currentLocale].tratamientos.nombre }}:</label>
               <input type="text" class="w-100" v-model="kategoriaIzenaCrear" />
-              <label>{{ translations[currentLocale].tratamientos.precioDentro }}:</label>
-              <input type="checkbox" class="w-100" v-model="kategoriaColorCrear" />
-              <label>{{ translations[currentLocale].tratamientos.precioFuera }}:</label>
-              <input type="checkbox" class="w-100" v-model="kategoriaExtraCrear" />
+              <div class="d-flex">
+                <label>{{ translations[currentLocale].tratamientos.color }}:</label>
+                <input type="checkbox" class="" v-model="kategoriaColorCrear" />
+              </div>
+              <div class="d-flex">
+                <label>{{ translations[currentLocale].tratamientos.extras }}:</label>
+                <input type="checkbox" class="" v-model="kategoriaExtraCrear" />
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ translations[currentLocale].default.salir }}</button>
@@ -136,9 +141,9 @@
           </div>
         </div>
       </div>
-      <div class="modal fade" id="exampleModalEditarKategoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 20vh" >
+      <div class="modal fade mt-20vh" id="exampleModalEditarKategoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  >
         <div class="modal-dialog">
-          <div class="modal-content" style="background-color: #ba9471">
+          <div class="modal-content bg-skin-strong" >
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalLabelEditarKategoria"> {{ translations[currentLocale].citas.crear.titulo }} </h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
@@ -147,12 +152,16 @@
               <select class="form-select" aria-label="Default select example" v-model="tratKategoriaIdEditar" @change="cargar_datos_kategoria()">
                 <option v-for="(kategoria) in tratamenduKategoria" :value="kategoria.id" >{{kategoria.izena}}</option>
               </select class="form-select" aria-label="Default select example">
-              <label>Izena:</label>
+              <label>{{ translations[currentLocale].tratamientos.nombre }}:</label>
               <input type="text" class="w-100" v-model="kategoriaIzenaEditar" />
-              <label>Color:</label>
-              <input type="checkbox" class="w-100" v-model="kategoriaColorEditar" />
-              <label>Extra:</label>
-              <input type="checkbox" class="w-100" v-model="kategoriaExtraEditar" />
+              <div class="d-flex">
+                <span>{{ translations[currentLocale].tratamientos.color }}:</span>
+                <input type="checkbox" class="" v-model="kategoriaColorEditar" />
+              </div>
+              <div class="d-flex">
+                <span>{{ translations[currentLocale].tratamientos.extras }}:</span>
+                <input type="checkbox" class="" v-model="kategoriaExtraEditar" />
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ translations[currentLocale].default.salir }}</button>

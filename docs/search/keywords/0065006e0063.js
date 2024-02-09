@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("enc",["Function"],[["enCarrito",,[["MaterialaAteraScript",,,,0,"File:MaterialaAteraScript.js:MaterialaAteraScript.enCarrito","JavaScriptClass:MaterialaAteraScript:enCarrito"]]]]);

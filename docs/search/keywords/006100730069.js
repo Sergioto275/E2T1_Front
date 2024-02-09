@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("asi",["Function"],[["asignar_cita",,[["HitzorduScript",,,,0,"File:HitzorduScript.js:HitzorduScript.asignar_cita","JavaScriptClass:HitzorduScript:asignar_cita"]]]]);

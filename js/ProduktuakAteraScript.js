@@ -1,3 +1,5 @@
+// Class: ProduktuakAteraScript
+// Produktuak ateratzeko behar diren metodo guztiak batzen dituen script-a.
 new Vue({
   el: '#app',
   data: {
@@ -23,7 +25,7 @@ new Vue({
     kategoriaFil: "first",
     currentLocale: 'es',
     translations: translations,
-    environment: 'http://localhost/Erronka2/Back/talde1erronka2',
+    environment: environment,
     carrito: [],
     mensaje: '',
     accionActual: null,
@@ -35,6 +37,9 @@ new Vue({
     markaFil: ''
   },
   methods: {
+    /* Function: modalAtera
+    Modala erakusteko.
+    */
     modalAtera() {
       this.cargaTalde();
       $('#modalAtera').modal('show');
@@ -42,6 +47,11 @@ new Vue({
     changeEnvironment(env) {
       this.environment = env;
     },
+    /* Function: addCarrito
+    Produktu zehatz bat orgatxoan sartzeko.
+    Parameters:
+      produktu - Produktua.
+    */
     addCarrito(produktu) {
       const existingProduct = this.carrito.find(item => item.id === produktu.id);
 
@@ -85,6 +95,11 @@ new Vue({
         }
       }
     },
+    /* Function: removeCarrito
+    Produktu zehatz bat orgatxotik ateratzeko.
+    Parameters:
+      produktu - Produktua.
+    */
     removeCarrito(produktu) {
       const index = this.carrito.findIndex(item => item.id === produktu.id);
 
@@ -92,9 +107,18 @@ new Vue({
         this.carrito.splice(index, 1);
       }
     },
+    /* Function: limpiarCarrito
+    Orgatxoa husteko.
+    */
     limpiarCarrito() {
       this.carrito = []
     },
+    /* Function: updateCantidad
+    Aukeratutako produktuaren kantitatea aldatzeko balidazioarekin.
+    Parameters:
+      event - Ebentoa.
+      produktu - Aukeratutako produktua.
+    */
     updateCantidad(event, produktu) {
       const newCantidad = parseInt(event.target.value);
 
@@ -107,6 +131,12 @@ new Vue({
         console.warn('¡Error! Ingresa una cantidad válida.');
       }
     },
+    /* Function: updateCarritoCantidad
+    Orgatxoan dagoen produktu baten kantitatea aldatzeko balidazioekin.
+    Parameters:
+      newCantidad - Kantitate berria.
+      produktu - Aukeratutako produktua.
+    */
     updateCarritoCantidad(produktu, newCantidad) {
       // Produktua bilatuko du
       const index = this.carrito.findIndex(item => item.id === produktu.id);
@@ -131,6 +161,11 @@ new Vue({
         }
       }
     },
+    /* Function: deskribapenaZatitu
+    Produktuen deskribapena 50 karaktereetara gutxitzeko..
+    Parameters:
+      produktu - Aukeratutako produktua.
+    */
     deskribapenaZatitu(produktu) {
       if (produktu.deskribapena.length > 50) {
         return produktu.deskribapena.slice(0, 50);
@@ -138,14 +173,28 @@ new Vue({
         return produktu.deskribapena;
       }
     },
+    /* Function: toggleDescription
+    Produktu horren deskribapena guztiz erakusteko edo ez.
+    Parameters:
+      produktu - Aukeratutako produktua.
+    */
     toggleDescription(produktu) {
       produktu.showFullDescription = !produktu.showFullDescription;
     },
+    /* Function: showFullDescription
+    Produktu horren deskribapena guztiz erakusten ari den edo ez bueltatzen du.
+    Parameters:
+      produktu - Aukeratutako produktua.
+    Returns:
+      True edo False.
+    */
     showFullDescription(produktu) {
       // Devuelve el valor de showFullDescription para decidir si mostrar la descripción completa o no
       return produktu.showFullDescription || false;
     },
-    // Produktuak ateratzeko funtzioa
+    /* Function: ateraProduktuak
+    Produktuak ateratzeko.
+    */
     async ateraProduktuak() {
       try {
         const requestData = {
@@ -188,7 +237,9 @@ new Vue({
         toastr.error(this.translations[this.currentLocale].default.error);
       }
     },
-    // Produktu guztiak taulan kargatu
+    /* Function: cargaProduktu
+    Produktuak taulan kargatzeko.
+    */
     async cargaProduktu() {
       try {
         const response = await fetch(this.environment + '/public/api/produktuak', {
@@ -218,7 +269,9 @@ new Vue({
         console.error('Errorea:', error);
       }
     },
-    // Talde guztiak taulan kargatu
+    /* Function: cargaTalde
+    Talde guztiak kargatzeko.
+    */
     async cargaTalde() {
       try {
         const response = await fetch(this.environment + '/public/api/taldeak', {
@@ -241,7 +294,9 @@ new Vue({
         console.error('Errorea: ', error);
       }
     },
-    // Langile guztiak taulan kargatu
+    /* Function: cargaLangile
+    Langile guztiak kargatzeko.
+    */
     async cargaLangile() {
       try {
         const response = await fetch(this.environment + '/public/api/langileak', {
@@ -267,7 +322,9 @@ new Vue({
         console.error('Errorea:', error);
       }
     },
-    //Editatzeko modalean aukeratutako langilearen datuak kargatzeko
+    /* Function: cargarDatosModal
+    Editatzeko modalean datu guztiak kargatzeko.
+    */
     async cargarDatosModal() {
       try {
         const response = await fetch(this.environment + '/public/api/produktuak/' + this.arrayId[0], {
@@ -465,6 +522,9 @@ new Vue({
       this.cargarKategoria();
 
     },
+    /* Function: cargarKategoria
+    Kategoria guztiak kargatzeko.
+    */
     async cargarKategoria() {
       try {
         const response = await fetch(this.environment + '/public/api/kategoriak', {
@@ -487,6 +547,9 @@ new Vue({
         console.error('Errorea: ', error);
       }
     },
+    /* Function: filtroNombre
+    Filtroa izenaren arabera.
+    */
     async filtroNombre() {
       console.log("hola")
       try {
@@ -568,6 +631,11 @@ new Vue({
         console.error('Errorea: ', error);
       }
     },
+    /* Function: changeLanguage
+    Hizkuntza aldatzeko.
+    Parameters:
+      locale - Hizkuntza.
+    */
     changeLanguage(locale) {
       console.log('Cambiando a:', locale);
       this.currentLocale = locale;

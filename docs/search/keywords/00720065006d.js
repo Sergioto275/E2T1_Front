@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("rem",["Function"],[["removeCarrito",,[["MaterialaAteraScript",,,,0,"File:MaterialaAteraScript.js:MaterialaAteraScript.removeCarrito","JavaScriptClass:MaterialaAteraScript:removeCarrito"],["ProduktuakAteraScript",,,,0,"File:ProduktuakAteraScript.js:ProduktuakAteraScript.removeCarrito","JavaScriptClass:ProduktuakAteraScript:removeCarrito"]]]]);

@@ -1,0 +1,1 @@
+﻿NDFramePage.OnPageTitleLoaded("JavaScriptClass:translations","translations");NDSummary.OnSummaryLoaded("JavaScriptClass:translations",[["JavaScript","JavaScript"]],[["Classes","Class"]],[[6,0,0,"translations"]]);

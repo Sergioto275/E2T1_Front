@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("lan",["Class"],[["LangileScript",,[[,,,,0,"File:LangileScript.js:LangileScript","JavaScriptClass:LangileScript"]]]]);

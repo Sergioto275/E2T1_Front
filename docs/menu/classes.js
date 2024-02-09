@@ -1,0 +1,1 @@
+﻿NDMenu.OnSectionLoaded("classes.js",[[1,"Bezero"],[1,"DevolverMaterialScript"],[1,"DistribucionInicialScript"],[1,"HitzorduScript"],[1,"Home"],[1,"LangileScript"],[1,"MaterialaAteraScript"],[1,"MaterialaScript"],[1,"OrdutegiScript"],[1,"ProduktuakAteraScript"],[1,"ProduktuakScript"],[1,"TaldeScript"],[1,"translations"],[1,"TratamenduakScript"],[1,"Txanda"]]);

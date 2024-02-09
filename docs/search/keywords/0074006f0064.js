@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("tod",["Function"],[["today",,[["HitzorduScript",,,,0,"File:HitzorduScript.js:HitzorduScript.today","JavaScriptClass:HitzorduScript:today"]]]]);
