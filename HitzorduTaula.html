@@ -190,7 +190,7 @@
                           <label v-else class="form-check-label" for="Checkbox"> - {{ translations[currentLocale].citas.precioFuera}}: {{ tratamendua.kanpoko_prezioa }}</label>
                         </template>
                         <template v-else>
-                          <input :disabled="idSelec == null" class="form-check-input me-1" type="checkbox" :value="{'tratamendu_id':tratamendua.id, 'prezioa':precioextra}" v-model="tratamenduSelec" id="Checkbox">
+                          <input :disabled="idSelec == null || precioextra == null || precioextra == 0" class="form-check-input me-1" type="checkbox" :value="{'tratamendu_id':tratamendua.id, 'prezioa':precioextra}" v-model="tratamenduSelec" id="Checkbox">
                           <label class="form-check-label" for="Checkbox">{{ tratamendua.izena }}</label>
                           <input :disabled="idSelec == null" class="me-1" type="number" v-model="precioextra" >
                         </template>

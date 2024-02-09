@@ -539,4 +539,4 @@ const translations = {
   }
 };
 // Host helbidea
-const environment = 'https://www.talde1-back.edu';
+const environment = 'http://localhost/Erronka2/Back/talde1erronka2';

@@ -259,6 +259,7 @@ const vue = new Vue({
                     "id_hitzordu": this.idSelec,
                     "tratamendua": this.tratamenduSelec
                 }
+                console.log(JSON.stringify(json_data))
                 const response = await fetch(this.environment + '/public/api/ticket_lerro', {
                     headers: {
                         'Content-Type': 'application/json',
