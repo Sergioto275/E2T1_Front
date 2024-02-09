@@ -399,7 +399,7 @@ new Vue({
           throw new Error('Errorea eguneratzerakoan');
         }
 
-        alert('Ondo eguneratuta');
+        toastr.success(this.translations[this.currentLocale].default.actualizar);
         await this.cargaProduktu();
 
         //Modal-a ixteko ondo egiten duenean
@@ -453,7 +453,7 @@ new Vue({
           throw new Error('Errorea sortzerakoan');
         }
 
-        alert('Sortu da');
+        toastr.success(this.translations[this.currentLocale].default.crear);
         await this.cargaProduktu();
 
         //Modal-a ixteko ondo sortzen duenean
@@ -505,7 +505,7 @@ new Vue({
         console.error('Errorea:', error);
       }
       if (ondo) {
-        alert("Eguneratu egin da");
+        toastr.success(this.translations[this.currentLocale].default.actualizar);
       }
 
       this.arrayId = [];

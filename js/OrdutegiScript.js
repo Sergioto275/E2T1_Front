@@ -208,7 +208,7 @@ new Vue({
         body: JSON.stringify(jsonEditatu), // Convertir el objeto JSON a una cadena JSON
       })
         .then(response => {
-          alert("Se ha actualizado");
+          toastr.success(this.translations[this.currentLocale].default.actualizar);
           this.listaOrdutegi = [];
           this.cargaLangile();
         })
@@ -244,7 +244,7 @@ new Vue({
           body: JSON.stringify(jsonEditatu), // Convertir el objeto JSON a una cadena JSON
         })
         .then(response => {
-          alert("Se ha creado");
+          toastr.success(this.translations[this.currentLocale].default.crear);
         })
         .catch(error => {
           console.error('Se ha producido un error:', error);
@@ -287,7 +287,7 @@ new Vue({
         console.error('Errorea:', error);
       }
       if (ondo) {
-        alert("Eguneratu egin da");
+        toastr.success(this.translations[this.currentLocale].default.actualizar);
       }
 
       this.arrayId = [];
