@@ -58,7 +58,6 @@ new Vue({
     Langilea guztiak taulan kargatzen ditu.
     */
     async cargaBezeroa() {
-      console.log("Hello")
       try {
         const response = await fetch(this.environment + '/public/api/bezero', {
           mode: 'cors',
@@ -165,7 +164,7 @@ new Vue({
           throw new Error('Errorea sortzerakoan');
         }
 
-        alert('Sortu da');
+        toastr.success(this.translations[this.currentLocale].default.crear);
         await this.cargaBezeroa();
         
         this.limpiarCampos();
@@ -247,7 +246,7 @@ new Vue({
           throw new Error('Errorea eguneratzerakoan');
         }
 
-        alert('Ondo eguneratuta');
+        toastr.success(this.translations[this.currentLocale].default.actualizar);
         await this.cargaBezeroa();
 
         //Modal-a ixteko ondo egiten duenean
@@ -288,7 +287,7 @@ new Vue({
           throw new Error('Errorea sortzerakoan');
         }
 
-        alert('Sortu da');
+        toastr.success(this.translations[this.currentLocale].default.crear);
         await this.cargaLangile();
 
         //Modal-a ixteko ondo sortzen duenean
@@ -333,7 +332,7 @@ new Vue({
         console.error('Errorea:', error);
       }
       if (ondo) {
-        alert("Eguneratu egin da");
+        toastr.success(this.translations[this.currentLocale].default.actualizar);
       }
 
       this.arrayId = [];
@@ -418,7 +417,7 @@ new Vue({
           throw new Error('Errorea sortzerakoan');
         }
 
-        alert('Sortu da');
+        toastr.success(this.translations[this.currentLocale].default.crear);
         await this.cargaFitxa(this.bezeroSeleccionado[0].id);
 
         //Modal-a ixteko ondo sortzen duenean
@@ -668,7 +667,7 @@ new Vue({
           throw new Error('Errorea eguneratzerakoan');
         }
 
-        alert('Ondo eguneratuta');
+        toastr.success(this.translations[this.currentLocale].default.actualizar);
         await this.cargaFitxa(this.bezeroSeleccionado[0].id);
 
         //Modal-a ixteko ondo egiten duenean
@@ -711,7 +710,7 @@ new Vue({
         console.error('Errorea:', error);
       }
       if (ondo) {
-        alert("Eguneratu egin da");
+        toastr.success(this.translations[this.currentLocale].default.actualizar);
       }
   
       this.arrayId2 = [];

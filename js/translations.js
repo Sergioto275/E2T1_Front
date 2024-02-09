@@ -16,7 +16,10 @@ const translations = {
       aceptar: 'Aceptar',
       limpiar: 'Limpiar',
       datosCargados: 'Datos cargados correctamente',
-      avisoCarrito: 'Ya se encuentra en el carrito'
+      avisoCarrito: 'Ya se encuentra en el carrito',
+      crear: 'Se ha creado',
+      actualizar: 'Se ha actualizado',
+      exist: 'Ya existe un registro igual'
     },
 
     trabajador: {
@@ -167,6 +170,10 @@ const translations = {
       asignar: 'Asignar Alumno',
       precioFuera: 'Precio Fuera',
       precioDentro: 'Precio Dentro',
+      registrarCliente: 'Debe registrar la ficha del cliente',
+      redireccionCliente: 'Desea ser redireccionado a registrar la ficha del cliente?',
+      precioMessage:'Precio Total: ',
+      citaReservada: 'Esta cita ya esta reservada',
       seleccionarCita: {
         titulo: 'Seleccionar Cita'
       },
@@ -276,7 +283,10 @@ const translations = {
       aceptar: 'Onartu',
       limpiar: 'Garbitu',
       datosCargados: 'Datuak kargatu egin dira',
-      avisoCarrito: 'Orgatxoan dago jada'
+      avisoCarrito: 'Orgatxoan dago jada',
+      crear: 'Sortu da',
+      actualizar: 'Eguneratu da',
+      exist: 'Erregistro berdin bat existitzen da'
     },
 
     trabajador: {
@@ -428,6 +438,10 @@ const translations = {
       asignar: 'Ikaslea Esleitu',
       precioFuera: 'Kanpoko prezioa',
       precioDentro: 'Barruko Prezioa',
+      registrarCliente: 'Bezeroaren fitxa erregistratu behar da',
+      redireccionCliente: 'Bezero fitxa erregistratzera birbideratzea nahi duzu?',
+      precioMessage:'Prezio totala: ',
+      citaReservada: 'Hitzordu hau jadanik erreserbatuta dago',
       seleccionarCita: {
         titulo: 'Hitzordua Aukeratu'
       },

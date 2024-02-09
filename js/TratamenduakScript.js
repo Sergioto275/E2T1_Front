@@ -110,7 +110,7 @@ const vue = new Vue({
                 if (!response.ok) {
                     throw new Error('Errorea eskaera egiterakoan');
                 }
-                alert('Ondo eguneratuta');
+                toastr.success(this.translations[this.currentLocale].default.actualizar);
                 await this.cargarTratamenduak();
 
                 //Modal-a ixteko ondo egiten duenean
@@ -155,7 +155,7 @@ const vue = new Vue({
                 if (!response.ok) {
                     throw new Error('Errorea eskaera egiterakoan');
                 }
-                alert('Ondo eguneratuta');
+                toastr.success(this.translations[this.currentLocale].default.actualizar);
                 await this.cargarTratamenduak();
                 await this.cargarCategorias();
 
@@ -190,7 +190,7 @@ const vue = new Vue({
                 if (!response.ok) {
                     throw new Error('Errorea eskaera egiterakoan');
                 }
-                alert('Ondo eguneratuta');
+                toastr.success(this.translations[this.currentLocale].default.actualizar);
                 await this.cargarTratamenduak();
 
                 //Modal-a ixteko ondo egiten duenean
@@ -236,7 +236,7 @@ const vue = new Vue({
                 if (!response.ok) {
                     throw new Error('Errorea eskaera egiterakoan');
                 }
-                alert('Ondo eguneratuta');
+                toastr.success(this.translations[this.currentLocale].default.actualizar);
                 await this.cargarTratamenduak();
                 await this.cargarCategorias();
 
@@ -267,7 +267,7 @@ const vue = new Vue({
                 if (!response.ok) {
                     throw new Error('Errorea eskaera egiterakoan');
                 }
-                alert('Ondo eguneratuta');
+                toastr.success(this.translations[this.currentLocale].default.actualizar);
                 await this.cargarTratamenduak();
                 await this.cargarCategorias();
 
@@ -320,7 +320,7 @@ const vue = new Vue({
                 if (!response.ok) {
                     throw new Error('Errorea eskaera egiterakoan');
                 }
-                alert('Ondo eguneratuta');
+                toastr.success(this.translations[this.currentLocale].default.actualizar);
                 await this.cargarTratamenduak();
 
                 //Modal-a ixteko ondo egiten duenean

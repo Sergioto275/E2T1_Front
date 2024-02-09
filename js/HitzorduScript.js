@@ -168,7 +168,7 @@ const vue = new Vue({
                 if (!response.ok) {
                     throw new Error('Errorea eskaera egiterakoan');
                 }
-                toastr.success('Ondo eguneratuta');
+                toastr.success(this.translations[this.currentLocale].default.actualizar);
                 await this.cargarHitzordu();
             } catch (error) {
                 throw new Error("Error en carga de citas disponibles:" + error);
@@ -193,7 +193,7 @@ const vue = new Vue({
                 if (!response.ok) {
                     throw new Error('Errorea eskaera egiterakoan');
                 }
-                toastr.success('Ondo eguneratuta');
+                toastr.success(this.translations[this.currentLocale].default.actualizar);
                 await this.cargarHitzordu();
 
             } catch (error) {
@@ -220,7 +220,7 @@ const vue = new Vue({
                 if (!response.ok) {
                     throw new Error('Errorea eskaera egiterakoan');
                 }
-                toastr.success('Ondo eguneratuta');
+                toastr.success(this.translations[this.currentLocale].default.actualizar);
                 await this.cargarHitzordu();
             } catch (error) {
                 throw new Error("Error en carga de citas disponibles:" + error);
@@ -270,14 +270,14 @@ const vue = new Vue({
                 if (!response.ok) {
                     throw new Error('Errorea eskaera egiterakoan');
                 }
-                toastr.success('Ondo eguneratuta');
-                toastr.success('Precio a pagar' + prezio_totala);
+                toastr.success(this.translations[this.currentLocale].default.actualizar);
+                toastr.info(this.translations[this.currentLocale].citas.precioMessage + prezio_totala);
                 this.tratamenduSelec.forEach(tratamendu => {
                     var tratamiento = this.tratamenduArray.filter(element => element.id == tratamendu.tratamendu_id);
                     var kategoria = this.tratamenduKategoria.filter(el => el.id == tratamiento[0].id_katTratamendu)
                     if (kategoria[0].kolorea == 's') {
-                        toastr.warning('Tiene que registrar la ficha de este cliente');
-                        if (confirm("Desea ser redireccionado a clientes?")) {
+                        toastr.warning(this.translations[this.currentLocale].citas.registrarCliente);
+                        if (confirm(this.translations[this.currentLocale].citas.redireccionCliente)) {
                             window.location.href = 'BezeroFitxak.html';
                         } else {
                             this.cargarHitzordu();
@@ -513,7 +513,7 @@ const vue = new Vue({
                 if (!response.ok) {
                     throw new Error('Errorea eskaera egiterakoan');
                 }
-                toastr.success('Sortu da');
+                toastr.success(this.translations[this.currentLocale].default.crear);
                 await this.cargarHitzordu();                
             }catch(error){
                 throw new Error("Ez da sortu".error);
@@ -699,7 +699,7 @@ const vue = new Vue({
             const filtrarCitas = this.hitzorduak.filter(cita => ((cita.hasiera_ordua >= this.hasOrduaEditar && cita.hasiera_ordua < this.amaOrduaEditar) || (cita.amaiera_ordua >= this.hasOrduaEditar && cita.amaiera_ordua < this.amaOrduaEditar)) && cita.eserlekua == this.eserlekuaEditar && cita.data.includes(eguna));
             if (filtrarCitas.length > 0) {
                 this.error = true;
-                toastr.error('La cita ya esta reservada');
+                toastr.error(this.translations[this.currentLocale].default.citaReservada);
             } else {
                 this.error = false;
             }
@@ -709,7 +709,7 @@ const vue = new Vue({
             const filtrarCitas = this.hitzorduak.filter(cita => ((cita.hasiera_ordua >= this.hasOrduaTest && cita.hasiera_ordua < this.amaOrduaTest) || (cita.amaiera_ordua >= this.hasOrduaTest && cita.amaiera_ordua < this.amaOrduaTest)) && cita.eserlekua == this.eserlekuaCrear && cita.data.includes(eguna));
             if (filtrarCitas.length > 0) {
                 this.error = true;
-                toastr.error('La cita ya esta reservada');
+                toastr.error(this.translations[this.currentLocale].default.citaReservada);
             } else {
                 this.error = false;
             }

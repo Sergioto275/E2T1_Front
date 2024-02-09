@@ -285,12 +285,12 @@ new Vue({
         });
 
         if (!response.ok) {
-          alert("ya existe un registro igual")
+          toastr.error(this.translations[this.currentLocale].default.exist);
           console.log(response+'Errorea sortzerakoan');
           throw new Error('Errorea sortzerakoan');
         }
 
-        alert('Sortu da');
+        toastr.success(this.translations[this.currentLocale].default.crear);
         await this.cargarTxanda();
         //Modal-a ixteko ondo sortzen duenean
         const modalCrearElement = document.getElementById('exampleModalCrear');
