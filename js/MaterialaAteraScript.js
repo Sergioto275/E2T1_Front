@@ -9,7 +9,7 @@ new Vue({
     nombreFil: "",
     currentLocale: 'es',
     translations: translations,
-    environment: 'https://localhost/Erronka2/Back/talde1erronka2',
+    environment: 'http://localhost/Erronka2/Back/talde1erronka2',
     carrito: [],
     mensaje: '',
     accionActual: null,
@@ -18,6 +18,14 @@ new Vue({
     listaLangile: [],
     langileFil: '',
     searchTimeout: null,
+  },
+  computed: {
+    listaFiltradaPorNombre() {
+      return this.listaMaterial.filter(langile => {
+        return langile.izena.toLowerCase().includes(this.nombreFil.toLowerCase()) &&
+               (langile.ezabatze_data === null || langile.ezabatze_data === "0000-00-00 00:00:00");
+      });
+    }
   },
   methods: {
     modalAtera() {
@@ -116,7 +124,12 @@ new Vue({
         const datuak = await response.json();
 
         this.listaMaterial = datuak
-          .filter(material => material.ezabatze_data === null || material.ezabatze_data === "0000-00-00 00:00:00");
+          .filter(material => 
+            (material.ezabatze_data === null || material.ezabatze_data === "0000-00-00 00:00:00")
+          )
+          .filter((material, index, self) => 
+            index === self.findIndex(m => m.id === material.id)
+          );
 
         toastr.success(this.translations[this.currentLocale].default.datosCargados);
       } catch (error) {

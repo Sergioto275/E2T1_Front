@@ -13,7 +13,15 @@ new Vue({
     nombreFil: "",
     currentLocale: 'es',
     translations: translations,
-    environment: 'https://localhost/Erronka2/Back/talde1erronka2',
+    environment: 'http://localhost/Erronka2/Back/talde1erronka2',
+  },
+  computed: {
+    listaFiltradaPorNombre() {
+      return this.listaMaterial.filter(langile => {
+        return langile.izena.toLowerCase().includes(this.nombreFil.toLowerCase()) &&
+               (langile.ezabatze_data === null || langile.ezabatze_data === "0000-00-00 00:00:00");
+      });
+    }
   },
   methods: {
     changeEnvironment(env) {

@@ -15,6 +15,15 @@ new Vue({
       translations: translations,
       environment: 'http://localhost/Erronka2/Back/talde1erronka2',
     },
+    computed: {
+    filteredTalde() {
+      return this.listaTalde.filter(bezero =>
+        (bezero.kodea.includes(this.nombreFil) && bezero.ezabatze_data === null) ||
+        (bezero.kodea.includes(this.nombreFil) && bezero.ezabatze_data === "0000-00-00 00:00:00") ||
+        (this.nombreFil === "" && (bezero.ezabatze_data === null || bezero.ezabatze_data === "0000-00-00 00:00:00"))
+      );
+    }
+  },
     methods: {
       changeEnvironment(env){
         this.environment = env;

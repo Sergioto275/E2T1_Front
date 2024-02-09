@@ -14,6 +14,7 @@ new Vue({
     translations: translations,
     environment: 'http://localhost/Erronka2/Back/talde1erronka2',
   },
+  
   methods: {
     changeEnvironment(env) {
       this.environment = env;

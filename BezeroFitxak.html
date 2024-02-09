@@ -89,7 +89,7 @@
                     <th class="border border-black" style="background-color: #BA9471">{{
                       translations[currentLocale].trabajador.apellidos }}</th>
                   </tr>
-                  <tr class="table-secondary" v-for="(bezero) in listaBezero" data-tor="hover:bg-darken(x1)"
+                  <tr class="table-secondary" v-for="(bezero) in listaFiltradaPorNombre" data-tor="hover:bg-darken(x1)"
                     @click="cargaFitxa(bezero.id)">
                     <td class="table-secondary"><input type="checkbox" :value="bezero.id" v-model="arrayId"
                         :disabled="bezero.id=='no'"></td>

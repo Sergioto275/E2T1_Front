@@ -77,7 +77,7 @@
               <th class="border border-black" style="background-color: #BA9471">{{
                 translations[currentLocale].material.nombre }}</th>
             </tr>
-            <tr class="table-secondary" v-for="(material) in listaMaterial" data-tor="hover:bg-darken(x1)">
+            <tr class="table-secondary" v-for="(material) in listaFiltradaPorNombre" data-tor="hover:bg-darken(x1)">
               <td class="table-secondary"><button type="button" class="btn btn-dark" @click="addCarrito(material)"
                   :disabled="enCarrito(material)"><i class="bi bi-cart-plus"></i>
                 </button></td>
