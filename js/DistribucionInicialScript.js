@@ -7,6 +7,8 @@ new Vue({
     listaTalde: [],
     listaOrdutegi: [],
     listaTxandaCont: [],
+    listaTxandaContLimpia: [],
+    listaTxandaDepurar: [],
     listaTxandaLast: [],
     listaFiltroTalde: [],
     grupoSeleccionado: "",
@@ -41,8 +43,9 @@ new Vue({
         const datuak = await response.json();
         console.log(this.grupoSeleccionado)
         this.listaLangile = datuak
-          .filter(langile => langile.ezabatze_data === null && langile.kodea == this.grupoSeleccionado || langile.ezabatze_data === "0000-00-00 00:00:00" && langile.kodea == this.grupoSeleccionado);
+          .filter(langile => langile.ezabatze_data == null && langile.kodea == this.grupoSeleccionado || langile.ezabatze_data == "0000-00-00 00:00:00" && langile.kodea == this.grupoSeleccionado);
 
+          console.log(this.listaLangile)
         this.cargarTxanda();
       } catch (error) {
         console.error('Errorea:', error);
@@ -65,6 +68,7 @@ new Vue({
           throw new Error('Errorea eskaera egiterakoan');
         }
         const datuak = await response.json();
+        console.log(datuak);
         this.listaTalde = datuak
           .filter(talde => talde.ezabatze_data === null || talde.ezabatze_data === "0000-00-00 00:00:00");
       } catch (error) {
@@ -87,7 +91,6 @@ new Vue({
               const fechaActual = new Date();
               const fecha1SoloFecha = new Date(fechaActual.getFullYear(), fechaActual.getMonth(), fechaActual.getDate());
               const fecha2SoloFecha = new Date(fechaEjemplo.getFullYear(), fechaEjemplo.getMonth(), fechaEjemplo.getDate());
-              console.log(fecha1SoloFecha+" "+fecha2SoloFecha)
               if (fecha1SoloFecha.getTime() === fecha2SoloFecha.getTime()) {
                 console.log("HOla")
                 this.grupoSeleccionado=datos[i]["kodea"];
@@ -122,6 +125,7 @@ new Vue({
           throw new Error('Errorea eskaera egiterakoan');
         }
         const datuak = await response.json();
+        console.log(datuak);
         for (let index = 0; index < datuak.length; index++) {
           if (this.listaTxandaCont.length === 0) {
             if (datuak[index]["mota"] === "G") {
@@ -182,7 +186,6 @@ new Vue({
           } catch (error) {
 
           }
-          console.log(this.listaTxandaCont)
         }
 
         for (let index = 0; index < this.listaTxandaCont.length; index++) {
@@ -191,8 +194,13 @@ new Vue({
           }
         }
 
+        this.listaTxandaContLimpia = this.listaTxandaCont
+          .filter(langile => isNaN(langile.id_langilea));
+        
+
+        console.log(this.listaTxandaContLimpia);
+
         for (let index = 0; index < datuak.length; index++) {
-          console.log(datuak[index]["sortze_data"])
           const cadenaFecha = datuak[index]["sortze_data"];
           const fechaEjemplo = new Date(cadenaFecha);
           const fechaActual = new Date();
@@ -203,7 +211,6 @@ new Vue({
             var listaTxandaLastStrings = this.listaTxandaLast.map(item => JSON.stringify(item));
             var personaString = JSON.stringify(persona);
             if (listaTxandaLastStrings.includes(personaString)) {
-              console.log("persona")
             } else {
               this.listaTxandaLast.push(persona);
             }
@@ -239,12 +246,9 @@ new Vue({
           } catch (error) {
 
           }
-          console.log(this.listaTxandaCont)
         }
 
-
-
-        console.log(this.listaTxandaCont);
+        
       } catch (error) {
         console.error('Errorea: ', error);
       }
@@ -274,7 +278,6 @@ new Vue({
         };
 
         console.log(JSON.stringify(jsonSortu));
-
         const response = await fetch(this.environment + '/public/api/txanda', {
           method: 'POST',
           headers: {
