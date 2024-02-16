@@ -3,10 +3,11 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Langileak</title>
+        <title>Produktuak</title>
         <link href="css/bootstrap/bootstrap.css" rel="stylesheet">
         <link href="css/estilo.css" rel="stylesheet">
         <link href="css/bootstrap/icons/font/bootstrap-icons.css" rel="stylesheet">
+        <link href="js/toastr/build/toastr.css" rel="stylesheet">
       </head>
       <body>
       <div id="app" >
@@ -72,7 +73,7 @@
                           <th class="border border-black bg-skin-strong" >{{ translations[currentLocale].productos.categoria }}</th>
                           <th class="border border-black bg-skin-strong" >{{ translations[currentLocale].productos.stock }}</th>
                       </tr>
-                      <tr class="table-secondary" v-for="(produktu) in listaProduktu" data-tor="hover:bg-darken(x1)">
+                      <tr :class="{'table-secondary': true, 'glowing-red2': produktu.stock < produktu.stock_alerta}" v-for="(produktu) in listaProduktu" data-tor="hover:bg-darken(x1)">
                         <td class="table-secondary"><input type="checkbox" :value="produktu.id"v-model="arrayId"></td>
                         <td>{{produktu.izena}}</td>
                         <td>{{produktu.deskribapena}}</td>
@@ -150,6 +151,8 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="js/translations.js"></script>
+        <script src="js/bootstrap/jquery-3.7.1.js"></script>
+        <script src="js/toastr/toastr.js"></script>
         <script src="js/ProduktuakScript.js"></script>
         <script src="js/bootstrap/bootstrap.bundle.js"></script>
     </body>

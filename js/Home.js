@@ -4,12 +4,14 @@ const vue = new Vue({
     el: "#app",
     data: {
         hitzorduArray: [],
+        stockArray: [],
         calendar: null,
         citas: [],
         organizer: null,
         currentLocale: 'es',
         translations: translations,
-        environment: environment,
+        isGlowing: false,
+        environment: environment
     },
     methods: {
         changeEnvironment(env) {
@@ -55,10 +57,35 @@ const vue = new Vue({
             } catch (error) {
                 console.log("Errorea: " + error);
             }
+        },
+        /**
+         * Funtzioa stock alertak ikusteko
+         */
+        async stock_alerta() {
+            try{
+                const response = await fetch(this.environment + '/public/api/produktuakalerta', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    method: "GET"
+                });
+                if (!response.ok) {
+                    throw new Error('Errorea eskaera egiterakoan');
+                }
+                const datuak = await response.json();
+                this.stockArray = datuak;
+            }catch(Error){
+                throw new error("Errorea: "+error)
+            }
         }
     },
     mounted() {
         this.cargarHitzordu();
+        this.stock_alerta();
+        // setInterval(() => {
+        //     this.isGlowing = !this.isGlowing;
+        //   }, 2500);
     }
 });
 

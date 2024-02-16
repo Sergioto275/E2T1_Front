@@ -191,3 +191,40 @@ h5{
   background-color: hsla(0, 0%, 100%, 0.9) !important;
   backdrop-filter: saturate(200%) blur(25px);
 }
+
+.glowing {
+  box-shadow: 0 0 7px rgba(0, 255, 0, 0.7);
+}
+
+@keyframes glow-red {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.7);
+  }
+}
+.glowing-red2 {
+  animation: glow-red-prod 3s infinite;
+  top: 0;
+}
+
+@keyframes glow-red-prod {
+  0%, 100% {
+    box-shadow: -10px 0 10px -5px rgba(255, 0, 0, 0.7);
+  }
+  50% {
+    box-shadow: -20px 0 20px -10px rgba(255, 0, 0, 0.7);
+  }
+}
+
+.glowing-red {
+  animation: glow-red 3s infinite;
+}
+
+.toast {
+  opacity: 1 !important;
+}

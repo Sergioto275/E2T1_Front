@@ -101,6 +101,8 @@ const translations = {
       }
     },
     menu: {
+      alertas: 'Alertas',
+      alertaVacia: 'No hay alertas',
       almacen: {
         titulo: 'Almacen',
         producto: {
@@ -369,6 +371,8 @@ const translations = {
     },
 
     menu: {
+      alertas: 'Alertak',
+      alertaVacia: 'Ez daude alertak',
       almacen: {
         titulo: 'Biltegia',
         producto: {
@@ -539,5 +543,5 @@ const translations = {
   }
 };
 // Host helbidea
-// const environment = 'http://localhost/Erronka2/Back/talde1erronka2';
-const environment = 'https://www.talde1-back.edu:8443';
+const environment = 'http://localhost/Erronka2/Back/talde1erronka2';
+// const environment = 'https://www.talde1-back.edu:8443';

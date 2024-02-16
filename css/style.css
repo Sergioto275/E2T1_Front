@@ -1,4 +1,0 @@
-/* Aplicar opacidad del 100% a los mensajes emergentes de Toastr */
-.toast {
-    opacity: 1 !important;
-}
