@@ -14,133 +14,151 @@
     <body >
         <script src="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.js"></script>
         <div id="app">
-            <header>
-                <ul class="nav nav-pills justify-content-between bg-brown-strong" >
-                    <div class="nav rounded-end border-white border-4 sip bg-brown-light" >
+            <div class="rompe-header">
+                <div class="div-cubridor">
+                    <div class="triangulo"></div>
+                    <div class="triangulo"></div>
+                    <div class="triangulo"></div>
+                    <div class="triangulo"></div>
+                    <div class="triangulo"></div>
+                    <div class="triangulo"></div>
+                    <div class="triangulo"></div>
+                    <div class="triangulo"></div>
+                    <div class="triangulo"></div>
+                    <div class="triangulo"></div>
+                    <div class="triangulo"></div>
+                    <div class="triangulo"></div>
+                </div>
+                <header class="contenedor">
+                    <img src="imagenes/tijeras.png" alt="NyanCat" class="tijeras">
+                    <div class="resplandor"></div>
+                    <ul class="nav nav-pills justify-content-between bg-brown-strong" >
+                        <div class="nav rounded-end border-white border-4 sip bg-brown-light" >
+                            <li class="nav-item">
+                                <a class="nav-link text-white" aria-current="page" href="Login.html">
+                                    <i class="bi bi-box-arrow-left" alt="Logout"></i>
+                                </a>
+                            </li>
+                        </div>
+                        <div class="nav rounded-start border-white border-4 justify-content-evenly ps-1 bg-brown-light w-7">
+                            <li class="nav-item me-3 mt-2">
+                                <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }" @click="changeLanguage('eu')">EU</a>
+                            </li>
+                            <li class="nav-item me-3 mt-2">
+                                <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }" @click="changeLanguage('es')">ES</a>
+                            </li>
+                        </div>
+                    </ul>
+                    <div class="text-center bg-brown-strong" >
+                        <img class="w-25" src="imagenes/Logotipoa.png">
+                    </div>
+                    <ul class="nav nav-pills justify-content-center bg-brown-strong text-skin" >
                         <li class="nav-item">
-                            <a class="nav-link text-white" aria-current="page" href="Login.html">
-                                <i class="bi bi-box-arrow-left" alt="Logout"></i>
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle text-skin" href="#"  role="button"
+                                    data-bs-toggle="dropdown" id="dropdownMenuButton6" aria-expanded="false">
+                                    <strong>{{ translations[currentLocale].menu.almacen.titulo }}</strong>
+                                </button>
+                                <ul class="dropdown-menu menu bg-brown-strong" 
+                                    aria-labelledby="dropdownMenuButton6">
+                                    <li>
+                                        <div div class="dropdown dropend" onclick="event.stopPropagation();">
+                                            <button class="btn text-white dropdown-toggle" type="button"
+                                                id="dropdownMenuButton6" data-bs-toggle="dropdown" aria-expanded="false">
+                                                {{ translations[currentLocale].menu.almacen.producto.titulo }}
+                                            </button>
+                                            <ul class="dropdown-menu menu bg-drop-brown" 
+                                                aria-labelledby="dropdownMenuButton">
+                                                <li><a class="dropdown-item text-white" href="ProduktuakAtera.html">{{
+                                                        translations[currentLocale].menu.almacen.producto.sacar }}</a></li>
+                                                <!-- <li><a class="dropdown-item text-white" href="">{{
+                                                        translations[currentLocale].menu.almacen.producto.historico }}</a></li> -->
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="dropend">
+                                            <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                {{ translations[currentLocale].menu.almacen.material.titulo }}
+                                            </button>
+                                            <ul class="dropdown-menu menu bg-drop-brown" 
+                                                aria-labelledby="dropdownMenuButton">
+                                                <li><a class="dropdown-item text-white" href="MaterialaAtera.html">{{
+                                                        translations[currentLocale].menu.almacen.material.sacar }}</a></li>
+                                                <li><a class="dropdown-item text-white" href="DevolverMaterialTabla.html">{{
+                                                        translations[currentLocale].menu.almacen.material.entregar }}</a></li>
+                                                <!-- <li><a class="dropdown-item text-white" href="">{{
+                                                        translations[currentLocale].menu.almacen.material.historico }}</a></li> -->
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <a class="btn dropdown-toggle text-skin" type="button"  id="dropdownMenuButton3"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <strong>{{ translations[currentLocale].menu.profesor.titulo }}</strong>
+                                </a>
+                                <ul class="dropdown-menu menu bg-brown-strong" 
+                                    aria-labelledby="dropdownMenuButton3">
+                                    <li>
+                                        <div class="dropdown dropend" onclick="event.stopPropagation();">
+                                            <button class="btn text-white dropdown-toggle" type="button"
+                                                id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
+                                                {{ translations[currentLocale].menu.profesor.almacen.titulo }}
+                                            </button>
+                                            <ul class="dropdown-menu menu bg-drop-brown" 
+                                                aria-labelledby="dropdownMenuButton4">
+                                                <li><a class="dropdown-item text-white" href="ProduktuTaula.html">{{
+                                                        translations[currentLocale].menu.profesor.almacen.productos }}</a>
+                                                </li>
+                                                <li><a class="dropdown-item text-white" href="MaterialaTaula.html">{{
+                                                        translations[currentLocale].menu.profesor.almacen.material }}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li><a class="dropdown-item text-white" href="Tratamenduak.html">{{
+                                            translations[currentLocale].menu.profesor.tratamientos }}</a></li>
+                                    <li>
+                                        <div class="dropend">
+                                            <button class="btn text-white dropdown-toggle" type="button"
+                                                id="dropdownMenuButton5" data-bs-toggle="dropdown" aria-expanded="false">
+                                                {{ translations[currentLocale].menu.profesor.alumnado.titulo }}
+                                            </button>
+                                            <ul class="dropdown-menu menu bg-drop-brown" 
+                                                aria-labelledby="dropdownMenuButton5">
+                                                <li><a class="dropdown-item text-white" href="LangileTaula.html">{{
+                                                        translations[currentLocale].menu.profesor.alumnado.alumnos }}</a>
+                                                </li>
+                                                <li><a class="dropdown-item text-white" href="TaldeTaula.html">{{
+                                                        translations[currentLocale].menu.profesor.alumnado.grupos }}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li><a class="dropdown-item text-white" href="OrdutegiTaula.html">{{
+                                            translations[currentLocale].menu.profesor.calendario }}</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn text-skin" href="Tareas.html"  role="button"
+                                aria-expanded="false">
+                                <strong>{{ translations[currentLocale].menu.tareas }}</strong>
                             </a>
                         </li>
-                    </div>
-                    <div class="nav rounded-start border-white border-4 justify-content-evenly ps-1 bg-brown-light w-7">
-                        <li class="nav-item me-3 mt-2">
-                            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }" @click="changeLanguage('eu')">EU</a>
-                          </li>
-                          <li class="nav-item me-3 mt-2">
-                            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }" @click="changeLanguage('es')">ES</a>
-                          </li>
-                    </div>
-                </ul>
-                <div class="text-center bg-brown-strong" >
-                    <img class="w-25" src="imagenes/Logotipoa.png">
-                </div>
-                <ul class="nav nav-pills justify-content-center bg-brown-strong text-skin" >
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <button class="btn dropdown-toggle text-skin" href="#"  role="button"
-                                data-bs-toggle="dropdown" id="dropdownMenuButton6" aria-expanded="false">
-                                <strong>{{ translations[currentLocale].menu.almacen.titulo }}</strong>
-                            </button>
-                            <ul class="dropdown-menu menu bg-brown-strong" 
-                                aria-labelledby="dropdownMenuButton6">
-                                <li>
-                                    <div div class="dropdown dropend" onclick="event.stopPropagation();">
-                                        <button class="btn text-white dropdown-toggle" type="button"
-                                            id="dropdownMenuButton6" data-bs-toggle="dropdown" aria-expanded="false">
-                                            {{ translations[currentLocale].menu.almacen.producto.titulo }}
-                                        </button>
-                                        <ul class="dropdown-menu menu bg-drop-brown" 
-                                            aria-labelledby="dropdownMenuButton">
-                                            <li><a class="dropdown-item text-white" href="ProduktuakAtera.html">{{
-                                                    translations[currentLocale].menu.almacen.producto.sacar }}</a></li>
-                                            <!-- <li><a class="dropdown-item text-white" href="">{{
-                                                    translations[currentLocale].menu.almacen.producto.historico }}</a></li> -->
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="dropend">
-                                        <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            {{ translations[currentLocale].menu.almacen.material.titulo }}
-                                        </button>
-                                        <ul class="dropdown-menu menu bg-drop-brown" 
-                                            aria-labelledby="dropdownMenuButton">
-                                            <li><a class="dropdown-item text-white" href="MaterialaAtera.html">{{
-                                                    translations[currentLocale].menu.almacen.material.sacar }}</a></li>
-                                            <li><a class="dropdown-item text-white" href="DevolverMaterialTabla.html">{{
-                                                    translations[currentLocale].menu.almacen.material.entregar }}</a></li>
-                                            <!-- <li><a class="dropdown-item text-white" href="">{{
-                                                    translations[currentLocale].menu.almacen.material.historico }}</a></li> -->
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <a class="btn dropdown-toggle text-skin" type="button"  id="dropdownMenuButton3"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <strong>{{ translations[currentLocale].menu.profesor.titulo }}</strong>
+                        <li class="nav-item">
+                            <a class="btn text-skin" href="HitzorduTaula.html"  role="button">
+                                <strong>{{ translations[currentLocale].menu.citas }}</strong>
                             </a>
-                            <ul class="dropdown-menu menu bg-brown-strong" 
-                                aria-labelledby="dropdownMenuButton3">
-                                <li>
-                                    <div class="dropdown dropend" onclick="event.stopPropagation();">
-                                        <button class="btn text-white dropdown-toggle" type="button"
-                                            id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
-                                            {{ translations[currentLocale].menu.profesor.almacen.titulo }}
-                                        </button>
-                                        <ul class="dropdown-menu menu bg-drop-brown" 
-                                            aria-labelledby="dropdownMenuButton4">
-                                            <li><a class="dropdown-item text-white" href="ProduktuTaula.html">{{
-                                                    translations[currentLocale].menu.profesor.almacen.productos }}</a>
-                                            </li>
-                                            <li><a class="dropdown-item text-white" href="MaterialaTaula.html">{{
-                                                    translations[currentLocale].menu.profesor.almacen.material }}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li><a class="dropdown-item text-white" href="Tratamenduak.html">{{
-                                        translations[currentLocale].menu.profesor.tratamientos }}</a></li>
-                                <li>
-                                    <div class="dropend">
-                                        <button class="btn text-white dropdown-toggle" type="button"
-                                            id="dropdownMenuButton5" data-bs-toggle="dropdown" aria-expanded="false">
-                                            {{ translations[currentLocale].menu.profesor.alumnado.titulo }}
-                                        </button>
-                                        <ul class="dropdown-menu menu bg-drop-brown" 
-                                            aria-labelledby="dropdownMenuButton5">
-                                            <li><a class="dropdown-item text-white" href="LangileTaula.html">{{
-                                                    translations[currentLocale].menu.profesor.alumnado.alumnos }}</a>
-                                            </li>
-                                            <li><a class="dropdown-item text-white" href="TaldeTaula.html">{{
-                                                    translations[currentLocale].menu.profesor.alumnado.grupos }}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li><a class="dropdown-item text-white" href="OrdutegiTaula.html">{{
-                                        translations[currentLocale].menu.profesor.calendario }}</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn text-skin" href="Tareas.html"  role="button"
-                            aria-expanded="false">
-                            <strong>{{ translations[currentLocale].menu.tareas }}</strong>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn text-skin" href="HitzorduTaula.html"  role="button">
-                            <strong>{{ translations[currentLocale].menu.citas }}</strong>
-                        </a>
-                    </li>
-                </ul>
-            </header>
+                        </li>
+                    </ul>
+                </header>
+            </div>
             <div class="row center mt-3">
                 <div class="col-8 d-flex justify-content-center">
                     <div id="calendarContainer"></div>

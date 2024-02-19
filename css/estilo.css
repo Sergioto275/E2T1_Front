@@ -2,6 +2,105 @@ body {
   font-family: Arial, Helvetica, sans-serif !important;
   overflow-x: hidden !important;
   background-color: #EFEFEF !important;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.rompe-header {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.div-cubridor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #924613; /* Color de fondo del div cubridor */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); /* Rectángulo inicial */
+}
+
+.triangulo {
+  position: absolute;
+  width: 0;
+  height: 100%;
+  border-style: solid;
+  border-width: 0 85px 450px 85px;
+  border-color: transparent transparent #924613 transparent; /* Cambia el color según tus preferencias */
+  display: inline-block;
+  position: relative;
+  top: 0; /* Ajusta este valor según sea necesario para que la punta alcance la parte superior */
+  z-index: 2; /* Asegura que los triángulos estén por encima de los elementos del header */
+  opacity: 1; /* Inicialmente visible */
+  transition: opacity 0.5s ease-in-out; /* Agrega una transición de 0.5 segundos para suavizar el cambio de opacidad */
+}
+
+.tijeras {
+  position: absolute;
+  width: 100px; /* Ajusta el tamaño según tus preferencias */
+  height: auto;
+  bottom: 0;
+  /* background-image: url(''); Ruta a la imagen de tijeras */
+  background-size: cover;
+  animation: moverTijeras 10s linear infinite, desaparecerTriangulos 10s linear infinite;
+}
+
+.resplandor {
+  position: absolute;
+  width: 20px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  animation: aparecerYmoverResplandor 3s linear infinite;
+  transform: skewX(-45deg);
+  opacity: 0;
+}
+
+@keyframes aparecerYmoverResplandor {
+  0% {
+    left: 0;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    left: calc(100% - 20px);
+    opacity: 1;
+  }
+}
+
+@keyframes moverTijeras {
+  0% {
+    left: 0;
+    transform: translateX(0) translateY(0) rotate(45deg) scaleY(1);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(0) translateY(-400px) rotate(-45deg) scaleY(0.2);
+  }
+  20%,40%, 60%, 80% {
+    transform: translateX(0) translateY(0) rotate(45deg) scaleY(1);
+  }
+  100% {
+    left: calc(100% - 100px);
+    transform: translateX(0) translateY(0) rotate(-45deg) scaleY(0.2);
+  }
+}
+
+@keyframes desaparecerTriangulos {
+  0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%, 100% {
+    opacity: 1;
+  }
+  15%, 25%, 35%, 45%, 55%, 65%, 75%, 85%, 95% {
+    opacity: 0;
+  }
+}
+
+.cjslib-month{
+  width: 100%;
 }
 
 .center{
