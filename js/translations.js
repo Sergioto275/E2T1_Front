@@ -3,7 +3,6 @@
 // Testuak euskaraz eta gaztelaniaz
 const translations = {
   es: {
-
     default: {
       editar: 'Editar',
       añadir: 'Añadir',
@@ -268,10 +267,19 @@ const translations = {
       },
       grupo: 'Grupo',
       trabajador: 'Trabajador',
-      materialLibre: 'Material libre'
+      materialLibre: 'Material libre',
+      devolver: {
+        titulo: 'Devolver Material',
+        devuelto: 'Devolver',
+        todos: 'Todos',
+        trabajador: 'Trabajador',
+        codigo: 'Codigo del Material',
+        inicio: 'Fecha Inicio',
+        fin: 'Fecha Fin'
+      }
     },
-
   },
+
   eu: {
     default: {
       editar: 'Editatu',
@@ -538,7 +546,16 @@ const translations = {
       },
       grupo: 'Talde',
       trabajador: 'Langile',
-      materialLibre: 'Material librea'
+      materialLibre: 'Material librea',
+      devolver: {
+        titulo: 'Materiala Bueltatu',
+        devuelto: 'Bueltatu',
+        todos: 'Guztiak',
+        trabajador: 'Langileak',
+        codigo: 'Material Kodea',
+        inicio: 'Hasiera Data',
+        fin: 'Amaiera Data'
+      }
     }
   }
 };

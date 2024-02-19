@@ -42,7 +42,7 @@
         
         <div class="justify-content-center">
             <div class="col-md-10 mt-5 ml-30" >
-              <h1 class="mb-5 offset-md-2">Devolver Material</h1>
+              <h1 class="mb-5 offset-md-2">{{ translations[currentLocale].material.devolver.titulo }}</h1>
               <div>
                 <div class="input-group mb-3 w-50">
                   <input type="date" class="form-select border-black w-25 h-25" aria-label="Default select example" v
@@ -52,10 +52,10 @@
                   </button>
                 </div>      
                 <div class="input-group mb-1 w-50">
-                  <button type="button" class="btn btn-light border-black mb-3" :disabled="arrayId.length<=0" @click="devolver()">Devolver</button>
+                  <button type="button" class="btn btn-light border-black mb-3" :disabled="arrayId.length<=0" @click="devolver()">{{ translations[currentLocale].material.devolver.devuelto }}</button>
                   <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalEditar" :disabled="arrayId.length>1 || arrayId.length<=0" @click="cargarDatosModal()">{{ translations[currentLocale].default.editar }}</button>
                   <select class="form-select border-black w-25 h-25" aria-label="Default select example" v-model="materialFil" @change="fitroMaterial()" aria-placeholder="Grupo">
-                    <option selected>Todos</option>
+                    <option selected>{{ translations[currentLocale].material.devolver.todos }}</option>
                     <option v-for="(devolver) in listaMaterial" :value="devolver.id">{{devolver.izena}}</option>
                   </select>
                   <button type="button"
@@ -67,10 +67,10 @@
                   <table class="table table-striped table-hover w-50 text-center">
                       <tr>
                           <th class="border border-black bg-skin-strong" ></th>
-                          <th class="border border-black bg-skin-strong" >Trabajador</th>
-                          <th class="border border-black bg-skin-strong" >Codigo del material</th>
-                          <th class="border border-black bg-skin-strong" >Fecha Inicio</th>
-                          <th class="border border-black bg-skin-strong" >Fecha Fin</th>
+                          <th class="border border-black bg-skin-strong" >{{ translations[currentLocale].material.devolver.trabajador }}</th>
+                          <th class="border border-black bg-skin-strong" >{{ translations[currentLocale].material.devolver.codigo }}</th>
+                          <th class="border border-black bg-skin-strong" >{{ translations[currentLocale].material.devolver.inicio }}</th>
+                          <th class="border border-black bg-skin-strong" >{{ translations[currentLocale].material.devolver.fin }}</th>
                       </tr>
                       <tr class="table-secondary" v-for="(devolver) in listaDevolver" data-tor="hover:bg-darken(x1)">
                         <td class="table-secondary"><input type="checkbox" :value="devolver.id" v-model="arrayId" :disabled="devolver.amaiera_data!=null"></td>
@@ -94,12 +94,12 @@
                 <div class="modal-body">
                   <label>{{ translations[currentLocale].trabajador.nombre }}:</label><br>
                   <select class="form-select border-black w-100 h-25" aria-label="Default select example" v-model="langileActu" aria-placeholder="Grupo">
-                    <option selected>Todos</option>
+                    <option selected>{{ translations[currentLocale].material.devolver.todos }}</option>
                     <option v-for="(langile) in listaLangile" :value="langile.id">{{langile.izena}}</option>
                   </select><br>
                   <label>{{ translations[currentLocale].trabajador.apellidos }}:</label><br>
                   <select class="form-select border-black w-100 h-25" aria-label="Default select example" v-model="materialActu" aria-placeholder="Grupo">
-                    <option selected>Todos</option>
+                    <option selected>{{ translations[currentLocale].material.devolver.todos }}</option>
                     <option v-for="(material) in listaMaterial" :value="material.id">{{material.izena}}</option>
                   </select><br>
                 </div>
