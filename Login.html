@@ -13,53 +13,62 @@
 <body class="overflow-hidden">
   <!-- Section: Design Block -->
   <section class="background-radial-gradient overflow-hidden">
+    <div id="app">
 
-    <div class="container px-4 px-md-5 text-center text-lg-start my-5 lg-pad">
-      <div class="row gx-lg-5 align-items-center mb-5">
-        <div class="col-md-6 mb-5 mb-lg-0 z-index-10">
-          <img src="imagenes/Logotipoa.png" class="col-lg-9 img-fluid">
-        </div>
 
-        <div class="col-md-6 mb-5 mb-lg-0 position-relative">
-          <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
-          <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+      <div class="container px-4 px-md-5 text-center text-lg-start my-5 lg-pad">
+        <div class="row gx-lg-5 align-items-center mb-5">
+          <div class="col-md-6 mb-5 mb-lg-0 z-index-10">
+            <img src="imagenes/Logotipoa.png" class="col-lg-9 img-fluid">
+          </div>
 
-          <div class="card bg-glass">
-            <div class="card-body px-4 py-5 px-md-5">
-              <form>
-                <!-- 2 column grid layout with text inputs for the first and last names -->
+          <div class="col-md-6 mb-5 mb-lg-0 position-relative">
+            <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+            <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
 
-                <!-- Email input -->
-                <div class="form-outline mb-4">
-                  <input type="text" id="form3Example3" class="form-control" />
-                  <label class="form-label" for="form3Example3">Usuario</label>
-                </div>
+            <div class="card bg-glass">
+              <div class="card-body px-4 py-5 px-md-5">
+                <form>
+                  <!-- 2 column grid layout with text inputs for the first and last names -->
 
-                <!-- Password input -->
-                <div class="form-outline mb-4">
-                  <input type="password" id="form3Example4" class="form-control" />
-                  <label class="form-label" for="form3Example4">Contraseña</label>
-                </div>
+                  <!-- Email input -->
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form3Example3" class="form-control" v-model="usuario" />
+                    <label class="form-label" for="form3Example3">Usuario</label>
+                  </div>
 
-                <!-- Checkbox -->
-                <div class="form-check d-flex justify-content-center mb-4">
-                  <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
-                  <label class="form-check-label" for="form2Example33">
-                    Mostrar Contraseña
-                  </label>
-                </div>
-              </form>
-              <!-- Submit button -->
-              <a href="DistribucionInicial.html">
-                <button class="btn btn-dark btn-block mb-4">
-                  Log In
-                </button>
-              </a>
+                  <!-- Password input -->
+                  <div class="form-outline mb-4">
+                    <input type="password" id="form3Example4" class="form-control" v-model="contrasena" />
+                    <label class="form-label" for="form3Example4">Contraseña</label>
+                  </div>
+
+                  <!-- Checkbox -->
+                  <div class="form-check d-flex justify-content-center mb-4">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
+                    <label class="form-check-label" for="form2Example33">
+                      Mostrar Contraseña
+                    </label>
+                  </div>
+                </form>
+                <!-- Submit button -->
+                <!-- <a href="DistribucionInicial.html"> -->
+                  <button class="btn btn-dark btn-block mb-4" @click="LogIn()">
+                    Log In
+                  </button>
+                <!-- </a> -->
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/bootstrap/jquery-3.7.1.js"></script>
+    <script src="js/toastr/toastr.js"></script>
+    <script src="js/Login.js"></script>
+    <script src="js/bootstrap/bootstrap.bundle.js"></script>
   </section>
   <!-- Section: Design Block -->
 </body>
