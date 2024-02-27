@@ -1,5 +1,5 @@
 body {
-  font-family: Arial, Helvetica, sans-serif !important;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
   overflow-x: hidden !important;
   background-color: #EFEFEF !important;
   height: 100%;
@@ -108,27 +108,27 @@ body {
 }
 
 .bg-brown-strong {
-  background-color: #403A36 !important;
+  background: linear-gradient(to right,#009688, #0d7feb, #6DB8E6) !important;
 }
 
 .bg-brown-light{
-  background-color: #332A21 !important;
+  background-color: #032d55 !important;
 }
 
 .bg-drop-brown{
-  background-color: #665951 !important;
+  background-color: #00539F !important;
 }
 
 .bg-skin-strong{
-  background-color: #BA9471 !important;
+  background-color: #6DB8E6 !important;
 }
 
 .bg-grey-light{
-  background-color: #9E958C !important;
+  background-color: #6DB8E6 !important;
 }
 
 .bg-grey-very-light{
-  background-color: #C9C4C0 !important;
+  background-color: #0271da !important;
 }
 
 .bg-blue-brilliant{
@@ -236,7 +236,7 @@ h5{
 }
 
 .sip {
-  background-color: #332A21;
+  background-color: #032d55;
 }
 
 .mar {
@@ -252,18 +252,18 @@ h5{
 } */
 
 .background-radial-gradient {
-  background-color: #332A21;
+  background-color: #00539F;
   background-image: radial-gradient(650px circle at 0% 0%,
-      #D9914E 15%,
-      #4d3e2f 35%,
-      #403A36 75%,
-      #332A21 80%,
+      #04bba9 15%,
+      #6DB8E6 35%,
+      #4ca9e4 75%,
+      #00539F 80%,
       transparent 100%),
     radial-gradient(1250px circle at 100% 100%,
-      #D9914E 15%,
-      #4d3e2f 35%,
-      #403A36 75%,
-      #332A21 80%,
+    #04bba9 15%,
+    #009688 35%,
+    #6DB8E6 75%,
+    #00539F 80%,
       transparent 100%);
 }
 
@@ -272,7 +272,7 @@ h5{
   width: 220px;
   top: -60px;
   left: -130px;
-  background: radial-gradient(#D9914E, #E6B181);
+  background: radial-gradient(#6DB8E6, #009688);
   overflow: hidden;
 }
 
@@ -282,7 +282,7 @@ h5{
   right: -110px;
   width: 300px;
   height: 300px;
-  background: radial-gradient(#D9914E, #E6B181);
+  background: radial-gradient(#6DB8E6, #00539F);
   overflow: hidden;
 }
 
