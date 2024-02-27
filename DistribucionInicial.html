@@ -45,7 +45,7 @@
         <div class="container-fluid p-3 ml-20" >
             <div class="row">
                 <!-- Columna Izquierda -->
-                <div class="col-lg-5 mx-auto" >
+                <div class="col-lg-5 mx-auto mt-5" >
                     <div class="g-0 position-relative border rounded-5 custom-column shadow bg-grey-light" >
                         <div class="col-md-5 p-2 ps-md-0 mx-auto">
                             <div class="mb-5">
@@ -85,18 +85,25 @@
                     <h5 >{{ translations[currentLocale].tareas.historico }}</h5>
                     <div class="row g-0 position-relative border rounded-3 custom-column shadow bg-grey-very-light"
                         >
-                        <div class="col-md-5 p-2 ps-md-0 mx-auto hm-40-ovrfl" >
+                        <div class="col-md-5 p-1 ps-md-0 mx-auto hm-40-ovrfl" >
                             <div class="mb-3">
-                                <label v-show="listaTxandaLast.length > 0"><b>{{
-                                        translations[currentLocale].tareas.mostrador }}:</b><br></label>
+                                <label v-show="listaTxandaLast.length >= 0">
+                                    <b>{{ translations[currentLocale].tareas.mostrador }}:</b><br>
+                                </label>
                                 <label v-for="(valor) in listaTxandaLast"
-                                    v-if="valor.mota=='M' && typeof valor.id_langilea !== 'number' && Number.isInteger(valor.id_langilea)==false">
-                                    {{valor.id_langilea}}<br></label>
-                                <label v-show="listaTxandaLast.length > 0" class="mt-5"><b>{{
-                                        translations[currentLocale].tareas.limpieza }}:</b><br></label>
+                                       v-if="valor.mota == 'M' && typeof valor.id_langilea !== 'number' && !Number.isInteger(valor.id_langilea)">
+                                       - {{ valor.id_langilea }}<br>
+                                </label>
+                                <label v-show="listaTxandaLast.every(valor => !isNaN(valor.id_langilea))" class="mb-5">No hay datos esta semana<br></label>
+                            
+                                <label v-show="listaTxandaLast.length >= 0" class="mt-5">
+                                    <b>{{ translations[currentLocale].tareas.limpieza }}:</b><br>
+                                </label>
                                 <label v-for="(valor) in listaTxandaLast"
-                                    v-if="valor.mota=='G' && typeof valor.id_langilea !== 'number' && Number.isInteger(valor.id_langilea)==false">
-                                    {{valor.id_langilea}}</label>
+                                       v-if="valor.mota == 'G' && typeof valor.id_langilea !== 'number' && !Number.isInteger(valor.id_langilea)">
+                                    - {{ valor.id_langilea }}
+                                </label>
+                                <label v-show="listaTxandaLast.every(valor => !isNaN(valor.id_langilea))">No hay datos esta semana<br></label>
                             </div>
                         </div>
                     </div>
@@ -119,7 +126,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="table-secondary" v-for="(valor) in listaTxandaContLimpia">
+                                            <tr class="table-primary" v-for="(valor) in listaTxandaContLimpia">
                                                 <th>{{ valor.id_langilea }}</th>
                                                 <td>{{ valor.mostrador }}</td>
                                                 <td>{{ valor.limpieza }}</td>
