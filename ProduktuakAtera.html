@@ -67,7 +67,7 @@
           <div class="input-group mb-1 w-50 mx-auto">
             <select class="form-select border-black w-25 h-25" aria-label="Selecciona una marca" v-model="markaFil"
               @change="aplicarFiltros()" aria-placeholder="Marka">
-              <option selected value="first">{{ translations[currentLocale].productos.marca }}</option>
+              <option selected value="first">{{ translations[currentLocale].productos.marcaFil }}</option>
               <!-- Agrega las opciones de marca -->
               <option v-for="(marka) in listaMarka" :value="marka">{{marka}}</option>
             </select>

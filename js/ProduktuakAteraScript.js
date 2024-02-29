@@ -23,6 +23,7 @@ new Vue({
     existe: null,
     nombreFil: "",
     kategoriaFil: "first",
+    markaFil: "first",
     currentLocale: 'es',
     translations: translations,
     environment: environment,
@@ -34,7 +35,6 @@ new Vue({
     listaLangile: [],
     langileFil: '',
     listaMarka: [],
-    markaFil: ''
   },
   methods: {
     /* Function: modalAtera
@@ -599,20 +599,16 @@ new Vue({
     
         let filteredData = datuak;
     
-        if (this.markaFil && !this.kategoriaFil) {
+        if (this.kategoriaFil=="first" && this.markaFil!="first") {
           filteredData = filteredData.filter(produktu =>
             produktu.marka.toLowerCase() === this.markaFil
           );
-        }
-    
-        if (this.kategoriaFil && !this.markaFil) {
+        }else if (this.markaFil=="first" && this.kategoriaFil!="first" ) {
           filteredData = filteredData.filter(produktu =>
             produktu.id_kategoria === this.kategoriaFil &&
             (produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00")
           );
-        }
-
-        if(this.kategoriaFil && this.markaFil ){
+        }else if(this.kategoriaFil && this.markaFil ){
           filteredData = filteredData.filter(produktu =>
             produktu.marka.toLowerCase() === this.markaFil &&
             produktu.id_kategoria === this.kategoriaFil &&

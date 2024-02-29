@@ -23,6 +23,7 @@ new Vue({
     existe: null,
     nombreFil: "",
     kategoriaFil: "first",
+    
     currentLocale: 'es',
     translations: translations,
     environment: environment,
