@@ -9,8 +9,8 @@ new Vue({
     methods: {
         async LogIn() {
             try {
-                const user = this.contrasena;
-                const pass = this.usuario;
+                const pass = this.contrasena;
+                const user = this.usuario;
                 const jsonSortu = {
                     "username": user,
                     "pasahitza": pass,
@@ -30,16 +30,32 @@ new Vue({
                 if (!response.ok) {
                     console.log('Errorea sortzerakoan');
                     toastr.error("Esta mal");
+                }else{
+                    console.log('Esta bien');
+                    toastr.success("Esta bien");
+                    document.cookie = user;
+                    window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Home.html";
                 }
-                console.log(response);
-                toastr.success("Esta bien");
-
-    
             } catch (error) {
                 console.log('Errorea: ', error);
                 toastr.error("Error gordo");
             }
+        },
+        // Sortzeko modalean aurreko langilearen datuak ez agertzeko
+        borrarTodasLasCookies() {
+            var cookies = document.cookie.split(";"); // Obtener todas las cookies
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i];
+                var eqPos = cookie.indexOf("=");
+                var nombre = eqPos > -1 ? cookie.substr(0, eqPos) : cookie; // Obtener el nombre de la cookie
+                document.cookie = nombre + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/"; // Establecer la fecha de expiración en el pasado
+            }
+            console.log('Borrado');
         }
+    },
+    mounted() {
+      // Konponentea sortzen denean taula kargatzeko
+      this.borrarTodasLasCookies();
     }
 
     });
