@@ -97,6 +97,10 @@ new Vue({
               }
             }
           }
+          if(this.grupoSeleccionado==""){
+            console.log("llegue")
+            this.grupoSeleccionado=this.listaOrdutegi[0]["kodea"];
+          }
            this.cargaLangile();
 
         })
@@ -242,6 +246,7 @@ new Vue({
                 console.log(this.listaTxandaLast[a].id_langilea)
               }
             }
+            
 
           } catch (error) {
 
