@@ -129,7 +129,8 @@ const translations = {
           alumnos: 'Alumnos',
           grupos: 'Grupos'
         },
-        calendario: 'Calendario'
+        calendario: 'Calendario',
+        ticket:'Ticket'
       },
       tareas: 'Tareas',
       citas: 'Citas',
@@ -408,7 +409,8 @@ const translations = {
           alumnos: 'Ikasle',
           grupos: 'Taldeak'
         },
-        calendario: 'Ordutegia'
+        calendario: 'Ordutegia',
+        ticket:'Ticket'
       },
       tareas: 'Zereginak',
       citas: 'Hitzorduak',
