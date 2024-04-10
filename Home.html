@@ -96,10 +96,10 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" >
                             <div class="dropdown">
                                 <a class="btn dropdown-toggle text-skin" type="button"  id="dropdownMenuButton3"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    data-bs-toggle="dropdown" aria-expanded="false" v-if="!isAdmin">
                                     <strong>{{ translations[currentLocale].menu.profesor.titulo }}</strong>
                                 </a>
                                 <ul class="dropdown-menu menu bg-brown-strong" 
@@ -111,7 +111,7 @@
                                                 {{ translations[currentLocale].menu.profesor.almacen.titulo }}
                                             </button>
                                             <ul class="dropdown-menu menu bg-drop-brown" 
-                                                aria-labelledby="dropdownMenuButton4">
+                                                aria-labelledby="dropdownMenuButton4" id="profesorDropdown">
                                                 <li><a class="dropdown-item text-white" href="ProduktuTaula.html">{{
                                                         translations[currentLocale].menu.profesor.almacen.productos }}</a>
                                                 </li>

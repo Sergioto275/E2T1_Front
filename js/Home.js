@@ -11,7 +11,8 @@ const vue = new Vue({
         currentLocale: 'es',
         translations: translations,
         isGlowing: false,
-        environment: environment
+        environment: environment,
+        isAdmin: false 
     },
     methods: {
         changeEnvironment(env) {
@@ -78,11 +79,22 @@ const vue = new Vue({
             }catch(Error){
                 throw new error("Errorea: "+error)
             }
-        }
+        },
+
+        checkCookie() {
+            console.log(document.cookie)
+            // Verificar si la cookie es igual a "Admin"
+            const isAdminCookie = document.cookie == 'admin';
+            this.isAdmin = isAdminCookie;
+            console.log(isAdminCookie);
+        },
+    
+        
     },
     mounted() {
         this.cargarHitzordu();
         this.stock_alerta();
+        this.checkCookie();
         // setInterval(() => {
         //     this.isGlowing = !this.isGlowing;
         //   }, 2500);
