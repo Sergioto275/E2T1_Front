@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="eu">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tickets</title>
+    <link href="css/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="css/estilo.css" rel="stylesheet">
+    <link href="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.css" rel="stylesheet" />
+    <link href="css/bootstrap/icons/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="js/toastr/build/toastr.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <div id="app">
+      <!--HEADER-->
+      <header>
+        <ul class="nav nav-pills bg-brown-strong">
+          <div class="nav rounded-end border-white border-4 sip">
+            <li class="nav-item">
+              <a class="nav-link text-white" aria-current="page" href="Login.html">
+                <i class="bi bi-box-arrow-left" alt="Logout"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="Home.html">
+                <i class="bi bi-house" alt="Home"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="Home.html">
+                <i class="bi bi-arrow-left" alt="Back"></i>
+              </a>
+            </li>
+            <li class="nav-item me-3 mt-2">
+              <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }" @click="changeLanguage('eu')" >EU</a >
+            </li>
+            <li class="nav-item me-3 mt-2">
+              <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }" @click="changeLanguage('es')" >ES</a >
+            </li>
+          </div>
+        </ul>
+      </header>
+    <div class="text-center m-0-15">
+      <h1>{{translations[currentLocale].menu.profesor.ticket}}</h1>
+      <div class="row justify-content-evenly">
+        <div v-for="(ticket) in ticketArray" class="card col-4 me-3 w-25 mb-3 p-0" >
+              <img src="imagenes/default-tratamenduak.jpg" class="card-img-top h-50" alt="default">
+              <div class="card-body">
+                  <h5 class="card-title">{{ ticket.izena }} | {{ ticket.hasiera_ordua_erreala }} - {{ ticket.amaiera_ordua_erreala }}</h5>
+                  <p v-for="(tratamendua) in ticket.ticket" class="card-text">{{ tratamendua.izena }} - {{ tratamendua.prezioa }}</p>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/bootstrap/jquery-3.7.1.js"></script>
+    <script src="js/toastr/toastr.js"></script>
+    <script src="js/TicketScript.js"></script>
+    <script src="js/bootstrap/bootstrap.bundle.js"></script>
+  </body>
+</html>

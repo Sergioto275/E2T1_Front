@@ -14,7 +14,7 @@
     <body >
         <script src="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.js"></script>
         <div id="app">
-            <div class="rompe-header">
+            <!-- <div class="rompe-header">
                 <div class="div-cubridor">
                     <div class="triangulo"></div>
                     <div class="triangulo"></div>
@@ -28,10 +28,10 @@
                     <div class="triangulo"></div>
                     <div class="triangulo"></div>
                     <div class="triangulo"></div>
-                </div>
+                </div> -->
                 <header class="contenedor">
-                    <img src="imagenes/tijeras.png" alt="NyanCat" class="tijeras">
-                    <div class="resplandor"></div>
+                    <!-- <img src="imagenes/tijeras.png" alt="NyanCat" class="tijeras">
+                    <div class="resplandor"></div> -->
                     <ul class="nav nav-pills justify-content-between bg-brown-strong" >
                         <div class="nav rounded-end border-white border-4 sip bg-brown-light" >
                             <li class="nav-item">
@@ -99,7 +99,7 @@
                         <li class="nav-item" >
                             <div class="dropdown">
                                 <a class="btn dropdown-toggle text-skin" type="button"  id="dropdownMenuButton3"
-                                    data-bs-toggle="dropdown" aria-expanded="false" v-if="!isAdmin">
+                                    data-bs-toggle="dropdown" aria-expanded="false" v-if="isAdmin">
                                     <strong>{{ translations[currentLocale].menu.profesor.titulo }}</strong>
                                 </a>
                                 <ul class="dropdown-menu menu bg-brown-strong" 
@@ -111,7 +111,7 @@
                                                 {{ translations[currentLocale].menu.profesor.almacen.titulo }}
                                             </button>
                                             <ul class="dropdown-menu menu bg-drop-brown" 
-                                                aria-labelledby="dropdownMenuButton4" id="profesorDropdown">
+                                                aria-labelledby="dropdownMenuButton4" >
                                                 <li><a class="dropdown-item text-white" href="ProduktuTaula.html">{{
                                                         translations[currentLocale].menu.profesor.almacen.productos }}</a>
                                                 </li>
@@ -142,6 +142,8 @@
                                     </li>
                                     <li><a class="dropdown-item text-white" href="OrdutegiTaula.html">{{
                                             translations[currentLocale].menu.profesor.calendario }}</a></li>
+                                    <li><a class="dropdown-item text-white" href="Ticket.html">{{
+                                        translations[currentLocale].menu.profesor.ticket }}</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -158,7 +160,7 @@
                         </li>
                     </ul>
                 </header>
-            </div>
+            <!-- </div> -->
             <div class="row center mt-3">
                 <div class="col-8 d-flex justify-content-center">
                     <div id="calendarContainer"></div>
@@ -192,4 +194,5 @@
             });
         </script>
     </body>
+>>>>>>> b82fd1fd5a8ea8f09eaa9adb9f2be88bdaa29f95
 </html>
