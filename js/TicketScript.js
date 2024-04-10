@@ -1,5 +1,5 @@
-// Class: TratamenduakScript
-// Tratamenduak kudeatzen duen metodo guztiak batzen dituen script-a.
+// Class: TicketScript
+// Ticket kudeatzen duen metodo guztiak batzen dituen script-a.
 const vue = new Vue({
     el: "#app",
     data: {

@@ -252,7 +252,11 @@ const translations = {
       añadirKategoria:"Añadir Categoria",
       editarCentro:"Editar Categoria",
       color:"Utiliza Colorantes",
-      extras:"Extras"
+      extras:"Extras",
+      crearKat:"Añadir Categoria",
+      crear:"Añadir Tratamiento",
+      editarKat:"Editar Categoria",
+      editar:"Editar Tratamiento"
     },
 
     material: {
@@ -532,7 +536,11 @@ const translations = {
       añadirKategoria:"Kategoria Gehitu",
       editarCentro:"Kategoria Editatu",
       color:"Kolorea erabiltzen da",
-      extras:"Extrak"
+      extras:"Extrak",
+      crearKat:"Kategoria Gehitu",
+      crear:"Tratamendua Gehitu",
+      editarKat:"Kategoria editatu",
+      editar:"Tratamendua editatu"
     },
 
     material: {

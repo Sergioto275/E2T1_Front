@@ -28,6 +28,24 @@ const vue = new Vue({
         changeEnvironment(env) {
             this.environment = env;
         },
+        limpiar_campos()
+        {
+            this.tratKategoriaIdCrear= null;
+            this.tratKategoriaIdEditar= null;
+            this.kategoriaIzenaEditar= null;
+            this.kategoriaColorEditar= null;
+            this.kategoriaExtraEditar= null;
+            this.kategoriaIzenaCrear= null;
+            this.kategoriaColorCrear= null;
+            this.kategoriaExtraCrear= null;
+            this.idSelec= null;
+            this.izenaCrear= null;
+            this.izenaEditar= null;
+            this.kanpoko_prezioaCrear= null;
+            this.kanpoko_prezioaEditar= null;
+            this.etxeko_prezioaCrear= null;
+            this.etxeko_prezioaEditar= null;
+        },
         /* Function: changeLanguage
         Hizkuntza aldatzeko.
         Parameters:
@@ -97,8 +115,9 @@ const vue = new Vue({
                     "izena": this.izenaCrear,
                     "etxeko_prezioa": this.etxeko_prezioaCrear,
                     "kanpoko_prezioa": this.kanpoko_prezioaCrear,
-                    "id_katTratamendu": this.tratKategoriaIdEditar
+                    "id_katTratamendu": this.tratKategoriaIdCrear
                 }
+                console.log(JSON.stringify(json_data))
                 const response = await fetch(this.environment + '/public/api/tratamenduak', {
                     headers: {
                         'Content-Type': 'application/json',
@@ -116,6 +135,7 @@ const vue = new Vue({
                 //Modal-a ixteko ondo egiten duenean
                 const modalCrearElement = document.getElementById('exampleModalCrear');
                 const modalInst = bootstrap.Modal.getInstance(modalCrearElement);
+                this.limpiar_campos();
                 modalInst.hide();
             } catch (error) {
                 throw new Error("Error en carga de citas disponibles:" + error);
@@ -162,6 +182,7 @@ const vue = new Vue({
                 //Modal-a ixteko ondo egiten duenean
                 const modalCrearElement = document.getElementById('exampleModalAñadirKategoria');
                 const modalInst = bootstrap.Modal.getInstance(modalCrearElement);
+                this.limpiar_campos();
                 modalInst.hide();
             } catch (error) {
                 throw new Error("Error en carga de citas disponibles:" + error);
@@ -196,6 +217,7 @@ const vue = new Vue({
                 //Modal-a ixteko ondo egiten duenean
                 const modalEditarElement = document.getElementById('exampleModalEditar');
                 const modalInst = bootstrap.Modal.getInstance(modalEditarElement);
+                this.limpiar_campos();
                 modalInst.hide();
             } catch (error) {
                 throw new Error("Error en carga de citas disponibles:" + error);
@@ -243,6 +265,7 @@ const vue = new Vue({
                 //Modal-a ixteko ondo egiten duenean
                 const modalCrearElement = document.getElementById('exampleModalEditarKategoria');
                 const modalInst = bootstrap.Modal.getInstance(modalCrearElement);
+                this.limpiar_campos();
                 modalInst.hide();
             } catch (error) {
                 throw new Error("Error en carga de citas disponibles:" + error);
@@ -274,6 +297,7 @@ const vue = new Vue({
                 //Modal-a ixteko ondo egiten duenean
                 const modalCrearElement = document.getElementById('exampleModalEditarKategoria');
                 const modalInst = bootstrap.Modal.getInstance(modalCrearElement);
+                this.limpiar_campos();
                 modalInst.hide();
             } catch (error) {
                 throw new Error("Error en carga de citas disponibles:" + error);
@@ -326,6 +350,7 @@ const vue = new Vue({
                 //Modal-a ixteko ondo egiten duenean
                 const modalEditarElement = document.getElementById('exampleModalEditar');
                 const modalInst = bootstrap.Modal.getInstance(modalEditarElement);
+                this.limpiar_campos();
                 modalInst.hide();
             } catch (error) {
                 throw new Error("Error en carga de citas disponibles:" + error);
