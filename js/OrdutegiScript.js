@@ -297,10 +297,18 @@ new Vue({
       this.abizenaCrear = "";
       this.kodeaCrear = "";
     },
+    checkCookie() {
+      if(document.cookie==""){
+          window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
+      }else if(document.cookie=="ikasle"){
+        window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Home.html";
+      }
+  },
     
   },
   mounted() {
     // Llama a tu función cargarPagina cuando el componente se monta
     this.cargaLangile();
+    this.checkCookie();
   }
 });

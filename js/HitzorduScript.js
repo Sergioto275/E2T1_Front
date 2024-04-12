@@ -699,7 +699,14 @@ const vue = new Vue({
             } else {
                 this.error = false;
             }
-        }
+        },
+        checkCookie() {
+            if(document.cookie==""){
+                window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
+            }else if(document.cookie=="lanbide"){
+              window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Home.html";
+            }
+      },
     },
     mounted() {
         this.dataSelec = this.lortuData();
@@ -707,6 +714,7 @@ const vue = new Vue({
         this.cargarComboBox();
         this.cargarTratamenduak();
         this.cargarHitzordu();
+        this.checkCookie();
     }
 });
 

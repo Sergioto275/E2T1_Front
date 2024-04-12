@@ -325,10 +325,18 @@ new Vue({
     changeLanguage(locale) {
       console.log('Cambiando a:', locale);
       this.currentLocale = locale;
-    }
+    },
+    checkCookie() {
+      if(document.cookie==""){
+          window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
+      }else if(document.cookie=="ikasle"){
+        window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Home.html";
+      }
+},
   },
   mounted() {
     // Konponentea sortzen denean taula kargatzeko
     this.cargaLangile();
+    this.checkCookie();
   }
 });

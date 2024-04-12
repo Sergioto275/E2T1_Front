@@ -397,10 +397,16 @@ new Vue({
             } catch (error) {
                 console.error('Errorea:', error);
             }
-            }
+            },
+            checkCookie() {
+                if(document.cookie==""){
+                    window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
+                }
+          }
     },
     mounted() {
         // Konponentea sortzen denean taula kargatzeko
         this.cargaTxanda();
+        this.checkCookie();
     }
 });

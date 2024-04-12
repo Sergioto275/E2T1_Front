@@ -12,7 +12,8 @@ const vue = new Vue({
         translations: translations,
         isGlowing: false,
         environment: environment,
-        isAdmin: false 
+        isAdmin: false ,
+        isLanbide: false 
     },
     methods: {
         changeEnvironment(env) {
@@ -85,8 +86,13 @@ const vue = new Vue({
             console.log(document.cookie)
             // Verificar si la cookie es igual a "Admin"
             const isAdminCookie = document.cookie == 'admin';
+            const isLanbideCookie = document.cookie == 'lanbide';
             this.isAdmin = isAdminCookie;
-            console.log(isAdminCookie);
+            this.isLanbide = isLanbideCookie;
+
+            if(document.cookie==""){
+                window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
+            }
         },
     
         

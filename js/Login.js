@@ -34,7 +34,12 @@ new Vue({
                     console.log('Esta bien');
                     toastr.success("Esta bien");
                     document.cookie = user;
-                    window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Home.html";
+                    if(user=="ikasle"){
+                        window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/DistribucionInicial.html";
+                    }else{
+                        window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Home.html";
+
+                    }
                 }
             } catch (error) {
                 console.log('Errorea: ', error);
@@ -43,14 +48,8 @@ new Vue({
         },
         // Sortzeko modalean aurreko langilearen datuak ez agertzeko
         borrarTodasLasCookies() {
-            var cookies = document.cookie.split(";"); // Obtener todas las cookies
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = cookies[i];
-                var eqPos = cookie.indexOf("=");
-                var nombre = eqPos > -1 ? cookie.substr(0, eqPos) : cookie; // Obtener el nombre de la cookie
-                document.cookie = nombre + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/"; // Establecer la fecha de expiración en el pasado
-            }
-            console.log('Borrado');
+            document.cookie = ' = ; expires = Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            console.log(document.cookie);
         }
     },
     mounted() {

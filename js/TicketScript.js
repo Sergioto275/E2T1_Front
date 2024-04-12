@@ -41,10 +41,18 @@ const vue = new Vue({
             } catch (error) {
                 console.log("Errorea: " + error);
             }
-        }
+        },
+        checkCookie() {
+            if(document.cookie==""){
+                window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
+            }else if(document.cookie=="ikasle"){
+              window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Home.html";
+            }
+      },
     },
     mounted() {
         this.cargarTicket();
+        this.checkCookie();
     }
 });
 

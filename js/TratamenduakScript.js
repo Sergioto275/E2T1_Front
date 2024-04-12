@@ -356,10 +356,18 @@ const vue = new Vue({
                 throw new Error("Error en carga de citas disponibles:" + error);
             }
         },
+        checkCookie() {
+            if(document.cookie==""){
+                window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
+            }else if(document.cookie=="ikasle"){
+              window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Home.html";
+            }
+      },
     },
     mounted() {
         this.cargarTratamenduak();
         this.cargarCategorias();
+        this.checkCookie();
     }
 });
 
