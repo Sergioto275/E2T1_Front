@@ -35,9 +35,9 @@ new Vue({
                     toastr.success("Esta bien");
                     document.cookie = user;
                     if(user=="ikasle"){
-                        window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/DistribucionInicial.html";
+                        window.location.href = "http://localhost/Erronka2/Front/DistribucionInicial.html";
                     }else{
-                        window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Home.html";
+                        window.location.href = "http://localhost/Erronka2/Front/Home.html";
 
                     }
                 }

@@ -29,6 +29,9 @@ new Vue({
     environment: environment,
   },
   methods: {
+    retroceder(){
+      window.history.back();
+  },
     changeEnvironment(env) {
       this.environment = env;
     },
@@ -314,16 +317,19 @@ new Vue({
           throw new Error('Errorea eskaera egiterakoan');
         }
 
-        this.listaProduktu = [];
-        const datuak = await response.json();
+        this.listaProduktu = await response.json();
 
-        this.listaProduktu = datuak
-          .filter(produktu => produktu.id_kategoria === this.kategoriaFil && produktu.ezabatze_data === null || produktu.id_kategoria === this.kategoriaFil && produktu.ezabatze_data === "0000-00-00 00:00:00");
-
+        this.listaProduktu = this.listaProduktu
+        .filter(produktu => produktu.izena.includes(this.nombreFil) && (produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00"));
+       
+        if (this.kategoriaFil!="first") {
+          this.listaProduktu = this.listaProduktu
+            .filter(produktu => produktu.id_kategoria === this.kategoriaFil && (produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00"));
+        }
+        
         if (this.listaProduktu.length == 0) {
-          this.listaProduktu = datuak
+          this.listaProduktu = this.listaProduktu
             .filter(produktu => produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00");
-
         }
 
       } catch (error) {

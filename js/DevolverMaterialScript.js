@@ -9,7 +9,7 @@ new Vue({
       abizenaActu:"",
       kodeaActu:"",
       izenaCrear:"",
-      materialFil:"",
+      materialFil:"first",
       abizenaCrear:"",
       kodeaCrear:"",
       materialActu:"",
@@ -35,6 +35,9 @@ new Vue({
       }
     },
     methods: {
+      retroceder(){
+        window.history.back();
+      },
       changeEnvironment(env){
         this.environment = env;
       },
@@ -221,29 +224,29 @@ new Vue({
     Combobox-a kargatzeko metodoa.
     */ 
     async cargarComboBox() {
+      // try {
+      //   const response = await fetch(this.environment + '/public/api/langileak', {
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       'Access-Control-Allow-Origin': '*'
+      //     },
+      //   });
+
+      //   if (!response.ok) {
+      //     console.log('Errorea eskera egiterakoan');
+      //     throw new Error('Errorea eskaera egiterakoan');
+      //   }
+      //   const datuak = await response.json();
+      //   this.listaLangile = datuak
+      //     .filter(talde => talde.ezabatze_data === null || talde.ezabatze_data === "0000-00-00 00:00:00");
+
+      //   console.log(this.listaLangile);
+      // } catch (error) {
+      //   console.error('Errorea: ', error);
+      // }
+
       try {
-        const response = await fetch(this.environment + '/public/api/langileak', {
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
-          },
-        });
-
-        if (!response.ok) {
-          console.log('Errorea eskera egiterakoan');
-          throw new Error('Errorea eskaera egiterakoan');
-        }
-        const datuak = await response.json();
-        this.listaLangile = datuak
-          .filter(talde => talde.ezabatze_data === null || talde.ezabatze_data === "0000-00-00 00:00:00");
-
-        console.log(this.listaLangile);
-      } catch (error) {
-        console.error('Errorea: ', error);
-      }
-
-      try {
-        const response = await fetch(this.environment + '/public/api/materiala', {
+        const response = await fetch(this.environment + '/public/api/materialAgrup', {
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'
@@ -256,7 +259,6 @@ new Vue({
         }
         const datuak = await response.json();
         this.listaMaterial = datuak
-          .filter(talde => talde.ezabatze_data === null || talde.ezabatze_data === "0000-00-00 00:00:00");
 
         console.log(this.listaMaterial);
       } catch (error) {
@@ -330,28 +332,32 @@ new Vue({
     
         this.listaDevolver = [];
         const datuak = await response.json();
-    
-        if(this.fechaFil!=""){
+        console.log(datuak)
+        if (this.materialFil!="first") {
+          console.log("b")
           this.listaDevolver = datuak
-          .filter(kolore => {
+          .filter(kolore =>
             // Comparar si la fecha en formato "2024-01-31 08:36:23" incluye la fecha en formato "31/01/2024"
-            return kolore.id_materiala == this.materialFil && (kolore.ezabatze_data === null || kolore.ezabatze_data === "0000-00-00 00:00:00");
-          });
-        }else{
-          this.listaDevolver = datuak
-          .filter(kolore => {
-            // Comparar si la fecha en formato "2024-01-31 08:36:23" incluye la fecha en formato "31/01/2024"
-            return kolore.hasiera_data.includes(this.fechaFil) && kolore.id_materiala == this.materialFil && (kolore.ezabatze_data === null || kolore.ezabatze_data === "0000-00-00 00:00:00");
-          });
+             kolore.materiala_izena.includes(this.materialFil) && (kolore.ezabatze_data === null || kolore.ezabatze_data === "0000-00-00 00:00:00")
+          );
         }
+
+        // if(this.fechaFil!=""){
+        //   console.log("a")
+        //   this.listaDevolver = datuak
+        //   .filter(kolore => 
+        //     // Comparar si la fecha en formato "2024-01-31 08:36:23" incluye la fecha en formato "31/01/2024"
+        //     kolore.hasiera_data.includes(this.fechaFil) && kolore.id_materiala == this.materialFil && (kolore.ezabatze_data === null || kolore.ezabatze_data === "0000-00-00 00:00:00")
+        //   );
+        // }
         
     
         if (this.listaDevolver.length == 0) {
           this.listaDevolver = datuak
-            .filter(kolore => {
+            .filter(kolore => 
               // Comparar si la fecha en formato "2024-01-31 08:36:23" incluye la fecha en formato "31/01/2024"
-              return (kolore.ezabatze_data === null || kolore.ezabatze_data === "0000-00-00 00:00:00");
-            });
+              (kolore.ezabatze_data === null || kolore.ezabatze_data === "0000-00-00 00:00:00")
+            );
         }
     
       } catch (error) {

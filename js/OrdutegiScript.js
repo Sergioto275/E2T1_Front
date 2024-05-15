@@ -28,6 +28,9 @@ new Vue({
     grupoFil: "",
   },
   methods: {
+    retroceder(){
+      window.history.back();
+  },
     changeEnvironment(env) {
       this.environment = env;
     },

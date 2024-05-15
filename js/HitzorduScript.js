@@ -53,6 +53,9 @@ const vue = new Vue({
         environment: environment
     },
     methods: {
+        retroceder(){
+            window.history.back();
+        },
         /* Function: limpiar_campos
         Formularioetan aldagai guztiak ezabatzeko.
         */
