@@ -6,6 +6,10 @@ new Vue({
         contrasena: "",
         usuario: "",
         environment: environment,
+        userError: false, // Nueva propiedad para manejar el estado de error del usuario
+        passError: false, // Nueva propiedad para manejar el estado de error de la contraseña
+        showPassword: false, // Nueva propiedad para controlar la visibilidad de la contraseña
+
     },
     methods: {
         changeEnvironment(env) {
@@ -33,11 +37,16 @@ new Vue({
 
                 if (!response.ok) {
                     console.log('Errorea sortzerakoan');
-                    toastr.error("Esta mal");
+                    toastr.success("Esta mal");
+                    this.userError = true; // Marcar error en el usuario
+                    this.passError = true; // Marcar error en la contraseña
+
                 }else{
                     console.log('Esta bien');
                     toastr.success("Esta bien");
                     document.cookie = user;
+                    this.userError = false; // Marcar error en el usuario
+                    this.passError = false; // Marcar error en la contraseña
                     if(user=="ikasle"){
                         window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/DistribucionInicial.html";
                     }else{
@@ -54,6 +63,9 @@ new Vue({
         borrarTodasLasCookies() {
             document.cookie = ' = ; expires = Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
             console.log(document.cookie);
+        },
+        togglePasswordVisibility() {
+            this.showPassword = !this.showPassword;
         }
     },
     mounted() {

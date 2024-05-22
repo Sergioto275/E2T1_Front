@@ -8,14 +8,17 @@
   <link href="css/bootstrap/bootstrap.css" rel="stylesheet">
   <link href="css/estilo.css" rel="stylesheet">
   <link href="css/bootstrap/icons/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    .error {
+      border: 1px solid red !important;
+    }
+  </style>
 </head>
 
 <body class="overflow-hidden">
   <!-- Section: Design Block -->
   <section class="background-radial-gradient overflow-hidden">
     <div id="app">
-
-
       <div class="container px-4 px-md-5 text-center text-lg-start my-5 lg-pad">
         <div class="row gx-lg-5 align-items-center mb-5">
           <div class="col-md-6 mb-5 mb-lg-0 z-index-10">
@@ -29,34 +32,31 @@
             <div class="card bg-glass">
               <div class="card-body px-4 py-5 px-md-5">
                 <form>
-                  <!-- 2 column grid layout with text inputs for the first and last names -->
-
-                  <!-- Email input -->
+                  <!-- Usuario input -->
                   <div class="form-outline mb-4">
-                    <input type="text" id="form3Example3" class="form-control" v-model="usuario" />
+                    <input type="text" id="form3Example3" class="form-control" v-model="usuario" :class="{'error': userError}" />
                     <label class="form-label" for="form3Example3">Usuario</label>
                   </div>
-
-                  <!-- Password input -->
+                  
+                  <!-- Contraseña input -->
                   <div class="form-outline mb-4">
-                    <input type="password" id="form3Example4" class="form-control" v-model="contrasena" />
+                    <input :type="showPassword ? 'text' : 'password'" id="form3Example4" class="form-control" v-model="contrasena" :class="{'error': passError}" />
                     <label class="form-label" for="form3Example4">Contraseña</label>
                   </div>
 
                   <!-- Checkbox -->
                   <div class="form-check d-flex justify-content-center mb-4">
-                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
+                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" v-model="showPassword" />
                     <label class="form-check-label" for="form2Example33">
                       Mostrar Contraseña
                     </label>
                   </div>
                 </form>
+                
                 <!-- Submit button -->
-                <!-- <a href="DistribucionInicial.html"> -->
-                  <button class="btn btn-dark btn-block mb-4" @click="LogIn()">
-                    Log In
-                  </button>
-                <!-- </a> -->
+                <button class="btn btn-dark btn-block mb-4" @click="LogIn">
+                  Log In
+                </button>
               </div>
             </div>
           </div>

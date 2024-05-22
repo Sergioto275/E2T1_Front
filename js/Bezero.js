@@ -161,6 +161,7 @@ new Vue({
 
         if (!response.ok) {
           console.log('Errorea sortzerakoan');
+          toastr.error("Datos con formato erroneos")
           throw new Error('Errorea sortzerakoan');
         }
 
