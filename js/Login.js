@@ -4,9 +4,13 @@ new Vue({
     el: '#app',
     data: {
         contrasena: "",
-        usuario: ""
+        usuario: "",
+        environment: environment,
     },
     methods: {
+        changeEnvironment(env) {
+            this.environment = env;
+          },
         async LogIn() {
             try {
                 const pass = this.contrasena;
@@ -18,7 +22,7 @@ new Vue({
 
                 console.log(JSON.stringify(jsonSortu));
 
-                const response = await fetch('http://localhost/Erronka2/Back/talde1erronka2/public/api/login', {
+                const response = await fetch(this.environment + '/public/api/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json', // Indicar el tipo de contenido como JSON
