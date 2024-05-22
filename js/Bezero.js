@@ -1,4 +1,3 @@
-
 // Class: Bezero
 // Bezeroa-ren metodo guztiak batzen dituen script-a.
 new Vue({
@@ -52,9 +51,6 @@ new Vue({
     }
   },
   methods: {
-    retroceder(){
-      window.history.back();
-    },
     changeEnvironment(env) {
       this.environment = env;
     },

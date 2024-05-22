@@ -25,9 +25,6 @@ const vue = new Vue({
         environment: environment
     },
     methods: {
-        retroceder(){
-            window.history.back();
-        },
         changeEnvironment(env) {
             this.environment = env;
         },

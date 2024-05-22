@@ -30,9 +30,6 @@ new Vue({
     }
   },
   methods: {
-    retroceder(){
-      window.history.back();
-  },
     /* Function: modalAtera
     Modala kargatzeko.
     */

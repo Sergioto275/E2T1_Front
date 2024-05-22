@@ -37,9 +37,6 @@ new Vue({
     listaMarka: [],
   },
   methods: {
-    retroceder(){
-      window.history.back();
-  },
     /* Function: modalAtera
     Modala erakusteko.
     */
@@ -572,7 +569,7 @@ new Vue({
         const datuak = await response.json();
 
         this.listaProduktu = datuak
-          .filter(produktu => produktu.izena.includes(this.nombreFil) && (produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00"));
+          .filter(produktu => produktu.izena.includes(this.nombreFil) && produktu.ezabatze_data === null || produktu.izena.includes(this.nombreFil) && produktu.ezabatze_data === "0000-00-00 00:00:00");
 
         if (this.listaProduktu.length == 0) {
           this.listaProduktuById = datuak
@@ -601,36 +598,26 @@ new Vue({
         const datuak = await response.json();
     
         let filteredData = datuak;
-        console.log(filteredData)
-
-        if (this.nombreFil != null) {
-          filteredData = filteredData
-          .filter(produktu => produktu.izena.includes(this.nombreFil) && (produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00"));
-        }
     
-        if (this.markaFil!="first") {
+        if (this.kategoriaFil=="first" && this.markaFil!="first") {
           filteredData = filteredData.filter(produktu =>
             produktu.marka.toLowerCase() === this.markaFil
           );
-        }
-        
-        if (this.kategoriaFil!="first" ) {
+        }else if (this.markaFil=="first" && this.kategoriaFil!="first" ) {
           filteredData = filteredData.filter(produktu =>
             produktu.id_kategoria === this.kategoriaFil &&
             (produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00")
           );
+        }else if(this.kategoriaFil && this.markaFil ){
+          filteredData = filteredData.filter(produktu =>
+            produktu.marka.toLowerCase() === this.markaFil &&
+            produktu.id_kategoria === this.kategoriaFil &&
+            (produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00")
+          );
         }
-
-        // else if(this.kategoriaFil && this.markaFil ){
-        //   console.log("d")
-        //   filteredData = filteredData.filter(produktu =>
-        //     produktu.marka.toLowerCase() === this.markaFil &&
-        //     produktu.id_kategoria === this.kategoriaFil &&
-        //     (produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00")
-        //   );
-        // }
+    
         this.listaProduktu = filteredData;
-
+    
         if (this.listaProduktu.length === 0) {
           this.listaProduktu = datuak.filter(produktu =>
             produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00"
