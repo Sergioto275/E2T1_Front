@@ -30,6 +30,9 @@ new Vue({
     }
   },
   methods: {
+    retroceder(){
+      window.history.back();
+  },
     changeEnvironment(env) {
       this.environment = env;
     },

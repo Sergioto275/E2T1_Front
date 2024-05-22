@@ -12,7 +12,7 @@ const vue = new Vue({
         translations: translations,
         isGlowing: false,
         environment: environment,
-        isAdmin: false ,
+        isAdmin: true ,
         isLanbide: false 
     },
     methods: {
