@@ -9,7 +9,6 @@ new Vue({
         userError: false, // Nueva propiedad para manejar el estado de error del usuario
         passError: false, // Nueva propiedad para manejar el estado de error de la contraseña
         showPassword: false, // Nueva propiedad para controlar la visibilidad de la contraseña
-
     },
     methods: {
         changeEnvironment(env) {
@@ -48,9 +47,9 @@ new Vue({
                     this.userError = false; // Marcar error en el usuario
                     this.passError = false; // Marcar error en la contraseña
                     if(user=="ikasle"){
-                        window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/DistribucionInicial.html";
+                        window.location.href = "http://localhost/erronka2/Front/DistribucionInicial.html";
                     }else{
-                        window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Home.html";
+                        window.location.href = "http://localhost/erronka2/Front/Home.html";
 
                     }
                 }

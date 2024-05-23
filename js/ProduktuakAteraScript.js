@@ -316,7 +316,7 @@ new Vue({
         this.listaLangile = datuak
           .filter(langile => langile.kodea === this.taldeFil || this.taldeFil === null)
           .filter(langile => langile.ezabatze_data === null || langile.ezabatze_data === "0000-00-00 00:00:00");
-        
+
         this.langileFil = '';
       } catch (error) {
         console.error('Errorea:', error);
@@ -551,7 +551,6 @@ new Vue({
     Filtroa izenaren arabera.
     */
     async filtroNombre() {
-      console.log("hola")
       try {
         const response = await fetch(this.environment + '/public/api/produktuak', {
           headers: {
@@ -567,13 +566,19 @@ new Vue({
 
         this.listaProduktu = [];
         const datuak = await response.json();
+        const nombreFilLower = this.nombreFil.toLowerCase();
 
         this.listaProduktu = datuak
-          .filter(produktu => produktu.izena.includes(this.nombreFil) && produktu.ezabatze_data === null || produktu.izena.includes(this.nombreFil) && produktu.ezabatze_data === "0000-00-00 00:00:00");
+          .filter(produktu =>
+          (produktu.izena.toLowerCase().includes(nombreFilLower) &&
+            (produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00"))
+          );
 
         if (this.listaProduktu.length == 0) {
           this.listaProduktuById = datuak
-            .filter(produktu => produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00");
+            .filter(produktu =>
+              (produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00")
+            );
         }
 
       } catch (error) {
@@ -588,36 +593,36 @@ new Vue({
             'Access-Control-Allow-Origin': '*'
           },
         });
-    
+
         if (!response.ok) {
           console.log('Errorea eskera egiterakoan');
           throw new Error('Errorea eskaera egiterakoan');
         }
-    
+
         this.listaProduktu = [];
         const datuak = await response.json();
-    
+
         let filteredData = datuak;
-    
-        if (this.kategoriaFil=="first" && this.markaFil!="first") {
+
+        if (this.kategoriaFil == "first" && this.markaFil != "first") {
           filteredData = filteredData.filter(produktu =>
             produktu.marka.toLowerCase() === this.markaFil
           );
-        }else if (this.markaFil=="first" && this.kategoriaFil!="first" ) {
+        } else if (this.markaFil == "first" && this.kategoriaFil != "first") {
           filteredData = filteredData.filter(produktu =>
             produktu.id_kategoria === this.kategoriaFil &&
             (produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00")
           );
-        }else if(this.kategoriaFil && this.markaFil ){
+        } else if (this.kategoriaFil && this.markaFil) {
           filteredData = filteredData.filter(produktu =>
             produktu.marka.toLowerCase() === this.markaFil &&
             produktu.id_kategoria === this.kategoriaFil &&
             (produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00")
           );
         }
-    
+
         this.listaProduktu = filteredData;
-    
+
         if (this.listaProduktu.length === 0) {
           this.listaProduktu = datuak.filter(produktu =>
             produktu.ezabatze_data === null || produktu.ezabatze_data === "0000-00-00 00:00:00"
@@ -637,10 +642,10 @@ new Vue({
       this.currentLocale = locale;
     },
     checkCookie() {
-      if(document.cookie==""){
-          window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
+      if (document.cookie == "") {
+        window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
       }
-}
+    }
   },
   mounted() {
     // Konponentea sortzen denean taula kargatzeko

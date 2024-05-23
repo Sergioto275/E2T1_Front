@@ -119,15 +119,15 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <label>{{ translations[currentLocale].trabajador.nombre }}:</label><br>
+                  <label>{{ translations[currentLocale].material.trabajador }}:</label><br>
                   <select class="form-select border-black w-100 h-25" aria-label="Default select example" v-model="langileActu" aria-placeholder="Grupo">
                     <option selected>{{ translations[currentLocale].material.devolver.todos }}</option>
-                    <option v-for="(langile) in listaLangile" :value="langile.id">{{langile.izena}}</option>
+                    <option v-for="(langile) in listaLangile" :value="langile.id">{{langile.izena}} {{langile.abizenak}}</option>
                   </select><br>
-                  <label>{{ translations[currentLocale].trabajador.apellidos }}:</label><br>
+                  <label>{{ translations[currentLocale].material.titulo }}:</label><br>
                   <select class="form-select border-black w-100 h-25" aria-label="Default select example" v-model="materialActu" aria-placeholder="Grupo">
                     <option selected>{{ translations[currentLocale].material.devolver.todos }}</option>
-                    <option v-for="(material) in listaMaterial" :value="material.id">{{material.izena}}</option>
+                    <option v-for="(material) in listaMaterial" :value="material.id">{{material.izena}} - {{material.etiketa}}</option>
                   </select><br>
                 </div>
                 <div class="modal-footer">

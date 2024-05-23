@@ -91,7 +91,7 @@ const vue = new Vue({
             this.isLanbide = isLanbideCookie;
 
             if(document.cookie==""){
-                window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
+                window.location.href = "http://localhost/erronka2/Front/Login.html";
             }
         },
     
