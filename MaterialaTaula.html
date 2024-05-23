@@ -33,10 +33,12 @@
             </a>
           </li>
           <li class="nav-item me-3 mt-2">
-            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }" @click="changeLanguage('eu')" >EU</a >
+            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }"
+              @click="changeLanguage('eu')">EU</a>
           </li>
           <li class="nav-item me-3 mt-2">
-            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }" @click="changeLanguage('es')" >ES</a >
+            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }"
+              @click="changeLanguage('es')">ES</a>
           </li>
         </div>
       </ul>
@@ -55,19 +57,21 @@
               @click="cargarDatosModal()">{{ translations[currentLocale].default.editar }}</button>
             <button type="button" class="btn btn-light border-black mb-3" :disabled="arrayId.length<=0"
               @click="borrar()">{{ translations[currentLocale].default.borrar }}</button>
-              <input type="text" class="form-control" placeholder="" aria-label="Recipient's username"
-              aria-describedby="basic-addon2" v-model="nombreFil" @input="filtroNombre()" maxlength="100" style="height: fit-content;">
-            <button type="button" class="btn btn-light border-black" @click="cargaMaterial()" style="height: fit-content;">
+            <input type="text" class="form-control" placeholder="" aria-label="Recipient's username"
+              aria-describedby="basic-addon2" v-model="nombreFil" @input="filtroNombre()" maxlength="100"
+              style="height: fit-content;">
+            <button type="button" class="btn btn-light border-black" @click="cargaMaterial()"
+              style="height: fit-content;">
               <i class="bi bi-arrow-clockwise"></i>
             </button>
           </div>
 
           <table class="table table-striped table-hover w-50 text-center">
             <tr>
-              <th class="border border-black bg-skin-strong" ></th>
-              <th class="border border-black bg-skin-strong" >{{
+              <th class="border border-black bg-skin-strong"></th>
+              <th class="border border-black bg-skin-strong">{{
                 translations[currentLocale].material.etiqueta }}</th>
-              <th class="border border-black bg-skin-strong" >{{
+              <th class="border border-black bg-skin-strong">{{
                 translations[currentLocale].material.nombre }}</th>
             </tr>
             <tr class="table-secondary" v-for="(material) in listaFiltradaPorNombre" data-tor="hover:bg-darken(x1)">
@@ -80,10 +84,10 @@
       </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade mt-20vh" id="exampleModalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-      >
+    <div class="modal fade mt-20vh" id="exampleModalEditar" tabindex="-1" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
       <div class="modal-dialog">
-        <div class="modal-content bg-skin-strong" >
+        <div class="modal-content bg-skin-strong">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">{{ translations[currentLocale].material.modal.editar }}
             </h1>
@@ -99,17 +103,18 @@
           <div class="modal-footer">
             <button type="button" class="btn bg-black text-white" data-bs-dismiss="modal">{{
               translations[currentLocale].default.salir }}</button>
-            <button type="button" class="btn bg-black text-white" @click="actuDatosModal()" :disabled="etiketaActu === '' || izenaActu === ''">{{
+            <button type="button" class="btn bg-black text-white" @click="actuDatosModal()"
+              :disabled="etiketaActu === '' || izenaActu === ''">{{
               translations[currentLocale].default.guardar }}</button>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="modal fade mt-20vh" id="exampleModalCrear" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-      >
+    <div class="modal fade mt-20vh" id="exampleModalCrear" tabindex="-1" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
       <div class="modal-dialog">
-        <div class="modal-content bg-skin-strong" >
+        <div class="modal-content bg-skin-strong">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabelCrear">{{
               translations[currentLocale].trabajador.modal.añadir }}</h1>
@@ -124,7 +129,8 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{
               translations[currentLocale].default.salir }}</button>
-            <button type="button" class="btn btn-primary" @click="createDatosModal()" :disabled="etiketaCrear === ''|| izenaCrear === ''">{{
+            <button type="button" class="btn btn-primary" @click="createDatosModal()"
+              :disabled="etiketaCrear === ''|| izenaCrear === ''">{{
               translations[currentLocale].default.guardar }}</button>
           </div>
         </div>

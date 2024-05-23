@@ -16,6 +16,7 @@ new Vue({
     currentLocale: 'es',
     translations: translations,
     environment: environment,
+    searchTimeout: null,
   },
   methods: {
     changeEnvironment(env) {
@@ -217,9 +218,10 @@ new Vue({
 
         this.listaTalde = [];
         const datuak = await response.json();
+        const nombreFilLower = this.nombreFil.toLowerCase();
 
         this.listaTalde = datuak
-          .filter(bezero => bezero.kodea.includes(this.nombreFil) && bezero.ezabatze_data === null || bezero.kodea.includes(this.nombreFil) && bezero.ezabatze_data === "0000-00-00 00:00:00");
+          .filter(bezero => bezero.kodea.toLowerCase().includes(nombreFilLower) && bezero.ezabatze_data === null || bezero.kodea.includes(this.nombreFil) && bezero.ezabatze_data === "0000-00-00 00:00:00");
 
         if (this.listaTalde.length == 0) {
           this.listaTalde = datuak
@@ -251,12 +253,12 @@ new Vue({
       this.kodeaCrear = "";
     },
     checkCookie() {
-      if(document.cookie==""){
-          window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
-      }else if(document.cookie=="ikasle"){
+      if (document.cookie == "") {
+        window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
+      } else if (document.cookie == "ikasle") {
         window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Home.html";
       }
-},
+    },
   },
   mounted() {
     // Konponentea sortzen denean taula kargatzeko

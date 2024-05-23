@@ -33,10 +33,12 @@
             </a>
           </li>
           <li class="nav-item me-3 mt-2">
-            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }" @click="changeLanguage('eu')" >EU</a >
+            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }"
+              @click="changeLanguage('eu')">EU</a>
           </li>
           <li class="nav-item me-3 mt-2">
-            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }" @click="changeLanguage('es')" >ES</a >
+            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }"
+              @click="changeLanguage('es')">ES</a>
           </li>
         </div>
       </ul>
@@ -70,14 +72,14 @@
                 <div class="taula-2">
                   <table class="table table-striped table-hover w-50 text-center">
                     <tr>
-                      <th class="border border-black bg-skin-strong" ></th>
-                      <th class="border border-black bg-skin-strong" >{{
+                      <th class="border border-black bg-skin-strong"></th>
+                      <th class="border border-black bg-skin-strong">{{
                         translations[currentLocale].trabajador.nombre }}</th>
-                      <th class="border border-black bg-skin-strong" >{{
+                      <th class="border border-black bg-skin-strong">{{
                         translations[currentLocale].trabajador.apellidos }}</th>
                     </tr>
-                    <tr class="table-secondary" v-for="(bezero) in listaFiltradaPorNombre" data-tor="hover:bg-darken(x1)"
-                      @click="cargaFitxa(bezero.id)">
+                    <tr class="table-secondary" v-for="(bezero) in listaFiltradaPorNombre"
+                      data-tor="hover:bg-darken(x1)" @click="cargaFitxa(bezero.id)">
                       <td class="table-secondary"><input type="radio" :value="bezero.id" v-model="arrayId"
                           :disabled="bezero.id=='no'"></td>
                       <td>{{bezero.izena}}</td>
@@ -135,8 +137,10 @@
                 <div class="taula-3">
                   <table class="table table-striped table-hover w-50 text-center">
                     <tr v-for="(bezeroa) in bezeroSeleccionado">
-                      <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.nombreape }}</th>
-                      <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.telefono }}</th>
+                      <th class="border border-black bg-skin-strong">{{translations[currentLocale].fichas.nombreape }}
+                      </th>
+                      <th class="border border-black bg-skin-strong">{{translations[currentLocale].fichas.telefono }}
+                      </th>
                       <td colspan="5" class="border border-black">{{bezeroa.telefonoa}}</td>
 
                     </tr>
@@ -145,17 +149,21 @@
                       </td>
                     </tr>
                     <tr v-for="(bezeroa) in bezeroSeleccionado">
-                      <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.sensible }}</th>
+                      <th class="border border-black bg-skin-strong">{{translations[currentLocale].fichas.sensible }}
+                      </th>
                       <td class="border border-black" colspan="6">{{bezeroa.azal_sentikorra}}</td>
                     </tr>
                     <tr>
-                      <th class="border border-black bg-skin-strong" ></th>
-                      <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.fecha }} </th>
-                      <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.tinte }}</th>
-                      <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.casa }}</th>
-                      <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.cantidad }}</th>
-                      <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.volumenes }}</th>
-                      <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.observaciones }}</th>
+                      <th class="border border-black bg-skin-strong"></th>
+                      <th class="border border-black bg-skin-strong">{{translations[currentLocale].fichas.fecha }} </th>
+                      <th class="border border-black bg-skin-strong">{{translations[currentLocale].fichas.tinte }}</th>
+                      <th class="border border-black bg-skin-strong">{{translations[currentLocale].fichas.casa }}</th>
+                      <th class="border border-black bg-skin-strong">{{translations[currentLocale].fichas.cantidad }}
+                      </th>
+                      <th class="border border-black bg-skin-strong">{{translations[currentLocale].fichas.volumenes }}
+                      </th>
+                      <th class="border border-black bg-skin-strong">{{translations[currentLocale].fichas.observaciones
+                        }}</th>
                     </tr>
                     <tr class="table-secondary" v-for="(fitxa) in listaKolore" data-tor="hover:bg-darken(x1)">
                       <td class="table-secondary"><input type="checkbox" :value="fitxa.id" v-model="arrayId2"></td>
@@ -177,11 +185,12 @@
 
     <!-- Modal -->
     <div class="modal fade mt-20vh" id="modalCrearCliente" tabindex="-1" aria-labelledby="modalCrearClienteLabel"
-      aria-hidden="true" >
+      aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content lamodal">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">{{translations[currentLocale].fichas.añadirCliente.titulo }}</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              {{translations[currentLocale].fichas.añadirCliente.titulo }}</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -210,7 +219,8 @@
       <div class="modal-dialog">
         <div class="modal-content lamodal">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">{{translations[currentLocale].fichas.modificarCliente.titulo }}</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              {{translations[currentLocale].fichas.modificarCliente.titulo }}</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -239,7 +249,8 @@
       <div class="modal-dialog">
         <div class="modal-content lamodal">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">{{translations[currentLocale].fichas.añadirRegistro.titulo }}</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              {{translations[currentLocale].fichas.añadirRegistro.titulo }}</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -274,9 +285,10 @@
     <div class="modal fade" id="modalEditarResgistro" tabindex="-1" aria-labelledby="modalCrearClienteLabel"
       aria-hidden="true">
       <div class="modal-dialog">
-        <div class="modal-content bg-skin-strong" >
+        <div class="modal-content bg-skin-strong">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">{{translations[currentLocale].fichas.editarRegistro.titulo }}</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              {{translations[currentLocale].fichas.editarRegistro.titulo }}</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">

@@ -9,10 +9,8 @@ const vue = new Vue({
         hitzorduak: [],
         rowspanAux: [],
         langile_asignado: 'nadie Asignado',
-        // eserlekua: null,
         generado: false,
         asignado: false,
-        // ordua: null,
         langileTratamenduak: [],
         tratamenduKategoria: [],
         tratamenduKategoriaTaula: [],
@@ -23,7 +21,6 @@ const vue = new Vue({
         taldeArray: [],
         langileArray: [],
         eserlekuKop: [],
-        // citasMostradas: [],
         hoursArray: [],
         idLangile: null,
         idTalde: null,
@@ -58,29 +55,29 @@ const vue = new Vue({
         Formularioetan aldagai guztiak ezabatzeko.
         */
         limpiar_campos() {
-            this.langile_asignado= 'nadie Asignado';
-            this.langileTratamenduak= [];
-            this.tratamenduKategoriaTaula= [];
+            this.langile_asignado = 'nadie Asignado';
+            this.langileTratamenduak = [];
+            this.tratamenduKategoriaTaula = [];
             this.precioextra = null;
-            this.tratamenduSelec= [];
-            this.langileArray= [];
-            this.idLangile= null;
-            this.idTalde= null;
-            this.dataTest= null;
-            this.citaSelec= null;
-            this.idSelec= null;
-            this.izenaSelec= null;
-            this.hasOrduaTest= null;
-            this.amaOrduaTest= null;
-            this.eserlekuaCrear= null;
-            this.eserlekuaEditar= null;
-            this.izenaCrear= null;
-            this.telfCrear= null;
-            this.deskCrear= null;
-            this.etxekoCrear= null;
-            this.dataEditar= null;
-            this.hasOrduaEditar= null;
-            this.amaOrduaEditar= null;
+            this.tratamenduSelec = [];
+            this.langileArray = [];
+            this.idLangile = null;
+            this.idTalde = null;
+            this.dataTest = null;
+            this.citaSelec = null;
+            this.idSelec = null;
+            this.izenaSelec = null;
+            this.hasOrduaTest = null;
+            this.amaOrduaTest = null;
+            this.eserlekuaCrear = null;
+            this.eserlekuaEditar = null;
+            this.izenaCrear = null;
+            this.telfCrear = null;
+            this.deskCrear = null;
+            this.etxekoCrear = null;
+            this.dataEditar = null;
+            this.hasOrduaEditar = null;
+            this.amaOrduaEditar = null;
             this.izenaEditar = null;
             this.telfEditar = null;
             this.deskEditar = null;
@@ -420,7 +417,7 @@ const vue = new Vue({
             }
             this.cargar_asientos();
         },
-        async cargar_asientos(){
+        async cargar_asientos() {
             try {
                 const response2 = await fetch(this.environment + '/public/api/langileak/count/' + this.dataSelec, {
                     headers: {
@@ -506,8 +503,8 @@ const vue = new Vue({
                 }
                 toastr.success(this.translations[this.currentLocale].default.crear);
                 await this.cargarHitzordu();
-                this.limpiar_campos();                
-            }catch(error){
+                this.limpiar_campos();
+            } catch (error) {
                 throw new Error("Ez da sortu".error);
             }
         },
@@ -704,12 +701,12 @@ const vue = new Vue({
             }
         },
         checkCookie() {
-            if(document.cookie==""){
+            if (document.cookie == "") {
                 window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
-            }else if(document.cookie=="lanbide"){
-              window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Home.html";
+            } else if (document.cookie == "lanbide") {
+                window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Home.html";
             }
-      },
+        },
     },
     mounted() {
         this.dataSelec = this.lortuData();

@@ -12,8 +12,8 @@ const vue = new Vue({
         translations: translations,
         isGlowing: false,
         environment: environment,
-        isAdmin: false ,
-        isLanbide: false 
+        isAdmin: false,
+        isLanbide: false
     },
     methods: {
         changeEnvironment(env) {
@@ -30,7 +30,7 @@ const vue = new Vue({
         },
         /* Function: cargarHitzordu
         Hitzorduak kargatzeko.
-        */        
+        */
         async cargarHitzordu() {
             document.getElementById('organizerContainer').innerHTML = "";
             try {
@@ -64,7 +64,7 @@ const vue = new Vue({
          * Funtzioa stock alertak ikusteko
          */
         async stock_alerta() {
-            try{
+            try {
                 const response = await fetch(this.environment + '/public/api/produktuakalerta', {
                     headers: {
                         'Content-Type': 'application/json',
@@ -77,8 +77,8 @@ const vue = new Vue({
                 }
                 const datuak = await response.json();
                 this.stockArray = datuak;
-            }catch(Error){
-                throw new error("Errorea: "+error)
+            } catch (Error) {
+                throw new error("Errorea: " + error)
             }
         },
 
@@ -90,20 +90,17 @@ const vue = new Vue({
             this.isAdmin = isAdminCookie;
             this.isLanbide = isLanbideCookie;
 
-            if(document.cookie==""){
+            if (document.cookie == "") {
                 window.location.href = "http://localhost/erronka2/Front/Login.html";
             }
         },
-    
-        
+
+
     },
     mounted() {
         this.cargarHitzordu();
         this.stock_alerta();
         this.checkCookie();
-        // setInterval(() => {
-        //     this.isGlowing = !this.isGlowing;
-        //   }, 2500);
     }
 });
 

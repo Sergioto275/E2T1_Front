@@ -43,12 +43,12 @@ const vue = new Vue({
             }
         },
         checkCookie() {
-            if(document.cookie==""){
+            if (document.cookie == "") {
                 window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
-            }else if(document.cookie=="ikasle"){
-              window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Home.html";
+            } else if (document.cookie == "ikasle") {
+                window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Home.html";
             }
-      },
+        },
     },
     mounted() {
         this.cargarTicket();

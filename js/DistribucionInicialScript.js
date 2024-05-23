@@ -18,14 +18,14 @@ new Vue({
     translations: translations,
     environment: environment,
   },
-  
+
   methods: {
     changeEnvironment(env) {
       this.environment = env;
     },
     /* Function: cargaLangile
     Langileak kargatzeko.
-    */ 
+    */
     async cargaLangile() {
       try {
         const response = await fetch(this.environment + '/public/api/langileak', {
@@ -45,7 +45,7 @@ new Vue({
         this.listaLangile = datuak
           .filter(langile => langile.ezabatze_data == null && langile.kodea == this.grupoSeleccionado || langile.ezabatze_data == "0000-00-00 00:00:00" && langile.kodea == this.grupoSeleccionado);
 
-          console.log(this.listaLangile)
+        console.log(this.listaLangile)
         this.cargarTxanda();
       } catch (error) {
         console.error('Errorea:', error);
@@ -53,7 +53,7 @@ new Vue({
     },
     /* Function: cargarTalde
     Taldeak kargatzeko.
-    */ 
+    */
     async cargarTalde() {
       try {
         const response = await fetch(this.environment + '/public/api/taldeak', {
@@ -93,15 +93,15 @@ new Vue({
               const fecha2SoloFecha = new Date(fechaEjemplo.getFullYear(), fechaEjemplo.getMonth(), fechaEjemplo.getDate());
               if (fecha1SoloFecha.getTime() === fecha2SoloFecha.getTime()) {
                 console.log("HOla")
-                this.grupoSeleccionado=datos[i]["kodea"];
+                this.grupoSeleccionado = datos[i]["kodea"];
               }
             }
           }
-          if(this.grupoSeleccionado==""){
+          if (this.grupoSeleccionado == "") {
             console.log("llegue")
-            this.grupoSeleccionado=this.listaOrdutegi[0]["kodea"];
+            this.grupoSeleccionado = this.listaOrdutegi[0]["kodea"];
           }
-           this.cargaLangile();
+          this.cargaLangile();
 
         })
         .catch(error => {
@@ -111,7 +111,7 @@ new Vue({
     },
     /* Function: cargarTxanda
     Txanda guztiak kargatzeko.
-    */ 
+    */
     async cargarTxanda() {
       this.listaTxandaCont = []
       this.listaTxandaLast = []
@@ -200,7 +200,7 @@ new Vue({
 
         this.listaTxandaContLimpia = this.listaTxandaCont
           .filter(langile => isNaN(langile.id_langilea));
-        
+
 
         console.log(this.listaTxandaContLimpia);
 
@@ -246,21 +246,21 @@ new Vue({
                 console.log(this.listaTxandaLast[a].id_langilea)
               }
             }
-            
+
 
           } catch (error) {
 
           }
         }
 
-        
+
       } catch (error) {
         console.error('Errorea: ', error);
       }
     },
     /* Function: createDatos
     Datu berriak sortzeko.
-    */ 
+    */
     async createDatos() {
       try {
         const id_langilea = this.langileSeleccionado;
@@ -276,7 +276,7 @@ new Vue({
         const sortze_data = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         const jsonSortu = {
           "id_langilea": id_langilea,
-          "kodea":kodea,
+          "kodea": kodea,
           "mota": mota,
           "data": sortze_data,
           "sortze_data": sortze_data
@@ -294,7 +294,7 @@ new Vue({
 
         if (!response.ok) {
           toastr.error(this.translations[this.currentLocale].default.exist);
-          console.log(response+'Errorea sortzerakoan');
+          console.log(response + 'Errorea sortzerakoan');
           throw new Error('Errorea sortzerakoan');
         }
 
@@ -312,16 +312,16 @@ new Vue({
     Hizkuntza aldatzeko.
     Parameters:
       locale - Hizkuntza.
-    */ 
+    */
     changeLanguage(locale) {
       console.log('Cambiando a:', locale);
       this.currentLocale = locale;
     },
     checkCookie() {
-      if(document.cookie==""){
-          window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
+      if (document.cookie == "") {
+        window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
       }
-}
+    }
   },
 
 

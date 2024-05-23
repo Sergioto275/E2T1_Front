@@ -1,70 +1,86 @@
 <!DOCTYPE html>
 <html lang="eu">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Tratamientos</title>
-    <link href="css/bootstrap/bootstrap.css" rel="stylesheet" />
-    <link href="css/estilo.css" rel="stylesheet">
-    <link href="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.css" rel="stylesheet" />
-    <link href="css/bootstrap/icons/font/bootstrap-icons.css" rel="stylesheet" />
-    <link href="js/toastr/build/toastr.css" rel="stylesheet">
-  </head>
-  <body>
 
-    <div id="app">
-      <!--HEADER-->
-      <header>
-        <ul class="nav nav-pills bg-brown-strong">
-          <div class="nav rounded-end border-white border-4 sip">
-            <li class="nav-item">
-              <a class="nav-link text-white" aria-current="page" href="Login.html">
-                <i class="bi bi-box-arrow-left" alt="Logout"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="Home.html">
-                <i class="bi bi-house" alt="Home"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="Home.html">
-                <i class="bi bi-arrow-left" alt="Back"></i>
-              </a>
-            </li>
-            <li class="nav-item me-3 mt-2">
-              <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }" @click="changeLanguage('eu')" >EU</a >
-            </li>
-            <li class="nav-item me-3 mt-2">
-              <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }" @click="changeLanguage('es')" >ES</a >
-            </li>
-          </div>
-        </ul>
-      </header>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tratamientos</title>
+  <link href="css/bootstrap/bootstrap.css" rel="stylesheet" />
+  <link href="css/estilo.css" rel="stylesheet">
+  <link href="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.css"
+    rel="stylesheet" />
+  <link href="css/bootstrap/icons/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="js/toastr/build/toastr.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div id="app">
+    <!--HEADER-->
+    <header>
+      <ul class="nav nav-pills bg-brown-strong">
+        <div class="nav rounded-end border-white border-4 sip">
+          <li class="nav-item">
+            <a class="nav-link text-white" aria-current="page" href="Login.html">
+              <i class="bi bi-box-arrow-left" alt="Logout"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="Home.html">
+              <i class="bi bi-house" alt="Home"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="Home.html">
+              <i class="bi bi-arrow-left" alt="Back"></i>
+            </a>
+          </li>
+          <li class="nav-item me-3 mt-2">
+            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }"
+              @click="changeLanguage('eu')">EU</a>
+          </li>
+          <li class="nav-item me-3 mt-2">
+            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }"
+              @click="changeLanguage('es')">ES</a>
+          </li>
+        </div>
+      </ul>
+    </header>
     <div class="text-center m-0-15">
       <h1>{{ translations[currentLocale].tratamientos.titulo }}</h1>
       <div class="input-group mb-1 w-50">
-        <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalCrear">{{ translations[currentLocale].default.añadir }}</button>        
-        <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalAñadirKategoria">{{ translations[currentLocale].tratamientos.añadirKategoria }}</button>        
-        <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalEditarKategoria">{{ translations[currentLocale].tratamientos.editarCentro }}</button>        
+        <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal"
+          data-bs-target="#exampleModalCrear">{{ translations[currentLocale].default.añadir }}</button>
+        <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal"
+          data-bs-target="#exampleModalAñadirKategoria">{{ translations[currentLocale].tratamientos.añadirKategoria
+          }}</button>
+        <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal"
+          data-bs-target="#exampleModalEditarKategoria">{{ translations[currentLocale].tratamientos.editarCentro
+          }}</button>
       </div>
       <div class="row justify-content-evenly">
-        <div v-for="(tratamendua) in tratamenduArray" class="card col-4 me-3 w-25 mb-3 p-0" >
-              <img src="imagenes/default-tratamenduak.jpg" class="card-img-top h-50" alt="default">
-              <div class="card-body">
-                  <h5 class="card-title">{{ tratamendua.izena }}</h5>
-                  <p class="card-text">{{ translations[currentLocale].tratamientos.precioFuera }}: {{ tratamendua.kanpoko_prezioa }}</p>
-                  <p class="card-text">{{ translations[currentLocale].tratamientos.precioDentro }}: {{ tratamendua.etxeko_prezioa }}</p>
-                  <a href="#" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModalEditar" :key="tratamendua.id" @click="cargar_datos(tratamendua.id)">{{ translations[currentLocale].default.editar }}</a>
-              </div>
+        <div v-for="(tratamendua) in tratamenduArray" class="card col-4 me-3 w-25 mb-3 p-0">
+          <img src="imagenes/default-tratamenduak.jpg" class="card-img-top h-50" alt="default">
+          <div class="card-body">
+            <h5 class="card-title">{{ tratamendua.izena }}</h5>
+            <p class="card-text">{{ translations[currentLocale].tratamientos.precioFuera }}: {{
+              tratamendua.kanpoko_prezioa }}</p>
+            <p class="card-text">{{ translations[currentLocale].tratamientos.precioDentro }}: {{
+              tratamendua.etxeko_prezioa }}</p>
+            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalEditar"
+              :key="tratamendua.id" @click="cargar_datos(tratamendua.id)">{{ translations[currentLocale].default.editar
+              }}</a>
+          </div>
         </div>
       </div>
-      <div class="modal fade mt-20vh" id="exampleModalCrear" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  >
+      <div class="modal fade mt-20vh" id="exampleModalCrear" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content lamodal">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabelCrear"> {{ translations[currentLocale].tratamientos.crear }} </h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+              <h1 class="modal-title fs-5" id="exampleModalLabelCrear"> {{
+                translations[currentLocale].tratamientos.crear }} </h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <label>{{ translations[currentLocale].tratamientos.nombre }}:</label>
@@ -75,22 +91,26 @@
               <input type="number" class="w-100" v-model="kanpoko_prezioaCrear" />
               <label>{{ translations[currentLocale].tratamientos.categoria }}:</label>
               <select class="form-select" aria-label="Default select example" v-model="tratKategoriaIdCrear">
-                <option v-for="(kategoria) in tratamenduKategoria" :value="kategoria.id" >{{kategoria.izena}}</option>
+                <option v-for="(kategoria) in tratamenduKategoria" :value="kategoria.id">{{kategoria.izena}}</option>
               </select class="form-select" aria-label="Default select example">
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ translations[currentLocale].default.salir }}</button>
-              <button type="button" class="btn btn-primary" @click="createTratamendu()">{{ translations[currentLocale].default.guardar }}</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{
+                translations[currentLocale].default.salir }}</button>
+              <button type="button" class="btn btn-primary" @click="createTratamendu()">{{
+                translations[currentLocale].default.guardar }}</button>
             </div>
           </div>
         </div>
       </div>
-      <div class="modal fade" id="exampleModalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="exampleModalEditar" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content lamodal">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabelCrear"> {{ translations[currentLocale].tratamientos.editar }} </h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+              <h1 class="modal-title fs-5" id="exampleModalLabelCrear"> {{
+                translations[currentLocale].tratamientos.editar }} </h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <label>{{ translations[currentLocale].tratamientos.nombre }}:</label>
@@ -101,23 +121,28 @@
               <input type="number" class="w-100" v-model="kanpoko_prezioaEditar" />
               <label>{{ translations[currentLocale].tratamientos.categoria }}:</label>
               <select class="form-select" aria-label="Default select example" v-model="tratKategoriaIdEditar">
-                <option v-for="(kategoria) in tratamenduKategoria" :value="kategoria.id" >{{kategoria.izena}}</option>
+                <option v-for="(kategoria) in tratamenduKategoria" :value="kategoria.id">{{kategoria.izena}}</option>
               </select class="form-select" aria-label="Default select example">
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ translations[currentLocale].default.salir }}</button>
-              <button type="button" class="btn btn-primary" @click="borrarTratamendu()">{{ translations[currentLocale].default.borrar }}</button>
-              <button type="button" class="btn btn-primary" @click="editarTratamendu()">{{ translations[currentLocale].default.guardar }}</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{
+                translations[currentLocale].default.salir }}</button>
+              <button type="button" class="btn btn-primary" @click="borrarTratamendu()">{{
+                translations[currentLocale].default.borrar }}</button>
+              <button type="button" class="btn btn-primary" @click="editarTratamendu()">{{
+                translations[currentLocale].default.guardar }}</button>
             </div>
           </div>
         </div>
       </div>
-      <div class="modal fade mt-20vh" id="exampleModalAñadirKategoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  >
+      <div class="modal fade mt-20vh" id="exampleModalAñadirKategoria" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content bg-skin-strong" >
+          <div class="modal-content bg-skin-strong">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabelAñadirKategoria"> {{ translations[currentLocale].tratamientos.crearKat }} </h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+              <h1 class="modal-title fs-5" id="exampleModalLabelAñadirKategoria"> {{
+                translations[currentLocale].tratamientos.crearKat }} </h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <label>{{ translations[currentLocale].tratamientos.nombre }}:</label>
@@ -132,22 +157,27 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ translations[currentLocale].default.salir }}</button>
-              <button type="button" class="btn btn-primary" @click="createKategoria()">{{ translations[currentLocale].default.guardar }}</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{
+                translations[currentLocale].default.salir }}</button>
+              <button type="button" class="btn btn-primary" @click="createKategoria()">{{
+                translations[currentLocale].default.guardar }}</button>
             </div>
           </div>
         </div>
       </div>
-      <div class="modal fade mt-20vh" id="exampleModalEditarKategoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  >
+      <div class="modal fade mt-20vh" id="exampleModalEditarKategoria" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content bg-skin-strong" >
+          <div class="modal-content bg-skin-strong">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabelEditarKategoria"> {{ translations[currentLocale].tratamientos.editarKat }} </h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+              <h1 class="modal-title fs-5" id="exampleModalLabelEditarKategoria"> {{
+                translations[currentLocale].tratamientos.editarKat }} </h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <select class="form-select" aria-label="Default select example" v-model="tratKategoriaIdEditar" @change="cargar_datos_kategoria()">
-                <option v-for="(kategoria) in tratamenduKategoria" :value="kategoria.id" >{{kategoria.izena}}</option>
+              <select class="form-select" aria-label="Default select example" v-model="tratKategoriaIdEditar"
+                @change="cargar_datos_kategoria()">
+                <option v-for="(kategoria) in tratamenduKategoria" :value="kategoria.id">{{kategoria.izena}}</option>
               </select class="form-select" aria-label="Default select example">
               <label>{{ translations[currentLocale].tratamientos.nombre }}:</label>
               <input type="text" class="w-100" v-model="kategoriaIzenaEditar" />
@@ -161,9 +191,12 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ translations[currentLocale].default.salir }}</button>
-              <button type="button" class="btn btn-primary" @click="deleteKategoria()">{{ translations[currentLocale].default.borrar }}</button>
-              <button type="button" class="btn btn-primary" @click="editarKategoria()">{{ translations[currentLocale].default.guardar }}</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{
+                translations[currentLocale].default.salir }}</button>
+              <button type="button" class="btn btn-primary" @click="deleteKategoria()">{{
+                translations[currentLocale].default.borrar }}</button>
+              <button type="button" class="btn btn-primary" @click="editarKategoria()">{{
+                translations[currentLocale].default.guardar }}</button>
             </div>
           </div>
         </div>
@@ -171,11 +204,12 @@
 
     </div>
   </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="js/translations.js"></script>
-    <script src="js/bootstrap/jquery-3.7.1.js"></script>
-    <script src="js/toastr/toastr.js"></script>
-    <script src="js/TratamenduakScript.js"></script>
-    <script src="js/bootstrap/bootstrap.bundle.js"></script>
-  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="js/translations.js"></script>
+  <script src="js/bootstrap/jquery-3.7.1.js"></script>
+  <script src="js/toastr/toastr.js"></script>
+  <script src="js/TratamenduakScript.js"></script>
+  <script src="js/bootstrap/bootstrap.bundle.js"></script>
+</body>
+
 </html>

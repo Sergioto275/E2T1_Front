@@ -20,6 +20,7 @@ new Vue({
     currentLocale: 'es',
     translations: translations,
     environment: environment,
+    searchTimeout: null
   },
   computed: {
     listaFiltradaPorNombre() {
@@ -270,9 +271,10 @@ new Vue({
 
         this.listaLangile = [];
         const datuak = await response.json();
+        const nombreFilLower = this.nombreFil.toLowerCase();
 
         this.listaLangile = datuak
-          .filter(langile => langile.izena.includes(this.nombreFil) && langile.ezabatze_data === null || langile.izena.includes(this.nombreFil) && langile.ezabatze_data === "0000-00-00 00:00:00");
+          .filter(langile => langile.izena.toLowerCase().includes(nombreFilLower) && langile.ezabatze_data === null || langile.izena.includes(this.nombreFil) && langile.ezabatze_data === "0000-00-00 00:00:00");
 
         if (this.listaLangile.length == 0) {
           this.listaLangileById = datuak
@@ -327,12 +329,26 @@ new Vue({
       this.currentLocale = locale;
     },
     checkCookie() {
-      if(document.cookie==""){
-          window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
-      }else if(document.cookie=="ikasle"){
+      if (document.cookie == "") {
+        window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
+      } else if (document.cookie == "ikasle") {
         window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Home.html";
       }
-},
+    },
+    /* Function: callFiltro
+    Too many request errorea saiesteko timeout txikia filtroa deitzean.
+    */
+    callFiltro() {
+      // Borra el timeout anterior (si existe)
+      if (this.searchTimeout) {
+        clearTimeout(this.searchTimeout);
+      }
+
+      // Inicia un nuevo timeout para ejecutar la búsqueda después de 500 ms
+      this.searchTimeout = setTimeout(() => {
+        this.filtroNombre();
+      }, 500);
+    }
   },
   mounted() {
     // Konponentea sortzen denean taula kargatzeko

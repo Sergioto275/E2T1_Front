@@ -3,7 +3,7 @@
 new Vue({
   el: '#app',
   data: {
-    searchTimeout:null,
+    searchTimeout: null,
     listaBezero: [],
     listaBezeroById: [],
     listaKolore: [],
@@ -13,7 +13,7 @@ new Vue({
     arrayComboBoxMarka: [],
     arrayComboBoxTinte: [],
     bezeroSeleccionado: "",
-    tinteFiltr:"",
+    tinteFiltr: "",
     izenaEditar: "",
     izenaCrear: "",
     telefonoCrear: "",
@@ -28,7 +28,7 @@ new Vue({
     fechaEditar: "",
     casaCrear: "",
     casaEditar: "",
-    casaFiltr:"",
+    casaFiltr: "",
     tinteCrear: "",
     tinteEditar: "",
     cantidadCrear: "",
@@ -37,7 +37,7 @@ new Vue({
     volumenesEditar: "",
     observacionesCrear: "",
     observacionesEditar: "",
-    fechaFil:"",
+    fechaFil: "",
     currentLocale: 'es',
     translations: translations,
     environment: environment,
@@ -46,7 +46,7 @@ new Vue({
     listaFiltradaPorNombre() {
       return this.listaBezero.filter(langile => {
         return langile.izena.toLowerCase().includes(this.filtrNom.toLowerCase()) &&
-               (langile.ezabatze_data === null || langile.ezabatze_data === "0000-00-00 00:00:00");
+          (langile.ezabatze_data === null || langile.ezabatze_data === "0000-00-00 00:00:00");
       });
     }
   },
@@ -105,7 +105,7 @@ new Vue({
 
         const datuak = await response.json();
 
-        this.fechaFil="";
+        this.fechaFil = "";
         this.listaKolore = datuak
           .filter(kolore => kolore.ezabatze_data === null && kolore.id_bezeroa == bezero || kolore.ezabatze_data === "0000-00-00 00:00:00" && kolore.id_bezeroa == bezero);
 
@@ -167,7 +167,7 @@ new Vue({
 
         toastr.success(this.translations[this.currentLocale].default.crear);
         await this.cargaBezeroa();
-        
+
         this.limpiarCampos();
         //Modal-a ixteko ondo sortzen duenean
         const modalCrearElement = document.getElementById('exampleModalCrear');
@@ -298,7 +298,7 @@ new Vue({
       } catch (error) {
         console.log('Errorea: ', error);
       }
-    }, 
+    },
     /* Function: borrar
     Ezabatzeko logika duen funtzioa.
     */
@@ -535,7 +535,7 @@ new Vue({
       } catch (error) {
         console.log('Errorea: ', error);
       }
-      
+
     },
     async filtrarComboTintesFiltr() {
       try {
@@ -553,15 +553,15 @@ new Vue({
         }
 
         const datuak = await response.json();
-        
-          if(this.casaFiltr!=""){
-            console.log("Hola")
-            this.arrayComboBoxTinte = datuak
+
+        if (this.casaFiltr != "") {
+          console.log("Hola")
+          this.arrayComboBoxTinte = datuak
             .filter(tinte => tinte.marka == this.casaFiltr && tinte.ezabatze_data === null || tinte.marka == this.casaFiltr && tinte.ezabatze_data === "0000-00-00 00:00:00");
-          }else{
-            this.arrayComboBoxTinte = datuak
+        } else {
+          this.arrayComboBoxTinte = datuak
             .filter(tinte => tinte.ezabatze_data === null || tinte.id_bezeroa == this.bezeroSeleccionado[0].id && tinte.ezabatze_data === "0000-00-00 00:00:00");
-          }
+        }
 
 
       } catch (error) {
@@ -583,13 +583,13 @@ new Vue({
         }
 
         const datuak = await response.json();
-          if(this.casaFiltr!=""){
-            this.listaKolore = datuak
+        if (this.casaFiltr != "") {
+          this.listaKolore = datuak
             .filter(tinte => tinte.produktua_marka == this.casaFiltr && tinte.id_bezeroa == this.bezeroSeleccionado[0].id && tinte.ezabatze_data === null || tinte.produktua_marka == this.casaFiltr && tinte.id_bezeroa == this.bezeroSeleccionado[0].id && tinte.ezabatze_data === "0000-00-00 00:00:00");
-          }else{
-            this.listaKolore = datuak
+        } else {
+          this.listaKolore = datuak
             .filter(tinte => tinte.id_bezeroa == this.bezeroSeleccionado[0].id && tinte.ezabatze_data === null || tinte.id_bezeroa == this.bezeroSeleccionado[0].id && tinte.ezabatze_data === "0000-00-00 00:00:00");
-          }
+        }
 
       } catch (error) {
         console.log('Errorea: ', error);
@@ -599,7 +599,7 @@ new Vue({
     Datei formatua emateko.
     Parameters:
       date - Formateatu nahi den data.
-    */    
+    */
     formatDateToYYYYMMDD(date) {
       const year = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -689,7 +689,7 @@ new Vue({
             "id": id
           };
           console.log(JSON.stringify(jsonEzabatu));
-  
+
           const deleteResponse = await fetch(this.environment + '/public/api/kolore', {
             method: 'DELETE',
             headers: {
@@ -697,12 +697,12 @@ new Vue({
             },
             body: JSON.stringify(jsonEzabatu),
           });
-  
+
           if (!deleteResponse.ok) {
             console.log('Errorea ezabatzerakoan');
             throw new Error('Errorea ezabatzerakoan');
           }
-  
+
           ondo = true;
           this.cargaFitxa(this.bezeroSeleccionado[0].id);
         }
@@ -713,7 +713,7 @@ new Vue({
       if (ondo) {
         toastr.success(this.translations[this.currentLocale].default.actualizar);
       }
-  
+
       this.arrayId2 = [];
     },
     async filtroFecha() {
@@ -741,65 +741,65 @@ new Vue({
             .filter(kolore => kolore.data == this.fechaFil && kolore.id_bezeroa == this.bezeroSeleccionado[0].id && kolore.ezabatze_data === null || kolore.data == this.fechaFil && kolore.id_bezeroa == this.bezeroSeleccionado[0].id && kolore.ezabatze_data === "0000-00-00 00:00:00");
         }
 
-        } catch (error){
-          console.error('Errorea: ', error);
-        }
-      },
-      callFiltro2() {
-        // Borra el timeout anterior (si existe)
-        if (this.searchTimeout) {
-          clearTimeout(this.searchTimeout);
-        }
-  
-        // Inicia un nuevo timeout para ejecutar la búsqueda después de 500 ms
-        this.searchTimeout = setTimeout(() => {
-          this.filtroFecha();
-        }, 500);
-      },
+      } catch (error) {
+        console.error('Errorea: ', error);
+      }
+    },
+    callFiltro2() {
+      // Borra el timeout anterior (si existe)
+      if (this.searchTimeout) {
+        clearTimeout(this.searchTimeout);
+      }
+
+      // Inicia un nuevo timeout para ejecutar la búsqueda después de 500 ms
+      this.searchTimeout = setTimeout(() => {
+        this.filtroFecha();
+      }, 500);
+    },
     /* Function: filtrarPorTintes
     Tinteen arabera filtratzeko.
-    */ 
-      async filtrarPorTintes() {
-        try {
-  
-          const response = await fetch(this.environment + '/public/api/kolore', {
-            headers: {
-              'Content-Type': 'application/json', // Indicar el tipo de contenido como JSON
-              'Access-Control-Allow-Origin': '*'
-            },
-          });
-  
-          if (!response.ok) {
-            console.log('Errorea sortzerakoan');
-            throw new Error('Errorea sortzerakoan');
-          }
-  
-          const datuak = await response.json();
-          if(this.tinteFiltr!= ""){
-            this.listaKolore = datuak
-            .filter(tinte => tinte.id_produktua == this.tinteFiltr && tinte.id_bezeroa == this.bezeroSeleccionado[0].id && tinte.ezabatze_data === null || tinte.id_produktua == this.tinteFiltr && tinte.id_bezeroa == this.bezeroSeleccionado[0].id && tinte.ezabatze_data === "0000-00-00 00:00:00");
-          }else{
-            this.listaKolore = datuak
-            .filter(tinte => tinte.id_bezeroa == this.bezeroSeleccionado[0].id && tinte.ezabatze_data === null || tinte.id_bezeroa == this.bezeroSeleccionado[0].id && tinte.ezabatze_data === "0000-00-00 00:00:00");
-          }
-        } catch (error) {
-          console.log('Errorea: ', error);
+    */
+    async filtrarPorTintes() {
+      try {
+
+        const response = await fetch(this.environment + '/public/api/kolore', {
+          headers: {
+            'Content-Type': 'application/json', // Indicar el tipo de contenido como JSON
+            'Access-Control-Allow-Origin': '*'
+          },
+        });
+
+        if (!response.ok) {
+          console.log('Errorea sortzerakoan');
+          throw new Error('Errorea sortzerakoan');
         }
-      },
+
+        const datuak = await response.json();
+        if (this.tinteFiltr != "") {
+          this.listaKolore = datuak
+            .filter(tinte => tinte.id_produktua == this.tinteFiltr && tinte.id_bezeroa == this.bezeroSeleccionado[0].id && tinte.ezabatze_data === null || tinte.id_produktua == this.tinteFiltr && tinte.id_bezeroa == this.bezeroSeleccionado[0].id && tinte.ezabatze_data === "0000-00-00 00:00:00");
+        } else {
+          this.listaKolore = datuak
+            .filter(tinte => tinte.id_bezeroa == this.bezeroSeleccionado[0].id && tinte.ezabatze_data === null || tinte.id_bezeroa == this.bezeroSeleccionado[0].id && tinte.ezabatze_data === "0000-00-00 00:00:00");
+        }
+      } catch (error) {
+        console.log('Errorea: ', error);
+      }
+    },
     /* Function: changeLanguage
     Hizkuntza aldatzeko.
     Parameters:
       locale - Hizkuntza.
-    */ 
-      changeLanguage(locale) {
-        console.log('Cambiando a:', locale);
-        this.currentLocale = locale;
-      },
-      checkCookie() {
-        if(document.cookie==""){
-            window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
-        }
-  }
+    */
+    changeLanguage(locale) {
+      console.log('Cambiando a:', locale);
+      this.currentLocale = locale;
+    },
+    checkCookie() {
+      if (document.cookie == "") {
+        window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
+      }
+    }
 
   },
   mounted() {

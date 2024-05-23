@@ -23,7 +23,7 @@ new Vue({
     existe: null,
     nombreFil: "",
     kategoriaFil: "first",
-    
+
     currentLocale: 'es',
     translations: translations,
     environment: environment,
@@ -268,7 +268,6 @@ new Vue({
     Izenaren arabera datuak filtratzeko.
     */
     async filtroNombre() {
-      console.log("hola")
       try {
         const response = await fetch(this.environment + '/public/api/produktuak', {
           headers: {
@@ -284,9 +283,10 @@ new Vue({
 
         this.listaProduktu = [];
         const datuak = await response.json();
+        const nombreFilLower = this.nombreFil.toLowerCase();
 
         this.listaProduktu = datuak
-          .filter(produktu => produktu.izena.includes(this.nombreFil) && produktu.ezabatze_data === null || produktu.izena.includes(this.nombreFil) && produktu.ezabatze_data === "0000-00-00 00:00:00");
+          .filter(produktu => produktu.izena.toLowerCase().includes(nombreFilLower) && produktu.ezabatze_data === null || produktu.izena.includes(this.nombreFil) && produktu.ezabatze_data === "0000-00-00 00:00:00");
 
         if (this.listaProduktu.length == 0) {
           this.listaProduktuById = datuak
@@ -340,12 +340,12 @@ new Vue({
       this.currentLocale = locale;
     },
     checkCookie() {
-      if(document.cookie==""){
-          window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
-      }else if(document.cookie=="ikasle"){
+      if (document.cookie == "") {
+        window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
+      } else if (document.cookie == "ikasle") {
         window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Home.html";
       }
-}
+    }
   },
   mounted() {
     // Konponentea sortzen denean taula kargatzeko

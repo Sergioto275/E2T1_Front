@@ -3,7 +3,7 @@
 new Vue({
   el: '#app',
   data: {
-    selectedCheckbox: null, // Esta variable almacenará la ID del checkbox seleccionado
+    selectedCheckbox: null,
     arrayId: [],
     izenaActu: "",
     deskribapenaActu: "",
@@ -35,6 +35,7 @@ new Vue({
     listaLangile: [],
     langileFil: '',
     listaMarka: [],
+    searchTimeout: null
   },
   methods: {
     /* Function: modalAtera
@@ -645,6 +646,20 @@ new Vue({
       if (document.cookie == "") {
         window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
       }
+    },
+    /* Function: callFiltro
+    Too many request errorea saiesteko timeout txikia filtroa deitzean.
+    */
+    callFiltro() {
+      // Borra el timeout anterior (si existe)
+      if (this.searchTimeout) {
+        clearTimeout(this.searchTimeout);
+      }
+
+      // Inicia un nuevo timeout para ejecutar la búsqueda después de 500 ms
+      this.searchTimeout = setTimeout(() => {
+        this.filtroNombre();
+      }, 500);
     }
   },
   mounted() {

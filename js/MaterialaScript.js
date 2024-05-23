@@ -3,7 +3,7 @@
 new Vue({
   el: '#app',
   data: {
-    selectedCheckbox: null, // Esta variable almacenará la ID del checkbox seleccionado
+    selectedCheckbox: null,
     arrayId: [],
     etiketaActu: "",
     izenaActu: "",
@@ -21,7 +21,7 @@ new Vue({
     listaFiltradaPorNombre() {
       return this.listaMaterial.filter(langile => {
         return langile.izena.toLowerCase().includes(this.nombreFil.toLowerCase()) &&
-               (langile.ezabatze_data === null || langile.ezabatze_data === "0000-00-00 00:00:00");
+          (langile.ezabatze_data === null || langile.ezabatze_data === "0000-00-00 00:00:00");
       });
     }
   },
@@ -229,9 +229,10 @@ new Vue({
 
         this.listaMaterial = [];
         const datuak = await response.json();
+        const nombreFilLower = this.nombreFil.toLowerCase();
 
         this.listaMaterial = datuak
-          .filter(produktu => produktu.izena.includes(this.nombreFil) && produktu.ezabatze_data === null || produktu.izena.includes(this.nombreFil) && produktu.ezabatze_data === "0000-00-00 00:00:00");
+          .filter(produktu => produktu.izena.toLowerCase().includes(nombreFilLower) && produktu.ezabatze_data === null || produktu.izena.includes(this.nombreFil) && produktu.ezabatze_data === "0000-00-00 00:00:00");
 
         if (this.listaMaterial.length == 0) {
           this.listaMaterialById = datuak
@@ -253,11 +254,11 @@ new Vue({
       this.currentLocale = locale;
     },
     checkCookie() {
-            if(document.cookie==""){
-                window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
-            }else if(document.cookie=="ikasle"){
-              window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Home.html";
-            }
+      if (document.cookie == "") {
+        window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
+      } else if (document.cookie == "ikasle") {
+        window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Home.html";
+      }
     }
   },
   mounted() {

@@ -61,7 +61,7 @@ const translations = {
 
     tareas: {
       titulo: 'Turnos',
-      grupos:'Grupos',
+      grupos: 'Grupos',
       tipo: 'Tipo',
       fecha: 'Fecha',
       trabajador: 'Trabajador',
@@ -130,33 +130,33 @@ const translations = {
           grupos: 'Grupos'
         },
         calendario: 'Calendario',
-        ticket:'Ticket'
+        ticket: 'Ticket'
       },
       tareas: 'Tareas',
       citas: 'Citas',
       calendar: {
         meses: {
-          enero:'Enero',
-          febrero:'Febrero',
-          marzo:'Marzo',
-          abril:'Abril',
-          mayo:'Mayo',
-          junio:'Junio',
-          julio:'Julio',
-          agosto:'Agosto',
-          septiembre:'Septiembre',
-          octubre:'Octubre',
-          noviembre:'Noviembre',
-          diciembre:'Diciembre'
+          enero: 'Enero',
+          febrero: 'Febrero',
+          marzo: 'Marzo',
+          abril: 'Abril',
+          mayo: 'Mayo',
+          junio: 'Junio',
+          julio: 'Julio',
+          agosto: 'Agosto',
+          septiembre: 'Septiembre',
+          octubre: 'Octubre',
+          noviembre: 'Noviembre',
+          diciembre: 'Diciembre'
         },
         dias: {
-          lunes:'Lunes',
-          martes:'Martes',
-          miercoles:'Miercoles',
-          jueves:'Jueves',
-          viernes:'Viernes',
-          sabado:'Sabado',
-          domingo:'Domingo' 
+          lunes: 'Lunes',
+          martes: 'Martes',
+          miercoles: 'Miercoles',
+          jueves: 'Jueves',
+          viernes: 'Viernes',
+          sabado: 'Sabado',
+          domingo: 'Domingo'
         },
         placeholder: "No hay citas"
       }
@@ -174,7 +174,7 @@ const translations = {
       precioDentro: 'Precio Dentro',
       registrarCliente: 'Debe registrar la ficha del cliente',
       redireccionCliente: 'Desea ser redireccionado a registrar la ficha del cliente?',
-      precioMessage:'Precio Total: ',
+      precioMessage: 'Precio Total: ',
       citaReservada: 'Esta cita ya esta reservada',
       seleccionarCita: {
         titulo: 'Seleccionar Cita'
@@ -249,15 +249,15 @@ const translations = {
       editar: 'Editar Tratamiento',
       crear: 'Crear Tratamiento',
       nombre: 'Nombre',
-      añadirKategoria:"Añadir Categoria",
-      editarCentro:"Editar Categoria",
-      color:"Utiliza Colorantes",
-      extras:"Extras",
-      crearKat:"Añadir Categoria",
-      crear:"Añadir Tratamiento",
-      editarKat:"Editar Categoria",
-      editar:"Editar Tratamiento",
-      categoria:"Categoria"
+      añadirKategoria: "Añadir Categoria",
+      editarCentro: "Editar Categoria",
+      color: "Utiliza Colorantes",
+      extras: "Extras",
+      crearKat: "Añadir Categoria",
+      crear: "Añadir Tratamiento",
+      editarKat: "Editar Categoria",
+      editar: "Editar Tratamiento",
+      categoria: "Categoria"
     },
 
     material: {
@@ -345,10 +345,10 @@ const translations = {
 
     tareas: {
       titulo: 'Txanda',
-      grupos:'Taldeak',
+      grupos: 'Taldeak',
       tipo: 'Mota',
       fecha: 'Data',
-      saltar:'Salto',
+      saltar: 'Salto',
       completar: 'Amaitu',
       historico: 'Pasa den Asteko Historiala',
       mostrador: 'Mostradore',
@@ -415,33 +415,33 @@ const translations = {
           grupos: 'Taldeak'
         },
         calendario: 'Ordutegia',
-        ticket:'Ticket'
+        ticket: 'Ticket'
       },
       tareas: 'Zereginak',
       citas: 'Hitzorduak',
       calendar: {
         meses: {
-          enero:'Urtarrila',
-          febrero:'Otsaila',
-          marzo:'Martxoa',
-          abril:'Apirila',
-          mayo:'Maiatza',
-          junio:'Ekaina',
-          julio:'Ustaila',
-          agosto:'Abuztua',
-          septiembre:'Iraila',
-          octubre:'Urria',
-          noviembre:'Azaroa',
-          diciembre:'Abendua'
+          enero: 'Urtarrila',
+          febrero: 'Otsaila',
+          marzo: 'Martxoa',
+          abril: 'Apirila',
+          mayo: 'Maiatza',
+          junio: 'Ekaina',
+          julio: 'Ustaila',
+          agosto: 'Abuztua',
+          septiembre: 'Iraila',
+          octubre: 'Urria',
+          noviembre: 'Azaroa',
+          diciembre: 'Abendua'
         },
         dias: {
-          lunes:'Astelehena',
-          martes:'Asteartea',
-          miercoles:'Asteazkena',
-          jueves:'Osteguna',
-          viernes:'Ostirala',
-          sabado:'Larunbata',
-          domingo:'Igandea' 
+          lunes: 'Astelehena',
+          martes: 'Asteartea',
+          miercoles: 'Asteazkena',
+          jueves: 'Osteguna',
+          viernes: 'Ostirala',
+          sabado: 'Larunbata',
+          domingo: 'Igandea'
         },
         placeholder: "Ez dago hitzordurik"
       }
@@ -459,7 +459,7 @@ const translations = {
       precioDentro: 'Barruko Prezioa',
       registrarCliente: 'Bezeroaren fitxa erregistratu behar da',
       redireccionCliente: 'Bezero fitxa erregistratzera birbideratzea nahi duzu?',
-      precioMessage:'Prezio totala: ',
+      precioMessage: 'Prezio totala: ',
       citaReservada: 'Hitzordu hau jadanik erreserbatuta dago',
       seleccionarCita: {
         titulo: 'Hitzordua Aukeratu'
@@ -534,15 +534,15 @@ const translations = {
       editar: 'Tratamendua Editatu',
       crear: 'Tratamendua Gehitu',
       nombre: 'Izena',
-      añadirKategoria:"Kategoria Gehitu",
-      editarCentro:"Kategoria Editatu",
-      color:"Kolorea erabiltzen da",
-      extras:"Extrak",
-      crearKat:"Kategoria Gehitu",
-      crear:"Tratamendua Gehitu",
-      editarKat:"Kategoria editatu",
-      editar:"Tratamendua editatu",
-      categoria:"Kategoria"
+      añadirKategoria: "Kategoria Gehitu",
+      editarCentro: "Kategoria Editatu",
+      color: "Kolorea erabiltzen da",
+      extras: "Extrak",
+      crearKat: "Kategoria Gehitu",
+      crear: "Tratamendua Gehitu",
+      editarKat: "Kategoria editatu",
+      editar: "Tratamendua editatu",
+      categoria: "Kategoria"
     },
 
     material: {

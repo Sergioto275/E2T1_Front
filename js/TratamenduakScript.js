@@ -28,23 +28,22 @@ const vue = new Vue({
         changeEnvironment(env) {
             this.environment = env;
         },
-        limpiar_campos()
-        {
-            this.tratKategoriaIdCrear= null;
-            this.tratKategoriaIdEditar= null;
-            this.kategoriaIzenaEditar= null;
-            this.kategoriaColorEditar= null;
-            this.kategoriaExtraEditar= null;
-            this.kategoriaIzenaCrear= null;
-            this.kategoriaColorCrear= null;
-            this.kategoriaExtraCrear= null;
-            this.idSelec= null;
-            this.izenaCrear= null;
-            this.izenaEditar= null;
-            this.kanpoko_prezioaCrear= null;
-            this.kanpoko_prezioaEditar= null;
-            this.etxeko_prezioaCrear= null;
-            this.etxeko_prezioaEditar= null;
+        limpiar_campos() {
+            this.tratKategoriaIdCrear = null;
+            this.tratKategoriaIdEditar = null;
+            this.kategoriaIzenaEditar = null;
+            this.kategoriaColorEditar = null;
+            this.kategoriaExtraEditar = null;
+            this.kategoriaIzenaCrear = null;
+            this.kategoriaColorCrear = null;
+            this.kategoriaExtraCrear = null;
+            this.idSelec = null;
+            this.izenaCrear = null;
+            this.izenaEditar = null;
+            this.kanpoko_prezioaCrear = null;
+            this.kanpoko_prezioaEditar = null;
+            this.etxeko_prezioaCrear = null;
+            this.etxeko_prezioaEditar = null;
         },
         /* Function: changeLanguage
         Hizkuntza aldatzeko.
@@ -357,12 +356,12 @@ const vue = new Vue({
             }
         },
         checkCookie() {
-            if(document.cookie==""){
+            if (document.cookie == "") {
                 window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
-            }else if(document.cookie=="ikasle"){
-              window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Home.html";
+            } else if (document.cookie == "ikasle") {
+                window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Home.html";
             }
-      },
+        },
     },
     mounted() {
         this.cargarTratamenduak();

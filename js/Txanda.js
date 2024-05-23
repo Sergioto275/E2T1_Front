@@ -14,12 +14,12 @@ new Vue({
         listaTxandaById: [],
         listaGrupoCorrecto: [],
         listaFiltroTalde: [],
-        listaLangile:[],
-        listaTalde:[],
+        listaLangile: [],
+        listaTalde: [],
         existe: null,
         nombreFil: "",
         grupoFil: "",
-        fechaFil:"",
+        fechaFil: "",
         currentLocale: 'es',
         translations: translations,
         environment: environment,
@@ -140,7 +140,7 @@ new Vue({
                 this.tareaActu = this.listaTxandaById.mota;
                 this.langileActu = this.listaTxandaById.id_langilea;
 
-                
+
                 await this.grupoCorrecto();
                 await this.cargarComboBox();
 
@@ -168,7 +168,7 @@ new Vue({
                     "id": id,
                     "mota": mota,
                     "id_langilea": id_langilea,
-                    "eguneratze_data":eguneratze_data
+                    "eguneratze_data": eguneratze_data
                 };
 
                 console.log(JSON.stringify(jsonEditatu));
@@ -256,66 +256,66 @@ new Vue({
         */
         async cargarComboBox() {
             try {
-              const response = await fetch(this.environment + '/public/api/taldeak', {
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Access-Control-Allow-Origin': '*'
-                },
-              });
-      
-              if (!response.ok) {
-                console.log('Errorea eskera egiterakoan');
-                throw new Error('Errorea eskaera egiterakoan');
-              }
-              const datuak = await response.json();
-              this.listaTalde = datuak
-                .filter(talde => talde.ezabatze_data === null || talde.ezabatze_data === "0000-00-00 00:00:00");
-      
+                const response = await fetch(this.environment + '/public/api/taldeak', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                });
+
+                if (!response.ok) {
+                    console.log('Errorea eskera egiterakoan');
+                    throw new Error('Errorea eskaera egiterakoan');
+                }
+                const datuak = await response.json();
+                this.listaTalde = datuak
+                    .filter(talde => talde.ezabatze_data === null || talde.ezabatze_data === "0000-00-00 00:00:00");
+
             } catch (error) {
-              console.error('Errorea: ', error);
+                console.error('Errorea: ', error);
             }
 
             try {
                 const response = await fetch(this.environment + '/public/api/langileak', {
-                  headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                  },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    },
                 });
-        
+
                 if (!response.ok) {
-                  console.log('Errorea eskera egiterakoan');
-                  throw new Error('Errorea eskaera egiterakoan');
+                    console.log('Errorea eskera egiterakoan');
+                    throw new Error('Errorea eskaera egiterakoan');
                 }
                 const datuak = await response.json();
                 this.listaLangile = datuak
-                  .filter(langile => langile.ezabatze_data === null && langile.kodea == this.grupoActu || langile.ezabatze_data === "0000-00-00 00:00:00" && langile.kodea == this.grupoActu);
-        
-              } catch (error) {
-                console.error('Errorea: ', error);
-              }
-          },
-          async grupoCorrecto() {
-            try {
-              const response = await fetch(this.environment + '/public/api/langileak/'+this.langileActu, {
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Access-Control-Allow-Origin': '*'
-                },
-              });
-      
-              if (!response.ok) {
-                console.log('Errorea eskera egiterakoan');
-                throw new Error('Errorea eskaera egiterakoan');
-              }
-              const datuak = await response.json();
-              this.listaGrupoCorrecto = datuak
-              this.grupoActu = this.listaGrupoCorrecto.kodea
+                    .filter(langile => langile.ezabatze_data === null && langile.kodea == this.grupoActu || langile.ezabatze_data === "0000-00-00 00:00:00" && langile.kodea == this.grupoActu);
+
             } catch (error) {
-              console.error('Errorea: ', error);
+                console.error('Errorea: ', error);
             }
-          },
-          async filtroFecha() {
+        },
+        async grupoCorrecto() {
+            try {
+                const response = await fetch(this.environment + '/public/api/langileak/' + this.langileActu, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                });
+
+                if (!response.ok) {
+                    console.log('Errorea eskera egiterakoan');
+                    throw new Error('Errorea eskaera egiterakoan');
+                }
+                const datuak = await response.json();
+                this.listaGrupoCorrecto = datuak
+                this.grupoActu = this.listaGrupoCorrecto.kodea
+            } catch (error) {
+                console.error('Errorea: ', error);
+            }
+        },
+        async filtroFecha() {
             this.listaTxanda = [];
             try {
                 const response = await fetch(this.environment + '/public/api/txanda', {
@@ -329,7 +329,7 @@ new Vue({
                     console.log('Errorea eskera egiterakoan');
                     throw new Error('Errorea eskaera egiterakoan');
                 }
-                var datuak="";
+                var datuak = "";
                 datuak = await response.json();
 
 
@@ -351,11 +351,11 @@ new Vue({
                     if (mismoDia(fechaEjemplo, fechaActual)) {
                         var persona = { id: datuak[index]["id"], id_langilea: datuak[index]["id_langilea"], data: datuak[index]["data"], mota: datuak[index]["mota"] };
                         console.log(persona);
-                        if(this.listaTxanda.includes(persona)){
-                            
-                        }else{
-                        this.listaTxanda.push(persona);
-                    }
+                        if (this.listaTxanda.includes(persona)) {
+
+                        } else {
+                            this.listaTxanda.push(persona);
+                        }
                     }
 
                 }
@@ -389,7 +389,7 @@ new Vue({
 
                     }
                 }
-                
+
                 if (this.listaTxanda.length == 0) {
                     var nohay = { id: "no", mota: ">:(", data: "No hay datos en esta fecha", id_langilea: "🤫🧏‍♀️" }
                     this.listaTxanda.push(nohay);
@@ -397,12 +397,12 @@ new Vue({
             } catch (error) {
                 console.error('Errorea:', error);
             }
-            },
-            checkCookie() {
-                if(document.cookie==""){
-                    window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
-                }
-          }
+        },
+        checkCookie() {
+            if (document.cookie == "") {
+                window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
+            }
+        }
     },
     mounted() {
         // Konponentea sortzen denean taula kargatzeko

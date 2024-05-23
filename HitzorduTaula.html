@@ -1,210 +1,253 @@
 <!DOCTYPE html>
 <html lang="eu">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hitzorduak</title>
-    <link href="css/bootstrap/bootstrap.css" rel="stylesheet" />
-    <link href="css/estilo.css" rel="stylesheet">
-    <link href="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.css" rel="stylesheet" />
-    <link href="css/bootstrap/icons/font/bootstrap-icons.css" rel="stylesheet" />
-    <link href="js/toastr/build/toastr.css" rel="stylesheet">
-  <style>
-    /* Aplicar opacidad del 100% a los mensajes emergentes de Toastr */
 
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hitzorduak</title>
+  <link href="css/bootstrap/bootstrap.css" rel="stylesheet" />
+  <link href="css/estilo.css" rel="stylesheet">
+  <link href="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.css"
+    rel="stylesheet" />
+  <link href="css/bootstrap/icons/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="js/toastr/build/toastr.css" rel="stylesheet">
+  <style>
   </style>
 </head>
-  </head>
-  <body>
-    <div id="app">
-      <!--HEADER-->
-      <header>
-        <ul class="nav nav-pills bg-brown-strong">
-          <div class="nav rounded-end border-white border-4 sip">
-            <li class="nav-item">
-              <a class="nav-link text-white" aria-current="page" href="Login.html">
-                <i class="bi bi-box-arrow-left" alt="Logout"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="Home.html">
-                <i class="bi bi-house" alt="Home"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="Home.html">
-                <i class="bi bi-arrow-left" alt="Back"></i>
-              </a>
-            </li>
-            <li class="nav-item me-3 mt-2">
-              <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }" @click="changeLanguage('eu')" >EU</a >
-            </li>
-            <li class="nav-item me-3 mt-2">
-              <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }" @click="changeLanguage('es')" >ES</a >
-            </li>
-          </div>
-        </ul>
-      </header>
-      <div class="text-center m-0-15" >
+</head>
+
+<body>
+  <div id="app">
+    <!--HEADER-->
+    <header>
+      <ul class="nav nav-pills bg-brown-strong">
+        <div class="nav rounded-end border-white border-4 sip">
+          <li class="nav-item">
+            <a class="nav-link text-white" aria-current="page" href="Login.html">
+              <i class="bi bi-box-arrow-left" alt="Logout"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="Home.html">
+              <i class="bi bi-house" alt="Home"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="Home.html">
+              <i class="bi bi-arrow-left" alt="Back"></i>
+            </a>
+          </li>
+          <li class="nav-item me-3 mt-2">
+            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }"
+              @click="changeLanguage('eu')">EU</a>
+          </li>
+          <li class="nav-item me-3 mt-2">
+            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }"
+              @click="changeLanguage('es')">ES</a>
+          </li>
+        </div>
+      </ul>
+    </header>
+    <div class="text-center m-0-15">
+      <div>
+        <h1> {{ translations[currentLocale].citas.titulo }} </h1>
         <div>
-          <h1> {{ translations[currentLocale].citas.titulo }} </h1>
-          <div>
-            <div class="input-group mb-1 w-50">
-              <a class="btn border-black mb-3" href="BezeroFitxak.html"><button class="btn">{{ translations[currentLocale].citas.fichaCliente }}</button></a>
-              <input class="btn border-black mb-3" type="date" v-model="dataSelec" @change="cargar_dia_seleccionado()" />
-              <input class="btn border-black mb-3" type="time" v-model="startHour" @change="getHoursInRange()"/>
-              <input class="btn border-black mb-3" type="time" v-model="endHour" @change="getHoursInRange()" />
-            </div>
-            <div class="row">
-              <div class="col taula">
-                <div >
-                  <table class="h-100 w-100" >
-                    <thead>
-                      <tr>
-                        <th>{{ translations[currentLocale].citas.hora }}</th>
-                        <th v-for="eserlekua in eserlekuKop" :key="eserlekua.id">{{ translations[currentLocale].citas.asiento }} {{ eserlekua.id }}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="(time, index) in hoursArray">
-                        <td>{{ time }}</td>
-                          <template v-for="(eserlekua, esIndex) in eserlekuKop">
-                            <td class="m-1" :key="eserlekua.id" v-if="cita_sartuta(time,eserlekua.id)" :rowspan="rowspanManagement(time,eserlekua.id)" >
-                                <template v-if="getCitasAtTimeAndSeat(time, eserlekua.id).length > 0">
-                                    <div v-for="cita in getCitasAtTimeAndSeat(time, eserlekua.id)" class="card h-100 border-0" v-bind:class="{ 'bg-grey-blue-light': cita.prezio_totala, 'bg-blue-green-light': cita.id_langilea && !cita.prezio_totala, 'bg-pink-light': !cita.id_langilea && !cita.prezio_totala }">
-                                        <div class="card-body" @click="cargar_cita_selec(cita.id)" >
-                                            <h5 class="card-title">{{ cita.izena }}</h5>
-                                            <p class="card-text">{{ cita.deskribapena }}</p>
-                                        </div>
-                                    </div>
-                                </template>
-                                <template v-else>
-                                    <button class="w-100 border-0 bg-blue-brilliant" @click="seleccionar_citaCrear(eserlekua.id, time)" >
-                                        <i class="bi bi-calendar2-plus"></i>
-                                    </button>
-                                </template>
-                            </td>
-                        </template>
+          <div class="input-group mb-1 w-50">
+            <a class="btn border-black mb-3" href="BezeroFitxak.html"><button class="btn">{{
+                translations[currentLocale].citas.fichaCliente }}</button></a>
+            <input class="btn border-black mb-3" type="date" v-model="dataSelec" @change="cargar_dia_seleccionado()" />
+            <input class="btn border-black mb-3" type="time" v-model="startHour" @change="getHoursInRange()" />
+            <input class="btn border-black mb-3" type="time" v-model="endHour" @change="getHoursInRange()" />
+          </div>
+          <div class="row">
+            <div class="col taula">
+              <div>
+                <table class="h-100 w-100">
+                  <thead>
+                    <tr>
+                      <th>{{ translations[currentLocale].citas.hora }}</th>
+                      <th v-for="eserlekua in eserlekuKop" :key="eserlekua.id">{{
+                        translations[currentLocale].citas.asiento }} {{ eserlekua.id }}</th>
                     </tr>
-                    </tbody>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(time, index) in hoursArray">
+                      <td>{{ time }}</td>
+                      <template v-for="(eserlekua, esIndex) in eserlekuKop">
+                        <td class="m-1" :key="eserlekua.id" v-if="cita_sartuta(time,eserlekua.id)"
+                          :rowspan="rowspanManagement(time,eserlekua.id)">
+                          <template v-if="getCitasAtTimeAndSeat(time, eserlekua.id).length > 0">
+                            <div v-for="cita in getCitasAtTimeAndSeat(time, eserlekua.id)" class="card h-100 border-0"
+                              v-bind:class="{ 'bg-grey-blue-light': cita.prezio_totala, 'bg-blue-green-light': cita.id_langilea && !cita.prezio_totala, 'bg-pink-light': !cita.id_langilea && !cita.prezio_totala }">
+                              <div class="card-body" @click="cargar_cita_selec(cita.id)">
+                                <h5 class="card-title">{{ cita.izena }}</h5>
+                                <p class="card-text">{{ cita.deskribapena }}</p>
+                              </div>
+                            </div>
+                          </template>
+                          <template v-else>
+                            <button class="w-100 border-0 bg-blue-brilliant"
+                              @click="seleccionar_citaCrear(eserlekua.id, time)">
+                              <i class="bi bi-calendar2-plus"></i>
+                            </button>
+                          </template>
+                        </td>
+                      </template>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col">
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="crear-tab" data-bs-toggle="tab" data-bs-target="#crear-tab-pane"
+                    type="button" role="tab" aria-controls="crear-tab-pane" aria-selected="true">{{
+                    translations[currentLocale].default.añadir }}</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="edit-tab" data-bs-toggle="tab" data-bs-target="#edit-tab-pane"
+                    type="button" role="tab" aria-controls="edit-tab-pane" aria-selected="true"
+                    :disabled="!idSelec || generado">{{ translations[currentLocale].default.editar }}</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="asignar-tab" data-bs-toggle="tab" data-bs-target="#asignar-tab-pane"
+                    type="button" role="tab" aria-controls="asignar-tab-pane" aria-selected="true"
+                    :disabled="!idSelec || generado">{{ translations[currentLocale].citas.asignar }}</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="generar-tab" data-bs-toggle="tab" data-bs-target="#generar-tab-pane"
+                    type="button" role="tab" aria-controls="generar-tab-pane" aria-selected="false"
+                    :disabled="!idSelec || generado || !asignado">{{ translations[currentLocale].citas.ticket
+                    }}</button>
+                </li>
+              </ul>
+              <div class="tab-content bg-white p-3 border-black mb-3" id="myTabContent">
+                <div class="tab-pane fade show active" id="crear-tab-pane" role="tabpanel" aria-labelledby="crear-tab"
+                  tabindex="0">
+                  <label>{{ translations[currentLocale].citas.crear.fecha }}:</label>
+                  <input type="date" class="w-100" v-model="dataTest" />
+                  <label>{{ translations[currentLocale].citas.crear.horaIni }}:</label>
+                  <input type="time" class="w-100" v-model="hasOrduaTest" @blur="roundDownHour_hasieraData_crear()" />
+                  <label>{{ translations[currentLocale].citas.crear.horaFin }}:</label>
+                  <input type="time" class="w-100" v-model="amaOrduaTest" @blur="roundDownHour_amaieraData_crear()" />
+                  <label>{{ translations[currentLocale].citas.asiento }}</label>
+                  <input type="number" class="w-100" v-model="eserlekuaCrear" @blur="comprobar_cita_crear()" />
+                  <label>{{ translations[currentLocale].citas.crear.nombre }}:</label>
+                  <input type="text" class="w-100" v-model="izenaCrear" />
+                  <label>{{ translations[currentLocale].citas.crear.telefono}}:</label>
+                  <input type="text" class="w-100" v-model="telfCrear" />
+                  <label>{{ translations[currentLocale].citas.crear.descripcion }}:</label>
+                  <input type="text" class="w-100" v-model="deskCrear" />
+                  <div class="d-flex">
+                    <label>{{ translations[currentLocale].citas.crear.centro }}:</label>
+                    <input type="checkbox" class="w-25" v-model="etxekoCrear" />
+                  </div>
+                  <button type="button" class="btn btn-primary" :disabled="error" @click="createCita()">{{
+                    translations[currentLocale].default.guardar }}</button>
+                </div>
+                <div class="tab-pane fade show" id="edit-tab-pane" role="tabpanel" aria-labelledby="edit-tab"
+                  tabindex="0">
+                  <label>{{ translations[currentLocale].citas.crear.fecha }}:</label>
+                  <input type="date" class="w-100" v-model="dataEditar" />
+                  <label>{{ translations[currentLocale].citas.crear.horaIni }}:</label>
+                  <input type="time" class="w-100" v-model="hasOrduaEditar"
+                    @blur="roundDownHour_hasieraData_editar()" />
+                  <label>{{ translations[currentLocale].citas.crear.horaFin }}:</label>
+                  <input type="time" class="w-100" v-model="amaOrduaEditar"
+                    @blur="roundDownHour_amaieraData_editar()" />
+                  <label>{{ translations[currentLocale].citas.asiento }}:</label>
+                  <input type="number" class="w-100" v-model="eserlekuaEditar" @blur="comprobar_cita_editar()" />
+                  <label>{{ translations[currentLocale].citas.crear.nombre }}:</label>
+                  <input type="text" class="w-100" v-model="izenaEditar" />
+                  <label>{{ translations[currentLocale].citas.crear.telefono}}:</label>
+                  <input type="text" class="w-100" v-model="telfEditar" />
+                  <label>{{ translations[currentLocale].citas.crear.descripcion }}:</label>
+                  <input type="text" class="w-100" v-model="deskEditar" />
+                  <div class="d-flex">
+                    <label>{{ translations[currentLocale].citas.crear.centro }}:</label>
+                    <input type="checkbox" class="w-25" v-model="etxekoEditar" />
+                  </div>
+                  <button type="button" class="btn bg-black text-white" @click="eliminar_cita()" :disabled="!idSelec">
+                    {{ translations[currentLocale].default.borrar }} </button>
+                  <button type="button" class="btn bg-black text-white" @click="editar_cita()"
+                    :disabled="error || !idSelec || generado"> {{ translations[currentLocale].default.guardar }}
+                  </button>
+                </div>
+                <div class="tab-pane fade show" id="asignar-tab-pane" role="tabpanel" aria-labelledby="asignar-tab"
+                  tabindex="0">
+                  <span>{{ idSelec }} - {{ izenaSelec }}</span><br>
+                  <span>{{ langile_asignado }}</span><br>
+                  <label>{{ translations[currentLocale].trabajador.grupo }}:</label>
+                  <select class="form-select" aria-label="Default select example" v-model="idTalde"
+                    @change="cargarComboBox()">
+                    <option v-for="(taldea) in taldeArray" :value="taldea.kodea">{{taldea.kodea}}</option>
+                  </select class="form-select" aria-label="Default select example">
+                  <label>{{ translations[currentLocale].citas.alumno }}:</label>
+                  <select class="form-select" aria-label="Default select example" v-model="idLangile">
+                    <option v-for="(langile) in langileArray" :value="langile.id">{{langile.kodea}} - {{ langile.izena
+                      }}</option>
+                  </select class="form-select" aria-label="Default select example">
+                  <button type="button" class="btn bg-black text-white" @click="asignar_cita()"
+                    :disabled="!idSelec || generado"> {{ translations[currentLocale].default.guardar }} </button>
+                  <table v-if="langileArray.length > 0">
+                    <tr>
+                      <th>Langilea</th>
+                      <th v-for="kategoria in tratamenduKategoriaTaula">{{ kategoria.izena }}</th>
+                    </tr>
+                    <tr v-for="langile in langileArray">
+                      <td>{{ langile.izena }}</td>
+                      <td v-for="kategoria in tratamenduKategoriaTaula">{{ getCantKategoria(kategoria.id,langile.id) }}
+                      </td>
+                    </tr>
                   </table>
                 </div>
-              </div>
-              <div class="col">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="crear-tab" data-bs-toggle="tab" data-bs-target="#crear-tab-pane" type="button" role="tab" aria-controls="crear-tab-pane" aria-selected="true">{{ translations[currentLocale].default.añadir }}</button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="edit-tab" data-bs-toggle="tab" data-bs-target="#edit-tab-pane" type="button" role="tab" aria-controls="edit-tab-pane" aria-selected="true" :disabled="!idSelec || generado">{{ translations[currentLocale].default.editar }}</button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="asignar-tab" data-bs-toggle="tab" data-bs-target="#asignar-tab-pane" type="button" role="tab" aria-controls="asignar-tab-pane" aria-selected="true" :disabled="!idSelec || generado">{{ translations[currentLocale].citas.asignar }}</button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="generar-tab" data-bs-toggle="tab" data-bs-target="#generar-tab-pane" type="button" role="tab" aria-controls="generar-tab-pane" aria-selected="false" :disabled="!idSelec || generado || !asignado">{{ translations[currentLocale].citas.ticket }}</button>
-                  </li>
-                </ul>
-                <div class="tab-content bg-white p-3 border-black mb-3" id="myTabContent">
-                  <div class="tab-pane fade show active" id="crear-tab-pane" role="tabpanel" aria-labelledby="crear-tab" tabindex="0">
-                    <label>{{ translations[currentLocale].citas.crear.fecha }}:</label>
-                    <input type="date" class="w-100" v-model="dataTest" />
-                    <label>{{ translations[currentLocale].citas.crear.horaIni }}:</label>
-                    <input type="time" class="w-100" v-model="hasOrduaTest" @blur="roundDownHour_hasieraData_crear()" />
-                    <label>{{ translations[currentLocale].citas.crear.horaFin }}:</label>
-                    <input type="time" class="w-100" v-model="amaOrduaTest" @blur="roundDownHour_amaieraData_crear()" />
-                    <label>{{ translations[currentLocale].citas.asiento }}</label>
-                    <input type="number" class="w-100" v-model="eserlekuaCrear" @blur="comprobar_cita_crear()" />
-                    <label>{{ translations[currentLocale].citas.crear.nombre }}:</label>
-                    <input type="text" class="w-100" v-model="izenaCrear" />
-                    <label>{{ translations[currentLocale].citas.crear.telefono}}:</label>
-                    <input type="text" class="w-100" v-model="telfCrear" />
-                    <label>{{ translations[currentLocale].citas.crear.descripcion }}:</label>
-                    <input type="text" class="w-100" v-model="deskCrear" />
-                    <div class="d-flex">
-                      <label>{{ translations[currentLocale].citas.crear.centro }}:</label>
-                      <input type="checkbox" class="w-25" v-model="etxekoCrear" />
-                    </div>
-                    <button type="button" class="btn btn-primary" :disabled="error" @click="createCita()">{{ translations[currentLocale].default.guardar }}</button>
-                  </div>
-                  <div class="tab-pane fade show" id="edit-tab-pane" role="tabpanel" aria-labelledby="edit-tab" tabindex="0">
-                    <label>{{ translations[currentLocale].citas.crear.fecha }}:</label>
-                    <input type="date" class="w-100" v-model="dataEditar" />
-                    <label>{{ translations[currentLocale].citas.crear.horaIni }}:</label>
-                    <input type="time" class="w-100" v-model="hasOrduaEditar" @blur="roundDownHour_hasieraData_editar()" />
-                    <label>{{ translations[currentLocale].citas.crear.horaFin }}:</label>
-                    <input type="time" class="w-100" v-model="amaOrduaEditar" @blur="roundDownHour_amaieraData_editar()" />
-                    <label>{{ translations[currentLocale].citas.asiento }}:</label>
-                    <input type="number" class="w-100" v-model="eserlekuaEditar" @blur="comprobar_cita_editar()" />
-                    <label>{{ translations[currentLocale].citas.crear.nombre }}:</label>
-                    <input type="text" class="w-100" v-model="izenaEditar" />
-                    <label>{{ translations[currentLocale].citas.crear.telefono}}:</label>
-                    <input type="text" class="w-100" v-model="telfEditar" />
-                    <label>{{ translations[currentLocale].citas.crear.descripcion }}:</label>
-                    <input type="text" class="w-100" v-model="deskEditar" />
-                    <div class="d-flex">
-                      <label>{{ translations[currentLocale].citas.crear.centro }}:</label>
-                      <input type="checkbox" class="w-25" v-model="etxekoEditar" />
-                    </div>
-                    <button type="button" class="btn bg-black text-white" @click="eliminar_cita()" :disabled="!idSelec"> {{ translations[currentLocale].default.borrar }} </button>
-                    <button type="button" class="btn bg-black text-white" @click="editar_cita()" :disabled="error || !idSelec || generado"> {{ translations[currentLocale].default.guardar }} </button>
-                  </div>
-                  <div class="tab-pane fade show" id="asignar-tab-pane" role="tabpanel" aria-labelledby="asignar-tab" tabindex="0">
-                     <span>{{ idSelec }} - {{ izenaSelec }}</span><br>
-                     <span>{{ langile_asignado }}</span><br>
-                    <label>{{ translations[currentLocale].trabajador.grupo }}:</label>
-                    <select class="form-select" aria-label="Default select example" v-model="idTalde" @change="cargarComboBox()">
-                        <option v-for="(taldea) in taldeArray" :value="taldea.kodea" >{{taldea.kodea}}</option>
-                    </select class="form-select" aria-label="Default select example">
-                    <label>{{ translations[currentLocale].citas.alumno }}:</label>
-                    <select class="form-select" aria-label="Default select example" v-model="idLangile">
-                        <option v-for="(langile) in langileArray" :value="langile.id" >{{langile.kodea}} - {{ langile.izena }}</option>
-                    </select class="form-select" aria-label="Default select example">
-                    <button type="button" class="btn bg-black text-white" @click="asignar_cita()" :disabled="!idSelec || generado"> {{ translations[currentLocale].default.guardar }} </button> 
-                    <table v-if="langileArray.length > 0">
-                      <tr>
-                        <th>Langilea</th>
-                        <th v-for="kategoria in tratamenduKategoriaTaula">{{ kategoria.izena }}</th>
-                      </tr>
-                      <tr v-for="langile in langileArray">
-                        <td>{{ langile.izena }}</td>
-                        <td v-for="kategoria in tratamenduKategoriaTaula">{{ getCantKategoria(kategoria.id,langile.id) }}</td>
-                      </tr>
-                    </table>
-                  </div>
-                  <div class="tab-pane fade" id="generar-tab-pane" role="tabpanel" aria-labelledby="generar-tab" tabindex="0">
-                    <span>{{ idSelec }} - {{ izenaSelec }}</span>
-                    <ul class="list-group">
-                      <li class="list-group-item" v-for="tratamendua in tratamenduArray">
-                        <template v-if="!comprobar_extras(tratamendua.id_katTratamendu)">
-                          <input v-if="etxekoEditar" :disabled="idSelec == null" class="form-check-input me-1" type="checkbox" :value="{'tratamendu_id':tratamendua.id,'prezioa':tratamendua.etxeko_prezioa}" v-model="tratamenduSelec" id="Checkbox">
-                          <input v-else :disabled="idSelec == null" class="form-check-input me-1" type="checkbox" :value="{'tratamendu_id':tratamendua.id,'prezioa':tratamendua.kanpoko_prezioa}" v-model="tratamenduSelec" id="Checkbox">
-                          <label class="form-check-label" for="Checkbox">{{ tratamendua.izena }}</label>
-                          <label v-if="etxekoEditar" class="form-check-label" for="Checkbox"> - {{ translations[currentLocale].citas.precioDentro}}: {{ tratamendua.etxeko_prezioa }}</label>
-                          <label v-else class="form-check-label" for="Checkbox"> - {{ translations[currentLocale].citas.precioFuera}}: {{ tratamendua.kanpoko_prezioa }}</label>
-                        </template>
-                        <template v-else>
-                          <input :disabled="idSelec == null || precioextra == null || precioextra == 0" class="form-check-input me-1" type="checkbox" :value="{'tratamendu_id':tratamendua.id, 'prezioa':precioextra}" v-model="tratamenduSelec" id="Checkbox">
-                          <label class="form-check-label" for="Checkbox">{{ tratamendua.izena }}</label>
-                          <input :disabled="idSelec == null" class="me-1" type="number" v-model="precioextra" >
-                        </template>
-                      </li>
-                    </ul>
-                    <button type="button" class="btn bg-black text-white" :disabled="tratamenduSelec.length <= 0 || generado" @click="generar_ticket()"> {{ translations[currentLocale].default.guardar }} </button>
-                  </div>
+                <div class="tab-pane fade" id="generar-tab-pane" role="tabpanel" aria-labelledby="generar-tab"
+                  tabindex="0">
+                  <span>{{ idSelec }} - {{ izenaSelec }}</span>
+                  <ul class="list-group">
+                    <li class="list-group-item" v-for="tratamendua in tratamenduArray">
+                      <template v-if="!comprobar_extras(tratamendua.id_katTratamendu)">
+                        <input v-if="etxekoEditar" :disabled="idSelec == null" class="form-check-input me-1"
+                          type="checkbox" :value="{'tratamendu_id':tratamendua.id,'prezioa':tratamendua.etxeko_prezioa}"
+                          v-model="tratamenduSelec" id="Checkbox">
+                        <input v-else :disabled="idSelec == null" class="form-check-input me-1" type="checkbox"
+                          :value="{'tratamendu_id':tratamendua.id,'prezioa':tratamendua.kanpoko_prezioa}"
+                          v-model="tratamenduSelec" id="Checkbox">
+                        <label class="form-check-label" for="Checkbox">{{ tratamendua.izena }}</label>
+                        <label v-if="etxekoEditar" class="form-check-label" for="Checkbox"> - {{
+                          translations[currentLocale].citas.precioDentro}}: {{ tratamendua.etxeko_prezioa }}</label>
+                        <label v-else class="form-check-label" for="Checkbox"> - {{
+                          translations[currentLocale].citas.precioFuera}}: {{ tratamendua.kanpoko_prezioa }}</label>
+                      </template>
+                      <template v-else>
+                        <input :disabled="idSelec == null || precioextra == null || precioextra == 0"
+                          class="form-check-input me-1" type="checkbox"
+                          :value="{'tratamendu_id':tratamendua.id, 'prezioa':precioextra}" v-model="tratamenduSelec"
+                          id="Checkbox">
+                        <label class="form-check-label" for="Checkbox">{{ tratamendua.izena }}</label>
+                        <input :disabled="idSelec == null" class="me-1" type="number" v-model="precioextra">
+                      </template>
+                    </li>
+                  </ul>
+                  <button type="button" class="btn bg-black text-white"
+                    :disabled="tratamenduSelec.length <= 0 || generado" @click="generar_ticket()"> {{
+                    translations[currentLocale].default.guardar }} </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- Modal -->
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="js/translations.js"></script>
-    <script src="js/bootstrap/jquery-3.7.1.js"></script>
-    <script src="js/toastr/toastr.js"></script>
-    <script src="js/HitzorduScript.js"></script>
-    <script src="js/bootstrap/bootstrap.bundle.js"></script>
-  </body>
+    <!-- Modal -->
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="js/translations.js"></script>
+  <script src="js/bootstrap/jquery-3.7.1.js"></script>
+  <script src="js/toastr/toastr.js"></script>
+  <script src="js/HitzorduScript.js"></script>
+  <script src="js/bootstrap/bootstrap.bundle.js"></script>
+</body>
+
 </html>

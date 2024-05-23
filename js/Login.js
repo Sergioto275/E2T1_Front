@@ -6,14 +6,14 @@ new Vue({
         contrasena: "",
         usuario: "",
         environment: environment,
-        userError: false, // Nueva propiedad para manejar el estado de error del usuario
-        passError: false, // Nueva propiedad para manejar el estado de error de la contraseña
-        showPassword: false, // Nueva propiedad para controlar la visibilidad de la contraseña
+        userError: false,
+        passError: false,
+        showPassword: false,
     },
     methods: {
         changeEnvironment(env) {
             this.environment = env;
-          },
+        },
         async LogIn() {
             try {
                 const pass = this.contrasena;
@@ -28,27 +28,27 @@ new Vue({
                 const response = await fetch(this.environment + '/public/api/login', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json', // Indicar el tipo de contenido como JSON
+                        'Content-Type': 'application/json',
                         'Access-Control-Allow-Origin': '*'
                     },
-                    body: JSON.stringify(jsonSortu), // Convertir el objeto JSON a una cadena JSON
+                    body: JSON.stringify(jsonSortu),
                 });
 
                 if (!response.ok) {
                     console.log('Errorea sortzerakoan');
                     toastr.success("Esta mal");
-                    this.userError = true; // Marcar error en el usuario
-                    this.passError = true; // Marcar error en la contraseña
+                    this.userError = true;
+                    this.passError = true;
 
-                }else{
+                } else {
                     console.log('Esta bien');
                     toastr.success("Esta bien");
                     document.cookie = user;
-                    this.userError = false; // Marcar error en el usuario
-                    this.passError = false; // Marcar error en la contraseña
-                    if(user=="ikasle"){
+                    this.userError = false;
+                    this.passError = false;
+                    if (user == "ikasle") {
                         window.location.href = "http://localhost/erronka2/Front/DistribucionInicial.html";
-                    }else{
+                    } else {
                         window.location.href = "http://localhost/erronka2/Front/Home.html";
 
                     }
@@ -68,8 +68,8 @@ new Vue({
         }
     },
     mounted() {
-      // Konponentea sortzen denean taula kargatzeko
-      this.borrarTodasLasCookies();
+        // Konponentea sortzen denean taula kargatzeko
+        this.borrarTodasLasCookies();
     }
 
-    });
+});

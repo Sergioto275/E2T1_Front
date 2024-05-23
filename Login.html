@@ -34,25 +34,28 @@
                 <form>
                   <!-- Usuario input -->
                   <div class="form-outline mb-4">
-                    <input type="text" id="form3Example3" class="form-control" v-model="usuario" :class="{'error': userError}" />
+                    <input type="text" id="form3Example3" class="form-control" v-model="usuario"
+                      :class="{'error': userError}" />
                     <label class="form-label" for="form3Example3">Usuario</label>
                   </div>
-                  
+
                   <!-- Contraseña input -->
                   <div class="form-outline mb-4">
-                    <input :type="showPassword ? 'text' : 'password'" id="form3Example4" class="form-control" v-model="contrasena" :class="{'error': passError}" />
+                    <input :type="showPassword ? 'text' : 'password'" id="form3Example4" class="form-control"
+                      v-model="contrasena" :class="{'error': passError}" />
                     <label class="form-label" for="form3Example4">Contraseña</label>
                   </div>
 
                   <!-- Checkbox -->
                   <div class="form-check d-flex justify-content-center mb-4">
-                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" v-model="showPassword" />
+                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33"
+                      v-model="showPassword" />
                     <label class="form-check-label" for="form2Example33">
                       Mostrar Contraseña
                     </label>
                   </div>
                 </form>
-                
+
                 <!-- Submit button -->
                 <button class="btn btn-dark btn-block mb-4" @click="LogIn">
                   Log In

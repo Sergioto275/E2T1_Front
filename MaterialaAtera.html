@@ -33,10 +33,12 @@
             </a>
           </li>
           <li class="nav-item me-3 mt-2">
-            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }" @click="changeLanguage('eu')" >EU</a >
+            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }"
+              @click="changeLanguage('eu')">EU</a>
           </li>
           <li class="nav-item me-3 mt-2">
-            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }" @click="changeLanguage('es')" >ES</a >
+            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }"
+              @click="changeLanguage('es')">ES</a>
           </li>
         </div>
       </ul>
@@ -58,10 +60,10 @@
 
           <table class="table table-striped table-hover w-50 text-center mx-auto">
             <tr>
-              <th class="border border-black bg-skin-strong" ></th>
-              <th class="border border-black bg-skin-strong" >{{
+              <th class="border border-black bg-skin-strong"></th>
+              <th class="border border-black bg-skin-strong">{{
                 translations[currentLocale].material.etiqueta }}</th>
-              <th class="border border-black bg-skin-strong" >{{
+              <th class="border border-black bg-skin-strong">{{
                 translations[currentLocale].material.nombre }}</th>
             </tr>
             <tr class="table-secondary" v-for="(material) in listaFiltradaPorNombre" data-tor="hover:bg-darken(x1)">
@@ -79,8 +81,8 @@
         <h1 class="text-center">{{translations[currentLocale].material.carrito}}</h1>
         <table class="table table-striped table-hover w-100 text-center mx-auto">
           <tr>
-            <th class="border border-black bg-skin-strong" ></th>
-            <th class="border border-black bg-skin-strong" >
+            <th class="border border-black bg-skin-strong"></th>
+            <th class="border border-black bg-skin-strong">
               {{translations[currentLocale].material.titulo}}</th>
           </tr>
           <tr class="table-secondary" v-for="(material) in carrito" data-tor="hover:bg-darken(x1)">
@@ -101,10 +103,9 @@
 
 
     <!-- Produktuak ateratzeko modala -->
-    <div class="modal fade mt-20vh" id="modalAtera" tabindex="-1" aria-labelledby="modalAteraLabel" aria-hidden="true"
-      >
+    <div class="modal fade mt-20vh" id="modalAtera" tabindex="-1" aria-labelledby="modalAteraLabel" aria-hidden="true">
       <div class="modal-dialog">
-        <div class="modal-content bg-skin-strong" >
+        <div class="modal-content bg-skin-strong">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="modalAteraLabel">{{ translations[currentLocale].material.modal.sacar }}
             </h1>

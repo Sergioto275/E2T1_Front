@@ -25,7 +25,7 @@ new Vue({
     listaFiltradaPorNombre() {
       return this.listaMaterial.filter(langile => {
         return langile.izena.toLowerCase().includes(this.nombreFil.toLowerCase()) &&
-               (langile.ezabatze_data === null || langile.ezabatze_data === "0000-00-00 00:00:00");
+          (langile.ezabatze_data === null || langile.ezabatze_data === "0000-00-00 00:00:00");
       });
     }
   },
@@ -148,10 +148,10 @@ new Vue({
         const datuak = await response.json();
 
         this.listaMaterial = datuak
-          .filter(material => 
+          .filter(material =>
             (material.ezabatze_data === null || material.ezabatze_data === "0000-00-00 00:00:00")
           )
-          .filter((material, index, self) => 
+          .filter((material, index, self) =>
             index === self.findIndex(m => m.id === material.id)
           );
 
@@ -232,9 +232,10 @@ new Vue({
 
         this.listaMaterial = [];
         const datuak = await response.json();
+        const nombreFilLower = this.nombreFil.toLowerCase();
 
         this.listaMaterial = datuak
-          .filter(material => material.izena.includes(this.nombreFil) && material.ezabatze_data === null || material.izena.includes(this.nombreFil) && material.ezabatze_data === "0000-00-00 00:00:00");
+          .filter(material => material.izena.toLowerCase().includes(nombreFilLower) && material.ezabatze_data === null || material.izena.includes(this.nombreFil) && material.ezabatze_data === "0000-00-00 00:00:00");
 
         if (this.listaMaterial.length == 0) {
           this.listaMaterialById = datuak
@@ -267,11 +268,11 @@ new Vue({
     changeLanguage(locale) {
       console.log('Cambiando a:', locale);
       this.currentLocale = locale;
-    },checkCookie() {
-      if(document.cookie==""){
-          window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
+    }, checkCookie() {
+      if (document.cookie == "") {
+        window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
       }
-}
+    }
   },
   mounted() {
     // Konponentea sortzen denean taula kargatzeko

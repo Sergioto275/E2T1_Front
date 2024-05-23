@@ -33,10 +33,12 @@
             </a>
           </li>
           <li class="nav-item me-3 mt-2">
-            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }" @click="changeLanguage('eu')" >EU</a >
+            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }"
+              @click="changeLanguage('eu')">EU</a>
           </li>
           <li class="nav-item me-3 mt-2">
-            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }" @click="changeLanguage('es')" >ES</a >
+            <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }"
+              @click="changeLanguage('es')">ES</a>
           </li>
         </div>
       </ul>
@@ -50,7 +52,7 @@
         <div>
           <div class="input-group mb-3 w-50 mx-auto">
             <input type="text" class="form-control" placeholder="" aria-label="Recipient's username"
-              aria-describedby="basic-addon2" v-model="nombreFil" @input="filtroNombre()">
+              aria-describedby="basic-addon2" v-model="nombreFil" @input="callFiltro()">
             <button type="button" class="btn btn-light border-black" @click="cargaProduktu()">
               <i class="bi bi-arrow-clockwise"></i>
             </button>
@@ -75,16 +77,16 @@
 
           <table class="table table-striped table-hover w-50 text-center mx-auto">
             <tr>
-              <th class="border border-black bg-skin-strong" ></th>
-              <th class="border border-black bg-skin-strong" >{{
+              <th class="border border-black bg-skin-strong"></th>
+              <th class="border border-black bg-skin-strong">{{
                 translations[currentLocale].productos.nombre }}</th>
-              <th class="border border-black bg-skin-strong" >{{
+              <th class="border border-black bg-skin-strong">{{
                 translations[currentLocale].productos.descripcion }}</th>
-              <th class="border border-black bg-skin-strong" >{{
+              <th class="border border-black bg-skin-strong">{{
                 translations[currentLocale].productos.marca }}</th>
-              <th class="border border-black bg-skin-strong" >{{
+              <th class="border border-black bg-skin-strong">{{
                 translations[currentLocale].productos.categoria }}</th>
-              <th class="border border-black bg-skin-strong" >{{
+              <th class="border border-black bg-skin-strong">{{
                 translations[currentLocale].productos.stock }}</th>
             </tr>
             <tr class="table-secondary" v-for="(produktu) in listaProduktu" data-tor="hover:bg-darken(x1)">
@@ -113,9 +115,9 @@
         <h1 class="text-center">{{translations[currentLocale].productos.carrito}}</h1>
         <table class="table table-striped table-hover w-100 text-center mx-auto">
           <tr>
-            <th class="border border-black bg-skin-strong" ></th>
-            <th class="border border-black bg-skin-strong" >{{translations[currentLocale].productos.titulo}}</th>
-            <th class="border border-black bg-skin-strong" ></th>
+            <th class="border border-black bg-skin-strong"></th>
+            <th class="border border-black bg-skin-strong">{{translations[currentLocale].productos.titulo}}</th>
+            <th class="border border-black bg-skin-strong"></th>
           </tr>
           <tr class="table-secondary" v-for="(produktu) in carrito" data-tor="hover:bg-darken(x1)">
             <td class="table-secondary col-2">
@@ -137,8 +139,7 @@
 
 
     <!-- Produktuak ateratzeko modala -->
-    <div class="modal fade mt-20vh" id="modalAtera" tabindex="-1" aria-labelledby="modalAteraLabel" aria-hidden="true"
-      >
+    <div class="modal fade mt-20vh" id="modalAtera" tabindex="-1" aria-labelledby="modalAteraLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content lamodal">
           <div class="modal-header">

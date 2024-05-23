@@ -85,28 +85,28 @@ new Vue({
 
         this.listaOrdutegi = [];
         const datuak = await response.json();
-        
-          for (var i = 0; i < datuak.length; i++) {
-            if (datuak[i].ezabatze_data === null && datuak[i].kodea === this.grupoFil || datuak[i].ezabatze_data === "0000-00-00 00:00:00" && datuak[i].kodea === this.grupoFil) {
-              if(datuak[i].eguna==1){
-                var ordutegi={"kodea":datuak[i].kodea,"eguna":"Lunes","hasiera_data":datuak[i].hasiera_data,"amaiera_data":datuak[i].amaiera_data,"hasiera_ordua":datuak[i].hasiera_ordua,"amaiera_ordua":datuak[i].amaiera_data,"id":datuak[i].id}
 
-              }else if(datuak[i].eguna==2){
-                var ordutegi={"kodea":datuak[i].kodea,"eguna":"Martes","hasiera_data":datuak[i].hasiera_data,"amaiera_data":datuak[i].amaiera_data,"hasiera_ordua":datuak[i].hasiera_ordua,"amaiera_ordua":datuak[i].amaiera_data,"id":datuak[i].id}
+        for (var i = 0; i < datuak.length; i++) {
+          if (datuak[i].ezabatze_data === null && datuak[i].kodea === this.grupoFil || datuak[i].ezabatze_data === "0000-00-00 00:00:00" && datuak[i].kodea === this.grupoFil) {
+            if (datuak[i].eguna == 1) {
+              var ordutegi = { "kodea": datuak[i].kodea, "eguna": "Lunes", "hasiera_data": datuak[i].hasiera_data, "amaiera_data": datuak[i].amaiera_data, "hasiera_ordua": datuak[i].hasiera_ordua, "amaiera_ordua": datuak[i].amaiera_data, "id": datuak[i].id }
 
-              }else if(datuak[i].eguna==3){
-                var ordutegi={"kodea":datuak[i].kodea,"eguna":"Miercoles","hasiera_data":datuak[i].hasiera_data,"amaiera_data":datuak[i].amaiera_data,"hasiera_ordua":datuak[i].hasiera_ordua,"amaiera_ordua":datuak[i].amaiera_data,"id":datuak[i].id}
+            } else if (datuak[i].eguna == 2) {
+              var ordutegi = { "kodea": datuak[i].kodea, "eguna": "Martes", "hasiera_data": datuak[i].hasiera_data, "amaiera_data": datuak[i].amaiera_data, "hasiera_ordua": datuak[i].hasiera_ordua, "amaiera_ordua": datuak[i].amaiera_data, "id": datuak[i].id }
 
-              }else if(datuak[i].eguna==4){
-                var ordutegi={"kodea":datuak[i].kodea,"eguna":"Jueves","hasiera_data":datuak[i].hasiera_data,"amaiera_data":datuak[i].amaiera_data,"hasiera_ordua":datuak[i].hasiera_ordua,"amaiera_ordua":datuak[i].amaiera_data,"id":datuak[i].id}
+            } else if (datuak[i].eguna == 3) {
+              var ordutegi = { "kodea": datuak[i].kodea, "eguna": "Miercoles", "hasiera_data": datuak[i].hasiera_data, "amaiera_data": datuak[i].amaiera_data, "hasiera_ordua": datuak[i].hasiera_ordua, "amaiera_ordua": datuak[i].amaiera_data, "id": datuak[i].id }
 
-              }else if(datuak[i].eguna==5){
-                var ordutegi={"kodea":datuak[i].kodea,"eguna":"Viernes","hasiera_data":datuak[i].hasiera_data,"amaiera_data":datuak[i].amaiera_data,"hasiera_ordua":datuak[i].hasiera_ordua,"amaiera_ordua":datuak[i].amaiera_data,"id":datuak[i].id}
-              }
-              this.listaOrdutegi.push(ordutegi);
+            } else if (datuak[i].eguna == 4) {
+              var ordutegi = { "kodea": datuak[i].kodea, "eguna": "Jueves", "hasiera_data": datuak[i].hasiera_data, "amaiera_data": datuak[i].amaiera_data, "hasiera_ordua": datuak[i].hasiera_ordua, "amaiera_ordua": datuak[i].amaiera_data, "id": datuak[i].id }
 
+            } else if (datuak[i].eguna == 5) {
+              var ordutegi = { "kodea": datuak[i].kodea, "eguna": "Viernes", "hasiera_data": datuak[i].hasiera_data, "amaiera_data": datuak[i].amaiera_data, "hasiera_ordua": datuak[i].hasiera_ordua, "amaiera_ordua": datuak[i].amaiera_data, "id": datuak[i].id }
             }
+            this.listaOrdutegi.push(ordutegi);
+
           }
+        }
 
         if (this.listaOrdutegi.length == 0) {
           this.cargaLangile();
@@ -130,20 +130,20 @@ new Vue({
           for (var i = 0; i < datos.length; i++) {
 
             if (datos[i].ezabatze_data === null || datos[i].ezabatze_data === "0000-00-00 00:00:00") {
-              if(datos[i].eguna==1){
-                var ordutegi={"kodea":datos[i].kodea,"eguna":"Lunes","hasiera_data":datos[i].hasiera_data,"amaiera_data":datos[i].amaiera_data,"hasiera_ordua":datos[i].hasiera_ordua,"amaiera_ordua":datos[i].amaiera_data,"id":datos[i].id}
+              if (datos[i].eguna == 1) {
+                var ordutegi = { "kodea": datos[i].kodea, "eguna": "Lunes", "hasiera_data": datos[i].hasiera_data, "amaiera_data": datos[i].amaiera_data, "hasiera_ordua": datos[i].hasiera_ordua, "amaiera_ordua": datos[i].amaiera_data, "id": datos[i].id }
 
-              }else if(datos[i].eguna==2){
-                var ordutegi={"kodea":datos[i].kodea,"eguna":"Martes","hasiera_data":datos[i].hasiera_data,"amaiera_data":datos[i].amaiera_data,"hasiera_ordua":datos[i].hasiera_ordua,"amaiera_ordua":datos[i].amaiera_data,"id":datos[i].id}
+              } else if (datos[i].eguna == 2) {
+                var ordutegi = { "kodea": datos[i].kodea, "eguna": "Martes", "hasiera_data": datos[i].hasiera_data, "amaiera_data": datos[i].amaiera_data, "hasiera_ordua": datos[i].hasiera_ordua, "amaiera_ordua": datos[i].amaiera_data, "id": datos[i].id }
 
-              }else if(datos[i].eguna==3){
-                var ordutegi={"kodea":datos[i].kodea,"eguna":"Miercoles","hasiera_data":datos[i].hasiera_data,"amaiera_data":datos[i].amaiera_data,"hasiera_ordua":datos[i].hasiera_ordua,"amaiera_ordua":datos[i].amaiera_data,"id":datos[i].id}
+              } else if (datos[i].eguna == 3) {
+                var ordutegi = { "kodea": datos[i].kodea, "eguna": "Miercoles", "hasiera_data": datos[i].hasiera_data, "amaiera_data": datos[i].amaiera_data, "hasiera_ordua": datos[i].hasiera_ordua, "amaiera_ordua": datos[i].amaiera_data, "id": datos[i].id }
 
-              }else if(datos[i].eguna==4){
-                var ordutegi={"kodea":datos[i].kodea,"eguna":"Jueves","hasiera_data":datos[i].hasiera_data,"amaiera_data":datos[i].amaiera_data,"hasiera_ordua":datos[i].hasiera_ordua,"amaiera_ordua":datos[i].amaiera_data,"id":datos[i].id}
+              } else if (datos[i].eguna == 4) {
+                var ordutegi = { "kodea": datos[i].kodea, "eguna": "Jueves", "hasiera_data": datos[i].hasiera_data, "amaiera_data": datos[i].amaiera_data, "hasiera_ordua": datos[i].hasiera_ordua, "amaiera_ordua": datos[i].amaiera_data, "id": datos[i].id }
 
-              }else if(datos[i].eguna==5){
-                var ordutegi={"kodea":datos[i].kodea,"eguna":"Viernes","hasiera_data":datos[i].hasiera_data,"amaiera_data":datos[i].amaiera_data,"hasiera_ordua":datos[i].hasiera_ordua,"amaiera_ordua":datos[i].amaiera_data,"id":datos[i].id}
+              } else if (datos[i].eguna == 5) {
+                var ordutegi = { "kodea": datos[i].kodea, "eguna": "Viernes", "hasiera_data": datos[i].hasiera_data, "amaiera_data": datos[i].amaiera_data, "hasiera_ordua": datos[i].hasiera_ordua, "amaiera_ordua": datos[i].amaiera_data, "id": datos[i].id }
 
               }
               this.listaOrdutegi.push(ordutegi);
@@ -151,7 +151,7 @@ new Vue({
 
             }
           }
-          
+
         })
         .catch(error => {
           console.error('Se ha producido un error:', error);
@@ -243,12 +243,12 @@ new Vue({
           },
           body: JSON.stringify(jsonEditatu), // Convertir el objeto JSON a una cadena JSON
         })
-        .then(response => {
-          toastr.success(this.translations[this.currentLocale].default.crear);
-        })
-        .catch(error => {
-          console.error('Se ha producido un error:', error);
-        });
+          .then(response => {
+            toastr.success(this.translations[this.currentLocale].default.crear);
+          })
+          .catch(error => {
+            console.error('Se ha producido un error:', error);
+          });
       }
       // Llamar a cargaLangile una vez que todas las iteraciones del bucle hayan terminado
       this.cargaLangile();
@@ -298,13 +298,13 @@ new Vue({
       this.kodeaCrear = "";
     },
     checkCookie() {
-      if(document.cookie==""){
-          window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
-      }else if(document.cookie=="ikasle"){
+      if (document.cookie == "") {
+        window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
+      } else if (document.cookie == "ikasle") {
         window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Home.html";
       }
-  },
-    
+    },
+
   },
   mounted() {
     // Llama a tu función cargarPagina cuando el componente se monta
