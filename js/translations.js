@@ -256,7 +256,8 @@ const translations = {
       crearKat:"Añadir Categoria",
       crear:"Añadir Tratamiento",
       editarKat:"Editar Categoria",
-      editar:"Editar Tratamiento"
+      editar:"Editar Tratamiento",
+      categoria:"Categoria"
     },
 
     material: {
@@ -540,7 +541,8 @@ const translations = {
       crearKat:"Kategoria Gehitu",
       crear:"Tratamendua Gehitu",
       editarKat:"Kategoria editatu",
-      editar:"Tratamendua editatu"
+      editar:"Tratamendua editatu",
+      categoria:"Kategoria"
     },
 
     material: {

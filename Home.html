@@ -11,7 +11,7 @@
         <link href="css/bootstrap/icons/font/bootstrap-icons.css" rel="stylesheet">
         <link href="js/toastr/build/toastr.css" rel="stylesheet">
     </head>
-    <body >
+    <body>
         <script src="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.js"></script>
         <div id="app">
             <!-- <div class="rompe-header">
@@ -161,23 +161,25 @@
                     </ul>
                 </header>
             <!-- </div> -->
-            <div class="row center mt-3">
-                <div class="col-8 d-flex justify-content-center">
+            <div class="container">
+                <div class="row justify-content-center mt-3">
+                  <div class="col-md-9 d-flex justify-content-center">
                     <div id="calendarContainer"></div>
                     <div id="organizerContainer"></div>
-                </div>
-                <div class="col-4">
+                  </div>
+                  <div class="col-md-3">
                     <h4><i class="bi bi-bell-fill"></i> {{ translations[currentLocale].menu.alertas }}</h4>
-                    <div :class="{'card w-50 p-2 text-center': true, 'glowing': stockArray.length == 0, 'glowing-red': stockArray.length != 0}" class="">
-                        <i v-if="stockArray.length == 0" class="bi bi-check2-circle display-5 text-success"></i>
-                        <i v-else class="bi bi-x-circle-fill display-5 text-danger"></i>
-                        <div class="card-body text-start">
-                            <p v-if="stockArray.length == 0" class="card-text"><i class="bi bi-bell-fill"></i>  {{ translations[currentLocale].menu.alertaVacia }}</p>
-                            <p v-else v-for="produktu in stockArray" class="card-text"><i class="bi bi-bell-fill"></i>  {{ produktu.izena }}</p>
-                        </div>
+                    <div :class="{'card w-100 p-2 text-center': true, 'glowing': stockArray.length == 0, 'glowing-red': stockArray.length != 0}">
+                      <i v-if="stockArray.length == 0" class="bi bi-check2-circle display-5 text-success"></i>
+                      <i v-else class="bi bi-x-circle-fill display-5 text-danger"></i>
+                      <div class="card-body text-start">
+                        <p v-if="stockArray.length == 0" class="card-text"><i class="bi bi-bell-fill"></i> {{ translations[currentLocale].menu.alertaVacia }}</p>
+                        <p v-else v-for="produktu in stockArray" class="card-text"><i class="bi bi-bell-fill"></i> {{ produktu.izena }}</p>
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
+              </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="js/translations.js"></script>

@@ -39,49 +39,50 @@
             </div>
           </ul>
         </header>
-        
-        <div class="row justify-content-center">
-            <div class="col-md-10 offset-md-5 mt-5">
-              <h1 class="mb-5 offset-md-2">{{ translations[currentLocale].productos.titulo }}</h1>
-              <div>
-                <div class="input-group mb-3 w-50">
-                  <input type="text" class="form-control" placeholder="" aria-label="Recipient's username" aria-describedby="basic-addon2" v-model="nombreFil" @change="filtroNombre()">
-                  <button type="button" class="btn btn-light border-black" @click="cargaProduktu()">
-                    <i class="bi bi-arrow-clockwise"></i>
-                  </button>
-                </div>      
-                <div class="input-group mb-1 w-50">
-                  <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalCrear" @click="limpiarCampos()">{{ translations[currentLocale].default.añadir }}</button>
-                  <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalEditar" :disabled="arrayId.length>1 || arrayId.length<=0" @click="cargarDatosModal()">{{ translations[currentLocale].default.editar }}</button>
-                  <button type="button" class="btn btn-light border-black mb-3" :disabled="arrayId.length<=0" @click="borrar()">{{ translations[currentLocale].default.borrar }}</button>
-                  <select class="form-select border-black w-25 h-25" aria-label="Selecciona una categoria" v-model="kategoriaFil" @change="filtroKategoria()" aria-placeholder="Categoria">
-                    <option selected value="first">{{ translations[currentLocale].productos.kategoriaFil }}</option>
-                    <option v-for="(kategoria) in listaKategoria" :value="kategoria.id">{{kategoria.izena}}</option>
-                  </select>
-                  <!-- <select class="form-select border-black w-25 h-25" aria-label="Default select example" v-model="grupoFil" @change="filtroGrupo()" aria-placeholder="Grupo">
-                    <option selected>Todos</option>
-                    <option v-for="(taldea) in listaTalde" :value="taldea.kodea">{{taldea.kodea}}</option>
-                  </select> -->
+        <div class="container">
+          <div class="row justify-content-center">
+              <div class="col-md-10 center mt-5">
+                <h1 class="mb-5">{{ translations[currentLocale].productos.titulo }}</h1>
+                <div>
+                  <div class="input-group mb-3 w-50">
+                    <input type="text" class="form-control" placeholder="" aria-label="Recipient's username" aria-describedby="basic-addon2" v-model="nombreFil" @change="filtroNombre()">
+                    <button type="button" class="btn btn-light border-black" @click="cargaProduktu()">
+                      <i class="bi bi-arrow-clockwise"></i>
+                    </button>
+                  </div>      
+                  <div class="input-group mb-1 w-50">
+                    <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalCrear" @click="limpiarCampos()">{{ translations[currentLocale].default.añadir }}</button>
+                    <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalEditar" :disabled="arrayId.length>1 || arrayId.length<=0" @click="cargarDatosModal()">{{ translations[currentLocale].default.editar }}</button>
+                    <button type="button" class="btn btn-light border-black mb-3" :disabled="arrayId.length<=0" @click="borrar()">{{ translations[currentLocale].default.borrar }}</button>
+                    <select class="form-select border-black w-25 h-25" aria-label="Selecciona una categoria" v-model="kategoriaFil" @change="filtroKategoria()" aria-placeholder="Categoria">
+                      <option selected value="first">{{ translations[currentLocale].productos.kategoriaFil }}</option>
+                      <option v-for="(kategoria) in listaKategoria" :value="kategoria.id">{{kategoria.izena}}</option>
+                    </select>
+                    <!-- <select class="form-select border-black w-25 h-25" aria-label="Default select example" v-model="grupoFil" @change="filtroGrupo()" aria-placeholder="Grupo">
+                      <option selected>Todos</option>
+                      <option v-for="(taldea) in listaTalde" :value="taldea.kodea">{{taldea.kodea}}</option>
+                    </select> -->
+                  </div>
+                  
+                    <table class="table table-striped table-hover w-50 text-center">
+                        <tr>
+                            <th class="border border-black bg-skin-strong" ></th>
+                            <th class="border border-black bg-skin-strong" >{{ translations[currentLocale].productos.nombre }}</th>
+                            <th class="border border-black bg-skin-strong" >{{ translations[currentLocale].productos.descripcion }}</th>
+                            <th class="border border-black bg-skin-strong" >{{ translations[currentLocale].productos.marca }}</th>
+                            <th class="border border-black bg-skin-strong" >{{ translations[currentLocale].productos.categoria }}</th>
+                            <th class="border border-black bg-skin-strong" >{{ translations[currentLocale].productos.stock }}</th>
+                        </tr>
+                        <tr :class="{'table-secondary': true, 'glowing-red2': produktu.stock < produktu.stock_alerta}" v-for="(produktu) in listaProduktu" data-tor="hover:bg-darken(x1)">
+                          <td class="table-secondary"><input type="checkbox" :value="produktu.id"v-model="arrayId"></td>
+                          <td>{{produktu.izena}}</td>
+                          <td>{{produktu.deskribapena}}</td>
+                          <td>{{produktu.marka}}</td>
+                          <td>{{produktu.kategoria_izena}}</td>
+                          <td>{{produktu.stock}}</td>
+                        </tr>
+                    </table>
                 </div>
-                
-                  <table class="table table-striped table-hover w-50 text-center">
-                      <tr>
-                          <th class="border border-black bg-skin-strong" ></th>
-                          <th class="border border-black bg-skin-strong" >{{ translations[currentLocale].productos.nombre }}</th>
-                          <th class="border border-black bg-skin-strong" >{{ translations[currentLocale].productos.descripcion }}</th>
-                          <th class="border border-black bg-skin-strong" >{{ translations[currentLocale].productos.marca }}</th>
-                          <th class="border border-black bg-skin-strong" >{{ translations[currentLocale].productos.categoria }}</th>
-                          <th class="border border-black bg-skin-strong" >{{ translations[currentLocale].productos.stock }}</th>
-                      </tr>
-                      <tr :class="{'table-secondary': true, 'glowing-red2': produktu.stock < produktu.stock_alerta}" v-for="(produktu) in listaProduktu" data-tor="hover:bg-darken(x1)">
-                        <td class="table-secondary"><input type="checkbox" :value="produktu.id"v-model="arrayId"></td>
-                        <td>{{produktu.izena}}</td>
-                        <td>{{produktu.deskribapena}}</td>
-                        <td>{{produktu.marka}}</td>
-                        <td>{{produktu.kategoria_izena}}</td>
-                        <td>{{produktu.stock}}</td>
-                      </tr>
-                  </table>
               </div>
             </div>
           </div>

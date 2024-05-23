@@ -71,13 +71,10 @@
             <div class="col-md-10 mt-5 ml-30" >
               <h1 class="mb-5 offset-md-2">{{ translations[currentLocale].material.devolver.titulo }}</h1>
               <div>
-                <div class="input-group mb-3 w-50">
-                  <input type="date" class="form-select border-black w-25 h-25" aria-label="Default select example" v
-                    @change="callFiltro()" aria-placeholder="Grupo" v-model="fechaFil" /><button type="button"
-                    class="btn btn-light border-black h-25" @click="cargarDatosSinEntregar()">
-                    <i class="bi bi-calendar-range-fill"></i>
-                  </button>
-                </div>      
+                <!-- <div class="input-group mb-3 w-50">
+                  <input type="date" class="form-select border-black w-25 h-25" aria-label="Default select example"
+                    @change="callFiltro()" aria-placeholder="Grupo" v-model="fechaFil" />
+                </div>       -->
                 <div class="input-group mb-1 w-50">
                   <button type="button" class="btn btn-light border-black mb-3" :disabled="arrayId.length<=0" @click="devolver()">{{ translations[currentLocale].material.devolver.devuelto }}</button>
                   <button type="button" class="btn btn-light border-black mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalEditar" :disabled="arrayId.length>1 || arrayId.length<=0" @click="cargarDatosModal()">{{ translations[currentLocale].default.editar }}</button>
@@ -88,6 +85,9 @@
                   <button type="button"
                     class="btn btn-light border-black h-25" @click="cargaLangile()">
                     <i class="bi bi-arrow-clockwise"></i>
+                  </button>
+                  <button type="button" class="btn btn-light border-black h-25" @click="cargarDatosSinEntregar()">
+                    <i class="bi bi-calendar-range-fill"></i>
                   </button>
                 </div>
                 

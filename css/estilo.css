@@ -208,6 +208,18 @@ h5{
   width:500px;
 }
 
+.taula-2{
+  overflow:scroll;
+  height:500px;
+  width:220px;
+}
+
+.taula-3{
+  overflow:scroll;
+  height:500px;
+  width:600px;
+}
+
 .lg-pad{
   padding-bottom: 70vh;
   padding-top: 8%;

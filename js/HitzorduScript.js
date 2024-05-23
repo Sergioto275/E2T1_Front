@@ -11,6 +11,7 @@ const vue = new Vue({
         langile_asignado: 'nadie Asignado',
         // eserlekua: null,
         generado: false,
+        asignado: false,
         // ordua: null,
         langileTratamenduak: [],
         tratamenduKategoria: [],
@@ -132,8 +133,10 @@ const vue = new Vue({
             };
             if (cita[0].id_langilea) {
                 this.langile_asignado = cita[0].kodea + ' - ' + cita[0].l_izena;
+                this.asignado = true;
             } else {
                 this.langile_asignado = 'nadie Asignado';
+                this.asignado = false;
             }
             if (cita[0].prezio_totala) {
                 this.generado = true;

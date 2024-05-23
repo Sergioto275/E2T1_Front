@@ -67,22 +67,24 @@
                     @click="borrar()">{{ translations[currentLocale].default.borrar }}</button>
                   </select>
                 </div>
-                <table class="table table-striped table-hover w-50 text-center">
-                  <tr>
-                    <th class="border border-black bg-skin-strong" ></th>
-                    <th class="border border-black bg-skin-strong" >{{
-                      translations[currentLocale].trabajador.nombre }}</th>
-                    <th class="border border-black bg-skin-strong" >{{
-                      translations[currentLocale].trabajador.apellidos }}</th>
-                  </tr>
-                  <tr class="table-secondary" v-for="(bezero) in listaFiltradaPorNombre" data-tor="hover:bg-darken(x1)"
-                    @click="cargaFitxa(bezero.id)">
-                    <td class="table-secondary"><input type="checkbox" :value="bezero.id" v-model="arrayId"
-                        :disabled="bezero.id=='no'"></td>
-                    <td>{{bezero.izena}}</td>
-                    <td>{{bezero.abizena}}</td>
-                  </tr>
-                </table>
+                <div class="taula-2">
+                  <table class="table table-striped table-hover w-50 text-center">
+                    <tr>
+                      <th class="border border-black bg-skin-strong" ></th>
+                      <th class="border border-black bg-skin-strong" >{{
+                        translations[currentLocale].trabajador.nombre }}</th>
+                      <th class="border border-black bg-skin-strong" >{{
+                        translations[currentLocale].trabajador.apellidos }}</th>
+                    </tr>
+                    <tr class="table-secondary" v-for="(bezero) in listaFiltradaPorNombre" data-tor="hover:bg-darken(x1)"
+                      @click="cargaFitxa(bezero.id)">
+                      <td class="table-secondary"><input type="radio" :value="bezero.id" v-model="arrayId"
+                          :disabled="bezero.id=='no'"></td>
+                      <td>{{bezero.izena}}</td>
+                      <td>{{bezero.abizena}}</td>
+                    </tr>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
@@ -130,41 +132,42 @@
                     <i class="bi bi-arrow-clockwise"></i>
                   </button>
                 </div>
+                <div class="taula-3">
+                  <table class="table table-striped table-hover w-50 text-center">
+                    <tr v-for="(bezeroa) in bezeroSeleccionado">
+                      <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.nombreape }}</th>
+                      <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.telefono }}</th>
+                      <td colspan="5" class="border border-black">{{bezeroa.telefonoa}}</td>
 
-                <table class="table table-striped table-hover w-50 text-center">
-                  <tr v-for="(bezeroa) in bezeroSeleccionado">
-                    <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.nombreape }}</th>
-                    <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.telefono }}</th>
-                    <td colspan="5" class="border border-black">{{bezeroa.telefonoa}}</td>
-
-                  </tr>
-                  <tr v-for="(bezeroa) in bezeroSeleccionado">
-                    <td class="border border-black text-start ps-3" colspan="7">{{bezeroa.izena}} {{bezeroa.abizena}}
-                    </td>
-                  </tr>
-                  <tr v-for="(bezeroa) in bezeroSeleccionado">
-                    <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.sensible }}</th>
-                    <td class="border border-black" colspan="6">{{bezeroa.azal_sentikorra}}</td>
-                  </tr>
-                  <tr>
-                    <th class="border border-black bg-skin-strong" ></th>
-                    <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.fecha }} </th>
-                    <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.tinte }}</th>
-                    <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.casa }}</th>
-                    <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.cantidad }}</th>
-                    <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.volumenes }}</th>
-                    <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.observaciones }}</th>
-                  </tr>
-                  <tr class="table-secondary" v-for="(fitxa) in listaKolore" data-tor="hover:bg-darken(x1)">
-                    <td class="table-secondary"><input type="checkbox" :value="fitxa.id" v-model="arrayId2"></td>
-                    <td>{{fitxa.data}}</td>
-                    <td>{{fitxa.produktua_izena}}</td>
-                    <td>{{fitxa.produktua_marka}}</td>
-                    <td>{{fitxa.kantitatea}}</td>
-                    <td>{{fitxa.bolumena}}</td>
-                    <td>{{fitxa.oharrak}}</td>
-                  </tr>
-                </table>
+                    </tr>
+                    <tr v-for="(bezeroa) in bezeroSeleccionado">
+                      <td class="border border-black text-start ps-3" colspan="7">{{bezeroa.izena}} {{bezeroa.abizena}}
+                      </td>
+                    </tr>
+                    <tr v-for="(bezeroa) in bezeroSeleccionado">
+                      <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.sensible }}</th>
+                      <td class="border border-black" colspan="6">{{bezeroa.azal_sentikorra}}</td>
+                    </tr>
+                    <tr>
+                      <th class="border border-black bg-skin-strong" ></th>
+                      <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.fecha }} </th>
+                      <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.tinte }}</th>
+                      <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.casa }}</th>
+                      <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.cantidad }}</th>
+                      <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.volumenes }}</th>
+                      <th class="border border-black bg-skin-strong" >{{translations[currentLocale].fichas.observaciones }}</th>
+                    </tr>
+                    <tr class="table-secondary" v-for="(fitxa) in listaKolore" data-tor="hover:bg-darken(x1)">
+                      <td class="table-secondary"><input type="checkbox" :value="fitxa.id" v-model="arrayId2"></td>
+                      <td>{{fitxa.data}}</td>
+                      <td>{{fitxa.produktua_izena}}</td>
+                      <td>{{fitxa.produktua_marka}}</td>
+                      <td>{{fitxa.kantitatea}}</td>
+                      <td>{{fitxa.bolumena}}</td>
+                      <td>{{fitxa.oharrak}}</td>
+                    </tr>
+                  </table>
+                </div>
               </div>
             </div>
           </div>

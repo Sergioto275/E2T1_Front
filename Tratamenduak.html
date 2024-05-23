@@ -73,6 +73,7 @@
               <input type="number" class="w-100" v-model="etxeko_prezioaCrear" />
               <label>{{ translations[currentLocale].tratamientos.precioFuera }}:</label>
               <input type="number" class="w-100" v-model="kanpoko_prezioaCrear" />
+              <label>{{ translations[currentLocale].tratamientos.categoria }}:</label>
               <select class="form-select" aria-label="Default select example" v-model="tratKategoriaIdCrear">
                 <option v-for="(kategoria) in tratamenduKategoria" :value="kategoria.id" >{{kategoria.izena}}</option>
               </select class="form-select" aria-label="Default select example">
@@ -98,6 +99,7 @@
               <input type="number" class="w-100" v-model="etxeko_prezioaEditar" />
               <label>{{ translations[currentLocale].tratamientos.precioFuera }}:</label>
               <input type="number" class="w-100" v-model="kanpoko_prezioaEditar" />
+              <label>{{ translations[currentLocale].tratamientos.categoria }}:</label>
               <select class="form-select" aria-label="Default select example" v-model="tratKategoriaIdEditar">
                 <option v-for="(kategoria) in tratamenduKategoria" :value="kategoria.id" >{{kategoria.izena}}</option>
               </select class="form-select" aria-label="Default select example">

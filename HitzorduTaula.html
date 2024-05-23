@@ -102,7 +102,7 @@
                     <button class="nav-link" id="asignar-tab" data-bs-toggle="tab" data-bs-target="#asignar-tab-pane" type="button" role="tab" aria-controls="asignar-tab-pane" aria-selected="true" :disabled="!idSelec || generado">{{ translations[currentLocale].citas.asignar }}</button>
                   </li>
                   <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="generar-tab" data-bs-toggle="tab" data-bs-target="#generar-tab-pane" type="button" role="tab" aria-controls="generar-tab-pane" aria-selected="false" :disabled="!idSelec || generado">{{ translations[currentLocale].citas.ticket }}</button>
+                    <button class="nav-link" id="generar-tab" data-bs-toggle="tab" data-bs-target="#generar-tab-pane" type="button" role="tab" aria-controls="generar-tab-pane" aria-selected="false" :disabled="!idSelec || generado || !asignado">{{ translations[currentLocale].citas.ticket }}</button>
                   </li>
                 </ul>
                 <div class="tab-content bg-white p-3 border-black mb-3" id="myTabContent">
