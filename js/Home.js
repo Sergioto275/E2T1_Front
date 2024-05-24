@@ -90,9 +90,9 @@ const vue = new Vue({
             this.isAdmin = isAdminCookie;
             this.isLanbide = isLanbideCookie;
 
-            if (document.cookie == "") {
-                window.location.href = "http://localhost/erronka2/Front/Login.html";
-            }
+            // if (document.cookie == "") {
+            //     window.location.href = "http://localhost/erronka2/Front/Login.html";
+            // }
         },
 
 

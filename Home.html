@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html lang="eu">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home</title>
     <link href="css/bootstrap/bootstrap.css" rel="stylesheet">
     <link href="css/estilo.css" rel="stylesheet">
-    <link href="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.css"
-        rel="stylesheet" />
+    <link href="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.css" rel="stylesheet" />
     <link href="css/bootstrap/icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="js/toastr/build/toastr.css" rel="stylesheet">
 </head>
-
 <body>
     <script src="https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.js"></script>
     <div id="app">
@@ -27,12 +24,10 @@
                 </div>
                 <div class="nav rounded-start border-white border-4 justify-content-evenly ps-1 bg-brown-light w-7">
                     <li class="nav-item me-3 mt-2">
-                        <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }"
-                            @click="changeLanguage('eu')">EU</a>
+                        <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'eu' }" @click="changeLanguage('eu')">EU</a>
                     </li>
                     <li class="nav-item me-3 mt-2">
-                        <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }"
-                            @click="changeLanguage('es')">ES</a>
+                        <a href="#" class="text-white" :class="{ 'fw-bold': currentLocale === 'es' }" @click="changeLanguage('es')">ES</a>
                     </li>
                 </div>
             </ul>
@@ -48,32 +43,28 @@
                         </button>
                         <ul class="dropdown-menu menu bg-brown-strong" aria-labelledby="dropdownMenuButton6">
                             <li>
-                                <div div class="dropdown dropend" onclick="event.stopPropagation();">
-                                    <button class="btn text-white dropdown-toggle" type="button"
-                                        id="dropdownMenuButton6" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="dropdown dropend menu">
+                                    <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton6-1"
+                                        data-bs-toggle="dropdown" aria-expanded="false" onclick="event.stopPropagation()">
                                         {{ translations[currentLocale].menu.almacen.producto.titulo }}
                                     </button>
-                                    <ul class="dropdown-menu menu bg-drop-brown" aria-labelledby="dropdownMenuButton">
+                                    <ul class="dropdown-menu menu bg-drop-brown" aria-labelledby="dropdownMenuButton6-1">
                                         <li><a class="dropdown-item text-white" href="ProduktuakAtera.html">{{
-                                                translations[currentLocale].menu.almacen.producto.sacar }}</a></li>
-                                        <!-- <li><a class="dropdown-item text-white" href="">{{
-                                                        translations[currentLocale].menu.almacen.producto.historico }}</a></li> -->
+                                            translations[currentLocale].menu.almacen.producto.sacar }}</a></li>
                                     </ul>
                                 </div>
                             </li>
                             <li>
-                                <div class="dropend">
-                                    <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="dropdown dropend menu">
+                                    <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton6-2"
+                                        data-bs-toggle="dropdown" aria-expanded="false" onclick="event.stopPropagation()">
                                         {{ translations[currentLocale].menu.almacen.material.titulo }}
                                     </button>
-                                    <ul class="dropdown-menu menu bg-drop-brown" aria-labelledby="dropdownMenuButton">
+                                    <ul class="dropdown-menu menu bg-drop-brown" aria-labelledby="dropdownMenuButton6-2">
                                         <li><a class="dropdown-item text-white" href="MaterialaAtera.html">{{
-                                                translations[currentLocale].menu.almacen.material.sacar }}</a></li>
+                                            translations[currentLocale].menu.almacen.material.sacar }}</a></li>
                                         <li><a class="dropdown-item text-white" href="DevolverMaterialTabla.html">{{
-                                                translations[currentLocale].menu.almacen.material.entregar }}</a></li>
-                                        <!-- <li><a class="dropdown-item text-white" href="">{{
-                                                        translations[currentLocale].menu.almacen.material.historico }}</a></li> -->
+                                            translations[currentLocale].menu.almacen.material.entregar }}</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -88,43 +79,43 @@
                         </a>
                         <ul class="dropdown-menu menu bg-brown-strong" aria-labelledby="dropdownMenuButton3">
                             <li>
-                                <div class="dropdown dropend" onclick="event.stopPropagation();">
-                                    <button class="btn text-white dropdown-toggle" type="button"
-                                        id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="dropdown dropend menu">
+                                    <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton4"
+                                        data-bs-toggle="dropdown" aria-expanded="false" onclick="event.stopPropagation()">
                                         {{ translations[currentLocale].menu.profesor.almacen.titulo }}
                                     </button>
                                     <ul class="dropdown-menu menu bg-drop-brown" aria-labelledby="dropdownMenuButton4">
                                         <li><a class="dropdown-item text-white" href="ProduktuTaula.html">{{
-                                                translations[currentLocale].menu.profesor.almacen.productos }}</a>
+                                            translations[currentLocale].menu.profesor.almacen.productos }}</a>
                                         </li>
                                         <li><a class="dropdown-item text-white" href="MaterialaTaula.html">{{
-                                                translations[currentLocale].menu.profesor.almacen.material }}</a>
+                                            translations[currentLocale].menu.profesor.almacen.material }}</a>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
                             <li><a class="dropdown-item text-white" href="Tratamenduak.html">{{
-                                    translations[currentLocale].menu.profesor.tratamientos }}</a></li>
+                                translations[currentLocale].menu.profesor.tratamientos }}</a></li>
                             <li>
-                                <div class="dropend">
-                                    <button class="btn text-white dropdown-toggle" type="button"
-                                        id="dropdownMenuButton5" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="dropdown dropend menu">
+                                    <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton5"
+                                        data-bs-toggle="dropdown" aria-expanded="false" onclick="event.stopPropagation()">
                                         {{ translations[currentLocale].menu.profesor.alumnado.titulo }}
                                     </button>
                                     <ul class="dropdown-menu menu bg-drop-brown" aria-labelledby="dropdownMenuButton5">
                                         <li><a class="dropdown-item text-white" href="LangileTaula.html">{{
-                                                translations[currentLocale].menu.profesor.alumnado.alumnos }}</a>
+                                            translations[currentLocale].menu.profesor.alumnado.alumnos }}</a>
                                         </li>
                                         <li><a class="dropdown-item text-white" href="TaldeTaula.html">{{
-                                                translations[currentLocale].menu.profesor.alumnado.grupos }}</a>
+                                            translations[currentLocale].menu.profesor.alumnado.grupos }}</a>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
                             <li><a class="dropdown-item text-white" href="OrdutegiTaula.html">{{
-                                    translations[currentLocale].menu.profesor.calendario }}</a></li>
+                                translations[currentLocale].menu.profesor.calendario }}</a></li>
                             <li><a class="dropdown-item text-white" href="Ticket.html">{{
-                                    translations[currentLocale].menu.profesor.ticket }}</a></li>
+                                translations[currentLocale].menu.profesor.ticket }}</a></li>
                         </ul>
                     </div>
                 </li>
@@ -172,12 +163,19 @@
     <script src="js/bootstrap/bootstrap.bundle.js"></script>
     <script>
         // Dropdown-a ongi funtzionatzeko
-        document.querySelectorAll('.dropdown').forEach(function (dropdown) {
+        document.querySelectorAll('.menu').forEach(function (dropdown) {
             dropdown.addEventListener('click', function (event) {
                 event.stopPropagation();
+            });
+
+            dropdown.addEventListener('show.bs.dropdown', function () {
+                document.querySelectorAll('.menu .dropdown-menu.show').forEach(function (menu) {
+                    if (menu !== dropdown.querySelector('.dropdown-menu')) {
+                        new bootstrap.Dropdown(menu.parentElement.querySelector('[data-bs-toggle="dropdown"]')).hide();
+                    }
+                });
             });
         });
     </script>
 </body>
-
 </html>
