@@ -18,7 +18,9 @@ const translations = {
       avisoCarrito: 'Ya se encuentra en el carrito',
       crear: 'Se ha creado',
       actualizar: 'Se ha actualizado',
-      exist: 'Ya existe un registro igual'
+      exist: 'Ya existe un registro igual',
+      fechIni:'Fecha Inicial',
+      fechFin:'Fecha Fin'
     },
 
     trabajador: {
@@ -130,7 +132,11 @@ const translations = {
           grupos: 'Grupos'
         },
         calendario: 'Calendario',
-        ticket: 'Ticket'
+        historial:{
+          ticket: 'Ticket',
+          producto: 'Historial de Productos',
+          material: 'Historial de Materiales'
+        }
       },
       tareas: 'Tareas',
       citas: 'Citas',
@@ -158,7 +164,7 @@ const translations = {
           sabado: 'Sabado',
           domingo: 'Domingo'
         },
-        placeholder: "No hay citas"
+        placeholder: 'No hay citas'
       }
     },
 
@@ -195,51 +201,51 @@ const translations = {
     },
 
     fichas: {
-      titulo: "Fichas",
-      nombre: "Nombre",
-      apellido: "Apellidos",
-      seleccionCasa: "Seleccione una casa",
-      seleccionTinte: "Seleccione un tinte",
-      nombreape: "Nombre y apellidos",
-      telefono: "Telefono",
-      sensible: "Sensible",
-      fecha: "Fecha",
-      tinte: "Tinte",
-      casa: "Casa",
-      cantidad: "Cantidad",
-      volumenes: "Volumenes",
-      observaciones: "Observaciones",
+      titulo: 'Fichas',
+      nombre: 'Nombre',
+      apellido: 'Apellidos',
+      seleccionCasa: 'Seleccione una casa',
+      seleccionTinte: 'Seleccione un tinte',
+      nombreape: 'Nombre y apellidos',
+      telefono: 'Telefono',
+      sensible: 'Sensible',
+      fecha: 'Fecha',
+      tinte: 'Tinte',
+      casa: 'Casa',
+      cantidad: 'Cantidad',
+      volumenes: 'Volumenes',
+      observaciones: 'Observaciones',
       añadirCliente: {
-        titulo: "Modificar Cliente",
-        nombre: "Nombre",
-        apellido: "Apellidos",
-        telefono: "Telefono",
-        sensible: "Piel Sensible",
+        titulo: 'Modificar Cliente',
+        nombre: 'Nombre',
+        apellido: 'Apellidos',
+        telefono: 'Telefono',
+        sensible: 'Piel Sensible',
       },
       modificarCliente: {
-        titulo: "Insertar cita",
-        nombre: "Nombre",
-        apellido: "Apellidos",
-        telefono: "Telefono",
-        sensible: "Piel Sensible",
+        titulo: 'Insertar cita',
+        nombre: 'Nombre',
+        apellido: 'Apellidos',
+        telefono: 'Telefono',
+        sensible: 'Piel Sensible',
       },
       añadirRegistro: {
-        titulo: "Añadir Tratamiento",
-        fecha: "Fecha",
-        casa: "Casa",
-        tinte: "Tinte",
-        cantidad: "Cantidad",
-        volumenes: "Volumenes",
-        observaciones: "Observaciones",
+        titulo: 'Añadir Tratamiento',
+        fecha: 'Fecha',
+        casa: 'Casa',
+        tinte: 'Tinte',
+        cantidad: 'Cantidad',
+        volumenes: 'Volumenes',
+        observaciones: 'Observaciones',
       },
       editarRegistro: {
-        titulo: "Editar Tratamiento",
-        fecha: "Fecha",
-        casa: "Casa",
-        tinte: "Tinte",
-        cantidad: "Cantidad",
-        volumenes: "Volumenes",
-        observaciones: "Observaciones",
+        titulo: 'Editar Tratamiento',
+        fecha: 'Fecha',
+        casa: 'Casa',
+        tinte: 'Tinte',
+        cantidad: 'Cantidad',
+        volumenes: 'Volumenes',
+        observaciones: 'Observaciones',
       },
     },
     tratamientos: {
@@ -249,15 +255,15 @@ const translations = {
       editar: 'Editar Tratamiento',
       crear: 'Crear Tratamiento',
       nombre: 'Nombre',
-      añadirKategoria: "Añadir Categoria",
-      editarCentro: "Editar Categoria",
-      color: "Utiliza Colorantes",
-      extras: "Extras",
-      crearKat: "Añadir Categoria",
-      crear: "Añadir Tratamiento",
-      editarKat: "Editar Categoria",
-      editar: "Editar Tratamiento",
-      categoria: "Categoria"
+      añadirKategoria: 'Añadir Categoria',
+      editarCentro: 'Editar Categoria',
+      color: 'Utiliza Colorantes',
+      extras: 'Extras',
+      crearKat: 'Añadir Categoria',
+      crear: 'Añadir Tratamiento',
+      editarKat: 'Editar Categoria',
+      editar: 'Editar Tratamiento',
+      categoria: 'Categoria'
     },
 
     material: {
@@ -302,7 +308,9 @@ const translations = {
       avisoCarrito: 'Orgatxoan dago jada',
       crear: 'Sortu da',
       actualizar: 'Eguneratu da',
-      exist: 'Erregistro berdin bat existitzen da'
+      exist: 'Erregistro berdin bat existitzen da',
+      fechIni:'Hasiera Data',
+      fechFin:'Amaiera Data'
     },
 
     trabajador: {
@@ -415,7 +423,11 @@ const translations = {
           grupos: 'Taldeak'
         },
         calendario: 'Ordutegia',
-        ticket: 'Ticket'
+        historial:{
+          ticket: 'Ticket',
+          producto: 'Productu Historiala',
+          material: 'Material Historiala'
+        }
       },
       tareas: 'Zereginak',
       citas: 'Hitzorduak',
@@ -443,7 +455,7 @@ const translations = {
           sabado: 'Larunbata',
           domingo: 'Igandea'
         },
-        placeholder: "Ez dago hitzordurik"
+        placeholder: 'Ez dago hitzordurik'
       }
     },
 
@@ -480,51 +492,51 @@ const translations = {
     },
 
     fichas: {
-      titulo: "Fitxak",
-      nombre: "Izena",
-      apellido: "Abizenak",
-      seleccionCasa: "Aukeratu etxe bat",
-      seleccionTinte: "Aukeratu tindagai bat",
-      nombreape: "Izena y Abizenak",
-      telefono: "Telefonoa",
-      sensible: "Sentikorra",
-      fecha: "Data",
-      tinte: "Tindagai",
-      casa: "Etxea",
-      cantidad: "Kantitatea",
-      volumenes: "Bolumena",
-      observaciones: "Behaketak",
+      titulo: 'Fitxak',
+      nombre: 'Izena',
+      apellido: 'Abizenak',
+      seleccionCasa: 'Aukeratu etxe bat',
+      seleccionTinte: 'Aukeratu tindagai bat',
+      nombreape: 'Izena y Abizenak',
+      telefono: 'Telefonoa',
+      sensible: 'Sentikorra',
+      fecha: 'Data',
+      tinte: 'Tindagai',
+      casa: 'Etxea',
+      cantidad: 'Kantitatea',
+      volumenes: 'Bolumena',
+      observaciones: 'Behaketak',
       añadirCliente: {
-        titulo: "Gehitu Bezero",
-        nombre: "Izena",
-        apellido: "Abizenak",
-        telefono: "Telefonoa",
-        sensible: "Azal Sentikorra",
+        titulo: 'Gehitu Bezero',
+        nombre: 'Izena',
+        apellido: 'Abizenak',
+        telefono: 'Telefonoa',
+        sensible: 'Azal Sentikorra',
       },
       modificarCliente: {
-        titulo: "Eguneratu Bezero",
-        nombre: "Izena",
-        apellido: "Abizenak",
-        telefono: "Telefonoa",
-        sensible: "Azal Sentikorra",
+        titulo: 'Eguneratu Bezero',
+        nombre: 'Izena',
+        apellido: 'Abizenak',
+        telefono: 'Telefonoa',
+        sensible: 'Azal Sentikorra',
       },
       añadirRegistro: {
-        titulo: "Tratamendua Gehitu",
-        fecha: "Data",
-        casa: "Etxea",
-        tinte: "Tindagai",
-        cantidad: "Kantitatea",
-        volumenes: "Bolumena",
-        observaciones: "Behaketak",
+        titulo: 'Tratamendua Gehitu',
+        fecha: 'Data',
+        casa: 'Etxea',
+        tinte: 'Tindagai',
+        cantidad: 'Kantitatea',
+        volumenes: 'Bolumena',
+        observaciones: 'Behaketak',
       },
       editarRegistro: {
-        titulo: "Tratamendua Editatu",
-        fecha: "data",
-        casa: "Etxea",
-        tinte: "Tindagai",
-        cantidad: "Kantitatea",
-        volumenes: "Bolumena",
-        observaciones: "Behaketak",
+        titulo: 'Tratamendua Editatu',
+        fecha: 'data',
+        casa: 'Etxea',
+        tinte: 'Tindagai',
+        cantidad: 'Kantitatea',
+        volumenes: 'Bolumena',
+        observaciones: 'Behaketak',
       }
     },
     tratamientos: {
@@ -534,15 +546,15 @@ const translations = {
       editar: 'Tratamendua Editatu',
       crear: 'Tratamendua Gehitu',
       nombre: 'Izena',
-      añadirKategoria: "Kategoria Gehitu",
-      editarCentro: "Kategoria Editatu",
-      color: "Kolorea erabiltzen da",
-      extras: "Extrak",
-      crearKat: "Kategoria Gehitu",
-      crear: "Tratamendua Gehitu",
-      editarKat: "Kategoria editatu",
-      editar: "Tratamendua editatu",
-      categoria: "Kategoria"
+      añadirKategoria: 'Kategoria Gehitu',
+      editarCentro: 'Kategoria Editatu',
+      color: 'Kolorea erabiltzen da',
+      extras: 'Extrak',
+      crearKat: 'Kategoria Gehitu',
+      crear: 'Tratamendua Gehitu',
+      editarKat: 'Kategoria editatu',
+      editar: 'Tratamendua editatu',
+      categoria: 'Kategoria'
     },
 
     material: {

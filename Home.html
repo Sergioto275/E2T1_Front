@@ -114,8 +114,22 @@
                             </li>
                             <li><a class="dropdown-item text-white" href="OrdutegiTaula.html">{{
                                 translations[currentLocale].menu.profesor.calendario }}</a></li>
-                            <li><a class="dropdown-item text-white" href="Ticket.html">{{
-                                translations[currentLocale].menu.profesor.ticket }}</a></li>
+                            <li>
+                                <div class="dropdown dropend menu">
+                                    <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton5"
+                                        data-bs-toggle="dropdown" aria-expanded="false" onclick="event.stopPropagation()">
+                                        Historial
+                                    </button>
+                                    <ul class="dropdown-menu menu bg-drop-brown" aria-labelledby="dropdownMenuButton5">
+                                        <li><a class="dropdown-item text-white" href="Ticket.html">{{ translations[currentLocale].menu.profesor.historial.ticket }}</a></li>
+                                        <li><a class="dropdown-item text-white" href="ProduktuHistoriala.html">{{ translations[currentLocale].menu.profesor.historial.producto }}</a>
+                                        </li>
+                                        <li><a class="dropdown-item text-white" href="MaterialaHistoriala.html">{{ translations[currentLocale].menu.profesor.historial.material }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            
                         </ul>
                     </div>
                 </li>
