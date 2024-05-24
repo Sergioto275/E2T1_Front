@@ -47,9 +47,9 @@ new Vue({
                     this.userError = false;
                     this.passError = false;
                     if (user == "ikasle") {
-                        window.location.href = "http://localhost/erronka2/Front/DistribucionInicial.html";
+                        window.location.href = "http://localhost/Erronka2/Front/DistribucionInicial.html";
                     } else {
-                        window.location.href = "http://localhost/erronka2/Front/Home.html";
+                        window.location.href = "http://localhost/Erronka2/Front/Home.html";
 
                     }
                 }

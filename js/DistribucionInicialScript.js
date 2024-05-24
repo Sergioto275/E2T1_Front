@@ -20,6 +20,10 @@ new Vue({
   },
 
   methods: {
+    retroceder(){ 
+      window.history.back(); 
+  }, 
+
     changeEnvironment(env) {
       this.environment = env;
     },
@@ -319,7 +323,7 @@ new Vue({
     },
     checkCookie() {
       if (document.cookie == "") {
-        window.location.href = "http://localhost/Erronka2/Front/E2T1_Front/Login.html";
+        window.location.href = "http://localhost/Erronka2/Front/Login.html";
       }
     }
   },
