@@ -98,6 +98,7 @@ const vue = new Vue({
         */
         changeLanguage(locale) {
             this.currentLocale = locale;
+            localStorage.setItem('selectedLocale', locale); // Guardar en localStorage
         },
         /* Function: today
         Gaurko data lortzeko.
@@ -713,6 +714,10 @@ const vue = new Vue({
         },
     },
     mounted() {
+        const savedLocale = localStorage.getItem('selectedLocale');
+        if (savedLocale) {
+            this.currentLocale = savedLocale;
+        }
         this.dataSelec = this.lortuData();
         this.getHoursInRange();
         this.cargarComboBox();

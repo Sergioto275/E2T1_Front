@@ -27,6 +27,7 @@ const vue = new Vue({
         changeLanguage(locale) {
             console.log('Cambiando a:', locale);
             this.currentLocale = locale;
+            localStorage.setItem('selectedLocale', locale); // Guardar en localStorage
         },
         /* Function: mugimenduCarga
         Mugimendu guztiak kargatzeko.
@@ -67,6 +68,10 @@ const vue = new Vue({
         },
     },
     mounted() {
+        const savedLocale = localStorage.getItem('selectedLocale');
+        if (savedLocale) {
+            this.currentLocale = savedLocale;
+        }
         this.mugimenduCarga();
         this.checkCookie();
     }

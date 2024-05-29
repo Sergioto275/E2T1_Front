@@ -43,6 +43,7 @@ new Vue({
     changeLanguage(locale) {
       console.log('Cambiando a:', locale);
       this.currentLocale = locale;
+      localStorage.setItem('selectedLocale', locale); // Guardar en localStorage
     },
     /* Function: cargarComboBox
     Comboboxa kargatzeko.
@@ -311,6 +312,10 @@ new Vue({
 
   },
   mounted() {
+    const savedLocale = localStorage.getItem('selectedLocale');
+    if (savedLocale) {
+        this.currentLocale = savedLocale;
+    }
     // Llama a tu función cargarPagina cuando el componente se monta
     this.cargaLangile();
     this.checkCookie();

@@ -78,9 +78,9 @@
               <h5 class="card-title">{{ material.produktu_izena }}</h5>
               <h6 class="card-subtitle mb-2 text-muted">{{ material.materiala_kodea }}</h6>
               <p class="card-text">
-                <strong>Langilea:</strong> {{ material.langile_izena }} {{ material.abizenak }}<br>
-                <strong>Hasiera Data:</strong> {{ material.hasiera_data }}<br>
-                <strong>Amaiera Data:</strong> {{ material.amaiera_data ? material.amaiera_data : 'N/A' }}<br>
+                <strong>{{ translations[currentLocale].hisProducto.trabajador }}:</strong> {{ material.langile_izena }} {{ material.abizenak }}<br>
+                <strong>{{ translations[currentLocale].default.fechIni }}:</strong> {{ material.hasiera_data }}<br>
+                <strong>{{ translations[currentLocale].default.fechFin }}:</strong> {{ material.amaiera_data ? material.amaiera_data : 'N/A' }}<br>
               </p>
             </div>
           </div>

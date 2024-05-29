@@ -46,14 +46,31 @@
         </div>
       </ul>
     </header>
+      <!-- Date Range Filter -->
+      <div class="container my-4">
+        <div class="row">
+          <div class="col text-center">
+            <h1>{{ translations[currentLocale].menu.profesor.historial.ticket }}</h1>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="startDate">{{ translations[currentLocale].default.fechIni }}</label>
+            <input type="date" v-model="startDate" class="form-control" placeholder="Fecha de inicio" @change="filterByDateRange()">
+          </div>
+          <div class="col-md-6">
+            <label for="endDate">{{ translations[currentLocale].default.fechFin }}</label>
+            <input type="date" v-model="endDate" class="form-control" placeholder="Fecha de fin" @change="filterByDateRange()">
+          </div>
+        </div>
+      </div>
     <div class="text-center m-0-15">
-      <h1>{{translations[currentLocale].menu.profesor.ticket}}</h1>
       <div class="row justify-content-evenly">
-        <div v-for="(ticket) in ticketArray" class="card col-4 me-3 w-25 mb-3 p-0">
+        <div v-for="(ticket) in filteredTickets" class="card col-4 me-3 w-25 mb-3 p-0">
           <img src="imagenes/default-tratamenduak.jpg" class="card-img-top h-50" alt="default">
           <div class="card-body">
-            <h5 class="card-title">{{ ticket.izena }} | {{ ticket.hasiera_ordua_erreala }} - {{
-              ticket.amaiera_ordua_erreala }}</h5>
+            <h5 class="card-title">{{ ticket.izena }} | {{ ticket.data }} </h5>
+              <h5 class="card-title">{{ ticket.hasiera_ordua_erreala }} - {{ticket.amaiera_ordua_erreala }}</h5>
             <p v-for="(tratamendua) in ticket.ticket" class="card-text">{{ tratamendua.izena }} - {{ tratamendua.prezioa
               }}</p>
           </div>

@@ -40,6 +40,7 @@ new Vue({
         changeLanguage(locale) {
             console.log('Cambiando a:', locale);
             this.currentLocale = locale;
+            localStorage.setItem('selectedLocale', locale); // Guardar en localStorage
         },
         /* Function: cargaTxanda
         Txanda guztiak kargatzeko.
@@ -409,6 +410,10 @@ new Vue({
         }
     },
     mounted() {
+        const savedLocale = localStorage.getItem('selectedLocale');
+        if (savedLocale) {
+            this.currentLocale = savedLocale;
+        }
         // Konponentea sortzen denean taula kargatzeko
         this.cargaTxanda();
         this.checkCookie();

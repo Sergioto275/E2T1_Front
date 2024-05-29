@@ -290,6 +290,11 @@ const translations = {
         fin: 'Fecha Fin'
       }
     },
+    hisProducto:{
+      trabajador:"Trabajador",
+      fecha:"Fecha",
+      cantidad:"Cantidad"
+    }
   },
 
   eu: {
@@ -556,7 +561,6 @@ const translations = {
       editar: 'Tratamendua editatu',
       categoria: 'Kategoria'
     },
-
     material: {
       titulo: 'Materiala',
       id: 'ID',
@@ -580,6 +584,11 @@ const translations = {
         inicio: 'Hasiera Data',
         fin: 'Amaiera Data'
       }
+    },
+    hisProducto:{
+      trabajador:"Langilea",
+      fecha:"Data",
+      cantidad:"Kopurua"
     }
   }
 };

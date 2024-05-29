@@ -27,6 +27,7 @@ const vue = new Vue({
         changeLanguage(locale) {
             console.log('Cambiando a:', locale);
             this.currentLocale = locale;
+            localStorage.setItem('selectedLocale', locale); // Guardar en localStorage
         },
         /* Function: cargarHitzordu
         Hitzorduak kargatzeko.
@@ -98,6 +99,10 @@ const vue = new Vue({
 
     },
     mounted() {
+        const savedLocale = localStorage.getItem('selectedLocale');
+        if (savedLocale) {
+            this.currentLocale = savedLocale;
+        }
         this.cargarHitzordu();
         this.stock_alerta();
         this.checkCookie();

@@ -645,6 +645,7 @@ new Vue({
     changeLanguage(locale) {
       console.log('Cambiando a:', locale);
       this.currentLocale = locale;
+      localStorage.setItem('selectedLocale', locale); // Guardar en localStorage
     },
     checkCookie() {
       if (document.cookie == "") {
@@ -667,6 +668,10 @@ new Vue({
     }
   },
   mounted() {
+    const savedLocale = localStorage.getItem('selectedLocale');
+    if (savedLocale) {
+        this.currentLocale = savedLocale;
+    }
     // Konponentea sortzen denean taula kargatzeko
     this.cargaProduktu();
     this.checkCookie();

@@ -75,9 +75,9 @@
               <h5 class="card-title">{{ movement.produktu_izena }}</h5>
               <h6 class="card-subtitle mb-2 text-muted">{{ movement.kodea }}</h6>
               <p class="card-text">
-                <strong>Langilea:</strong> {{ movement.langile_izena }} {{ movement.abizenak }}<br>
-                <strong>Data:</strong> {{ movement.data }}<br>
-                <strong>Kopurua:</strong> {{ movement.kopurua }}<br>
+                <strong>{{ translations[currentLocale].hisProducto.trabajador }}:</strong> {{ movement.langile_izena }} {{ movement.abizenak }}<br>
+                <strong>{{ translations[currentLocale].hisProducto.fecha }}:</strong> {{ movement.data }}<br>
+                <strong>{{ translations[currentLocale].hisProducto.cantidad }}:</strong> {{ movement.kopurua }}<br>
               </p>
             </div>
           </div>
