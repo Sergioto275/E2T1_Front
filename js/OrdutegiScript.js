@@ -136,19 +136,19 @@ new Vue({
 
             if (datos[i].ezabatze_data === null || datos[i].ezabatze_data === "0000-00-00 00:00:00") {
               if (datos[i].eguna == 1) {
-                var ordutegi = { "kodea": datos[i].kodea, "eguna": "Lunes", "hasiera_data": datos[i].hasiera_data, "amaiera_data": datos[i].amaiera_data, "hasiera_ordua": datos[i].hasiera_ordua, "amaiera_ordua": datos[i].amaiera_data, "id": datos[i].id }
+                var ordutegi = { "kodea": datos[i].kodea, "eguna": "Lunes", "hasiera_data": datos[i].hasiera_data, "amaiera_data": datos[i].amaiera_data, "hasiera_ordua": datos[i].hasiera_ordua, "amaiera_ordua": datos[i].amaiera_ordua, "id": datos[i].id }
 
               } else if (datos[i].eguna == 2) {
-                var ordutegi = { "kodea": datos[i].kodea, "eguna": "Martes", "hasiera_data": datos[i].hasiera_data, "amaiera_data": datos[i].amaiera_data, "hasiera_ordua": datos[i].hasiera_ordua, "amaiera_ordua": datos[i].amaiera_data, "id": datos[i].id }
+                var ordutegi = { "kodea": datos[i].kodea, "eguna": "Martes", "hasiera_data": datos[i].hasiera_data, "amaiera_data": datos[i].amaiera_data, "hasiera_ordua": datos[i].hasiera_ordua, "amaiera_ordua": datos[i].amaiera_ordua, "id": datos[i].id }
 
               } else if (datos[i].eguna == 3) {
-                var ordutegi = { "kodea": datos[i].kodea, "eguna": "Miercoles", "hasiera_data": datos[i].hasiera_data, "amaiera_data": datos[i].amaiera_data, "hasiera_ordua": datos[i].hasiera_ordua, "amaiera_ordua": datos[i].amaiera_data, "id": datos[i].id }
+                var ordutegi = { "kodea": datos[i].kodea, "eguna": "Miercoles", "hasiera_data": datos[i].hasiera_data, "amaiera_data": datos[i].amaiera_data, "hasiera_ordua": datos[i].hasiera_ordua, "amaiera_ordua": datos[i].amaiera_ordua, "id": datos[i].id }
 
               } else if (datos[i].eguna == 4) {
-                var ordutegi = { "kodea": datos[i].kodea, "eguna": "Jueves", "hasiera_data": datos[i].hasiera_data, "amaiera_data": datos[i].amaiera_data, "hasiera_ordua": datos[i].hasiera_ordua, "amaiera_ordua": datos[i].amaiera_data, "id": datos[i].id }
+                var ordutegi = { "kodea": datos[i].kodea, "eguna": "Jueves", "hasiera_data": datos[i].hasiera_data, "amaiera_data": datos[i].amaiera_data, "hasiera_ordua": datos[i].hasiera_ordua, "amaiera_ordua": datos[i].amaiera_ordua, "id": datos[i].id }
 
               } else if (datos[i].eguna == 5) {
-                var ordutegi = { "kodea": datos[i].kodea, "eguna": "Viernes", "hasiera_data": datos[i].hasiera_data, "amaiera_data": datos[i].amaiera_data, "hasiera_ordua": datos[i].hasiera_ordua, "amaiera_ordua": datos[i].amaiera_data, "id": datos[i].id }
+                var ordutegi = { "kodea": datos[i].kodea, "eguna": "Viernes", "hasiera_data": datos[i].hasiera_data, "amaiera_data": datos[i].amaiera_data, "hasiera_ordua": datos[i].hasiera_ordua, "amaiera_ordua": datos[i].amaiera_ordua, "id": datos[i].id }
 
               }
               this.listaOrdutegi.push(ordutegi);
