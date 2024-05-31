@@ -45,7 +45,7 @@
                             <li>
                                 <div class="dropdown dropend menu">
                                     <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton6-1"
-                                        data-bs-toggle="dropdown" aria-expanded="false" onclick="event.stopPropagation()">
+                                        data-bs-toggle="dropdown" aria-expanded="false">
                                         {{ translations[currentLocale].menu.almacen.producto.titulo }}
                                     </button>
                                     <ul class="dropdown-menu menu bg-drop-brown" aria-labelledby="dropdownMenuButton6-1">
@@ -57,7 +57,7 @@
                             <li>
                                 <div class="dropdown dropend menu">
                                     <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton6-2"
-                                        data-bs-toggle="dropdown" aria-expanded="false" onclick="event.stopPropagation()">
+                                        data-bs-toggle="dropdown" aria-expanded="false">
                                         {{ translations[currentLocale].menu.almacen.material.titulo }}
                                     </button>
                                     <ul class="dropdown-menu menu bg-drop-brown" aria-labelledby="dropdownMenuButton6-2">
@@ -81,7 +81,7 @@
                             <li>
                                 <div class="dropdown dropend menu">
                                     <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton4"
-                                        data-bs-toggle="dropdown" aria-expanded="false" onclick="event.stopPropagation()">
+                                        data-bs-toggle="dropdown" aria-expanded="false">
                                         {{ translations[currentLocale].menu.profesor.almacen.titulo }}
                                     </button>
                                     <ul class="dropdown-menu menu bg-drop-brown" aria-labelledby="dropdownMenuButton4">
@@ -99,7 +99,7 @@
                             <li>
                                 <div class="dropdown dropend menu">
                                     <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton5"
-                                        data-bs-toggle="dropdown" aria-expanded="false" onclick="event.stopPropagation()">
+                                        data-bs-toggle="dropdown" aria-expanded="false">
                                         {{ translations[currentLocale].menu.profesor.alumnado.titulo }}
                                     </button>
                                     <ul class="dropdown-menu menu bg-drop-brown" aria-labelledby="dropdownMenuButton5">
@@ -117,7 +117,7 @@
                             <li>
                                 <div class="dropdown dropend menu">
                                     <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton5"
-                                        data-bs-toggle="dropdown" aria-expanded="false" onclick="event.stopPropagation()">
+                                        data-bs-toggle="dropdown" aria-expanded="false">
                                         Historial
                                     </button>
                                     <ul class="dropdown-menu menu bg-drop-brown" aria-labelledby="dropdownMenuButton5">
@@ -176,18 +176,15 @@
     <script src="js/Home.js"></script>
     <script src="js/bootstrap/bootstrap.bundle.js"></script>
     <script>
-        // Dropdown-a ongi funtzionatzeko
-        document.querySelectorAll('.menu').forEach(function (dropdown) {
-            dropdown.addEventListener('click', function (event) {
-                event.stopPropagation();
+        $(document).ready(function () {
+            // Prevent event propagation on submenu buttons
+            $('.menu .dropdown-toggle').click(function (e) {
+                e.stopPropagation();
             });
 
-            dropdown.addEventListener('show.bs.dropdown', function () {
-                document.querySelectorAll('.menu .dropdown-menu.show').forEach(function (menu) {
-                    if (menu !== dropdown.querySelector('.dropdown-menu')) {
-                        new bootstrap.Dropdown(menu.parentElement.querySelector('[data-bs-toggle="dropdown"]')).hide();
-                    }
-                });
+            // Close other submenus when opening a submenu
+            $('.menu .dropdown-toggle').on('show.bs.dropdown', function () {
+                $('.menu .dropdown-menu.show').removeClass('show');
             });
         });
     </script>
