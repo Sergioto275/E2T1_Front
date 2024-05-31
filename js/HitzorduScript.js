@@ -265,14 +265,14 @@ const vue = new Vue({
                 }
                 await this.cargarHitzordu();
             } catch (error) {
-                throw new Error("Error en generacion de citas disponibles:" + error)
+                throw new Error("Error en generacion de citas disponibles:" + error);
             }
             try {
                 const json_data = {
                     "id_hitzordu": this.idSelec,
                     "tratamendua": this.tratamenduSelec
                 }
-
+        
                 const response = await fetch(this.environment + '/public/api/ticket_lerro', {
                     headers: {
                         'Content-Type': 'application/json',
@@ -286,9 +286,10 @@ const vue = new Vue({
                 }
                 toastr.success(this.translations[this.currentLocale].default.actualizar);
                 toastr.info(this.translations[this.currentLocale].citas.precioMessage + prezio_totala);
-                this.tratamenduSelec.forEach(tratamendu => {
+        
+                for (let tratamendu of this.tratamenduSelec) {
                     var tratamiento = this.tratamenduArray.filter(element => element.id == tratamendu.tratamendu_id);
-                    var kategoria = this.tratamenduKategoria.filter(el => el.id == tratamiento[0].id_katTratamendu)
+                    var kategoria = this.tratamenduKategoria.filter(el => el.id == tratamiento[0].id_katTratamendu);
                     if (kategoria[0].kolorea == 's') {
                         toastr.warning(this.translations[this.currentLocale].citas.registrarCliente);
                         if (confirm(this.translations[this.currentLocale].citas.redireccionCliente)) {
@@ -296,13 +297,16 @@ const vue = new Vue({
                         } else {
                             this.cargarHitzordu();
                         }
+                        break; // Detiene el bucle
                     }
-                });
+                }
+        
                 this.limpiar_campos();
             } catch (error) {
-                throw new Error("Error en generacion de citas disponibles:" + error)
+                throw new Error("Error en generacion de citas disponibles:" + error);
             }
         },
+        
         /* Function: cargarComboBox
         Combobox-a kargatzeko.
         */
